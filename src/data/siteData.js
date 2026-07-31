@@ -18,7 +18,7 @@ export const initiatives = [
   },
   {
     icon: '🏛️',
-    title: 'Sastranidhi Web',
+    title: 'Sastranidhi Web EBook Library',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
