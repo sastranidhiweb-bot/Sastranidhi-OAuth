@@ -1,0 +1,7 @@
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.feature{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;
+  box-shadow:0 8px 22px rgba(23,59,86,.06)
+}
+.feature h3{color:var(--navy);font-size:21px}
+.feature p{color:var(--muted);line-height:1.6;font-size:14px}
