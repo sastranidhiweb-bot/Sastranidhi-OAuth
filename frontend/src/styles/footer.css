@@ -1,0 +1,5 @@
+footer{background:#102c40;color:#d6e7f1;padding:52px 0 22px}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px}
+footer h4{color:#f2c75e}
+footer a{display:block;color:#c8dce8;margin:9px 0;font-size:14px}
+.copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:30px;padding-top:17px;font-size:13px;color:#a9c1cf}

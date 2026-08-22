@@ -1,0 +1,10 @@
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.course{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.course-top{
+  height:165px;background:linear-gradient(135deg,#9dcfe9,#245a7c);color:#fff;
+  display:grid;place-items:center;text-align:center;padding:20px;font:26px Georgia,serif
+}
+.course-body{padding:21px}
+.course-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.course-body h3{color:var(--navy);font-size:22px}
+.course-body p{color:var(--muted);line-height:1.6}

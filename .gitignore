@@ -1,4 +1,29 @@
-node_modules
-dist
-.DS_Store
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OAuth/private keys
+keys/
+**/keys/
+*.pem
+*.key
+
+# Logs
+logs/
+**/logs/
 *.log
+
+# Build output
+dist/
+build/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

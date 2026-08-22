@@ -1,0 +1,9 @@
+.cta{
+  background:linear-gradient(120deg,var(--navy),#2d7199);color:#fff;border-radius:22px;
+  padding:40px;display:flex;justify-content:space-between;align-items:center;gap:25px
+}
+.cta h2{font-size:35px;margin:0 0 10px}
+.cta p{color:#e5f4fc;line-height:1.6}
+.form{display:grid;gap:13px}
+.form input,.form select,.form textarea{padding:12px;border:1px solid #bfd4e2;border-radius:8px;background:#fff}
+.message{display:none;background:#e8f5e7;color:#285c26;padding:9px;border-radius:7px;font-size:13px}
