@@ -96,6 +96,10 @@ const env = {
     callbackUrl: process.env.MICROSOFT_CALLBACK_URL || null,
     tenant: process.env.MICROSOFT_TENANT || 'common',
   },
+  edmingle: {
+    ssoSecret: process.env.EDMINGLE_SSO_SECRET || null,
+    lmsUrl: process.env.EDMINGLE_LMS_URL || null,
+  },
 
   mfa: {
     issuerName: process.env.MFA_ISSUER_NAME || 'Sastranidhi',

@@ -43,15 +43,28 @@ export const initiatives = [
     href: 'https://pariprashna.sastranidhi.org',
     devHref: 'http://localhost:3000',
   },
+  // {
+  //   icon: '🎓',
+  //   title: 'IKS-LMS',
+  //   description:
+  //     'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
+  //   linkLabel: 'View Courses →',
+  //   href: 'https://lms.sastranidhi.org',
+  //   devHref: 'http://localhost:3004',
+  // },
   {
-    icon: '🎓',
-    title: 'IKS-LMS',
-    description:
-      'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
-    linkLabel: 'View Courses →',
-    href: 'https://lms.sastranidhi.org',
-    devHref: 'http://localhost:3004',
-  },
+  icon: '🎓',
+  title: 'IKS-LMS',
+  description:
+    'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
+  linkLabel: 'View Courses →',
+  href: 'https://lms.sastranidhi.org',
+  devHref: 'http://localhost:3004',
+  // Edmingle is a third-party SaaS LMS (no codebase access) — it uses a
+  // direct HS256 JWT redirect via this backend, not the OAuth2/PKCE flow
+  // the other initiatives use. redirect_url is Edmingle's own LMS host.
+  ssoRoute: '/auth/edmingle/sso?redirect_url=your-academy.edmingle.com',
+},
 ];
 
 export const stats = [
