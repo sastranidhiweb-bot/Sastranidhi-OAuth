@@ -59,14 +59,8 @@ export default function PlatformCard({
       return;
     }
 
-    let target;
-    try {
-      target = new URL(loginPath, href).toString();
-    } catch {
-      target = href;
-    }
-
-    window.location.href = target;
+    // Open the link directly in a new tab
+    window.open(href, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -74,7 +68,13 @@ export default function PlatformCard({
       <div className="icon">{icon}</div>
       <h3>{title}</h3>
       <p>{description}</p>
-      <a className="link" href={href} onClick={handleOpenPlatform}>
+      <a 
+        className="link" 
+        href={href} 
+        onClick={handleOpenPlatform}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {linkLabel}
       </a>
     </article>

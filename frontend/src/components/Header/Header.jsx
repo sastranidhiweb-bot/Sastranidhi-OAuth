@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { useModal } from '../../context/ModalContext.jsx';
-import { useAuth } from '../../context/AuthContext.jsx';
 import { navLinks } from '../../data/siteData.js';
 import MobileNav from './MobileNav.jsx';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { open } = useModal();
-  const { user, isAuthenticated, loading, logout } = useAuth();
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
   const closeMobile = () => setMobileOpen(false);
+
+  const openModalFromMobile = (name) => {
+    open(name);
+    closeMobile();
+  };
 
   return (
     <>
@@ -31,27 +34,14 @@ export default function Header() {
             ))}
           </nav>
           <div className="actions">
-            {/* While the initial GET /auth/session check is in flight,
-                render nothing here rather than flashing "Login" and then
-                immediately swapping to the logged-in state. */}
-            {!loading && !isAuthenticated && (
-              <>
-                <a className="btn outline" href="/login">
-                  Login
-                </a>
-                <a className="btn primary" href="/signup">
-                  Sign Up
-                </a>
-              </>
-            )}
-            {!loading && isAuthenticated && (
-              <>
-                <span className="welcome-user">{user.first_name || user.username}</span>
-                <button className="btn outline" onClick={() => logout()}>
-                  Logout
-                </button>
-              </>
-            )}
+            {/*
+            <button className="btn outline" onClick={() => open('login')}>
+              Login
+            </button>
+            <button className="btn primary" onClick={() => open('signup')}>
+              Sign Up
+            </button>
+            */}
             <button className="btn gold" onClick={() => open('donate')}>
               Donate
             </button>
@@ -69,9 +59,7 @@ export default function Header() {
       <MobileNav
         open={mobileOpen}
         onNavigate={closeMobile}
-        isAuthenticated={isAuthenticated}
-        user={user}
-        onLogout={logout}
+        onOpenModal={openModalFromMobile}
       />
     </>
   );
