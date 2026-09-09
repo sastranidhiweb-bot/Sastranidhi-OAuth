@@ -7,14 +7,6 @@ export const navLinks = [
   { href: '#contact', label: 'Contact' },
 ];
 
-// `href` is the real production platform URL. `devHref` (used only when
-// Vite's import.meta.env.DEV is true) points at wherever that app runs
-// locally instead — set once that app exists. Right now only Paripraśna
-// has a registered OAuth client (client_id PARIPRASHNA, redirect_uri
-// http://localhost:3001/callback — see the backend's create-client.js
-// output), so it's the only card that can complete a real login locally;
-// the other three will 404/connection-refused on :3001-style ports until
-// their own dev servers exist and are registered as clients too.
 export const initiatives = [
   {
     icon: '📖',
@@ -22,7 +14,7 @@ export const initiatives = [
     description:
       'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
     linkLabel: 'Open Platform →',
-    href: 'https://puranatilakam.sastranidhi.org',
+    href: 'https://puranatilakam.com/',
     devHref: 'http://localhost:3002',
   },
   {
@@ -31,7 +23,7 @@ export const initiatives = [
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
-    href: 'https://www.ebook-lib.sastranidhi.org',
+    href: 'https://reader.sastranidhi.org/homePage',
     devHref: 'http://localhost:3003',
   },
   {
@@ -40,31 +32,19 @@ export const initiatives = [
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
-    href: 'https://pariprashna.sastranidhi.org',
+    href: 'https://qna.sastranidhi.org/login',
     devHref: 'http://localhost:3000',
   },
-  // {
-  //   icon: '🎓',
-  //   title: 'IKS-LMS',
-  //   description:
-  //     'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
-  //   linkLabel: 'View Courses →',
-  //   href: 'https://lms.sastranidhi.org',
-  //   devHref: 'http://localhost:3004',
-  // },
   {
-  icon: '🎓',
-  title: 'IKS-LMS',
-  description:
-    'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
-  linkLabel: 'View Courses →',
-  href: 'https://lms.sastranidhi.org',
-  devHref: 'http://localhost:3004',
-  // Edmingle is a third-party SaaS LMS (no codebase access) — it uses a
-  // direct HS256 JWT redirect via this backend, not the OAuth2/PKCE flow
-  // the other initiatives use. redirect_url is Edmingle's own LMS host.
-  ssoRoute: '/auth/edmingle/sso?redirect_url=your-academy.edmingle.com',
-},
+    icon: '🎓',
+    title: 'IKS-LMS',
+    description:
+      'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
+    linkLabel: 'View Courses →',
+    href: 'https://sastranidhi.edmingle.com/',
+    devHref: 'http://localhost:3004',
+    ssoRoute: '/auth/edmingle/sso?redirect_url=your-academy.edmingle.com',
+  },
 ];
 
 export const stats = [

@@ -16,9 +16,12 @@ export default function Hero() {
               <a className="btn primary" href="#initiatives">
                 Explore Initiatives
               </a>
+              {/* "Create Account" button commented out as requested */}
+              {/*
               <a className="btn outline" href="/signup">
                 Create Account
               </a>
+              */}
             </div>
           </div>
           <SearchCard />

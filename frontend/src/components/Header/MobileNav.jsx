@@ -1,5 +1,5 @@
-import { navLinks } from '../../data/siteData.js';
-import { useModal } from '../../context/ModalContext.jsx';
+import { navLinks } from './data/siteData.js';
+import { useModal } from './context/ModalContext.jsx';
 
 export default function MobileNav({ open, onNavigate, isAuthenticated, user, onLogout }) {
   const { open: openModal } = useModal();
@@ -11,12 +11,19 @@ export default function MobileNav({ open, onNavigate, isAuthenticated, user, onL
           {link.label}
         </a>
       ))}
-      {!isAuthenticated && (
-        <>
-          <a href="/login">Login</a>
-          <a href="/signup">Sign Up</a>
-        </>
-      )}
+      
+      {/* Login and Sign Up commented out */}
+      {/* 
+      {isAuthenticated && (
+        <a href="/login">Login</a>
+      )
+      }
+
+      {isAuthenticated && (
+        <a href="/signup">Sign Up</a>
+      )
+      */}
+      
       {isAuthenticated && (
         <a
           href="#"
