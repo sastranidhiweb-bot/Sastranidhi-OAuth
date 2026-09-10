@@ -14,15 +14,15 @@ export const initiatives = [
     description:
       'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
     linkLabel: 'Open Platform →',
-    href: 'https://puranatilakam.sastranidhi.org',
+    href: 'https://puranatilakam.com/',
   },
   {
     icon: '🏛️',
-    title: 'Sastranidhi Web EBook Library',
+    title: 'Vedamanjusa',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
-    href: 'https://www.ebook-lib.sastranidhi.org',
+    href: 'https://reader.sastranidhi.org/homePage',
   },
   {
     icon: '❓',
@@ -30,15 +30,15 @@ export const initiatives = [
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
-    href: 'https://pariprashna.sastranidhi.org',
+    href: 'https://qna.sastranidhi.org/',
   },
   {
     icon: '🎓',
-    title: 'IKS-LMS',
+    title: 'Courses',
     description:
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
     linkLabel: 'View Courses →',
-    href: 'https://lms.sastranidhi.org',
+    href: 'https://sastranidhi.edmingle.com/',
   },
 ];
 
