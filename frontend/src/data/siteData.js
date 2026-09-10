@@ -19,7 +19,7 @@ export const initiatives = [
   },
   {
     icon: '🏛️',
-    title: 'Sastranidhi Web EBook Library',
+    title: 'Vedamanjusa',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
@@ -32,12 +32,12 @@ export const initiatives = [
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
-    href: 'https://qna.sastranidhi.org/login',
+    href: 'https://qna.sastranidhi.org/',
     devHref: 'http://localhost:3000',
   },
   {
     icon: '🎓',
-    title: 'IKS-LMS',
+    title: 'Courses',
     description:
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
     linkLabel: 'View Courses →',
