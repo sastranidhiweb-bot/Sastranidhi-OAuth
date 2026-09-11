@@ -8,12 +8,17 @@ export default function MobileNav({ open, onNavigate, onOpenModal }) {
           {link.label}
         </a>
       ))}
+
+      {/* Login and Sign Up links commented out as requested */}
+      {/*
       <a href="#" onClick={(e) => { e.preventDefault(); onOpenModal('login'); }}>
         Login
       </a>
       <a href="#" onClick={(e) => { e.preventDefault(); onOpenModal('signup'); }}>
         Sign Up
       </a>
+      */}
+
       <a href="#" onClick={(e) => { e.preventDefault(); onOpenModal('donate'); }}>
         Donate
       </a>

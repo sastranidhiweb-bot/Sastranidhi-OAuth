@@ -9,8 +9,9 @@ import Research from './components/Research/Research.jsx';
 import Contact from './components/Contact/Contact.jsx';
 import Footer from './components/Footer/Footer.jsx';
 
-import LoginModal from './components/Modals/LoginModal.jsx';
-import SignupModal from './components/Modals/SignupModal.jsx';
+// Login and Signup modals commented out as requested
+// import LoginModal from './components/Modals/LoginModal.jsx';
+// import SignupModal from './components/Modals/SignupModal.jsx';
 import DonateModal from './components/Modals/DonateModal.jsx';
 
 // Global stylesheets — imported in the same order as the rules appeared
@@ -43,8 +44,11 @@ export default function App() {
       </main>
       <Footer />
 
+      {/* Login and Signup modals commented out as requested */}
+      {/*
       <LoginModal />
       <SignupModal />
+      */}
       <DonateModal />
     </ModalProvider>
   );

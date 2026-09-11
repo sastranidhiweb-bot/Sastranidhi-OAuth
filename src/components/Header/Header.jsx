@@ -34,12 +34,15 @@ export default function Header() {
             ))}
           </nav>
           <div className="actions">
+            {/* Login and Sign Up buttons commented out as requested */}
+            {/*
             <button className="btn outline" onClick={() => open('login')}>
               Login
             </button>
             <button className="btn primary" onClick={() => open('signup')}>
               Sign Up
             </button>
+            */}
             <button className="btn gold" onClick={() => open('donate')}>
               Donate
             </button>
