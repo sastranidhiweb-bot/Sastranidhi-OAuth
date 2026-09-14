@@ -15,7 +15,7 @@
   .section-title h2{font-size:18px}.section-title p{font-size:9px}
   .grid{grid-template-columns:repeat(2,1fr);gap:6px}
   .card{padding:8px;min-height:115px}.icon{width:25px;height:25px;font-size:13px}
-  .card h3{font-size:13px;margin:4px 0 2px}.card p{font-size:8.5px;line-height:1.18}.link{font-size:8.5px;margin-top:3px}
+  .card h3{font-size:11px;margin:4px 0 2px}.platform-heading--linked{white-space:normal}.card p{font-size:8.5px;line-height:1.18}.link{font-size:8.5px;margin-top:3px}
   .stats-grid,.course-grid,.feature-grid,.footer-grid{grid-template-columns:1fr}
   .section{padding:58px 0}.section-head h2{font-size:32px}.cta{display:block;padding:28px}
   .cta .btn{margin-top:15px}

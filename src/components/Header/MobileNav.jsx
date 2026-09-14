@@ -1,6 +1,9 @@
 import { navLinks } from '../../data/siteData.js';
+import { useModal } from '../../context/ModalContext.jsx';
 
-export default function MobileNav({ open, onNavigate, onOpenModal }) {
+export default function MobileNav({ open, onNavigate, isAuthenticated, user, onLogout }) {
+  const { open: openModal } = useModal();
+
   return (
     <div className={`mobile${open ? ' open' : ''}`} id="mobileNav">
       {navLinks.map((link) => (
@@ -8,18 +11,39 @@ export default function MobileNav({ open, onNavigate, onOpenModal }) {
           {link.label}
         </a>
       ))}
+      
+      {/* Login and Sign Up commented out */}
+      {/* 
+      {isAuthenticated && (
+        <a href="/login">Login</a>
+      )
+      }
 
-      {/* Login and Sign Up links commented out as requested */}
-      {/*
-      <a href="#" onClick={(e) => { e.preventDefault(); onOpenModal('login'); }}>
-        Login
-      </a>
-      <a href="#" onClick={(e) => { e.preventDefault(); onOpenModal('signup'); }}>
-        Sign Up
-      </a>
+      {isAuthenticated && (
+        <a href="/signup">Sign Up</a>
+      )
       */}
-
-      <a href="#" onClick={(e) => { e.preventDefault(); onOpenModal('donate'); }}>
+      
+      {isAuthenticated && (
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onLogout();
+            onNavigate();
+          }}
+        >
+          Logout ({user?.first_name || user?.username})
+        </a>
+      )}
+      <a
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          openModal('donate');
+          onNavigate();
+        }}
+      >
         Donate
       </a>
     </div>

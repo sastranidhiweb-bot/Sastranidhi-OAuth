@@ -37,27 +37,18 @@
 // carrying `ssoRoute` skips the PKCE/child-app-login logic above
 // completely and is sent straight to that backend endpoint instead.
 
-import { API_BASE_URL } from '../services/api.js';
-
 export default function PlatformCard({
   icon,
   title,
+  linkedTitle,
   description,
   href,
   linkLabel,
+  showPlatformLink = true,
   loginPath = '/login',
-  ssoRoute,
 }) {
   const handleOpenPlatform = (e) => {
     e.preventDefault();
-
-    // Third-party SaaS child apps using direct-JWT SSO (currently just
-    // Edmingle/IKS-LMS) — bypass the PKCE/login-path logic entirely and
-    // go straight to this backend's SSO bridge route.
-    if (ssoRoute) {
-      window.location.href = `${API_BASE_URL}${ssoRoute}`;
-      return;
-    }
 
     // Open the link directly in a new tab
     window.open(href, '_blank', 'noopener,noreferrer');
@@ -66,20 +57,38 @@ export default function PlatformCard({
   return (
     <article className="card">
       <div className="icon">{icon}</div>
-      <h3>{title}</h3>
+      <h3 className={linkedTitle ? 'platform-heading platform-heading--linked' : 'platform-heading'}>
+        {title}
+        {linkedTitle && (
+          <>
+            <br />
+            <a className="platform-title-link" href={href} target="_blank" rel="noopener noreferrer">
+              {linkedTitle}
+            </a>
+          </>
+        )}
+      </h3>
       <p>{description}</p>
-      <a 
-        className="link" 
-        href={href} 
-        onClick={handleOpenPlatform}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {linkLabel}
-      </a>
+      {showPlatformLink && (
+        <a
+          className="link"
+          href={href}
+          onClick={handleOpenPlatform}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {linkLabel}
+        </a>
+      )}
     </article>
   );
 }
+
+// Future SSO support can be restored here when a platform is ready:
+// if (ssoRoute) {
+//   window.location.href = `${API_BASE_URL}${ssoRoute}`;
+//   return;
+// }
 
 
 

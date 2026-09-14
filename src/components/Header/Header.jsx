@@ -34,7 +34,6 @@ export default function Header() {
             ))}
           </nav>
           <div className="actions">
-            {/* Login and Sign Up buttons commented out as requested */}
             {/*
             <button className="btn outline" onClick={() => open('login')}>
               Login

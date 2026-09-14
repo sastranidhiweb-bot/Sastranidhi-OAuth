@@ -1,10 +1,6 @@
-import { useModal } from '../../context/ModalContext.jsx';
 import SearchCard from './SearchCard.jsx';
-import Initiatives from '../Initiatives/Initiatives.jsx';
 
 export default function Hero() {
-  const { open } = useModal();
-
   return (
     <section className="home-screen" id="home">
       <div className="container home-inner">
@@ -22,16 +18,14 @@ export default function Hero() {
               </a>
               {/* "Create Account" button commented out as requested */}
               {/*
-              <button className="btn outline" onClick={() => open('signup')}>
+              <a className="btn outline" href="/signup">
                 Create Account
-              </button>
+              </a>
               */}
             </div>
           </div>
           <SearchCard />
         </div>
-
-        <Initiatives />
       </div>
     </section>
   );

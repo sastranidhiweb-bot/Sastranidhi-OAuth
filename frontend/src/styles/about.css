@@ -1,9 +1,0 @@
-.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.about-copy h2{font-size:41px;color:var(--navy);margin:8px 0 16px}
-.about-copy p{line-height:1.8;color:var(--muted)}
-.quote{
-  background:linear-gradient(135deg,var(--navy),#255f83);color:#fff;padding:36px;
-  border-radius:20px;box-shadow:0 16px 40px rgba(23,59,86,.18)
-}
-.quote h3{font-size:29px;color:#f4cf72;margin-top:0}
-.quote p{line-height:1.8;color:#e8f5fc}

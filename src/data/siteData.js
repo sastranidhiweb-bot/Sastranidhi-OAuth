@@ -15,14 +15,18 @@ export const initiatives = [
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
     href: 'https://reader.sastranidhi.org/homePage',
+    devHref: 'https://reader.sastranidhi.org/homePage',
   },
   {
     icon: '🏛️',
-    title: 'Vislesaka (Analyze & Assimilate) Bhagavatam : Puranatilakam',
+    title: 'Vislesaka (Analyze & Assimilate)',
+    linkedTitle: 'Bhagavatam : Puranatilakam',
     description:
       'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
     linkLabel: 'Open Platform →',
+    showPlatformLink: false,
     href: 'https://puranatilakam.com/',
+    devHref: 'https://puranatilakam.com/',
   },
   {
     icon: '❓',
@@ -31,6 +35,7 @@ export const initiatives = [
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
     href: 'https://qna.sastranidhi.org/',
+    devHref: 'https://qna.sastranidhi.org/',
   },
   {
     icon: '🎓',
@@ -39,6 +44,9 @@ export const initiatives = [
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
     linkLabel: 'View Courses →',
     href: 'https://sastranidhi.edmingle.com/',
+    devHref: 'https://sastranidhi.edmingle.com/',
+    // Enable when Edmingle SSO is required:
+    // ssoRoute: '/auth/edmingle/sso?redirect_url=your-academy.edmingle.com',
   },
 ];
 

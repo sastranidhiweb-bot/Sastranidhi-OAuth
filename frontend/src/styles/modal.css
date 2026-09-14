@@ -1,6 +1,0 @@
-/* Modals */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:80;align-items:center;justify-content:center;padding:18px}
-.modal.show{display:flex}
-.box{width:min(480px,96%);background:#fff;border-radius:16px;padding:26px;position:relative}
-.close{position:absolute;right:13px;top:9px;border:0;background:none;font-size:28px;cursor:pointer}
-.box h2{color:var(--navy);margin-top:0}

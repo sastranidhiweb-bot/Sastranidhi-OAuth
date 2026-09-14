@@ -1,9 +1,8 @@
 # Sastranidhi — React Conversion
 
-A pixel-perfect React.js (Vite) rewrite of the original static `index.html`
-single-file website. All markup, CSS, class names, responsive breakpoints,
-and interactive behavior (mobile nav, search, modals, demo forms) have been
-preserved exactly, and reorganized into modular functional components.
+A React.js (Vite) frontend for Sastranidhi. It includes the public landing
+page, OAuth test harness, and the branded authentication pages used by the
+backend OAuth flow.
 
 ## Run it
 
@@ -28,7 +27,8 @@ src/
   main.jsx                     Mounts <App /> into #root
   App.jsx                      Composes the page, imports all global CSS
   context/
-    ModalContext.jsx           Shared state for which modal (login/signup/donate) is open
+    AuthContext.jsx            Shared authentication state and API calls
+    ModalContext.jsx           Shared state for the donate modal
   hooks/
     useDemoForm.js             Reproduces the original "demo" form submit behavior
   data/
@@ -57,9 +57,15 @@ src/
       Footer.jsx                   Footer columns + copyright
     Modals/
       Modal.jsx                    Reusable modal shell (backdrop click + close button)
-      LoginModal.jsx
-      SignupModal.jsx
       DonateModal.jsx
+  pages/
+    OAuthTestPage.jsx              Manual PKCE/OAuth test harness
+    LoginPage.jsx                  OAuth login page
+    SignupWizard.jsx               Account creation flow
+    ForgotPasswordPage.jsx         Password recovery request page
+    ResetPasswordPage.jsx          Password reset page
+  services/
+    api.js                         Backend API client
   styles/
     base.css                     :root variables, resets, typography, .container
     header.css                   header, nav, buttons, hamburger, mobile drawer
@@ -77,6 +83,10 @@ src/
 ```
 
 ## Behavior parity notes
+
+- **Auth routes** are available at `/login`, `/signup`, `/forgot-password`,
+  `/reset-password`, and `/oauth-test`. The landing page is rendered for all
+  other paths.
 
 - **Modals** (`login`, `signup`, `donate`) are controlled by a single
   `ModalContext` instead of `data-open` attributes + `classList`. Clicking
