@@ -10,23 +10,23 @@ export const navLinks = [
 export const initiatives = [
   {
     icon: '📖',
-    title: 'Purāṇa Tilakam',
-    description:
-      'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
-    linkLabel: 'Open Platform →',
-    href: 'https://puranatilakam.com/',
-  },
-  {
-    icon: '🏛️',
-    title: 'Vedamanjusa',
+    title: 'Svadhyaya',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
     href: 'https://reader.sastranidhi.org/homePage',
   },
   {
+    icon: '🏛️',
+    title: 'Vislesaka (Analyze & Assimilate) Bhagavatam : Puranatilakam',
+    description:
+      'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
+    linkLabel: 'Open Platform →',
+    href: 'https://puranatilakam.com/',
+  },
+  {
     icon: '❓',
-    title: 'Paripraśna',
+    title: 'Pariprasna',
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
@@ -34,7 +34,7 @@ export const initiatives = [
   },
   {
     icon: '🎓',
-    title: 'Courses',
+    title: 'Courses and Discourses',
     description:
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
     linkLabel: 'View Courses →',
