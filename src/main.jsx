@@ -25,8 +25,12 @@ const PageComponent = ROUTES[window.location.pathname];
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      {PageComponent ? <PageComponent /> : <App />}
-    </AuthProvider>
+    {PageComponent ? (
+      <AuthProvider>
+        <PageComponent />
+      </AuthProvider>
+    ) : (
+      <App />
+    )}
   </React.StrictMode>
 );
