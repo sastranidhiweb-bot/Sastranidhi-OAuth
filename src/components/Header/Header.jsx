@@ -1,66 +1,71 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useModal } from '../../context/ModalContext.jsx';
 import { navLinks } from '../../data/siteData.js';
-import MobileNav from './MobileNav.jsx';
+
+const BRAND_LOGO_SRC = '/images/logo.png';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { open } = useModal();
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
   const closeMobile = () => setMobileOpen(false);
 
-  const openModalFromMobile = (name) => {
-    open(name);
-    closeMobile();
-  };
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <>
-      <header>
-        <div className="container header-row">
-          <a className="brand" href="#home">
-            <span className="mark">卐</span>
-            <span>
-              SASTRANIDHI
-              <small>THE TREASURY OF ŚĀSTRAS</small>
-            </span>
+    <header className={scrolled ? 'scrolled' : ''}>
+      <div className="wrap nav">
+        <a href="#home" className="brand">
+          <span className="glyph">
+            <img src={BRAND_LOGO_SRC} alt="Sastranidhi emblem" />
+          </span>
+          <span>
+            <div className="name">SASTRANIDHI</div>
+            <div className="sub">THE TREASURY OF ŚĀSTRAS</div>
+          </span>
+        </a>
+        <nav className="links">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <a
+          href="#donate"
+          className="btn-donate js-donate-trigger"
+          onClick={(e) => {
+            e.preventDefault();
+            open('donate');
+          }}
+        >
+          Donate
+        </a>
+        <button
+          className={`hamburger${mobileOpen ? ' active' : ''}`}
+          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          onClick={toggleMobile}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+      <nav className={`mobile-nav${mobileOpen ? ' open' : ''}`}>
+        {navLinks.map((link) => (
+          <a key={link.href} href={link.href} onClick={closeMobile}>
+            {link.label}
           </a>
-          <nav>
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div className="actions">
-            {/*
-            <button className="btn outline" onClick={() => open('login')}>
-              Login
-            </button>
-            <button className="btn primary" onClick={() => open('signup')}>
-              Sign Up
-            </button>
-            */}
-            <button className="btn gold" onClick={() => open('donate')}>
-              Donate
-            </button>
-          </div>
-          <button
-            className="menu"
-            id="menuBtn"
-            aria-label="Open menu"
-            onClick={toggleMobile}
-          >
-            ☰
-          </button>
-        </div>
-      </header>
-      <MobileNav
-        open={mobileOpen}
-        onNavigate={closeMobile}
-        onOpenModal={openModalFromMobile}
-      />
-    </>
+        ))}
+      </nav>
+    </header>
   );
 }

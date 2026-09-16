@@ -11,24 +11,22 @@ export default function SearchCard() {
   };
 
   return (
-    <div className="search-card">
-      <h2>Search the Knowledge Network</h2>
+    <div className="search-panel">
+      <h3>Search the Knowledge Network</h3>
       <p>
         Discover scriptures, commentaries, philosophical answers, courses, research
         material and publications.
       </p>
-      <form className="search" id="searchForm" onSubmit={handleSubmit}>
+      <form className="search-row" onSubmit={handleSubmit}>
         <input
-          id="searchInput"
-          placeholder="Search texts, topics, courses..."
+          type="text"
+          placeholder="Search texts, topics, courses…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button className="btn gold">Search</button>
+        <button type="submit">Search</button>
       </form>
-      <div className="result" id="result" style={{ display: result ? 'block' : 'none' }}>
-        {result}
-      </div>
+      {result && <div className="search-result">{result}</div>}
     </div>
   );
 }

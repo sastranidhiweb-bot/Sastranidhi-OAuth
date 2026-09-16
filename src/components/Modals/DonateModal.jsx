@@ -8,25 +8,27 @@ export default function DonateModal() {
 
   return (
     <Modal
-      id="donate"
+      id="donateModal"
       isOpen={openModal === 'donate'}
       onClose={close}
       title="Support Sastranidhi"
     >
-      <form className="form demo" onSubmit={handleSubmit}>
-        <input required placeholder="Full name" />
+      <form onSubmit={handleSubmit}>
+        <input type="text" required placeholder="Full name" />
         <input type="email" required placeholder="Email address" />
-        <select>
-          <option>Research and Digitisation</option>
-          <option>Education and Courses</option>
-          <option>Publications</option>
-          <option>General Support</option>
-        </select>
-        <input type="number" min="1" required placeholder="Donation amount" />
-        <button className="btn gold">Continue</button>
-        <div className="message" style={{ display: message ? 'block' : 'none' }}>
-          {message}
+        <div className="select-wrap">
+          <select required defaultValue="Research and Digitisation">
+            <option>Research and Digitisation</option>
+            <option>Education and Courses</option>
+            <option>Publications</option>
+            <option>General Support</option>
+          </select>
         </div>
+        <input type="number" min="1" placeholder="Donation amount" />
+        <button type="submit" className="btn-continue">
+          Continue
+        </button>
+        {message && <div className="modal-success show">{message}</div>}
       </form>
     </Modal>
   );

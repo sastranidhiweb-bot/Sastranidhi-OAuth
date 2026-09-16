@@ -1,41 +1,16 @@
 import { navLinks } from '../../data/siteData.js';
 import { useModal } from '../../context/ModalContext.jsx';
 
-export default function MobileNav({ open, onNavigate, isAuthenticated, user, onLogout }) {
+export default function MobileNav({ open, onNavigate }) {
   const { open: openModal } = useModal();
 
   return (
-    <div className={`mobile${open ? ' open' : ''}`} id="mobileNav">
+    <nav className={`mobile-nav${open ? ' open' : ''}`} aria-label="Mobile navigation">
       {navLinks.map((link) => (
         <a key={link.href} href={link.href} onClick={onNavigate}>
           {link.label}
         </a>
       ))}
-      
-      {/* Login and Sign Up commented out */}
-      {/* 
-      {isAuthenticated && (
-        <a href="/login">Login</a>
-      )
-      }
-
-      {isAuthenticated && (
-        <a href="/signup">Sign Up</a>
-      )
-      */}
-      
-      {isAuthenticated && (
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            onLogout();
-            onNavigate();
-          }}
-        >
-          Logout ({user?.first_name || user?.username})
-        </a>
-      )}
       <a
         href="#"
         onClick={(e) => {
@@ -46,6 +21,6 @@ export default function MobileNav({ open, onNavigate, isAuthenticated, user, onL
       >
         Donate
       </a>
-    </div>
+    </nav>
   );
 }

@@ -6,45 +6,63 @@ export default function Contact() {
   const { message, handleSubmit } = useDemoForm();
 
   return (
-    <section className="section alt" id="contact">
-      <div className="container">
-        <div className="cta">
-          <div>
-            <h2>Support the Preservation of Knowledge</h2>
-            <p>
-              Your contribution can support research, digitisation, education,
-              publications and open-access initiatives.
-            </p>
-          </div>
-          <button className="btn gold" onClick={() => open('donate')}>
-            Make a Donation
-          </button>
-        </div>
-        <div className="split" style={{ marginTop: 42 }}>
-          <div>
-            <div className="kicker">Contact Us</div>
-            <h2 style={{ color: 'var(--navy)', fontSize: 36 }}>Connect with Sastranidhi</h2>
-            <p style={{ color: 'var(--muted)', lineHeight: 1.8 }}>
-              For research collaboration, courses, institutional partnerships,
-              volunteering and support.
-            </p>
-            <p>
-              <strong>Email:</strong> info@sastranidhi.org
-              <br />
-              <strong>Location:</strong> Hyderabad, India
-            </p>
-          </div>
-          <form className="form demo" onSubmit={handleSubmit}>
-            <input required placeholder="Your name" />
-            <input type="email" required placeholder="Email address" />
-            <textarea rows={5} required placeholder="Your message" />
-            <button className="btn primary">Send Message</button>
-            <div className="message" style={{ display: message ? 'block' : 'none' }}>
-              {message}
+    <>
+      <section id="donate" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="donate-band reveal">
+            <div>
+              <h3>Support the Preservation of Knowledge</h3>
+              <p>
+                Your contribution can support research, digitisation, education,
+                publications and open-access initiatives.
+              </p>
             </div>
-          </form>
+            <a
+              href="#donate"
+              className="btn-primary js-donate-trigger"
+              onClick={(e) => {
+                e.preventDefault();
+                open('donate');
+              }}
+            >
+              Make a Donation
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section id="contact" style={{ background: 'var(--stone-deep)' }}>
+        <div className="wrap">
+          <div className="section-head reveal" style={{ marginBottom: '10px' }}>
+            <div className="kicker">Contact Us</div>
+            <h2>Connect with Sastranidhi</h2>
+          </div>
+          <div className="contact-grid reveal">
+            <div>
+              <h3>Reach out</h3>
+              <p>
+                For research collaboration, courses, institutional partnerships,
+                volunteering and support.
+              </p>
+              <div className="meta-line">
+                <strong>Email:</strong> info@sastranidhi.org
+              </div>
+              <div className="meta-line">
+                <strong>Location:</strong> Hyderabad, India
+              </div>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <input type="text" placeholder="Your name" required />
+              <input type="email" placeholder="Email address" required />
+              <textarea placeholder="Your message" required />
+              <button type="submit" className="btn-primary">
+                Send Message
+              </button>
+              {message && <div className="form-message">{message}</div>}
+            </form>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

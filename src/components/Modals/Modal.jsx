@@ -7,12 +7,17 @@ export default function Modal({ id, isOpen, onClose, title, children }) {
 
   return (
     <div
-      className={`modal${isOpen ? ' show' : ''}`}
+      className={`modal-overlay${isOpen ? ' open' : ''}`}
       id={id}
       onClick={handleBackdropClick}
     >
-      <div className="box">
-        <button className="close" onClick={onClose}>
+      <div className="modal-box">
+        <button
+          type="button"
+          className="modal-close"
+          onClick={onClose}
+          aria-label="Close"
+        >
           ×
         </button>
         <h2>{title}</h2>

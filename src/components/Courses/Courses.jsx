@@ -2,9 +2,9 @@ import { courses } from '../../data/siteData.js';
 
 export default function Courses() {
   return (
-    <section className="section alt" id="courses">
-      <div className="container">
-        <div className="section-head">
+    <section id="courses" style={{ background: 'var(--stone-deep)' }}>
+      <div className="wrap">
+        <div className="section-head reveal">
           <div className="kicker">IKS-LMS</div>
           <h2>Featured Courses</h2>
           <p>
@@ -12,22 +12,23 @@ export default function Courses() {
             and scriptural studies.
           </p>
         </div>
-        <div className="course-grid">
+        <div className="course-grid stagger">
           {courses.map((course) => (
-            <article className="course" key={course.title}>
-              <div className="course-top">{course.topLabel}</div>
-              <div className="course-body">
-                <div className="course-meta">
+            <div className="course" key={course.title}>
+              <div className="head">
+                <div className="level">{course.level}</div>
+                <h3>{course.topLabel}</h3>
+              </div>
+              <div className="body">
+                <div className="meta">
                   <span>{course.lessons}</span>
                   <span>{course.level}</span>
                 </div>
-                <h3>{course.title}</h3>
+                <h4>{course.title}</h4>
                 <p>{course.description}</p>
-                <a className="link" href={course.href}>
-                  View Course →
-                </a>
+                <a href={course.href}>View Course →</a>
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </div>

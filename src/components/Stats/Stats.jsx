@@ -2,15 +2,15 @@ import { stats } from '../../data/siteData.js';
 
 export default function Stats() {
   return (
-    <section className="stats">
-      <div className="container stats-grid">
+    <div className="stats-band">
+      <div className="wrap stats-grid stagger">
         {stats.map((stat) => (
-          <div className="stat" key={stat.label}>
-            <strong>{stat.value}</strong>
-            {stat.label}
+          <div key={stat.label}>
+            <div className="num">{stat.value}</div>
+            <div className="lbl">{stat.label}</div>
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

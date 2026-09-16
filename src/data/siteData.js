@@ -1,6 +1,6 @@
 export const navLinks = [
   { href: '#home', label: 'Home' },
-  { href: '#initiatives', label: 'Initiatives' },
+  { href: '#platforms', label: 'Initiatives' },
   { href: '#about', label: 'About Us' },
   { href: '#courses', label: 'Courses' },
   { href: '#research', label: 'Research' },
@@ -9,8 +9,9 @@ export const navLinks = [
 
 export const initiatives = [
   {
-    icon: '📖',
+    icon: 'Sv',
     title: 'Svādhyāya (Study & Research)',
+    shortLabel: 'Svadhyaya',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
@@ -18,19 +19,20 @@ export const initiatives = [
     devHref: 'https://reader.sastranidhi.org/homePage',
   },
   {
-    icon: '🏛️',
+    icon: 'Vi',
     title: 'Viśleṣaka (Analyze & Assimilate)',
     linkedTitle: 'Bhagavatam : Puranatilakam',
+    shortLabel: 'Vislesaka: Puranatilakam',
     description:
       'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
     linkLabel: 'Open Platform →',
-    showPlatformLink: false,
     href: 'https://puranatilakam.com/',
     devHref: 'https://puranatilakam.com/',
   },
   {
-    icon: '❓',
+    icon: 'Pr',
     title: 'Paripraśna (Questions & Answers)',
+    shortLabel: 'Pariprasna',
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
@@ -38,15 +40,14 @@ export const initiatives = [
     devHref: 'https://qna.sastranidhi.org/',
   },
   {
-    icon: '🎓',
+    icon: 'Cd',
     title: 'Pravacana (Courses & Discourses)',
+    shortLabel: 'Courses and Discourses',
     description:
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
     linkLabel: 'View Courses →',
     href: 'https://sastranidhi.edmingle.com/',
     devHref: 'https://sastranidhi.edmingle.com/',
-    // Enable when Edmingle SSO is required:
-    // ssoRoute: '/auth/edmingle/sso?redirect_url=your-academy.edmingle.com',
   },
 ];
 
@@ -65,7 +66,7 @@ export const courses = [
     title: 'Indian Philosophy Foundations',
     description:
       'Understand the major darśanas, central questions and foundational terminology.',
-    href: 'https://lms.sastranidhi.org',
+    href: '#',
   },
   {
     topLabel: 'Bhagavad-gītā Study',
@@ -74,7 +75,7 @@ export const courses = [
     title: 'Bhagavad-gītā: Text and Meaning',
     description:
       'A structured study of selected verses with traditional explanations.',
-    href: 'https://lms.sastranidhi.org',
+    href: '#',
   },
   {
     topLabel: 'Sanskrit for Beginners',
@@ -83,34 +84,34 @@ export const courses = [
     title: 'Reading Sanskrit Scriptures',
     description:
       'Build the skills required to read simple Sanskrit verses and terminology.',
-    href: 'https://lms.sastranidhi.org',
+    href: '#',
   },
 ];
 
 export const researchFeatures = [
   {
-    title: '🔎 Research Projects',
+    title: 'Research Projects',
     description: 'Textual, comparative, manuscript and digital humanities projects.',
   },
   {
-    title: '📰 Publications',
+    title: 'Publications',
     description: 'Books, articles, translations, reports and educational resources.',
   },
   {
-    title: '🗓️ Events',
+    title: 'Events',
     description: 'Lectures, seminars, workshops, launches and conferences.',
   },
   {
-    title: '👥 Scholars',
+    title: 'Scholars',
     description: 'Profiles of teachers, researchers, contributors and institutional partners.',
   },
 ];
 
 export const footerPlatforms = [
-  { href: 'https://puranatilakam.sastranidhi.org', label: 'Purāṇa Tilakam' },
-  { href: 'https://www.sastranidhi.org', label: 'Vedic Digital Library' },
-  { href: 'https://pariprashna.sastranidhi.org', label: 'Paripraśna' },
-  { href: 'https://lms.sastranidhi.org', label: 'IKS-LMS' },
+  { href: '#', label: 'Purāṇa Tilakam' },
+  { href: '#', label: 'Vedic Digital Library' },
+  { href: '#', label: 'Paripraśna' },
+  { href: '#', label: 'IKS-LMS' },
 ];
 
 export const footerInstitution = [
