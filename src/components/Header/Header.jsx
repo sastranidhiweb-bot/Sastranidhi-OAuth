@@ -24,10 +24,10 @@ export default function Header() {
       <div className="wrap nav">
         <a href="#home" className="brand">
           <span className="glyph">
-            <img src={BRAND_LOGO_SRC} alt="Sastranidhi emblem" />
+            <img src={BRAND_LOGO_SRC} alt="Śāstranidhi emblem" />
           </span>
           <span>
-            <div className="name">SASTRANIDHI</div>
+            <div className="name">ŚĀSTRANIDHI</div>
             <div className="sub">THE TREASURY OF ŚĀSTRAS</div>
           </span>
         </a>
