@@ -6,18 +6,24 @@ export default function Hero() {
       <div className="orb orb1" />
       <div className="orb orb2" />
       <div className="wrap hero-inner">
-        <div className="pillars">
+        {/* Pillars (three lines) removed */}
+        {/* <div className="pillars">
           <span />
           <span />
           <span />
-        </div>
-        <div className="eyebrow">SASTRANIDHI KNOWLEDGE ECOSYSTEM</div>
+        </div> */}
+        
+        {/* Eyebrow (SASTRANIDHI KNOWLEDGE ECOSYSTEM) removed */}
+        {/* <div className="eyebrow">SASTRANIDHI KNOWLEDGE ECOSYSTEM</div> */}
+        
         <h1>The Treasury of Śāstras</h1>
         <p className="lede">
           A unified digital home for scripture, research, philosophical inquiry,
           Indian Knowledge Systems education and service.
         </p>
 
+        {/* Platform links (buttons) removed as requested */}
+        {/*
         <div className="platform-links reveal">
           {initiatives.map((item) => (
             <a
@@ -30,6 +36,7 @@ export default function Hero() {
             </a>
           ))}
         </div>
+        */}
       </div>
       <div className="gopuram-arch" />
     </section>
