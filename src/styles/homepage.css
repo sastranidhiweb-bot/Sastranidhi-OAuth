@@ -96,13 +96,17 @@ header.scrolled {
   gap: 14px;
 }
 .brand .glyph {
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   animation: auraPulse 3.2s ease-in-out infinite;
+  overflow: hidden;
+  background: #ffffff;
+  flex-shrink: 0;
+  padding: 2px;
 }
 @keyframes auraPulse {
   0%, 100% {
@@ -115,7 +119,10 @@ header.scrolled {
 .brand .glyph img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 50%;
 }
 .brand .name {
   font-family: 'Cinzel', serif;
