@@ -1,10 +1,10 @@
 export const navLinks = [
-  { href: '#home', label: 'Home' },
-  { href: '#platforms', label: 'Initiatives' },
-  { href: '#about', label: 'About Us' },
-  { href: '#courses', label: 'Courses' },
-  { href: '#research', label: 'Research' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#home', label: 'Home' },
+  { href: '/#platforms', label: 'Initiatives' },
+  { href: '/#about', label: 'About Us' },
+  { href: '/#courses', label: 'Courses' },
+  { href: '/#research', label: 'Research' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export const initiatives = [
@@ -52,10 +52,11 @@ export const initiatives = [
 ];
 
 export const stats = [
-  { value: '100+', label: 'Commentaries' },
-  { value: '18,000+', label: 'Ślokas' },
-  { value: '50+', label: 'Scholars & Contributors' },
-  { value: '4', label: 'Digital Platforms' },
+  { icon: '🌐', value: '250,000+', label: 'Website Hits' },
+  { icon: '👥', value: '10,000+', label: 'Users' },
+  { icon: '📜', value: '500+', label: 'Śāstras' },
+  { icon: '📈', value: '50,000+', label: 'Visits' },
+  { icon: '🎓', value: '3+', label: 'Courses' },
 ];
 
 export const courses = [
@@ -66,7 +67,7 @@ export const courses = [
     title: 'Indian Philosophy Foundations',
     description:
       'Understand the major darśanas, central questions and foundational terminology.',
-    href: '#',
+    href: 'https://sastranidhi.edmingle.com/',
   },
   {
     topLabel: 'Bhagavad-gītā Study',
@@ -75,7 +76,7 @@ export const courses = [
     title: 'Bhagavad-gītā: Text and Meaning',
     description:
       'A structured study of selected verses with traditional explanations.',
-    href: '#',
+    href: 'https://sastranidhi.edmingle.com/',
   },
   {
     topLabel: 'Sanskrit for Beginners',
@@ -84,7 +85,7 @@ export const courses = [
     title: 'Reading Sanskrit Scriptures',
     description:
       'Build the skills required to read simple Sanskrit verses and terminology.',
-    href: '#',
+    href: 'https://sastranidhi.edmingle.com/',
   },
 ];
 
@@ -115,8 +116,8 @@ export const footerPlatforms = [
 ];
 
 export const footerInstitution = [
-  { href: '#about', label: 'About Us' },
-  { href: '#research', label: 'Research' },
-  { href: '#courses', label: 'Courses' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#about', label: 'About Us' },
+  { href: '/#research', label: 'Research' },
+  { href: '/#courses', label: 'Courses' },
+  { href: '/contact', label: 'Contact' },
 ];

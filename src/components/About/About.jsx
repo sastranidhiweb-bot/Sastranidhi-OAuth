@@ -3,18 +3,7 @@ export default function About() {
     <section id="about">
       <div className="wrap about-grid">
         <div className="reveal">
-          <div
-            className="kicker"
-            style={{
-              color: 'var(--violet-deep)',
-              fontSize: '13px',
-              letterSpacing: '3px',
-              fontWeight: 700,
-              marginBottom: '10px',
-            }}
-          >
-            ABOUT SASTRANIDHI
-          </div>
+          <div className="kicker">ABOUT SASTRANIDHI</div>
           <h2>Preserving Śāstra. Enabling Research. Inspiring Learning.</h2>
           <p>
             Sastranidhi is dedicated to the study, preservation and dissemination of
@@ -23,7 +12,7 @@ export default function About() {
             collaboration, the institution makes authentic learning accessible to
             present and future generations.
           </p>
-          <a href="#contact" className="btn-primary">
+          <a href="/contact" className="btn-primary">
             Connect With Us
           </a>
         </div>

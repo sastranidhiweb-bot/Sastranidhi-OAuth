@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupWizard from './pages/SignupWizard.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
 import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import './styles/auth.css';
 
@@ -19,18 +20,15 @@ const ROUTES = {
   '/signup': SignupWizard,
   '/forgot-password': ForgotPasswordPage,
   '/reset-password': ResetPasswordPage,
+  '/contact': ContactPage,
 };
 
 const PageComponent = ROUTES[window.location.pathname];
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {PageComponent ? (
-      <AuthProvider>
-        <PageComponent />
-      </AuthProvider>
-    ) : (
-      <App />
-    )}
+    <AuthProvider>
+      {PageComponent ? <PageComponent /> : <App />}
+    </AuthProvider>
   </React.StrictMode>
 );
