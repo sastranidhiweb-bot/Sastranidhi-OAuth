@@ -2,7 +2,7 @@ import { courses } from '../../data/siteData.js';
 
 export default function Courses() {
   return (
-    <section id="courses" style={{ background: 'var(--stone-deep)' }}>
+    <section id="courses">
       <div className="wrap">
         <div className="section-head reveal">
           <div className="kicker">IKS-LMS</div>
@@ -26,7 +26,9 @@ export default function Courses() {
                 </div>
                 <h4>{course.title}</h4>
                 <p>{course.description}</p>
-                <a href={course.href}>View Course →</a>
+                <a href={course.href} target="_blank" rel="noopener noreferrer">
+                  View Course →
+                </a>
               </div>
             </div>
           ))}

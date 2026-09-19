@@ -7,7 +7,7 @@ export default function Contact() {
 
   return (
     <>
-      <section id="donate" style={{ paddingTop: 0 }}>
+      <section id="donate">
         <div className="wrap">
           <div className="donate-band reveal">
             <div>
@@ -31,9 +31,9 @@ export default function Contact() {
         </div>
       </section>
 
-      <section id="contact" style={{ background: 'var(--stone-deep)' }}>
+      <section id="contact">
         <div className="wrap">
-          <div className="section-head reveal" style={{ marginBottom: '10px' }}>
+          <div className="section-head reveal">
             <div className="kicker">Contact Us</div>
             <h2>Connect with Sastranidhi</h2>
           </div>

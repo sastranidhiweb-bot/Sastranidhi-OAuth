@@ -6,10 +6,7 @@ export default function Initiatives() {
     <section id="platforms">
       <div className="wrap">
         <div className="section-head reveal">
-          {/* "Our Digital Initiatives" kicker removed as requested */}
-          {/* <div className="kicker">Our Digital Initiatives</div> */}
-          <h2>Explore All Platforms</h2>
-          <p>The four key initiatives are visible immediately when visitors enter the website.</p>
+          <h2>Explore Sastranidhi</h2>
         </div>
         <div className="tablet-grid stagger">
           {initiatives.map((item) => (

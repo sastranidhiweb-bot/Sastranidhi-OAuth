@@ -19,10 +19,31 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleHashClick = (e, href) => {
+    if (href.startsWith('/#') && window.location.pathname === '/') {
+      e.preventDefault();
+      const id = href.replace('/#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.pushState(null, '', href);
+      }
+    }
+  };
+
   return (
     <header className={scrolled ? 'scrolled' : ''}>
       <div className="wrap nav">
-        <a href="#home" className="brand">
+        <a
+          href="/#home"
+          className="brand"
+          onClick={(e) => {
+            if (window.location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+        >
           <span className="glyph">
             <img src={BRAND_LOGO_SRC} alt="Śāstranidhi emblem" />
           </span>
@@ -33,7 +54,11 @@ export default function Header() {
         </a>
         <nav className="links">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleHashClick(e, link.href)}
+            >
               {link.label}
             </a>
           ))}
@@ -61,7 +86,14 @@ export default function Header() {
       </div>
       <nav className={`mobile-nav${mobileOpen ? ' open' : ''}`}>
         {navLinks.map((link) => (
-          <a key={link.href} href={link.href} onClick={closeMobile}>
+          <a
+            key={link.href}
+            href={link.href}
+            onClick={(e) => {
+              closeMobile();
+              handleHashClick(e, link.href);
+            }}
+          >
             {link.label}
           </a>
         ))}

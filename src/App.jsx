@@ -3,21 +3,52 @@ import { ModalProvider } from './context/ModalContext.jsx';
 
 import Header from './components/Header/Header.jsx';
 import Hero from './components/Hero/Hero.jsx';
-import SearchCard from './components/Hero/SearchCard.jsx';
 import Initiatives from './components/Initiatives/Initiatives.jsx';
+import InitiativesList from './components/Initiatives/InitiativesList.jsx';
 import Stats from './components/Stats/Stats.jsx';
 import About from './components/About/About.jsx';
 import Courses from './components/Courses/Courses.jsx';
 import Research from './components/Research/Research.jsx';
-import Contact from './components/Contact/Contact.jsx';
+import SubscribeSection from './components/Subscribe/SubscribeSection.jsx';
+import DonateBand from './components/DonateBand/DonateBand.jsx';
+// import Contact from './components/Contact/Contact.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import DonateModal from './components/Modals/DonateModal.jsx';
 
-import './styles/homepage.css';
+import './styles/new-design.css';
 
 export default function App() {
+  // Scroll to hash section on load (e.g., when arriving from /#platforms)
   useEffect(() => {
-    const revealTargets = document.querySelectorAll('.reveal, .stagger');
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
+
+  useEffect(() => {
+    const selector = [
+      '.reveal',
+      '.stagger',
+      '.section-head',
+      '.tablet',
+      '.course',
+      '.research-item',
+      '.vision-card',
+    ].join(', ');
+
+    const revealTargets = document.querySelectorAll(selector);
+
+    if (!('IntersectionObserver' in window)) {
+      revealTargets.forEach((el) => el.classList.add('in'));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -27,7 +58,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.15 },
+      { threshold: 0.12, rootMargin: '0px 0px -30px 0px' },
     );
 
     revealTargets.forEach((target) => observer.observe(target));
@@ -40,24 +71,26 @@ export default function App() {
         <Header />
         <main>
           <Hero />
-          <SearchCard />
           <Initiatives />
           <Stats />
           <About />
+          <InitiativesList />
           <Courses />
           <Research />
-          <Contact />
+          <DonateBand />
+          <SubscribeSection />
+          {/* <Contact /> */}
         </main>
         <Footer />
         <DonateModal />
         <div className="whatsapp-float">
-          <span className="wa-tooltip">Talk to us on WhatsApp</span>
+          <span className="wa-tooltip">Follow us on WhatsApp</span>
           <a
             className="wa-btn"
-            href="https://wa.me/919999999999?text=Namaste%2C%20I%20have%20a%20question%20about%20Sastranidhi"
+            href="https://whatsapp.com/channel/0029VbDKfR53mFY1T0Lfdb1O"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Chat with us on WhatsApp"
+            aria-label="Follow Sastranidhi on WhatsApp"
           >
             <span className="wa-ring" />
             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

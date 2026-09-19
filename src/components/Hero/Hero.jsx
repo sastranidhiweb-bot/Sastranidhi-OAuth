@@ -1,44 +1,22 @@
-import { initiatives } from '../../data/siteData.js';
-
 export default function Hero() {
   return (
     <section className="hero" id="home">
+      <div className="hero-clouds" aria-hidden="true">
+        <span className="hero-cloud" />
+        <span className="hero-cloud" />
+        <span className="hero-cloud" />
+      </div>
       <div className="orb orb1" />
       <div className="orb orb2" />
       <div className="wrap hero-inner">
-        {/* Pillars (three lines) removed */}
-        {/* <div className="pillars">
-          <span />
-          <span />
-          <span />
-        </div> */}
-        
-        {/* Eyebrow (SASTRANIDHI KNOWLEDGE ECOSYSTEM) removed */}
-        {/* <div className="eyebrow">SASTRANIDHI KNOWLEDGE ECOSYSTEM</div> */}
-        
-        <h1>The Treasury of Śāstras</h1>
+        <h1>THE TREASURY OF ŚĀSTRAS</h1>
         <p className="lede">
           A unified digital home for scripture, research, philosophical inquiry,
           Indian Knowledge Systems education and service.
         </p>
-
-        {/* Platform links (buttons) removed as requested */}
-        {/*
-        <div className="platform-links reveal">
-          {initiatives.map((item) => (
-            <a
-              key={item.title}
-              href={import.meta.env.DEV && item.devHref ? item.devHref : item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {item.shortLabel || item.title}
-            </a>
-          ))}
-        </div>
-        */}
       </div>
       <div className="gopuram-arch" />
+      <div className="hero-curve" />
     </section>
   );
 }
