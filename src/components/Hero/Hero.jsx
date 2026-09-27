@@ -18,7 +18,6 @@ export default function Hero() {
         </p>
       </div>
       <div className="gopuram-arch" />
-      <div className="hero-curve" />
     </section>
   );
 }

@@ -6,8 +6,8 @@
   position: relative;
   overflow: hidden;
   text-align: center;
-  padding: 52px 0 74px;
-  min-height: 208px;
+  padding: 10px 0 18px;
+  min-height: 0;
   background:
     radial-gradient(80% 70% at 50% 38%, rgba(101, 64, 181, 0.28), transparent 62%),
     var(--sn-gradient);
@@ -176,17 +176,6 @@
   display: none;
 }
 
-/* Bottom curve */
-.hero-curve {
-  position: absolute;
-  left: -10%;
-  right: -10%;
-  bottom: -1px;
-  height: 18px;
-  background: var(--lavender-light);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  z-index: 2;
-}
 
 /* ---------- Keyframes ---------- */
 @keyframes mandalaSpin {

@@ -5,7 +5,7 @@
 #platforms {
   position: relative;
   overflow: hidden;
-  padding: 50px 0 40px;
+  padding: 4px 0 40px;
   background:
     radial-gradient(circle at 10% 20%, rgba(101, 55, 166, 0.13), transparent 30%),
     radial-gradient(circle at 88% 18%, rgba(232, 196, 90, 0.09), transparent 22%),

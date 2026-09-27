@@ -25,7 +25,6 @@ export function PageHero({ crumb, title, lede }) {
         <h1>{title}</h1>
         <p className="lede">{lede}</p>
       </div>
-      <div className="hero-curve" />
     </section>
   );
 }
