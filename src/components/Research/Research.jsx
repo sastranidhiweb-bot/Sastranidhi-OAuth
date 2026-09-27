@@ -1,4 +1,5 @@
 import { researchFeatures } from '../../data/siteData.js';
+import '../../styles/research.css';
 
 export default function Research() {
   return (
@@ -19,6 +20,11 @@ export default function Research() {
               <p>{feature.description}</p>
             </div>
           ))}
+        </div>
+        <div className="section-more reveal">
+          <a className="btn-outline" href="/research">
+            Research in detail →
+          </a>
         </div>
       </div>
     </section>

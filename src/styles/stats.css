@@ -1,3 +1,160 @@
-.stats{background:var(--navy);color:#fff;padding:25px 0}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:center}
-.stat strong{display:block;font-family:Georgia,serif;font-size:30px;color:#f2c75e}
+/* ============================================================
+   STATS BAND — matches new Śāstranidhi design
+   ============================================================ */
+
+.stats-band {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 0;
+  background: var(--sn-gradient);
+}
+
+.stats-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.035) 0 2px,
+    transparent 2px 26px
+  );
+  animation: bandDrift 14s linear infinite;
+}
+
+@keyframes bandDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 400px 0; }
+}
+
+/* ---------- Grid ---------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* ---------- Each stat ---------- */
+.stat-item {
+  position: relative;
+  padding: 4px 14px;
+  transition: transform 0.35s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+}
+
+.stat-icon {
+  display: inline-block;
+  font-size: 18px;
+  margin-bottom: 2px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(232, 195, 74, 0.35));
+  animation: iconSway 3.6s ease-in-out infinite;
+}
+
+.stat-item:nth-child(2) .stat-icon { animation-delay: 0.3s; }
+.stat-item:nth-child(3) .stat-icon { animation-delay: 0.6s; }
+.stat-item:nth-child(4) .stat-icon { animation-delay: 0.9s; }
+
+@keyframes iconSway {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-3px) rotate(-4deg); }
+}
+
+.stats-grid .num {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  background: linear-gradient(
+    135deg,
+    var(--brand-gold),
+    var(--brand-gold-soft) 60%,
+    var(--brand-gold)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stats-grid .lbl {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  color: var(--lavender-soft);
+}
+
+/* ---------- Floating bubbles layer ---------- */
+.stats-bubbles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stats-bubbles span {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 226, 238, 0.45);
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(255, 255, 255, 0.5),
+    rgba(192, 202, 220, 0.14) 40%,
+    transparent 72%
+  );
+  animation: statBubble linear infinite;
+}
+
+.stats-bubbles span.gold {
+  border-color: rgba(232, 195, 74, 0.55);
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(255, 241, 201, 0.6),
+    rgba(232, 195, 74, 0.22) 40%,
+    transparent 72%
+  );
+}
+
+.stats-bubbles span:nth-child(1) { left: 6%;  width: 14px; height: 14px; animation-duration: 7s;  animation-delay: -1s; }
+.stats-bubbles span:nth-child(2) { left: 18%; width: 22px; height: 22px; animation-duration: 9s;  animation-delay: -4s; }
+.stats-bubbles span:nth-child(3) { left: 31%; width: 10px; height: 10px; animation-duration: 6s;  animation-delay: -2s; }
+.stats-bubbles span:nth-child(4) { left: 44%; width: 18px; height: 18px; animation-duration: 8s;  animation-delay: -6s; }
+.stats-bubbles span:nth-child(5) { left: 57%; width: 26px; height: 26px; animation-duration: 10s; animation-delay: -3s; }
+.stats-bubbles span:nth-child(6) { left: 70%; width: 12px; height: 12px; animation-duration: 7s;  animation-delay: -5s; }
+.stats-bubbles span:nth-child(7) { left: 82%; width: 20px; height: 20px; animation-duration: 9s;  animation-delay: -7s; }
+.stats-bubbles span:nth-child(8) { left: 93%; width: 15px; height: 15px; animation-duration: 8s;  animation-delay: -2.5s; }
+
+@keyframes statBubble {
+  0% {
+    transform: translateY(0) scale(0.7);
+    opacity: 0;
+  }
+  15% { opacity: 0.8; }
+  100% {
+    transform: translateY(-190px) translateX(14px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-band::before,
+  .stats-bubbles span,
+  .stat-icon {
+    animation: none !important;
+  }
+}

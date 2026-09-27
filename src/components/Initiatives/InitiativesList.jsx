@@ -1,3 +1,5 @@
+import '../../styles/initiatives-list.css';
+
 const initiativeItems = [
   {
     icon: 'Sv',
@@ -35,31 +37,34 @@ export default function InitiativesList() {
       <div className="wrap">
         <div className="section-head reveal">
           <div className="kicker">OUR INITIATIVES</div>
-          <h2>Explore Our Knowledge Initiatives</h2>
+          <h2>Explore Our Knowledge</h2>
           <p>
             Discover focused platforms and programs supporting study, research,
             inquiry and learning across the Indian knowledge traditions.
           </p>
         </div>
-        <div className="independent-list stagger">
+        <ul className="independent-list stagger">
           {initiativeItems.map((item) => (
-            <div className="initiative-item topic-item" key={item.title}>
-              <div className="initiative-icon">{item.icon}</div>
+            <li className="initiative-item topic-item" key={item.title}>
+              <div className="initiative-icon" aria-hidden="true">
+                {item.icon}
+              </div>
               <div className="initiative-body">
                 <h4>{item.title}</h4>
                 <p>{item.description}</p>
-                <a
-                  className="initiative-link-button"
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Details →
-                </a>
               </div>
-            </div>
+              <a
+                className="initiative-link-button"
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${item.title} (opens in a new tab)`}
+              >
+                Open Platform →
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

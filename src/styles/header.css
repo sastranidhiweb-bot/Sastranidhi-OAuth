@@ -1,27 +1,548 @@
-header{
-  height:72px;display:flex;align-items:center;background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40;
-  backdrop-filter:blur(10px)
+/* ============================================================
+   HEADER — matches new Śāstranidhi design
+   ============================================================ */
+
+header {
+  position: relative;
+  background: linear-gradient(115deg, #3A1C82 0%, #5129A8 46%, #7A45D6 100%);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(232, 196, 90, 0.14), transparent 38%),
+    radial-gradient(circle at 85% 120%, rgba(160, 110, 240, 0.38), transparent 52%),
+    linear-gradient(115deg, #3A1C82 0%, #5129A8 46%, #7A45D6 100%);
+  box-shadow: 0 4px 20px rgba(48, 22, 110, 0.22);
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0;
+  transition: box-shadow 0.3s ease, padding 0.3s ease;
+  animation: headerSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:900}
-.mark{
-  width:44px;height:44px;border:2px solid var(--gold);border-radius:50%;
-  display:grid;place-items:center;font-size:25px;color:#b46f16;background:#fff9e8;
-  font-family:"Noto Sans Devanagari","Mangal","Arial Unicode MS",sans-serif
+
+@keyframes headerSlideIn {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
 }
-.brand small{display:block;color:#6b8798;font-size:10px;letter-spacing:.12em}
-nav{display:flex;gap:20px;align-items:center;font-size:14px;font-weight:750}
-nav a:hover{color:#a97619}
-.actions{display:flex;gap:8px;align-items:center}
-.welcome-user{font-weight:750;color:var(--navy);font-size:14px}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;border-radius:8px;
-  padding:10px 15px;border:1px solid transparent;font-weight:800;cursor:pointer
+
+header::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brand-gold), transparent);
+  background-size: 200% 100%;
+  animation: gopuramGlow 6s ease-in-out infinite;
+  opacity: 0.7;
 }
-.primary{background:var(--navy);color:#fff}
-.gold{background:var(--gold);color:#fff}
-.outline{background:#fff;border-color:var(--navy);color:var(--navy)}
-.menu{display:none;border:0;background:none;font-size:28px;color:var(--navy)}
-.mobile{display:none;padding:12px 3% 18px;background:#fff;flex-direction:column;gap:12px;position:sticky;top:72px;z-index:35}
-.mobile.open{display:flex}
+
+@keyframes gopuramGlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -35%;
+  width: 30%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: skewX(-18deg);
+  animation: navSheen 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes navSheen {
+  0%, 65% { left: -35%; }
+  100%    { left: 125%; }
+}
+
+header.scrolled {
+  box-shadow: 0 6px 22px rgba(90, 46, 166, 0.18);
+}
+
+/* ---------- Top nav row ---------- */
+header .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+header .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  animation: brandFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  filter: drop-shadow(0 4px 14px rgba(25, 8, 62, 0.24));
+}
+
+@keyframes brandFadeIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+header .brand .name {
+  color: #FFFFFF;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 0 12px rgba(255, 255, 255, 0.16);
+}
+
+header .brand .sub {
+  color: #F2E9FF;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.32);
+}
+
+/* ---------- Animated logo glyph ---------- */
+header .glyph {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 0 0 5px rgba(255, 255, 255, 0.14),
+    0 6px 18px rgba(10, 4, 28, 0.35);
+  animation: logoPulse 4.5s ease-in-out infinite;
+}
+
+header .glyph img {
+  position: relative;
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+header .glyph .halo,
+header .glyph .halo2 {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+header .glyph .halo {
+  inset: -4px;
+  border: 1.5px solid transparent;
+  border-top-color: var(--brand-gold);
+  border-right-color: rgba(232, 195, 74, 0.45);
+  animation: logoSpin 5s linear infinite;
+}
+
+header .glyph .halo2 {
+  inset: -8px;
+  border: 1px dashed rgba(243, 223, 160, 0.45);
+  animation: logoSpin 16s linear infinite reverse;
+}
+
+header .glyph .spark {
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  animation: logoSpin 7s linear infinite;
+}
+
+header .glyph .spark::before {
+  content: "";
+  position: absolute;
+  top: -3px; left: 50%;
+  width: 6px; height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--brand-gold-soft);
+  box-shadow: 0 0 8px 2px rgba(232, 195, 74, 0.8);
+}
+
+header .glyph .shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 3;
+  pointer-events: none;
+}
+
+header .glyph .shine::before {
+  content: "";
+  position: absolute;
+  top: -20%; bottom: -20%; left: -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  transform: skewX(-18deg);
+  animation: logoShine 6s ease-in-out infinite;
+}
+
+@keyframes logoSpin { to { transform: rotate(360deg); } }
+@keyframes logoShine {
+  0%, 70% { left: -60%; }
+  100%    { left: 130%; }
+}
+@keyframes logoPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px var(--brand-gold),
+      0 0 0 5px rgba(255, 255, 255, 0.14),
+      0 6px 18px rgba(10, 4, 28, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px var(--brand-gold),
+      0 0 0 5px rgba(255, 255, 255, 0.2),
+      0 0 22px 4px rgba(232, 195, 74, 0.45);
+  }
+}
+
+header .brand:hover .glyph img {
+  transform: rotate(-6deg) scale(1.04);
+}
+
+/* ---------- Nav links ---------- */
+header .links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: brandFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+
+header .links a {
+  font-size: 15.5px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #F4ECFF;
+  position: relative;
+  white-space: nowrap;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+header .links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0%; height: 1.5px;
+  background: var(--brand-gold);
+  transition: width 0.3s ease;
+}
+
+header .links a:hover::after { width: 100%; }
+header .links a:hover {
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+header .links a.active {
+  color: var(--brand-gold);
+}
+header .links a.active::after { width: 100%; }
+
+/* ---------- Donate button ---------- */
+header .btn-donate {
+  padding: 10px 22px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+  background: linear-gradient(120deg, var(--brand-gold), var(--brand-gold-soft));
+  color: var(--brand-deep);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+header .btn-donate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232, 195, 74, 0.35);
+}
+
+/* ---------- Hamburger ---------- */
+header .hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+header .hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #F4ECFF;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+header .hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+header .hamburger.is-open span:nth-child(2) { opacity: 0; }
+header .hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Subbar (social + auth) ---------- */
+header .subbar {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(243, 223, 160, 0.22);
+}
+
+header .subbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+header .sb-social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .sb-kicker {
+  font: 800 10.5px/1 'Inter', system-ui, sans-serif;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--brand-gold-soft);
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+header .sb-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  color: #F3F0FA;
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04) 60%);
+  border: 1px solid rgba(232, 195, 74, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 8px rgba(10, 4, 28, 0.25);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.35s ease,
+              color 0.35s ease,
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+  text-decoration: none;
+}
+
+header .sb-icon svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+header .sb-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-gold), var(--brand-gold-soft));
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+header .sb-icon:hover,
+header .sb-icon:focus-visible {
+  color: var(--brand-deep);
+  border-color: var(--brand-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 4, 28, 0.35), 0 0 14px rgba(232, 195, 74, 0.45);
+}
+
+header .sb-icon:hover::before,
+header .sb-icon:focus-visible::before {
+  transform: scale(1);
+}
+
+header .sb-icon:hover svg {
+  transform: scale(1.1) rotate(-6deg);
+}
+
+header .sb-pivotra {
+  background: #fff;
+}
+
+header .sb-pivotra img {
+  width: 18px;
+  height: 22px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+header .sb-pivotra:hover img {
+  transform: scale(1.12);
+}
+
+/* ---------- Auth buttons ---------- */
+header .sb-auth {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header .sb-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0 16px;
+  font: 700 12px/1 'Inter', system-ui, sans-serif;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease,
+              background 0.3s ease,
+              color 0.3s ease;
+}
+
+header .sb-login {
+  color: var(--brand-gold-soft);
+  border: 1px solid rgba(232, 195, 74, 0.55);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+header .sb-login:hover,
+header .sb-login:focus-visible {
+  color: var(--brand-gold);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 4, 28, 0.3);
+}
+
+header .sb-signup {
+  color: var(--brand-deep);
+  background: linear-gradient(120deg, var(--brand-gold), var(--brand-gold-soft));
+  border: 1px solid var(--brand-gold);
+}
+
+header .sb-signup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.55) 48%, transparent 70%);
+  transform: translateX(-130%);
+  animation: sbSheen 5s ease-in-out infinite;
+}
+
+@keyframes sbSheen {
+  0%, 55% { transform: translateX(-130%); }
+  75%, 100% { transform: translateX(130%); }
+}
+
+header .sb-signup:hover,
+header .sb-signup:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232, 195, 74, 0.35);
+}
+
+/* ---------- Mobile nav ---------- */
+header .mobile-nav {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 28px 18px;
+  position: relative;
+  z-index: 2;
+}
+
+header .mobile-nav.is-open {
+  display: flex;
+}
+
+header .mobile-nav a {
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--lavender-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  transition: padding-left 0.25s ease, color 0.25s ease;
+}
+
+header .mobile-nav a:hover {
+  padding-left: 8px;
+  color: var(--brand-gold);
+}
+
+header .mobile-nav a.active {
+  color: var(--brand-gold);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1240px) {
+  header .links { gap: 18px; }
+  header .links a { font-size: 14px; }
+}
+
+@media (max-width: 1080px) {
+  header .links { display: none; }
+  header .hamburger { display: flex; }
+  header .btn-donate { margin-left: auto; }
+}
+
+@media (max-width: 700px) {
+  header .nav { padding-top: 10px; padding-bottom: 10px; }
+  header .glyph { width: 50px; height: 50px; }
+  header .glyph img { width: 46px; height: 46px; }
+  header .brand .name { font-size: 18px; }
+  header .sb-kicker { display: none; }
+  header .sb-icon { width: 30px; height: 30px; }
+  header .sb-btn { padding: 0 11px; font-size: 11px; letter-spacing: 0.8px; }
+}
+
+@media (max-width: 480px) {
+  header .sb-social { gap: 7px; }
+  header .sb-auth { gap: 6px; }
+  header .sb-btn { padding: 0 9px; min-height: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header,
+  header .glyph,
+  header .glyph *,
+  header .glyph .shine::before {
+    animation: none !important;
+  }
+}

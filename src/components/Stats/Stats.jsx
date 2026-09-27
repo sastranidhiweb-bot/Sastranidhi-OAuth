@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { stats } from '../../data/siteData.js';
+import '../../styles/stats.css';
 
 function parseStatValue(value) {
-  // Extract the number and suffix from strings like "250,000+" or "3+"
   const match = value.match(/^([\d,]+)(.*)$/);
   if (!match) return { target: 0, suffix: value };
   const target = parseInt(match[1].replace(/,/g, ''), 10);
@@ -75,6 +75,16 @@ export default function Stats() {
 
   return (
     <div className="stats-band">
+      <div className="stats-bubbles" aria-hidden="true">
+        <span />
+        <span className="gold" />
+        <span />
+        <span className="gold" />
+        <span />
+        <span className="gold" />
+        <span />
+        <span className="gold" />
+      </div>
       <div className="wrap stats-grid stagger" ref={gridRef}>
         {stats.map((stat) => (
           <div className="stat-item" key={stat.label}>

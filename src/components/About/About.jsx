@@ -1,8 +1,10 @@
+import '../../styles/about.css';
+
 export default function About() {
   return (
     <section id="about">
       <div className="wrap about-grid">
-        <div className="reveal">
+        <div className="about-copy reveal">
           <div className="kicker">ABOUT SASTRANIDHI</div>
           <h2>Preserving Śāstra. Enabling Research. Inspiring Learning.</h2>
           <p>
@@ -12,9 +14,14 @@ export default function About() {
             collaboration, the institution makes authentic learning accessible to
             present and future generations.
           </p>
-          <a href="/contact" className="btn-primary">
-            Connect With Us
-          </a>
+          <div className="about-actions">
+            <a href="/about" className="btn-primary">
+              Read Our Story
+            </a>
+            <a href="/contact" className="btn-outline">
+              Connect With Us
+            </a>
+          </div>
         </div>
         <div className="vision-card reveal">
           <h3>Our Guiding Vision</h3>

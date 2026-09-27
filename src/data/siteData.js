@@ -1,9 +1,10 @@
 export const navLinks = [
   { href: '/#home', label: 'Home' },
+  { href: '/#institutes', label: 'Institutes' },
   { href: '/#platforms', label: 'Initiatives' },
-  { href: '/#about', label: 'About Us' },
   { href: '/#courses', label: 'Courses' },
   { href: '/#research', label: 'Research' },
+  { href: '/#about', label: 'About Us' },
   { href: '/contact', label: 'Contact' },
 ];
 
