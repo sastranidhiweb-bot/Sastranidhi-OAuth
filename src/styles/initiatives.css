@@ -62,6 +62,7 @@
 #platforms .tablet {
   position: relative;
   overflow: hidden;
+  min-height: 0;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.90));
   border: 1.5px solid rgba(76, 43, 127, 0.30);
   border-radius: 18px;
@@ -106,10 +107,12 @@
 
 /* ---------- Icon badge (flag style) ---------- */
 #platforms .tablet .icon {
+  width: auto;
+  height: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 7px 12px;
+  padding: 12px 22px;
   margin-bottom: 14px;
   border-radius: 10px;
   background: linear-gradient(135deg, #21114F, #45218B);
@@ -118,7 +121,8 @@
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0.4px;
-  line-height: 1.1;
+  line-height: 1.4;
+  white-space: nowrap;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 

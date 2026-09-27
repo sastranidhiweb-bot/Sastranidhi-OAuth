@@ -8,7 +8,9 @@ export default function PlatformCard({
 }) {
   return (
     <div className="tablet">
-      <div className="icon">{icon}</div>
+      <a className="icon" href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title}`}>
+        {icon}
+      </a>
       <h3>
         {title}
         {linkedTitle && (

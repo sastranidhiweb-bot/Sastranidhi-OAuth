@@ -1,35 +1,19 @@
+import { initiatives } from '../../data/siteData.js';
 import '../../styles/initiatives-list.css';
 
-const initiativeItems = [
-  {
-    icon: 'Sv',
-    title: 'Svādhyāya',
-    description:
-      'Institutional information, research, publications, events, projects and scholar initiatives.',
-    href: 'https://reader.sastranidhi.org/homePage',
-  },
-  {
-    icon: 'Vi',
-    title: 'Viśleṣaka: Purāṇatilakam',
-    description:
-      'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
-    href: 'https://puranatilakam.com/',
-  },
-  {
-    icon: 'Pr',
-    title: 'Paripraśna',
-    description:
-      'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
-    href: 'https://qna.sastranidhi.org/',
-  },
-  {
-    icon: 'Cd',
-    title: 'Pravacana (Courses & Discourses)',
-    description:
-      'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
-    href: 'https://sastranidhi.edmingle.com/',
-  },
-];
+// Short badge abbreviations for this compact list view (the full Sanskrit
+// title used by the platform tablets above doesn't fit this 58px circle).
+// Titles/descriptions/links come from siteData.js so the two views can't
+// drift apart independently.
+const ICON_ABBR = ['Sv', 'Vi', 'Pr', 'Cd'];
+
+const initiativeItems = initiatives.map((item, index) => ({
+  icon: ICON_ABBR[index],
+  title: item.title.replace(/\s*\([^)]*\)\s*$/, ''),
+  description: item.description,
+  href: item.href,
+  linkLabel: item.linkLabel,
+}));
 
 export default function InitiativesList() {
   return (
@@ -60,7 +44,7 @@ export default function InitiativesList() {
                 rel="noopener noreferrer"
                 aria-label={`Open ${item.title} (opens in a new tab)`}
               >
-                Open Platform →
+                {item.linkLabel}
               </a>
             </li>
           ))}
