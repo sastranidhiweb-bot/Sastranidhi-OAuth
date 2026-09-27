@@ -14,6 +14,7 @@ export default function Initiatives() {
             <PlatformCard
               key={item.title}
               icon={item.icon}
+              shortLabel={item.shortLabel}
               title={item.title}
               linkedTitle={item.linkedTitle}
               description={item.description}

@@ -7,9 +7,7 @@
   overflow: hidden;
   isolation: isolate;
   padding: 48px 0 36px;
-  background:
-    radial-gradient(circle at 12% 20%, rgba(107, 57, 199, 0.08), transparent 30%),
-    linear-gradient(135deg, #EEE6F8, #E9E1F5 50%, #EFE9F8);
+  background: var(--lavender-light);
 }
 
 #courses .wrap {

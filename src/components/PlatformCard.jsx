@@ -1,5 +1,6 @@
 export default function PlatformCard({
   icon,
+  shortLabel,
   title,
   linkedTitle,
   description,
@@ -8,7 +9,7 @@ export default function PlatformCard({
 }) {
   return (
     <div className="tablet">
-      <div className="icon">{icon}</div>
+      <div className="icon icon-pill">{shortLabel || icon}</div>
       <h3>
         {title}
         {linkedTitle && (

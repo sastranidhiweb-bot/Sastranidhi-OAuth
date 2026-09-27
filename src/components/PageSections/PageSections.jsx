@@ -17,15 +17,16 @@ export function PageHero({ crumb, title, lede }) {
         <span className="hero-emblem-wrap">
           <img className="hero-emblem" src="/assets/logo-mark.png" alt="" />
         </span>
-        <nav className="crumb" aria-label="Breadcrumb">
-          <Link to="/">Home</Link>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">{crumb}</span>
-        </nav>
-        <h1>{title}</h1>
-        <p className="lede">{lede}</p>
+        <div className="hero-text">
+          <nav className="crumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{crumb}</span>
+          </nav>
+          <h1>{title}</h1>
+          <p className="lede">{lede}</p>
+        </div>
       </div>
-      <div className="hero-curve" />
     </section>
   );
 }

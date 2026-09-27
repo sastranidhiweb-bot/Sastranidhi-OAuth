@@ -5,25 +5,17 @@
 #platforms {
   position: relative;
   overflow: hidden;
-  padding: 50px 0 40px;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(101, 55, 166, 0.13), transparent 30%),
-    radial-gradient(circle at 88% 18%, rgba(232, 196, 90, 0.09), transparent 22%),
-    radial-gradient(circle at 48% 100%, rgba(96, 52, 162, 0.10), transparent 34%),
-    linear-gradient(135deg, #e8e1f2 0%, #ddd5eb 48%, #eee9f6 100%);
+  padding: 4px 0 40px;
+  background: var(--lavender-light);
 }
 
-/* Subtle diagonal pattern */
-#platforms::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(120deg, transparent 0 47%, rgba(80, 44, 133, 0.035) 48%, transparent 49% 100%),
-    linear-gradient(120deg, transparent 0 72%, rgba(80, 44, 133, 0.025) 73%, transparent 74% 100%);
-  background-size: 180px 180px;
-  opacity: 0.7;
-  pointer-events: none;
+/* new-design.css re-declares `#platforms { padding: 50px 0 58px;
+   background: #F5F2FB }` later; `section#platforms` outranks it so the
+   section sits right under the hero on the shared lavender background. */
+section#platforms {
+  padding-top: 4px;
+  padding-bottom: 40px;
+  background: var(--lavender-light);
 }
 
 #platforms .wrap {
@@ -51,6 +43,15 @@
   margin: 0;
 }
 
+/* Short gold rule under the heading */
+#platforms .section-head h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  margin: 10px auto 0;
+  border-top: 3px solid var(--brand-gold);
+}
+
 /* ---------- Tablet grid ---------- */
 #platforms .tablet-grid {
   display: grid;
@@ -66,6 +67,9 @@
   border: 1.5px solid rgba(76, 43, 127, 0.30);
   border-radius: 18px;
   padding: 22px 22px 20px;
+  /* new-design.css gives every .tablet min-height: 382px, which left empty
+     space in each card and pushed the row below the fold. */
+  min-height: 0;
   box-shadow:
     inset 0 0 0 5px rgba(255, 255, 255, 0.9),
     inset 0 0 0 6.5px rgba(232, 195, 74, 0.55),
@@ -104,11 +108,12 @@
   width: calc(100% - 36px);
 }
 
-/* ---------- Icon badge (flag style) ---------- */
-#platforms .tablet .icon {
+/* ---------- Name badge (short platform name) ---------- */
+#platforms .tablet .icon-pill {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  /* undo the fixed 46px square new-design.css sets on .tablet .icon */
+  width: auto;
+  height: auto;
   padding: 7px 12px;
   margin-bottom: 14px;
   border-radius: 10px;
@@ -119,10 +124,14 @@
   font-weight: 700;
   letter-spacing: 0.4px;
   line-height: 1.1;
+  white-space: nowrap;
+  /* sit on the line's top edge so no text descender space is added
+     between the badge and the title below */
+  vertical-align: top;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#platforms .tablet:hover .icon {
+#platforms .tablet:hover .icon-pill {
   transform: translateY(-3px) rotate(-3deg);
 }
 
@@ -170,8 +179,8 @@
   #platforms .tablet-grid {
     grid-template-columns: 1fr;
   }
-  #platforms {
-    padding: 42px 0 48px;
+  section#platforms {
+    padding: 4px 0 40px;
   }
   #platforms .section-head h2 {
     font-size: 38px;

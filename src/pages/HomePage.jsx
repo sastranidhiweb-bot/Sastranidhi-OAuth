@@ -2,7 +2,6 @@ import { ModalProvider } from '../context/ModalContext.jsx';
 import Header from '../components/Header/Header.jsx';
 import Hero from '../components/Hero/Hero.jsx';
 import Initiatives from '../components/Initiatives/Initiatives.jsx';
-import InitiativesList from '../components/Initiatives/InitiativesList.jsx';
 import Stats from '../components/Stats/Stats.jsx';
 import About from '../components/About/About.jsx';
 import Courses from '../components/Courses/Courses.jsx';
@@ -26,10 +25,9 @@ export default function HomePage() {
           <Hero />
           <Initiatives />
           <Stats />
-          <About />
-          <InitiativesList />
           <Courses />
           <Research />
+          <About />
           <DonateBand />
           <SubscribeSection />
           {/* <Contact /> */}
