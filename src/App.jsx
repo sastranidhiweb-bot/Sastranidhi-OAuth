@@ -23,11 +23,14 @@ function AppRoutes() {
   // Scroll to hash section (e.g., when arriving from /#platforms); otherwise
   // start each newly routed page at the top, as a full page load would.
   useEffect(() => {
-    if (!hash) {
+    const id = hash.replace('#', '');
+    // "home" is the top of the page itself — scrolling an element into view
+    // there just leaves it hidden behind the sticky header, so treat it (and
+    // no hash at all) as a plain jump to the very top instead.
+    if (!hash || id === 'home') {
       window.scrollTo(0, 0);
       return undefined;
     }
-    const id = hash.replace('#', '');
     const timer = setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
