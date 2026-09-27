@@ -1,7 +1,192 @@
-.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.feature{
-  background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;
-  box-shadow:0 8px 22px rgba(23,59,86,.06)
+/* ============================================================
+   RESEARCH — matches new Śāstranidhi design
+   ============================================================ */
+
+#research {
+  position: relative;
+  overflow: hidden;
+  padding: 36px 0 44px;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(124, 78, 194, 0.18), transparent 30%),
+    radial-gradient(circle at 12% 82%, rgba(255, 255, 255, 0.65), transparent 28%),
+    linear-gradient(135deg, #f2ebff 0%, #e0d1f8 52%, #f7f1ff 100%);
 }
-.feature h3{color:var(--navy);font-size:21px}
-.feature p{color:var(--muted);line-height:1.6;font-size:14px}
+
+#research::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(124, 78, 194, 0.18), transparent 30%),
+    radial-gradient(circle at 12% 82%, rgba(255, 255, 255, 0.65), transparent 28%);
+  animation: researchAtmosphere 18s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes researchAtmosphere {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.05); }
+}
+
+#research .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Section heading ---------- */
+#research .section-head {
+  position: relative;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 28px;
+  padding: 30px 34px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(49, 23, 93, 0.96), rgba(103, 58, 166, 0.86));
+  box-shadow: 0 18px 45px rgba(63, 34, 117, 0.14);
+  opacity: 1;
+  transform: none;
+}
+
+#research .section-head .kicker {
+  color: var(--brand-gold) !important;
+  font-size: 12.5px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+#research .section-head h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3.4vw, 36px);
+  font-weight: 700;
+  color: #fff !important;
+  margin: 0 0 12px;
+}
+
+#research .section-head p {
+  font-size: 16px;
+  color: #fff !important;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ---------- Grid ---------- */
+#research .research-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ---------- Card ---------- */
+#research .research-item {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  text-align: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(105, 69, 158, 0.15);
+  box-shadow: 0 10px 28px rgba(65, 36, 119, 0.07);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+#research .research-item::before {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -40%;
+  width: 45%;
+  height: 340%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  transform: rotate(18deg);
+  pointer-events: none;
+}
+
+#research .research-item:hover::before {
+  animation: cardSweep 0.9s ease-out;
+}
+
+@keyframes cardSweep {
+  from { left: -45%; }
+  to   { left: 125%; }
+}
+
+#research .research-item:hover {
+  transform: translateY(-8px);
+  border-color: rgba(105, 51, 201, 0.3);
+  box-shadow: 0 18px 38px rgba(48, 30, 89, 0.15);
+}
+
+#research .research-item h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  position: relative;
+}
+
+#research .research-item p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ---------- "Research in detail" button ---------- */
+#research .section-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+#research .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: 1.5px solid var(--brand-violet);
+  color: var(--brand-violet);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#research .btn-outline:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(120deg, var(--brand-violet), var(--brand-violet-light));
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(90, 46, 166, 0.3);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  #research .research-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  #research .research-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #research::before,
+  #research .research-item::before {
+    animation: none !important;
+  }
+}

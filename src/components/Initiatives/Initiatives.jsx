@@ -1,5 +1,6 @@
 import { initiatives } from '../../data/siteData.js';
 import PlatformCard from '../PlatformCard.jsx';
+import '../../styles/initiatives.css';
 
 export default function Initiatives() {
   return (

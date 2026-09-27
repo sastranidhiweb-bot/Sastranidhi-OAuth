@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext.jsx';
-import { footerPlatforms, footerInstitution } from '../../data/siteData.js';
+import { footerPlatforms } from '../../data/siteData.js';
+import '../../styles/footer.css';
+
+// Internal pages, rendered as <Link>s for client-side routing.
+const institutionLinks = [
+  { to: '/about', label: 'About Us' },
+  { to: '/research', label: 'Research' },
+  { to: '/courses', label: 'Courses' },
+  { to: '/contact', label: 'Contact' },
+];
 
 export default function Footer() {
   const { open } = useModal();
@@ -17,7 +27,14 @@ export default function Footer() {
     <footer>
       <div className="wrap footer-grid">
         <div>
-          <div className="footer-brand">Sastranidhi</div>
+          <div className="footer-brand">
+            <img
+              className="footer-logo"
+              src="/assets/logo-mark.png"
+              alt="Śāstranidhi Research Institute emblem"
+            />
+            <span>Sastranidhi</span>
+          </div>
           <p style={{ fontSize: '14.5px', maxWidth: '280px' }}>
             A digital and educational ecosystem for śāstric research, preservation,
             learning and public engagement.
@@ -33,10 +50,10 @@ export default function Footer() {
         </div>
         <div>
           <h4>Institution</h4>
-          {footerInstitution.map((link) => (
-            <a key={link.label} href={link.href}>
+          {institutionLinks.map((link) => (
+            <Link key={link.to} to={link.to}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
         <div>
@@ -93,7 +110,7 @@ export default function Footer() {
               title="Instagram"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7.3 2h9.4A5.3 5.3 0 0 1 22 7.3v9.4a5.3 5.3 0 0 1-5.3 5.3H7.3A5.3 5.3 0 0 1 2 16.7V7.3A5.3 5.3 0 0 1 7.3 2Zm0 2A3.3 3.3 0 0 0 4 7.3v9.4A3.3 3.3 0 0 0 7.3 20h9.4a3.3 3.3 0 0 0 3.3-3.3V7.3A3.3 3.3 0 0 0 16.7 4H7.3Zm9.95 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 1 0-6Z" />
+                <path d="M7.3 2h9.4A5.3 5.3 0 0 1 22 7.3v9.4a5.3 5.3 0 0 1-5.3 5.3H7.3A5.3 5.3 0 0 1 2 16.7V7.3A5.3 5.3 0 0 1 7.3 2Zm0 2A3.3 3.3 0 0 0 4 7.3v9.4A3.3 3.3 0 0 0 7.3 20h9.4a3.3 3.3 0 0 0 3.3-3.3V7.3A3.3 3.3 0 0 0 16.7 4H7.3Zm9.95 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
               </svg>
               <span>Instagram</span>
             </a>
@@ -105,7 +122,9 @@ export default function Footer() {
               aria-label="Śāstranidhi on Pivotra"
               title="Pivotra"
             >
-              <span className="pivotra-icon" aria-hidden="true">P</span>
+              <span className="pivotra-icon">
+                <img src="/assets/pivotra-logo.png" alt="Pivotra" />
+              </span>
               <span>Pivotra</span>
             </a>
           </div>

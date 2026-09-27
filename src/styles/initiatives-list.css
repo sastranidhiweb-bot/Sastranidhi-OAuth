@@ -1,146 +1,222 @@
-/* Independent initiatives section from the supplied HTML design. */
-.independent-initiatives {
+/* ============================================================
+   OUR INITIATIVES — topic-style divided list (new design)
+   Scoped under #initiatives so these rules win over the older
+   .independent-list rules in new-design.css, which is imported
+   later in App.jsx.
+   ============================================================ */
+
+#initiatives.independent-initiatives {
   position: relative;
   isolation: isolate;
-  padding: 78px 0 84px;
-  background: linear-gradient(135deg, rgba(245, 241, 253, .96), rgba(232, 222, 249, .88));
   overflow: hidden;
+  padding: 78px 0 84px;
+  background: linear-gradient(135deg, rgba(245, 241, 253, 0.96), rgba(232, 222, 249, 0.88));
 }
 
-.independent-initiatives::before {
+#initiatives.independent-initiatives::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 12% 22%, rgba(125, 82, 190, .10), transparent 28%),
-    radial-gradient(circle at 90% 78%, rgba(181, 160, 225, .14), transparent 30%);
+  background:
+    radial-gradient(circle at 12% 22%, rgba(125, 82, 190, 0.1), transparent 28%),
+    radial-gradient(circle at 90% 78%, rgba(181, 160, 225, 0.14), transparent 30%);
   animation: independentGlow 18s ease-in-out infinite;
 }
 
-.independent-initiatives .wrap {
+#initiatives .wrap {
   position: relative;
   z-index: 1;
 }
 
-.independent-initiatives .section-head {
+/* ---------- Heading ---------- */
+#initiatives .section-head {
   margin-bottom: 34px;
+  text-align: center;
 }
 
-.independent-initiatives .section-head h2 {
-  color: var(--brand-deep, var(--royal-deep));
+#initiatives .section-head .kicker {
+  color: var(--brand-gold);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-.independent-list {
+#initiatives .section-head h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+#initiatives .section-head p {
+  color: var(--text-secondary);
+  margin: 12px auto 0;
+}
+
+/* ---------- List ---------- */
+#initiatives .independent-list {
   display: grid;
   gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.independent-list .initiative-item {
-  display: flex;
-  align-items: flex-start;
+#initiatives .independent-list .initiative-item {
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center;
   gap: 24px;
   padding: 30px 4px;
   border: 0;
-  border-bottom: 1px solid rgba(93, 62, 145, .20);
+  border-bottom: 1px solid rgba(93, 62, 145, 0.2);
   border-radius: 0;
   background: transparent;
+  background-size: 200% 100%;
   box-shadow: none;
-  transition: padding-left .3s ease, background .3s ease;
+  transition: padding-left 0.3s ease, background 0.3s ease;
 }
 
-.independent-list .initiative-item:first-child {
-  border-top: 1px solid rgba(93, 62, 145, .20);
+#initiatives .independent-list .initiative-item:first-child {
+  border-top: 1px solid rgba(93, 62, 145, 0.2);
 }
 
-.independent-list .initiative-item:hover {
+#initiatives .independent-list .initiative-item:hover {
   transform: none;
-  padding-left: 14px;
-  background: linear-gradient(90deg, rgba(69, 33, 139, .18), rgba(105, 51, 201, .08), transparent);
+  padding-left: 18px;
+  background: linear-gradient(90deg, rgba(111, 73, 170, 0.08), transparent);
   box-shadow: none;
 }
 
-.independent-list .initiative-icon {
-  flex: 0 0 58px;
+/* ---------- Icon ---------- */
+#initiatives .independent-list .initiative-icon {
   width: 58px;
   height: 58px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
   font-weight: 700;
-  color: var(--brand-deep, var(--royal-deep));
-  background: linear-gradient(135deg, #f6f0ff, #e6dafa);
-  box-shadow: 0 8px 20px rgba(84, 53, 142, .10);
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand-violet), var(--brand-violet-light));
+  box-shadow: 0 8px 20px rgba(84, 53, 142, 0.22);
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.independent-list .initiative-body {
-  flex: 1;
+#initiatives .independent-list .initiative-item:hover .initiative-icon {
+  transform: scale(1.06);
+  color: var(--brand-gold);
 }
 
-.independent-list .initiative-body h4 {
+/* ---------- Text ---------- */
+#initiatives .independent-list .initiative-body {
+  min-width: 0;
+}
+
+#initiatives .independent-list .initiative-body h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 26px;
+  font-weight: 700;
   margin: 0 0 8px;
-  color: var(--brand-deep, var(--royal-deep));
+  color: var(--text-primary);
 }
 
-.independent-list .initiative-body p {
+#initiatives .independent-list .initiative-body p {
   max-width: 820px;
-  margin: 0 0 16px;
-  color: var(--text-muted, var(--ink-soft));
+  margin: 0;
+  color: var(--text-secondary);
   line-height: 1.65;
 }
 
-.initiative-link-button {
+/* ---------- Pill link ---------- */
+#initiatives .initiative-link-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 10px 17px;
-  border: 1px solid rgba(80, 39, 143, .28);
+  border: 1px solid rgba(80, 39, 143, 0.28);
   border-radius: 999px;
   background: linear-gradient(135deg, #f4edff, #e4d5fb);
-  color: var(--brand-deep, var(--royal-deep));
-  font-weight: 700;
+  color: var(--brand-violet);
   font-size: 14px;
+  font-weight: 700;
   text-decoration: none;
-  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-.initiative-link-button:hover {
+#initiatives .initiative-link-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(70, 38, 128, .16);
+  box-shadow: 0 8px 18px rgba(70, 38, 128, 0.16);
   background: linear-gradient(135deg, #fff8e4, #ead8ff);
 }
 
-@keyframes independentGlow {
-  0%, 100% {
-    opacity: .65;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.04);
-  }
+#initiatives .initiative-link-button:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 3px;
 }
 
-@media (max-width: 650px) {
-  .independent-initiatives .initiative-item {
-    gap: 15px;
+@keyframes independentGlow {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.04); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  #initiatives .independent-list .initiative-item {
+    grid-template-columns: 48px 1fr;
+    align-items: start;
+    gap: 12px 15px;
     padding: 24px 0;
   }
 
-  .independent-list .initiative-icon {
-    flex-basis: 48px;
-    width: 48px;
-    height: 48px;
+  #initiatives .independent-list .initiative-item:hover {
+    padding-left: 8px;
   }
 
-  .independent-list .initiative-body h4 {
+  #initiatives .independent-list .initiative-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  #initiatives .independent-list .initiative-body h4 {
     font-size: 21px;
+  }
+
+  #initiatives .initiative-link-button {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 420px) {
+  #initiatives.independent-initiatives {
+    padding: 56px 0 60px;
+  }
+
+  #initiatives .independent-list .initiative-item {
+    grid-template-columns: 1fr;
+  }
+
+  #initiatives .initiative-link-button {
+    grid-column: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .independent-initiatives::before {
+  #initiatives.independent-initiatives::before {
     animation: none;
+  }
+
+  #initiatives .independent-list .initiative-item,
+  #initiatives .independent-list .initiative-icon,
+  #initiatives .initiative-link-button {
+    transition: none;
   }
 }

@@ -400,3 +400,65 @@
 header {
   animation: headerSlideIn .7s cubic-bezier(.22, 1, .36, 1) both;
 }
+
+
+
+/* ============================================================
+   CONTACT SUBMIT BUTTON — ensure label is always visible
+   ============================================================ */
+
+.contact-submit {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  padding: 14px 20px !important;
+  border-radius: 13px !important;
+  background: linear-gradient(120deg, var(--brand-violet-dark, #291451), var(--brand-violet-light, #6933C9)) !important;
+  color: #FFFFFF !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  border: 0 !important;
+  height: auto !important;
+  min-height: 52px !important;
+  margin-top: 4px;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.contact-submit .btn-label {
+  display: inline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: #FFFFFF !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+}
+
+.contact-submit .btn-spin,
+.contact-submit .btn-check {
+  position: absolute !important;
+  inset: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.contact-submit.is-loading .btn-label {
+  opacity: 0 !important;
+}
+
+.contact-submit.is-loading .btn-spin {
+  opacity: 1 !important;
+}
+
+.contact-submit.is-success .btn-label,
+.contact-submit.is-success .btn-spin {
+  opacity: 0 !important;
+}
+
+.contact-submit.is-success .btn-check {
+  opacity: 1 !important;
+  color: #FFFFFF !important;
+  font-size: 24px !important;
+}

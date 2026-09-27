@@ -1,4 +1,5 @@
 import { courses } from '../../data/siteData.js';
+import '../../styles/courses.css';
 
 export default function Courses() {
   return (
@@ -32,6 +33,11 @@ export default function Courses() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="section-more reveal">
+          <a className="btn-outline" href="/courses">
+            See all courses →
+          </a>
         </div>
       </div>
     </section>
