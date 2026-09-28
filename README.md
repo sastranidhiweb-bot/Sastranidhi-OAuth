@@ -102,3 +102,8 @@ src/
 - All class names (`.btn`, `.card`, `.section`, `.modal`, etc.) are kept
   exactly as in the original so the CSS cascade and every visual detail
   (gradients, shadows, hover transforms, breakpoints) is unchanged.
+
+
+## Practice
+
+Practice change from my computer.
