@@ -1,4 +1,4 @@
-# Sastranidhi — React Conversion
+## Sastranidhi — React Conversion
 
 A React.js (Vite) frontend for Sastranidhi. It includes the public landing
 page, OAuth test harness, and the branded authentication pages used by the
