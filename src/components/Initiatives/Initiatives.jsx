@@ -7,7 +7,7 @@ export default function Initiatives() {
     <section id="platforms">
       <div className="wrap">
         <div className="section-head reveal">
-          <h2>Explore Sastranidhi</h2>
+          <h2>Explore Śāstranidhi</h2>
         </div>
         <div className="tablet-grid stagger">
           {initiatives.map((item) => (

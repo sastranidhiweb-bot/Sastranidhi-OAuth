@@ -218,3 +218,27 @@
     animation: none !important;
   }
 }
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/index.html)
+   Home "Featured Courses" card alignment (sn-fix-levels).
+   Copied verbatim, in the static page source order. Where marked
+   [home-only], selectors got a `.homepage ` prefix so the rules
+   stay off the /courses, /about etc. pages; declarations unchanged.
+   ============================================================ */
+
+/* --- sn-fix-levels: course rules [home-only; /courses uses the same classes] --- */
+.homepage .course-grid{align-items:stretch !important;}
+.homepage .course{display:flex !important;flex-direction:column !important;height:100%;}
+.homepage .course .head{min-height:168px;display:flex;flex-direction:column;justify-content:center;}
+.homepage .course .body{flex:1 1 auto;display:flex;flex-direction:column;}
+.homepage .course h4{min-height:2.7em;}
+.homepage .course .body p{flex:1 1 auto;}
+.homepage .course .body a{margin-top:auto;align-self:flex-start;}
+@media (max-width:760px){.homepage .course .head{min-height:0;}.homepage .course h4{min-height:0;}}
+
+.homepage .course-grid{grid-auto-rows:auto;}
+@supports (grid-template-rows:subgrid){
+.homepage .course-grid{grid-template-rows:auto auto;}
+.homepage .course{display:grid !important;grid-row:span 2;grid-template-rows:subgrid !important;gap:0 !important;}
+.homepage .course .head{min-height:0 !important;}
+}

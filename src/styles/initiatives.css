@@ -43,15 +43,6 @@ section#platforms {
   margin: 0;
 }
 
-/* Short gold rule under the heading */
-#platforms .section-head h2::after {
-  content: "";
-  display: block;
-  width: 64px;
-  margin: 10px auto 0;
-  border-top: 3px solid var(--brand-gold);
-}
-
 /* ---------- Tablet grid ---------- */
 #platforms .tablet-grid {
   display: grid;
@@ -186,3 +177,48 @@ section#platforms {
     font-size: 38px;
   }
 }
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/index.html)
+   Home "Explore Śāstranidhi" section (#platforms).
+   Copied verbatim, in the static page source order. Where marked
+   [home-only], selectors got a `.homepage ` prefix so the rules
+   stay off the /courses, /about etc. pages; declarations unchanged.
+   ============================================================ */
+
+/* --- enhanced-animations: section heading underline [home-only] --- */
+  .homepage .section-head{ position:relative; }
+  .homepage .section-head h2{ position:relative; display:inline-block; }
+  .homepage .section-head h2::after{
+    content:"";
+    display:block;
+    height:3px; width:0;
+    margin-top:10px;
+    background: linear-gradient(90deg, var(--brand-violet), var(--brand-gold));
+    border-radius:2px;
+    transition: width 1s cubic-bezier(.22,1,.36,1);
+  }
+  .homepage .section-head.in h2::after{ width:64px; }
+
+/* --- research-background-style, Round 3: Explore heading spacing
+   (outranks the 28px .section-head trim below, as in the static page) --- */
+#platforms .section-head{margin-top:0 !important;margin-bottom:18px !important;}
+
+/* --- research-background-style: Explore cards, rounded, double border --- */
+#platforms .tablet{border-radius:18px !important;outline:none !important;
+  border:1.5px solid rgba(76,43,127,.30) !important;
+  box-shadow:inset 0 0 0 5px rgba(255,255,255,.9),inset 0 0 0 6.5px rgba(232,195,74,.55),0 10px 26px rgba(47,30,85,.09) !important;}
+#platforms .tablet:hover{border-color:rgba(105,51,201,.55) !important;
+  box-shadow:inset 0 0 0 5px rgba(255,255,255,.95),inset 0 0 0 6.5px rgba(232,195,74,.9),0 22px 44px rgba(48,30,89,.16) !important;}
+#platforms .tablet::after{left:18px !important;right:18px;top:0;border-radius:0 0 3px 3px;}
+#platforms .tablet:hover::after{width:calc(100% - 36px) !important;}
+#platforms .tablet .icon{border-radius:10px !important;}
+
+/* --- research-background-style: Trim unnecessary space [home-only] --- */
+.homepage .section-head{margin-bottom:28px !important;}
+
+/* --- sn-explore-tight (#platforms lines) --- */
+#platforms{padding-top:6px !important;}
+#platforms .section-head{margin-top:0 !important;padding-top:0 !important;}
+
+/* --- sn-tablet-badge --- */
+#platforms .tablet .icon{width:auto !important;min-width:0 !important;padding:0 14px !important;white-space:nowrap;}

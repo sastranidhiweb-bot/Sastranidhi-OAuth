@@ -12,7 +12,7 @@ export const initiatives = [
   {
     icon: 'Sv',
     title: 'Svādhyāya (Study & Research)',
-    shortLabel: 'Svādhyāya',
+    shortLabel: 'Study & Research',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
@@ -23,7 +23,7 @@ export const initiatives = [
     icon: 'Vi',
     title: 'Viśleṣaka (Analyze & Assimilate)',
     linkedTitle: 'Bhagavatam : Puranatilakam',
-    shortLabel: 'Viśleṣaka',
+    shortLabel: 'Analyze & Assimilate',
     description:
       'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
     linkLabel: 'Open Platform →',
@@ -33,7 +33,7 @@ export const initiatives = [
   {
     icon: 'Pr',
     title: 'Paripraśna (Questions & Answers)',
-    shortLabel: 'Paripraśna',
+    shortLabel: 'Questions & Answers',
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
@@ -43,7 +43,7 @@ export const initiatives = [
   {
     icon: 'Cd',
     title: 'Pravacana (Courses & Discourses)',
-    shortLabel: 'Pravacana',
+    shortLabel: 'Courses & Discourses',
     description:
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
     linkLabel: 'View Courses →',
