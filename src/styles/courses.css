@@ -7,9 +7,7 @@
   overflow: hidden;
   isolation: isolate;
   padding: 48px 0 36px;
-  background:
-    radial-gradient(circle at 12% 20%, rgba(107, 57, 199, 0.08), transparent 30%),
-    linear-gradient(135deg, #EEE6F8, #E9E1F5 50%, #EFE9F8);
+  background: var(--lavender-light);
 }
 
 #courses .wrap {
@@ -220,3 +218,42 @@
     animation: none !important;
   }
 }
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/index.html)
+   Home "Featured Courses" card alignment (sn-fix-levels).
+   Copied verbatim, in the static page source order. Where marked
+   [home-only], selectors got a `.homepage ` prefix so the rules
+   stay off the /courses, /about etc. pages; declarations unchanged.
+   ============================================================ */
+
+/* --- sn-fix-levels: course rules [home-only; /courses uses the same classes] --- */
+.homepage .course-grid{align-items:stretch !important;}
+.homepage .course{display:flex !important;flex-direction:column !important;height:100%;}
+.homepage .course .head{min-height:168px;display:flex;flex-direction:column;justify-content:center;}
+.homepage .course .body{flex:1 1 auto;display:flex;flex-direction:column;}
+.homepage .course h4{min-height:2.7em;}
+.homepage .course .body p{flex:1 1 auto;}
+.homepage .course .body a{margin-top:auto;align-self:flex-start;}
+@media (max-width:760px){.homepage .course .head{min-height:0;}.homepage .course h4{min-height:0;}}
+
+.homepage .course-grid{grid-auto-rows:auto;}
+@supports (grid-template-rows:subgrid){
+.homepage .course-grid{grid-template-rows:auto auto;}
+.homepage .course{display:grid !important;grid-row:span 2;grid-template-rows:subgrid !important;gap:0 !important;}
+.homepage .course .head{min-height:0 !important;}
+}
+
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/courses.html)
+   <style id="sn-course-faq">, copied verbatim: the "Before You Enrol"
+   accordion and the five-card #course-includes grid on /courses.
+   ============================================================ */
+.sn-faq{display:grid;gap:12px;}
+.sn-faq details{background:linear-gradient(180deg,#fff,#FAF8FE);border:1px solid rgba(90,46,166,.14);box-shadow:0 6px 18px rgba(48,28,88,.06);transition:box-shadow .35s ease,border-color .35s ease;}
+.sn-faq details[open]{border-color:rgba(232,195,74,.6);box-shadow:0 12px 28px rgba(48,28,88,.12);}
+.sn-faq summary{cursor:pointer;list-style:none;padding:18px 22px;font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;font-weight:700;color:var(--text-primary);display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.sn-faq summary::-webkit-details-marker{display:none;}
+.sn-faq summary::after{content:"+";font:600 22px Inter,sans-serif;color:var(--brand-violet);transition:transform .35s cubic-bezier(.22,1,.36,1);}
+.sn-faq details[open] summary::after{transform:rotate(45deg);color:#C9A032;}
+.sn-faq details p{padding:0 22px 20px;margin:0;color:var(--text-secondary);font-size:15px;line-height:1.65;}
+#course-includes .steps{grid-template-columns:repeat(auto-fit,minmax(180px,1fr)) !important;}

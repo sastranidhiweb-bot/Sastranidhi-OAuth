@@ -18,6 +18,7 @@ const LMS_URL = 'https://sastranidhi.edmingle.com/';
 
 const courseDetails = [
   {
+    id: 'philosophy',
     kicker: 'Beginner · 12 Lessons',
     title: 'Indian Philosophy Foundations',
     paragraphs: [
@@ -39,6 +40,7 @@ const courseDetails = [
     },
   },
   {
+    id: 'gita',
     kicker: 'Intermediate · 18 Lessons',
     title: 'Bhagavad-gītā: Text and Meaning',
     paragraphs: [
@@ -61,6 +63,7 @@ const courseDetails = [
     },
   },
   {
+    id: 'sanskrit',
     kicker: 'Beginner · 20 Lessons',
     title: 'Reading Sanskrit Scriptures',
     paragraphs: [
@@ -88,6 +91,37 @@ const learningSteps = [
   { title: 'Study', text: 'Watch lessons and work through readings at your pace.' },
   { title: 'Practise', text: 'Complete exercises and assessments.' },
   { title: 'Certify', text: 'Receive a certificate on completion.' },
+];
+
+const courseIncludes = [
+  { title: 'Recorded lessons', text: 'Short video lessons you can watch in order and revisit at any time.' },
+  { title: 'Source readings', text: 'Selected passages in the original language with transliteration and translation.' },
+  { title: 'Assessments', text: 'Quizzes and graded exercises at the end of each module.' },
+  { title: 'Guided sessions', text: 'Live or scheduled sessions with teachers to clarify doubts.' },
+  { title: 'Certificate', text: 'A certificate of completion once all modules and assessments are done.' },
+];
+
+const courseFaq = [
+  {
+    q: 'Do I need to know Sanskrit?',
+    a: 'No. Beginner courses start from the script and basic terms. Intermediate courses assume you have completed a beginner course or have equivalent reading ability.',
+  },
+  {
+    q: 'How do I access the lessons?',
+    a: 'All courses run on IKS-LMS. After you enrol, the lessons, readings and assessments appear in your account and can be opened on a phone or computer.',
+  },
+  {
+    q: 'Can I study at my own pace?',
+    a: 'Yes. Recorded lessons and readings stay available, so you can move through the modules on your own schedule. Guided sessions are announced in advance.',
+  },
+  {
+    q: 'Will I receive a certificate?',
+    a: 'A certificate of completion is issued once you finish every module and pass the assessments.',
+  },
+  {
+    q: 'Which course should I start with?',
+    a: 'Indian Philosophy Foundations gives the widest overview. If you want to read texts directly, begin with Reading Sanskrit Scriptures.',
+  },
 ];
 
 export default function CoursesPage() {
@@ -148,6 +182,34 @@ export default function CoursesPage() {
               <h2>Learning on IKS-LMS</h2>
             </div>
             <Steps items={learningSteps} />
+          </div>
+        </section>
+
+        <section className="detail" id="course-includes">
+          <div className="wrap">
+            <div className="section-head reveal">
+              <div className="kicker">IKS-LMS</div>
+              <h2>What Every Course Includes</h2>
+              <p>Each course follows the same structure, so you always know what to expect.</p>
+            </div>
+            <Steps items={courseIncludes} />
+          </div>
+        </section>
+
+        <section className="detail" id="course-faq">
+          <div className="wrap" style={{ maxWidth: 860 }}>
+            <div className="section-head reveal">
+              <div className="kicker">Questions</div>
+              <h2>Before You Enrol</h2>
+            </div>
+            <div className="sn-faq reveal">
+              {courseFaq.map((item, i) => (
+                <details key={item.q} open={i === 0}>
+                  <summary>{item.q}</summary>
+                  <p>{item.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 

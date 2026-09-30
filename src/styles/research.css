@@ -6,26 +6,7 @@
   position: relative;
   overflow: hidden;
   padding: 36px 0 44px;
-  background:
-    radial-gradient(circle at 82% 18%, rgba(124, 78, 194, 0.18), transparent 30%),
-    radial-gradient(circle at 12% 82%, rgba(255, 255, 255, 0.65), transparent 28%),
-    linear-gradient(135deg, #f2ebff 0%, #e0d1f8 52%, #f7f1ff 100%);
-}
-
-#research::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 82% 18%, rgba(124, 78, 194, 0.18), transparent 30%),
-    radial-gradient(circle at 12% 82%, rgba(255, 255, 255, 0.65), transparent 28%);
-  animation: researchAtmosphere 18s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes researchAtmosphere {
-  0%, 100% { opacity: 0.55; transform: scale(1); }
-  50%      { opacity: 1;    transform: scale(1.05); }
+  background: var(--lavender-light);
 }
 
 #research .wrap {
@@ -185,8 +166,57 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #research::before,
   #research .research-item::before {
     animation: none !important;
   }
 }
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/index.html)
+   Home "Research & Publications" section (sn-research-like-lms).
+   Copied verbatim, in the static page source order. Where marked
+   [home-only], selectors got a `.homepage ` prefix so the rules
+   stay off the /courses, /about etc. pages; declarations unchanged.
+   ============================================================ */
+
+/* --- sn-research-like-lms: #research rules (the id exists only on home) --- */
+#research .section-head{background:none !important;box-shadow:none !important;border:0 !important;border-radius:0 !important;padding:0 !important;max-width:720px !important;}
+#research .section-head::before{display:none !important;}
+#research .section-head .kicker{color:var(--brand-violet) !important;}
+#research .section-head h2{color:var(--text-primary) !important;font-size:clamp(34px,4.2vw,52px) !important;text-shadow:none !important;}
+#research .section-head p{color:var(--text-secondary) !important;}
+#research .research-grid{align-items:stretch;}
+#research .research-item{padding:0 !important;text-align:left !important;display:flex;flex-direction:column;border-radius:0 !important;border:1px solid rgba(90,46,166,.14) !important;background:linear-gradient(180deg,#fff,#FAF8FE) !important;box-shadow:0 8px 24px rgba(48,28,88,.08) !important;overflow:hidden;}
+#research .research-item h3{margin:0 !important;padding:24px 22px 22px !important;min-height:96px;display:flex;align-items:flex-end;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#6A3FC6 0%,#8457D8 55%,#A07BE6 100%) !important;color:#fff !important;
+  font-family:'Cormorant Garamond',Georgia,serif !important;font-variant:small-caps;font-size:23px !important;letter-spacing:1px;}
+#research .research-item h3::after{content:"";position:absolute;top:-46px;right:-46px;width:110px;height:110px;border-radius:50%;border:1px solid rgba(255,255,255,.35);pointer-events:none;}
+#research .research-item p{padding:18px 22px 22px !important;margin:0 !important;font-size:14.5px !important;color:var(--text-secondary) !important;flex:1;}
+#research .research-item:hover{transform:translateY(-8px) !important;box-shadow:0 18px 36px rgba(48,28,88,.16) !important;}
+
+#research .research-item h3{min-height:0 !important;}
+@supports (grid-template-rows:subgrid){
+#research .research-grid{grid-template-rows:auto auto;}
+#research .research-item{display:grid !important;grid-row:span 2;grid-template-rows:subgrid !important;gap:0 !important;}
+}
+@supports not (grid-template-rows:subgrid){#research .research-item h3{min-height:118px !important;}}
+
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/research.html)
+   sn-research-like-lms (.detail .info-card lines) + sn-infocard-text.
+   Scoped to /research via .detail.research-page, and h4 mapped to
+   React card title .info-card-title (DetailRow renders an h3).
+   Declarations verbatim.
+   ============================================================ */
+.detail.research-page .info-card{padding:0 !important;border-radius:0 !important;overflow:hidden;border:1px solid rgba(90,46,166,.14) !important;background:linear-gradient(180deg,#fff,#FAF8FE) !important;box-shadow:0 8px 24px rgba(48,28,88,.08) !important;}
+.detail.research-page .info-card .info-card-title{margin:0 !important;padding:20px 22px !important;position:relative;overflow:hidden;background:linear-gradient(135deg,#6A3FC6 0%,#8457D8 55%,#A07BE6 100%) !important;color:#fff !important;font-family:'Cormorant Garamond',Georgia,serif !important;font-variant:small-caps;font-size:22px !important;letter-spacing:1px;}
+.detail.research-page .info-card .info-card-title::after{content:"";position:absolute;top:-46px;right:-46px;width:110px;height:110px;border-radius:50%;border:1px solid rgba(255,255,255,.35);}
+.detail.research-page .info-card > :not(.info-card-title){padding-left:22px !important;padding-right:22px !important;}
+.detail.research-page .info-card > :last-child{padding-bottom:20px !important;}
+.detail.research-page .info-card > .info-card-title + *{padding-top:16px !important;}
+.detail.research-page .info-card,.detail.research-page .info-card *{color:var(--text-secondary);}
+.detail.research-page .info-card .info-card-title{color:#fff !important;}
+.detail.research-page .info-card li,.detail.research-page .info-card p,.detail.research-page .info-card span,.detail.research-page .info-card a,.detail.research-page .info-card.dark li,.detail.research-page .info-card.dark p{color:#4A4163 !important;opacity:1 !important;}.detail.research-page .info-card .info-card-title{color:#fff !important;}
+
+/* research-background-style (Shiny animated gold frame): dark-card hover glow,
+   which outranks .detail .info-card in the static page. [trimmed to /research dark cards] */
+.detail.research-page .info-card.dark:hover{transform:translateY(-6px);box-shadow:0 0 28px rgba(232,195,74,.28),0 24px 48px rgba(41,20,81,.28) !important;}

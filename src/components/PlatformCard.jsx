@@ -1,5 +1,6 @@
 export default function PlatformCard({
   icon,
+  shortLabel,
   title,
   linkedTitle,
   description,
@@ -8,9 +9,7 @@ export default function PlatformCard({
 }) {
   return (
     <div className="tablet">
-      <a className="icon" href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title}`}>
-        {icon}
-      </a>
+      <div className="icon icon-pill">{shortLabel || icon}</div>
       <h3>
         {title}
         {linkedTitle && (

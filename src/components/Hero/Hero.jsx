@@ -18,6 +18,8 @@ export default function Hero() {
         </p>
       </div>
       <div className="gopuram-arch" />
+      <img className="hero-vyasa" src="/assets/vyasa-gold.png" alt="" aria-hidden="true" />
+      <div className="hero-curve" />
     </section>
   );
 }

@@ -1,0 +1,27 @@
+/* ============================================================
+   PORTED FROM STATIC SITE (<style id="silver-bubbles-clouds">)
+   Global silver/gold bubble layer behind the page content.
+   Rules copied verbatim; two lines trimmed, declarations unchanged:
+   - the stacking line drops `header` (its z-index:1 would override the
+     sticky header's z-index:1000 in header.css, which loads earlier)
+   - the reduced-motion line keeps only `.site-bubbles span`
+   The .brand/.links/.hero-cloud rules of that block are not ported here.
+   ============================================================ */
+.site-bubbles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.site-bubbles span{position:absolute;bottom:-100px;border:1px solid rgba(220,226,238,.48);border-radius:50%;background:radial-gradient(circle at 28% 22%,rgba(255,255,255,.52),rgba(192,202,220,.16) 35%,rgba(125,136,160,.04) 72%,transparent 75%);box-shadow:inset 0 0 16px rgba(255,255,255,.24),0 0 22px rgba(186,196,216,.16);animation:silverBubbleRise linear infinite;}
+.site-bubbles span.gold{border-color:rgba(232,195,74,.5);background:radial-gradient(circle at 28% 22%,rgba(255,241,201,.6),rgba(232,195,74,.24) 38%,rgba(163,122,32,.05) 72%,transparent 75%);box-shadow:inset 0 0 16px rgba(255,241,201,.3),0 0 24px rgba(232,195,74,.26);}
+.site-bubbles span:nth-child(1){width:42px;height:42px;left:4%;animation-duration:24s;animation-delay:-4s;}
+.site-bubbles span:nth-child(2){width:18px;height:18px;left:12%;animation-duration:17s;animation-delay:-9s;}
+.site-bubbles span:nth-child(3){width:66px;height:66px;left:22%;animation-duration:30s;animation-delay:-17s;}
+.site-bubbles span:nth-child(4){width:26px;height:26px;left:33%;animation-duration:20s;animation-delay:-6s;}
+.site-bubbles span:nth-child(5){width:52px;height:52px;left:44%;animation-duration:27s;animation-delay:-15s;}
+.site-bubbles span:nth-child(6){width:20px;height:20px;left:55%;animation-duration:19s;animation-delay:-3s;}
+.site-bubbles span:nth-child(7){width:74px;height:74px;left:66%;animation-duration:32s;animation-delay:-22s;}
+.site-bubbles span:nth-child(8){width:30px;height:30px;left:77%;animation-duration:23s;animation-delay:-12s;}
+.site-bubbles span:nth-child(9){width:46px;height:46px;left:86%;animation-duration:26s;animation-delay:-8s;}
+.site-bubbles span:nth-child(10){width:16px;height:16px;left:95%;animation-duration:16s;animation-delay:-2s;}
+.site-bubbles span:nth-child(11){width:58px;height:58px;left:8%;animation-duration:29s;animation-delay:-19s;}
+.site-bubbles span:nth-child(12){width:24px;height:24px;left:60%;animation-duration:18s;animation-delay:-5s;}
+@keyframes silverBubbleRise{0%{transform:translate3d(0,0,0) scale(.65);opacity:0;}12%{opacity:.7;}45%{transform:translate3d(28px,-35vh,0) scale(1);opacity:.5;}75%{transform:translate3d(-22px,-72vh,0) scale(1.15);opacity:.3;}100%{transform:translate3d(18px,-118vh,0) scale(1.3);opacity:0;}}
+.homepage,main,footer{position:relative;z-index:1;}
+@media(prefers-reduced-motion:reduce){.site-bubbles span{animation:none!important;}}

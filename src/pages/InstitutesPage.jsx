@@ -8,6 +8,7 @@ import '../styles/pages.css';
 
 const institutes = [
   {
+    id: 'sri',
     kicker: 'Research',
     title: 'Śāstra Research Institute',
     paragraphs: [
@@ -26,6 +27,7 @@ const institutes = [
     },
   },
   {
+    id: 'isil',
     kicker: 'Language',
     title: 'Institute of Sanskrit & Indic Languages',
     paragraphs: [
@@ -45,6 +47,7 @@ const institutes = [
     },
   },
   {
+    id: 'cds',
     kicker: 'Digital',
     title: 'Centre for Digital Śāstra',
     paragraphs: [

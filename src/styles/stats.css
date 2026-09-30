@@ -1,8 +1,12 @@
 /* ============================================================
    STATS BAND — matches new Śāstranidhi design
+   new-design.css (imported later) re-declares .stats-band, .stats-grid,
+   .stat-item, .stat-icon and .stats-grid .num with the older, taller
+   values (46px padding, 34px numbers, 20px icons). The layout selectors
+   below carry one extra element/class so these compact values win.
    ============================================================ */
 
-.stats-band {
+div.stats-band {
   position: relative;
   overflow: hidden;
   padding: 22px 0;
@@ -26,20 +30,28 @@
   to   { background-position: 400px 0; }
 }
 
-/* ---------- Grid ---------- */
-.stats-grid {
+/* ---------- Grid ----------
+   Four stats in one row (see `stats` in siteData.js). */
+.stats-band .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 22px;
+  column-gap: 22px;
+  row-gap: 0;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
+  padding-top: 0;
+  padding-bottom: 0;
   text-align: center;
 }
 
 /* ---------- Each stat ---------- */
-.stat-item {
+.stats-grid .stat-item {
   position: relative;
   padding: 4px 14px;
+  /* the page's 1.55 line-height put the 18px icon on a ~28px line and the
+     13px label on a ~20px one; 1.2 keeps each stat tight */
+  line-height: 1.2;
   transition: transform 0.35s ease;
 }
 
@@ -47,7 +59,7 @@
   transform: translateY(-4px);
 }
 
-.stat-icon {
+.stats-grid .stat-icon {
   display: inline-block;
   font-size: 18px;
   margin-bottom: 2px;
@@ -65,7 +77,7 @@
   50%      { transform: translateY(-3px) rotate(-4deg); }
 }
 
-.stats-grid .num {
+.stats-band .stats-grid .num {
   display: block;
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 30px;
@@ -82,14 +94,16 @@
   -webkit-text-fill-color: transparent;
 }
 
-.stats-grid .lbl {
+.stats-band .stats-grid .lbl {
   font-size: 13px;
   letter-spacing: 0.5px;
   margin-top: 4px;
   color: var(--lavender-soft);
 }
 
-/* ---------- Floating bubbles layer ---------- */
+/* ---------- Floating bubbles layer ----------
+   Absolutely positioned over the whole band and clipped by its
+   overflow: hidden, so the bubbles never add to the band's height. */
 .stats-bubbles {
   position: absolute;
   inset: 0;
@@ -145,7 +159,7 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
-  .stats-grid {
+  .stats-band .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }

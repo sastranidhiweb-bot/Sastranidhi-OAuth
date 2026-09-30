@@ -14,7 +14,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 0;
+  padding: 0; /* re-asserted below: new-design.css adds 10px */
   transition: box-shadow 0.3s ease, padding 0.3s ease;
   animation: headerSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -128,6 +128,19 @@ header .glyph img {
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+/* new-design.css sizes the logo with `.brand .glyph` (64px / 58px), which
+   outranks `header .glyph`. Re-assert the design size one step higher. */
+header .brand .glyph {
+  width: 60px;
+  height: 60px;
+}
+
+header .brand .glyph img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%; /* new-design.css sets `.brand .glyph img` to 0 */
 }
 
 header .glyph .halo,
@@ -245,12 +258,29 @@ header .links a::after {
 header .links a:hover::after { width: 100%; }
 header .links a:hover {
   color: #FFFFFF;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 header .links a.active {
   color: var(--brand-gold);
 }
 header .links a.active::after { width: 100%; }
+
+/* new-design.css sets `nav.links a` colour (and white on hover) with
+   !important; `header nav.links a…` outranks it. Hover is white with the
+   gold underline, as on the static site; the current page stays gold. */
+header nav.links a:hover {
+  color: #FFFFFF !important;
+}
+header nav.links a.active {
+  color: var(--brand-gold) !important;
+}
+
+/* new-design.css `nav.links a` is 16px with 4px bottom padding; the static
+   header uses 15.5px and no padding. */
+header nav.links a {
+  font-size: 15.5px;
+  padding-bottom: 0;
+}
 
 /* ---------- Donate button ---------- */
 header .btn-donate {
@@ -273,6 +303,7 @@ header .btn-donate {
 header .btn-donate:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(232, 195, 74, 0.35);
+  filter: brightness(1.05);
 }
 
 /* ---------- Hamburger ---------- */
@@ -507,13 +538,13 @@ header .mobile-nav a:hover {
 }
 
 header .mobile-nav a.active {
-  color: var(--brand-gold);
+  color: var(--brand-gold) !important;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1240px) {
   header .links { gap: 18px; }
-  header .links a { font-size: 14px; }
+  header nav.links a { font-size: 14px; }
 }
 
 @media (max-width: 1080px) {
@@ -524,8 +555,8 @@ header .mobile-nav a.active {
 
 @media (max-width: 700px) {
   header .nav { padding-top: 10px; padding-bottom: 10px; }
-  header .glyph { width: 50px; height: 50px; }
-  header .glyph img { width: 46px; height: 46px; }
+  header .brand .glyph { width: 50px; height: 50px; }
+  header .brand .glyph img { width: 46px; height: 46px; }
   header .brand .name { font-size: 18px; }
   header .sb-kicker { display: none; }
   header .sb-icon { width: 30px; height: 30px; }
@@ -538,6 +569,18 @@ header .mobile-nav a.active {
   header .sb-btn { padding: 0 9px; min-height: 30px; }
 }
 
+/* new-design.css re-declares `header` later with 10px of padding and a
+   darker `background: … !important`. `html header` outranks its bare
+   `header` selector; the background needs !important to beat theirs. */
+html header {
+  padding: 0;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(232, 196, 90, 0.14), transparent 38%),
+    radial-gradient(circle at 85% 120%, rgba(160, 110, 240, 0.38), transparent 52%),
+    linear-gradient(115deg, #3A1C82 0%, #5129A8 46%, #7A45D6 100%) !important;
+  box-shadow: 0 4px 20px rgba(48, 22, 110, 0.22);
+}
+
 @media (prefers-reduced-motion: reduce) {
   header,
   header .glyph,
@@ -546,3 +589,121 @@ header .mobile-nav a.active {
     animation: none !important;
   }
 }
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/index.html)
+   Copied verbatim, in the static page source order, so the
+   cascade matches. Only selector lists marked [trimmed] were cut
+   down to their header/.btn-donate parts; declarations unchanged.
+   ============================================================ */
+
+/* --- premium-visual-upgrade: Donate sheen base [trimmed] --- */
+  .btn-donate{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .btn-donate::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.28) 48%,transparent 70%);
+    transform:translateX(-130%);
+    animation:buttonSheen 5s ease-in-out infinite;
+    z-index:-1;
+  }
+  @keyframes buttonSheen{
+    0%,55%{transform:translateX(-130%)}
+    75%,100%{transform:translateX(130%)}
+  }
+
+/* --- sastranidhi-brand-background-weight: brand text --- */
+/* Brand name beside logo: ALWAYS white and highly visible */
+.brand .brand-name,
+header .brand .brand-name,
+.brand-name,
+.brand .name,
+header .brand .name{
+  color:#FFFFFF !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  font-weight:700 !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.45),
+    0 0 12px rgba(255,255,255,.16) !important;
+  letter-spacing:.075em !important;
+}
+.brand .brand-tag,
+header .brand .brand-tag,
+.brand .sub,
+header .brand .sub{
+  color:#F2E9FF !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  text-shadow:0 1px 4px rgba(0,0,0,.32);
+}
+@media(max-width:700px){
+  .brand .brand-name,
+  .brand-name,
+  .brand .name{
+    color:#fff !important;
+    font-size:20px !important;
+    text-shadow:0 1px 3px rgba(0,0,0,.5),0 0 10px rgba(255,255,255,.14) !important;
+  }
+}
+
+/* --- silver-bubbles-clouds: brand + link hover --- */
+.brand{transition:transform .3s ease,filter .3s ease;}
+.brand:hover{transform:translateY(-2px);filter:drop-shadow(0 0 10px rgba(193,202,222,.45));}
+.links a,.mobile-nav a{transition:color .25s ease,transform .25s ease;}
+.links a:hover,.mobile-nav a:hover{transform:translateY(-2px);color:var(--brand-gold);}
+
+/* --- research-background-style, Compact sticky double header (sticky only;
+   new-design.css sets `header{position:relative}` after this file) --- */
+header{position:sticky !important;top:0;z-index:1000;padding:0 !important;}
+
+/* --- research-background-style, Round 3: header background, subbar, active link --- */
+header{background:
+  radial-gradient(circle at 15% 0%,rgba(232,196,90,.14),transparent 38%),
+  radial-gradient(circle at 85% 120%,rgba(160,110,240,.38),transparent 52%),
+  linear-gradient(115deg,#3A1C82 0%,#5129A8 46%,#7A45D6 100%) !important;
+  box-shadow:0 4px 20px rgba(48,22,110,.22) !important;}
+.subbar{background:rgba(255,255,255,.07);border-top:1px solid rgba(243,223,160,.22);}
+header .links a.active{color:var(--brand-gold) !important;}
+header .links a.active::after{width:100%;}
+.mobile-nav a.active{color:var(--brand-gold) !important;}
+
+/* --- sn-header-final (header rules only; hero rules belong to the hero task) --- */
+@view-transition{navigation:auto;}
+header{view-transition-name:sn-header;}
+::view-transition-old(sn-header),::view-transition-new(sn-header){animation:none;mix-blend-mode:normal;}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;}
+header .brand,header .links,header .btn-donate,header .subbar,header .subbar *{animation:none !important;}
+header .glyph::before,header .glyph::after,header .glyph .halo,header .glyph .halo2,header .glyph .spark,header .glyph .shine{display:none !important;animation:none !important;}
+header .glyph img{animation:none !important;}
+header .btn-donate{border-radius:3px !important;padding:9px 22px !important;background:linear-gradient(135deg,#F6E3A1 0%,#E8C34A 45%,#C9A032 100%) !important;color:#21163F !important;border:1px solid #F8EAB8 !important;font-weight:800 !important;letter-spacing:.6px;text-transform:uppercase;font-size:13px !important;box-shadow:0 6px 18px rgba(10,4,28,.35),0 0 0 3px rgba(232,195,74,.18),inset 0 1px 0 rgba(255,255,255,.6) !important;text-shadow:0 1px 0 rgba(255,255,255,.35);}
+header .btn-donate::after{display:none !important;}
+header .btn-donate::before{background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.7) 50%,transparent 75%) !important;animation:buttonSheen 4.5s ease-in-out infinite !important;}
+header .btn-donate:hover{transform:translateY(-2px) !important;box-shadow:0 10px 26px rgba(10,4,28,.4),0 0 0 4px rgba(232,195,74,.3),inset 0 1px 0 rgba(255,255,255,.6) !important;color:#21163F !important;}
+header .sb-btn{border-radius:3px !important;box-shadow:0 5px 14px rgba(10,4,28,.35),inset 0 1px 0 rgba(255,255,255,.2) !important;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease !important;}
+header .sb-login{border:1px solid rgba(232,195,74,.6) !important;}
+header .sb-btn:hover{transform:translateY(-2px);box-shadow:0 9px 22px rgba(10,4,28,.42),0 0 0 3px rgba(232,195,74,.22) !important;}
+header .sb-wa:hover{background:#25D366 !important;color:#fff !important;border-color:#25D366 !important;}
+
+/* --- sn-gold-yellow [trimmed to header selectors] --- */
+header .btn-donate,header .sb-signup{background:linear-gradient(135deg,#F6DA6A 0%,#E8C34A 55%,#E2B93C 100%) !important;color:#21163F !important;border:1px solid #F6DA6A !important;}
+header .btn-donate:hover,header .sb-signup:hover{background:linear-gradient(135deg,#F9E27E 0%,#EDCB55 55%,#E8C34A 100%) !important;color:#21163F !important;}
+
+/* --- sn-nav-dropdown --- */
+header{overflow:visible !important;}
+header .links .nav-dd{position:relative;display:inline-flex;align-items:center;}
+header .links .nav-dd > a{display:inline-flex;align-items:center;gap:5px;}
+header .links .nav-dd > a .dd-caret{display:inline-block;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .3s cubic-bezier(.22,1,.36,1);opacity:.8;}
+header .links .nav-dd:hover > a .dd-caret,header .links .nav-dd:focus-within > a .dd-caret{transform:translateY(1px) rotate(-135deg);}
+header .links .dd-menu{position:absolute;top:100%;left:50%;min-width:270px;padding:10px 0 0;transform:translate(-50%,8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,transform .35s cubic-bezier(.22,1,.36,1),visibility 0s .25s;z-index:60;}
+header .links .nav-dd:hover .dd-menu,header .links .nav-dd:focus-within .dd-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);transition:opacity .25s ease,transform .35s cubic-bezier(.22,1,.36,1),visibility 0s;}
+header .links .dd-panel{display:flex;flex-direction:column;padding:8px;background:linear-gradient(160deg,#3A1C82,#4A26A0);border:1px solid rgba(232,195,74,.55);box-shadow:0 18px 40px rgba(20,8,50,.4),inset 0 1px 0 rgba(255,255,255,.12);}
+header .links .dd-panel::before{content:"";position:absolute;top:4px;left:50%;width:12px;height:12px;margin-left:-6px;background:#3A1C82;border-left:1px solid rgba(232,195,74,.55);border-top:1px solid rgba(232,195,74,.55);transform:rotate(45deg);}
+header .links a.dd-item{display:block;padding:10px 14px;font-size:14px !important;font-weight:600;white-space:nowrap;color:#F3F0FA !important;border-left:2px solid transparent;transition:background .25s ease,color .25s ease,border-color .25s ease,padding-left .25s ease;}
+header .links a.dd-item::after{display:none !important;}
+header .links a.dd-item:hover,header .links a.dd-item:focus{background:rgba(255,255,255,.08);color:#E8C34A !important;border-left-color:#E8C34A;padding-left:18px;}
+header .links a.dd-item.dd-all{margin-top:4px;border-top:1px solid rgba(232,195,74,.25);font-size:12px !important;letter-spacing:1.5px;text-transform:uppercase;color:#F3DFA0 !important;}

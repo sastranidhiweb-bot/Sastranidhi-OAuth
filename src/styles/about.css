@@ -5,6 +5,14 @@
    imported later in App.jsx.
    ============================================================ */
 
+/* ---------- Section ----------
+   Without its own rule the section fell back to new-design.css's generic
+   `section { padding: 76px 0 }`. */
+#about {
+  padding: 32px 0 44px;
+  background: var(--lavender-light);
+}
+
 /* ---------- Layout ---------- */
 #about .about-grid {
   display: grid;

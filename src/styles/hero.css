@@ -6,7 +6,7 @@
   position: relative;
   overflow: hidden;
   text-align: center;
-  padding: 10px 0 18px;
+  padding: 40px 0 52px;
   min-height: 0;
   background:
     radial-gradient(80% 70% at 50% 38%, rgba(101, 64, 181, 0.28), transparent 62%),
@@ -149,12 +149,11 @@
 
 .hero h1 {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(40px, 4.2vw, 54px);
+  font-size: clamp(34px, 4.2vw, 54px);
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--brand-gold);
   margin: 0 0 12px;
-  transform: translateY(-7px);
   text-shadow: 0 0 30px rgba(232, 195, 74, 0.10);
   animation:
     heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both,
@@ -167,7 +166,6 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--lavender-light);
-  transform: translateY(-5px);
   animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
 }
 
@@ -176,6 +174,17 @@
   display: none;
 }
 
+/* Bottom curve */
+.hero-curve {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -1px;
+  height: 32px;
+  background: var(--lavender-light);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 2;
+}
 
 /* ---------- Keyframes ---------- */
 @keyframes mandalaSpin {
@@ -207,14 +216,38 @@
   50%      { text-shadow: 0 0 34px rgba(232, 195, 74, 0.22); }
 }
 
+/* ---------- Compact first viewport ----------
+   new-design.css (imported later) re-declares .hero, .hero h1 and
+   .hero-curve with the old, taller values. These `section.hero` rules
+   outrank it so the compact sizes above actually apply. Inner-page heroes
+   keep their own sizing via `.hero.page-hero` in pages.css. */
+section.hero {
+  padding: 40px 0 52px;
+  min-height: 0;
+}
+
+section.hero h1 {
+  font-size: clamp(34px, 4.2vw, 54px);
+  margin-bottom: 12px;
+}
+
+section.hero .lede {
+  line-height: 1.5;
+}
+
+section.hero .hero-curve {
+  height: 32px;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 700px) {
-  .hero {
-    padding: 42px 0 66px;
-    min-height: 190px;
+  .hero,
+  section.hero {
+    padding: 36px 0 46px;
+    min-height: 0;
   }
-  .hero h1 {
-    font-size: clamp(34px, 10vw, 46px);
+  section.hero h1 {
+    font-size: clamp(30px, 9vw, 42px);
   }
   .hero::before {
     width: 420px;
@@ -236,3 +269,50 @@
     animation: none !important;
   }
 }
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/index.html)
+   Hero rules copied verbatim, in the static page source order.
+   Only whole lines were taken; lines for other areas (.brand,
+   .links, .site-bubbles, .course, #platforms) were left out.
+   ============================================================ */
+
+/* --- silver-bubbles-clouds: hero clouds --- */
+.hero-clouds{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+.hero-cloud{position:absolute;width:190px;height:58px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(214,219,236,.06));filter:blur(1px);opacity:.5;box-shadow:0 0 30px rgba(255,255,255,.08);}
+.hero-cloud:before,.hero-cloud:after{content:"";position:absolute;border-radius:50%;background:inherit;}
+.hero-cloud:before{width:92px;height:92px;left:28px;bottom:8px;}
+.hero-cloud:after{width:118px;height:118px;right:24px;bottom:0;}
+.hero-cloud:nth-child(1){top:18%;left:-230px;transform:scale(.85);animation:cloudDrift 46s linear infinite;}
+.hero-cloud:nth-child(2){top:38%;left:-300px;transform:scale(1.15);opacity:.28;animation:cloudDrift 64s linear infinite -18s;}
+.hero-cloud:nth-child(3){top:12%;left:-260px;transform:scale(.6);opacity:.24;animation:cloudDrift 55s linear infinite -31s;}
+@keyframes cloudDrift{from{margin-left:0;}to{margin-left:calc(100vw + 620px);}}
+
+/* --- sn-header-final: curve, page-hero, Vyasa --- */
+.hero .hero-curve{height:92px !important;left:-4% !important;right:-4% !important;border-radius:50% 50% 0 0/100% 100% 0 0 !important;box-shadow:0 -3px 0 rgba(232,195,74,.55),0 -14px 30px rgba(232,195,74,.12) !important;}
+.hero .hero-curve::before{content:"";position:absolute;left:6%;right:6%;top:-22px;height:60px;border-radius:50% 50% 0 0/100% 100% 0 0;border-top:1px solid rgba(243,223,160,.35);pointer-events:none;}
+.hero{overflow:hidden;}
+.page-hero{padding-top:20px !important;padding-bottom:96px !important;min-height:0 !important;}
+.page-hero .hero-inner{padding-top:0 !important;margin-top:0 !important;}
+.page-hero .hero-emblem-wrap,.page-hero .hero-emblem{display:none !important;}
+.page-hero .crumb{margin-top:0 !important;}
+.hero-vyasa{position:absolute;right:max(3%,calc(50% - 600px));bottom:58px;height:clamp(110px,15vw,170px);width:auto;z-index:1;pointer-events:none;opacity:.92;filter:drop-shadow(0 0 10px rgba(232,195,74,.35));animation:vyasaFloat 7s ease-in-out infinite;}
+@keyframes vyasaFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media (max-width:760px){.hero-vyasa{height:84px;opacity:.5;right:8px;}}
+@media (prefers-reduced-motion:reduce){.hero-vyasa{animation:none;}}
+
+/* --- sn-fix-levels: hero padding, page-hero, Vyasa --- */
+.hero:not(.page-hero){padding-top:40px !important;padding-bottom:128px !important;min-height:0 !important;}
+.hero .hero-inner{position:relative;z-index:3 !important;}
+.hero .lede{display:block !important;opacity:1;visibility:visible;}
+.page-hero{padding-top:28px !important;padding-bottom:124px !important;}
+.page-hero h1{font-size:clamp(38px,4.6vw,58px) !important;}
+.page-hero .lede{font-size:17px !important;max-width:680px !important;}
+.hero-vyasa{bottom:74px;}
+
+/* --- sn-explore-tight: home curve + padding --- */
+.hero:not(.page-hero) .hero-curve{height:58px !important;}
+.hero:not(.page-hero){padding-bottom:84px !important;}
+.hero:not(.page-hero){padding-bottom:112px !important;}
+
+/* --- sn-vyasa-op --- */
+.hero-vyasa{opacity:.22 !important;filter:none !important;}@media (max-width:760px){.hero-vyasa{opacity:.15 !important;}}

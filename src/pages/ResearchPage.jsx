@@ -86,7 +86,8 @@ export default function ResearchPage() {
           lede="Authentic sources with digital access: projects, publications, events and the scholars behind them."
         />
 
-        <section className="detail">
+        {/* research-page scopes the purple info-card treatment (research.css) to this page */}
+        <section className="detail research-page">
           <div className="wrap">
             {researchAreas.map((row) => (
               <DetailRow key={row.title} {...row} />
