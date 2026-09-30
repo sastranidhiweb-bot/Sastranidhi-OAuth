@@ -1,4 +1,3 @@
-import { ModalProvider } from '../context/ModalContext.jsx';
 import Header from '../components/Header/Header.jsx';
 import Hero from '../components/Hero/Hero.jsx';
 import Initiatives from '../components/Initiatives/Initiatives.jsx';
@@ -10,7 +9,6 @@ import SubscribeSection from '../components/Subscribe/SubscribeSection.jsx';
 import DonateBand from '../components/DonateBand/DonateBand.jsx';
 // import Contact from '../components/Contact/Contact.jsx';
 import Footer from '../components/Footer/Footer.jsx';
-import DonateModal from '../components/Modals/DonateModal.jsx';
 
 // Imported after the component stylesheets so it keeps the same cascade
 // position it had when it lived in App.jsx.
@@ -18,7 +16,7 @@ import '../styles/new-design.css';
 
 export default function HomePage() {
   return (
-    <ModalProvider>
+    <>
       <div className="homepage">
         <Header />
         <main>
@@ -33,7 +31,6 @@ export default function HomePage() {
           {/* <Contact /> */}
         </main>
         <Footer />
-        <DonateModal />
         <div className="whatsapp-float">
           <span className="wa-tooltip">Follow us on WhatsApp</span>
           <a
@@ -50,6 +47,6 @@ export default function HomePage() {
           </a>
         </div>
       </div>
-    </ModalProvider>
+    </>
   );
 }

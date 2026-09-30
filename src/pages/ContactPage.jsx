@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ModalProvider } from '../context/ModalContext.jsx';
 import Header from '../components/Header/Header.jsx';
 import Footer from '../components/Footer/Footer.jsx';
-import DonateModal from '../components/Modals/DonateModal.jsx';
 import '../styles/new-design.css';
 import '../styles/contact-page.css';
 
@@ -89,7 +87,7 @@ export default function ContactPage() {
   };
 
   return (
-    <ModalProvider>
+    <>
       <div className="homepage">
         <Header />
         <main>
@@ -259,7 +257,6 @@ export default function ContactPage() {
           </section>
         </main>
         <Footer />
-        <DonateModal />
         <div className="whatsapp-float">
           <span className="wa-tooltip">Follow us on WhatsApp</span>
           <a
@@ -276,6 +273,6 @@ export default function ContactPage() {
           </a>
         </div>
       </div>
-    </ModalProvider>
+    </>
   );
 }

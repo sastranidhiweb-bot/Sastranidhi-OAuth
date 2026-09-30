@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ModalProvider } from './context/ModalContext.jsx';
+import DonateModal from './components/Modals/DonateModal.jsx';
 
 import HomePage from './pages/HomePage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
@@ -97,6 +98,8 @@ export default function App() {
     <ModalProvider>
       <BrowserRouter>
         <AppRoutes />
+        {/* Rendered once so the header's Donate button works on every route */}
+        <DonateModal />
       </BrowserRouter>
     </ModalProvider>
   );
