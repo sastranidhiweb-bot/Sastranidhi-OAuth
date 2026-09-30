@@ -19,12 +19,6 @@
   border-radius: 0;
 }
 
-/* Inner pages end in a straight edge; only the homepage hero keeps its
-   curve. PageHero no longer renders one — this guards against it. */
-.hero.page-hero .hero-curve {
-  display: none;
-}
-
 .hero.page-hero .hero-inner {
   display: flex;
   align-items: center;

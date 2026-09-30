@@ -27,6 +27,8 @@ export function PageHero({ crumb, title, lede }) {
           <p className="lede">{lede}</p>
         </div>
       </div>
+      <img className="hero-vyasa" src="/assets/vyasa-gold.png" alt="" aria-hidden="true" />
+      <div className="hero-curve" />
     </section>
   );
 }
