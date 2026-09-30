@@ -5,6 +5,7 @@ import '../styles/pages.css';
 
 const initiatives = [
   {
+    id: 'svadhyaya',
     kicker: 'Study & Research',
     title: 'Svādhyāya',
     paragraphs: [
@@ -22,6 +23,7 @@ const initiatives = [
     },
   },
   {
+    id: 'visleshaka',
     kicker: 'Analyze & Assimilate',
     title: 'Viśleṣaka: Purāṇatilakam',
     paragraphs: [
@@ -44,6 +46,7 @@ const initiatives = [
     },
   },
   {
+    id: 'pariprasna',
     kicker: 'Questions & Answers',
     title: 'Paripraśna',
     paragraphs: [
@@ -61,6 +64,7 @@ const initiatives = [
     },
   },
   {
+    id: 'pravacana',
     kicker: 'Courses & Discourses',
     title: 'Pravacana',
     paragraphs: [
@@ -71,7 +75,7 @@ const initiatives = [
       'Assessments and certificates',
       'Discourse recordings',
     ],
-    action: { to: 'https://sastranidhi.edmingle.com/', label: 'Open Pravacana →' },
+    action: { to: '/courses', label: 'Open Pravacana →' },
     card: {
       dark: true,
       title: 'Featured tracks',

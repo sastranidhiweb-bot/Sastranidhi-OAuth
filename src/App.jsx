@@ -29,13 +29,24 @@ function AppRoutes() {
       return undefined;
     }
     const id = hash.replace('#', '');
+    let frame;
     const timer = setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // An unrevealed .reveal/.stagger is still shifted down, so reveal the
+        // target and its ancestors first and scroll to where they'll settle.
+        for (let el = element; el && el !== document.body; el = el.parentElement) {
+          if (el.matches('.reveal, .stagger')) el.classList.add('in');
+        }
+        frame = requestAnimationFrame(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
       }
     }, 100);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      cancelAnimationFrame(frame);
+    };
   }, [pathname, hash]);
 
   useEffect(() => {

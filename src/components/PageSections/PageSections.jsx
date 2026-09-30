@@ -59,9 +59,9 @@ export function TickList({ items }) {
   );
 }
 
-export function DetailRow({ kicker, title, paragraphs = [], ticks, action, card }) {
+export function DetailRow({ id, kicker, title, paragraphs = [], ticks, action, card }) {
   return (
-    <div className="detail-row reveal">
+    <div className="detail-row reveal" id={id}>
       <div>
         <div className="kicker">{kicker}</div>
         <h2>{title}</h2>
