@@ -222,3 +222,23 @@ section#platforms {
 
 /* --- sn-tablet-badge --- */
 #platforms .tablet .icon{width:auto !important;min-width:0 !important;padding:0 14px !important;white-space:nowrap;}
+
+/* --- sastranidhi-visual-upgrade: section background [home-only]
+   Static selector is section:not(.hero):not(#contact), which outranks every
+   #platforms/#courses/#research background rule there; here it is limited to
+   the three home sections. Declaration verbatim. --- */
+.homepage #platforms,.homepage #courses,.homepage #research{
+  background:
+    radial-gradient(circle at 0% 0%,rgba(106,57,174,.055),transparent 32%),
+    linear-gradient(135deg,#f5f2fa 0%,#eeeaf6 52%,#f8f6fc 100%) !important;
+}
+
+/* --- sastranidhi-visual-upgrade: Explore badge hover [home-only]
+   (outranks the #platforms .tablet .icon-pill rules above) --- */
+.homepage #platforms .tablet .icon{
+  transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease;
+}
+.homepage #platforms .tablet:hover .icon{
+  transform:translateY(-3px) rotate(-2deg);
+  box-shadow:0 8px 18px rgba(48,22,98,.18);
+}
