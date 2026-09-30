@@ -12,7 +12,8 @@
   --green:#2f684f;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
+html{scroll-behavior:smooth;scroll-padding-top:118px}
+@media(max-width:700px){ html{scroll-padding-top:104px;} }
 body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--blue)}
 a{text-decoration:none;color:inherit}
 button,input,select,textarea{font:inherit}
