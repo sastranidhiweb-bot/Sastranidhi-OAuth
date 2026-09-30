@@ -693,3 +693,13 @@
     transition: none;
   }
 }
+
+/* ============================================================
+   PORTED FROM STATIC SITE (research-background-style,
+   "Tighter section rhythm"; index.html line 2016).
+   Gives stacked .detail sections their 44px top padding back (it
+   outranks .detail + .detail above), so anchor jumps land headings
+   below the sticky header. Only the .detail rule from that line;
+   its .detail-row / .cta-band rules were not ported.
+   ============================================================ */
+.detail{padding:44px 0 !important;}
