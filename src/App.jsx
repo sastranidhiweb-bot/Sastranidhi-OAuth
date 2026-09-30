@@ -16,6 +16,10 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
 import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
 import OAuthTestPage from './pages/OAuthTestPage.jsx';
 
+// Routes drawn without the site header/footer (AuthLayout pages and the dev
+// OAuth harness).
+const AUTH_PATHS = ['/login', '/signup', '/forgot-password', '/reset-password', '/oauth-test'];
+
 // Page-level effects live inside the router so they can re-run whenever the
 // route changes, not only on the first load.
 function AppRoutes() {
@@ -83,24 +87,37 @@ function AppRoutes() {
     return () => observer.disconnect();
   }, [pathname]);
 
+  // The auth pages have their own full-page background, so the bubble layer
+  // (styles/bubbles.css) is only drawn behind the site pages.
+  const showBubbles = !AUTH_PATHS.includes(pathname);
+
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/institutes" element={<InstitutesPage />} />
-      <Route path="/initiatives" element={<InitiativesPage />} />
-      <Route path="/courses" element={<CoursesPage />} />
-      <Route path="/research" element={<ResearchPage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupWizard />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
-      {/* Dev-only PKCE harness, previously routed in main.jsx */}
-      <Route path="/oauth-test" element={<OAuthTestPage />} />
-      {/* Unknown paths fall back to the homepage, as before */}
-      <Route path="*" element={<HomePage />} />
-    </Routes>
+    <>
+      {showBubbles && (
+        <div className="site-bubbles" aria-hidden="true">
+          {Array.from({ length: 12 }, (_, i) => (
+            <span key={i} className={i % 2 ? 'gold' : undefined} />
+          ))}
+        </div>
+      )}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/institutes" element={<InstitutesPage />} />
+        <Route path="/initiatives" element={<InitiativesPage />} />
+        <Route path="/courses" element={<CoursesPage />} />
+        <Route path="/research" element={<ResearchPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupWizard />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        {/* Dev-only PKCE harness, previously routed in main.jsx */}
+        <Route path="/oauth-test" element={<OAuthTestPage />} />
+        {/* Unknown paths fall back to the homepage, as before */}
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </>
   );
 }
 

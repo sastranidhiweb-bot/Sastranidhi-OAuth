@@ -13,6 +13,7 @@ import './styles/research.css';
 import './styles/donate-band.css';
 import './styles/footer.css';
 import './styles/new-design.css';
+import './styles/bubbles.css';
 import './styles/pages.css';
 import './styles/contact-page.css';
 import App from './App.jsx';

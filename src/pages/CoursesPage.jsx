@@ -15,6 +15,7 @@ const LMS_URL = 'https://sastranidhi.edmingle.com/';
 
 const courseDetails = [
   {
+    id: 'philosophy',
     kicker: 'Beginner · 12 Lessons',
     title: 'Indian Philosophy Foundations',
     paragraphs: [
@@ -36,6 +37,7 @@ const courseDetails = [
     },
   },
   {
+    id: 'gita',
     kicker: 'Intermediate · 18 Lessons',
     title: 'Bhagavad-gītā: Text and Meaning',
     paragraphs: [
@@ -58,6 +60,7 @@ const courseDetails = [
     },
   },
   {
+    id: 'sanskrit',
     kicker: 'Beginner · 20 Lessons',
     title: 'Reading Sanskrit Scriptures',
     paragraphs: [

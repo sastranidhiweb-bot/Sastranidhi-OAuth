@@ -140,6 +140,7 @@ header .brand .glyph {
 header .brand .glyph img {
   width: 56px;
   height: 56px;
+  border-radius: 50%; /* new-design.css sets `.brand .glyph img` to 0 */
 }
 
 header .glyph .halo,
@@ -256,19 +257,29 @@ header .links a::after {
 
 header .links a:hover::after { width: 100%; }
 header .links a:hover {
-  color: var(--brand-gold);
-  transform: translateY(-1px);
+  color: #FFFFFF;
+  transform: translateY(-2px);
 }
 header .links a.active {
   color: var(--brand-gold);
 }
 header .links a.active::after { width: 100%; }
 
-/* new-design.css forces `nav.links a` to #F4ECFF (and white on hover) with
-   !important, which hid the gold above. `header nav.links a…` outranks it. */
-header nav.links a:hover,
+/* new-design.css sets `nav.links a` colour (and white on hover) with
+   !important; `header nav.links a…` outranks it. Hover is white with the
+   gold underline, as on the static site; the current page stays gold. */
+header nav.links a:hover {
+  color: #FFFFFF !important;
+}
 header nav.links a.active {
   color: var(--brand-gold) !important;
+}
+
+/* new-design.css `nav.links a` is 16px with 4px bottom padding; the static
+   header uses 15.5px and no padding. */
+header nav.links a {
+  font-size: 15.5px;
+  padding-bottom: 0;
 }
 
 /* ---------- Donate button ---------- */
@@ -292,6 +303,7 @@ header .btn-donate {
 header .btn-donate:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(232, 195, 74, 0.35);
+  filter: brightness(1.05);
 }
 
 /* ---------- Hamburger ---------- */
@@ -532,7 +544,7 @@ header .mobile-nav a.active {
 /* ---------- Responsive ---------- */
 @media (max-width: 1240px) {
   header .links { gap: 18px; }
-  header .links a { font-size: 14px; }
+  header nav.links a { font-size: 14px; }
 }
 
 @media (max-width: 1080px) {

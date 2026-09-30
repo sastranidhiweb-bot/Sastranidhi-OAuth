@@ -762,3 +762,29 @@ footer::before {
     display: none;
   }
 }
+/* ============================================================
+   Donate modal: Continue button and support-area select.
+   These three rules only existed in homepage.css, which is not
+   imported; copied here verbatim. .btn-continue uses homepage.css
+   tokens that nothing else defines (base.css has a different --gold),
+   so they are set on .modal-box with homepage.css values.
+   ============================================================ */
+.modal-box {
+  --gold: #D4AF37;
+  --gold-light: #E9CE79;
+  --royal-deep: #140B33;
+}
+.select-wrap { position: relative; }
+.select-wrap select { cursor: pointer; padding-right: 40px; }
+.modal-box .btn-continue {
+  background: linear-gradient(120deg, var(--gold), var(--gold-light));
+  color: var(--royal-deep);
+  border: none;
+  border-radius: 9px;
+  padding: 13px;
+  font-weight: 700;
+  font-size: 14.5px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}

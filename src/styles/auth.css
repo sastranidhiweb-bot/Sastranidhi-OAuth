@@ -199,3 +199,21 @@
   margin: -16px 0 20px;
   text-align: center;
 }
+
+/* ============================================================
+   Purple palette for the auth pages.
+   auth.css was written against the legacy blue tokens in base.css
+   (--blue, --navy, …). Remap them here, on the auth layout root, so the
+   auth pages use the site's purple palette. base.css is unchanged and
+   nothing outside .auth-page is affected.
+   ============================================================ */
+.auth-page {
+  --blue: var(--brand-violet);
+  --blue-2: var(--brand-violet-light);
+  --navy: var(--brand-deep);
+  --ink: var(--text-primary);
+  --line: rgba(90,46,166,.18);
+  --muted: var(--text-muted);
+  --gold: var(--brand-gold);
+  --green: var(--brand-gold);
+}

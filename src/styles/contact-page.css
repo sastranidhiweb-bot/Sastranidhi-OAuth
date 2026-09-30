@@ -462,3 +462,18 @@ header {
   color: #FFFFFF !important;
   font-size: 24px !important;
 }
+/* ============================================================
+   PORTED FROM STATIC SITE (sastranidhi-site/contact.html)
+   Later static blocks override the contact-upgrade rules above:
+   - sastranidhi-brand-background-weight: the bare section{background}
+     rule wins on #contact (it is excluded from section:not(#contact)),
+     scoped here to .contact-section. Declaration verbatim.
+   - Trim unnecessary space: .contact-section padding, verbatim.
+   ============================================================ */
+.contact-section{
+  background:
+    radial-gradient(circle at 8% 18%,rgba(93,49,158,.10),transparent 27%),
+    radial-gradient(circle at 92% 76%,rgba(106,61,178,.09),transparent 29%),
+    linear-gradient(135deg,#eee9f6 0%,#e4ddef 48%,#f0ecf7 100%) !important;
+}
+.contact-section{padding:40px 0 52px !important;}
