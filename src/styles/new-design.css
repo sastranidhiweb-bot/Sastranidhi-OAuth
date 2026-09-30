@@ -46,95 +46,27 @@ section:not(.hero)::before {
   background: linear-gradient(90deg, transparent, rgba(101,64,181,.18), rgba(232,195,74,.16), transparent);
 }
 
-/* Header — scrolls away normally, NOT sticky (matches HTML) */
-header {
-  position: relative;
-  z-index: 50;
-  padding: 10px 0;
-  overflow: hidden;
-  background: linear-gradient(110deg, rgba(27,13,55,.98), rgba(46,22,86,.98)) !important;
-  box-shadow: 0 4px 22px rgba(22,9,49,.24);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-header::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 -35%;
-  width: 30%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.08), transparent);
-  transform: skewX(-18deg);
-  animation: navSheen 9s ease-in-out infinite;
-  pointer-events: none;
-}
-header::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--brand-gold), transparent);
-  background-size: 200% 100%;
-  animation: gopuramGlow 6s ease-in-out infinite;
-}
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.brand .glyph { position: relative; width: 64px; height: 64px; display: grid; place-items: center; isolation: isolate; }
-.brand .glyph::before, .brand .glyph::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
-.brand .glyph::before { inset: -5px; border: 1px solid rgba(232,195,74,.5); border-left-color: transparent; border-bottom-color: rgba(232,195,74,.16); animation: logoOrbit 7s linear infinite; }
-.brand .glyph::after { inset: -9px; border: 1px dashed rgba(255,255,255,.22); border-right-color: transparent; border-top-color: transparent; animation: logoOrbitReverse 11s linear infinite; }
-.brand .glyph img { position: relative; z-index: 2; width: 58px; height: 58px; border-radius: 0; object-fit: contain; box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 0 22px rgba(232,195,74,.22), 0 7px 20px rgba(19,11,41,.35); animation: logoBreath 3.8s ease-in-out infinite; }
-.brand .name { color: #FFFFFF !important; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; letter-spacing: .075em; text-shadow: 0 1px 2px rgba(0,0,0,.45), 0 0 12px rgba(255,255,255,.16); }
-.brand .sub { color: #F2E9FF !important; font-size: 10.5px; font-weight: 600; letter-spacing: 1.6px; text-shadow: 0 1px 4px rgba(0,0,0,.32); }
-nav.links { display: flex; align-items: center; gap: 28px; }
-nav.links a { position: relative; padding-bottom: 4px; color: #F4ECFF !important; font-size: 16.0px; font-weight: 600; text-decoration: none; }
-nav.links a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 1.5px; background: var(--brand-gold); transition: width .3s ease; }
-nav.links a:hover { color: #FFFFFF !important; }
-nav.links a:hover::after { width: 100%; }
-.btn-donate { border: 0; border-radius: 999px; padding: 10px 22px; background: linear-gradient(120deg, var(--brand-violet), var(--brand-violet-light)); color: #FFFFFF; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; }
-.hamburger { display: none; flex-direction: column; gap: 5px; width: 34px; height: 34px; padding: 0; border: 0; background: none; cursor: pointer; }
-.hamburger span { display: block; width: 100%; height: 2px; background: #F3F0FA; }
-.mobile-nav { display: none; flex-direction: column; gap: 2px; padding: 10px 28px 18px; }
-.mobile-nav.open { display: flex; }
-.mobile-nav a { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.14); color: #F3F0FA; text-decoration: none; }
-
-/* Hero */
-.hero { min-height: 208px; padding: 52px 0 74px; text-align: center; background: linear-gradient(125deg, #241044 0%, #321765 42%, #4b238f 75%, #5e2cad 100%); }
-.hero::before { content: ''; position: absolute; width: 420px; height: 420px; left: -180px; top: -230px; border: 1px solid rgba(233,196,90,.17); border-radius: 50%; box-shadow: 0 0 0 42px rgba(233,196,90,.025), 0 0 0 84px rgba(233,196,90,.018); animation: heroOrbit 18s linear infinite; }
-.hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 18% 24%, rgba(214,194,255,.10) 0 2px, transparent 3px), radial-gradient(circle at 76% 20%, rgba(255,255,255,.10) 0 1px, transparent 2px); background-size: 170px 150px, 230px 190px; animation: heroSparkle 18s linear infinite; }
-.hero-clouds { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
-.hero-cloud { position: absolute; width: 190px; height: 58px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.24), rgba(214,219,236,.06)); filter: blur(1px); opacity: .5; }
-.hero-cloud::before, .hero-cloud::after { content: ''; position: absolute; border-radius: 50%; background: inherit; }
-.hero-cloud::before { width: 92px; height: 92px; left: 28px; bottom: 8px; }
-.hero-cloud::after { width: 118px; height: 118px; right: 24px; bottom: 0; }
-.hero-cloud:nth-child(1) { top: 18%; left: -230px; animation: cloudDrift 46s linear infinite; }
-.hero-cloud:nth-child(2) { top: 38%; left: -300px; opacity: .28; animation: cloudDrift 64s linear infinite -18s; }
-.hero-cloud:nth-child(3) { top: 12%; left: -260px; opacity: .24; animation: cloudDrift 55s linear infinite -31s; }
-.hero-inner { position: relative; z-index: 2; }
-.hero h1 { position: relative; z-index: 2; margin: 0 0 12px; color: var(--brand-gold); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(40px, 4.2vw, 54px); line-height: 1.1; text-transform: uppercase; letter-spacing: 1px; opacity: 1; text-shadow: 0 0 30px rgba(232,195,74,.10); }
-.hero .lede { position: relative; z-index: 2; max-width: 650px; margin: 0 auto; color: #F3F0FA; font-size: 16px; line-height: 1.5; }
-.gopuram-arch { position: relative; z-index: 2; height: 6px; }
-.hero-curve { position: absolute; left: -10%; right: -10%; bottom: -1px; height: 48px; background: var(--lavender-light); border-radius: 50% 50% 0 0 / 100% 100% 0 0; z-index: 3; }
+/* Header and hero are fully owned by header.css / hero.css (loaded via
+   Header.jsx / Hero.jsx). Their old bare-selector versions used to live
+   here and silently out-ranked those dedicated files on equal specificity
+   (this file loads last) — removed so header.css/hero.css are the single
+   source of truth for header, nav, brand/glyph and hero styling. */
 
 /* Core sections */
-#platforms { padding: 50px 0 58px; background: #F5F2FB; }
+/* #platforms itself is owned by initiatives.css (equal-specificity ID
+   selector, so it must not be redeclared here or this later import wins). */
 .section-head { max-width: 640px; margin: 0 auto 44px; text-align: center; }
 .section-head h2 { margin: 0; font-size: clamp(38px,4.3vw,48px); }
 .section-head p { margin: 12px auto 0; color: var(--text-muted); }
 .kicker { margin-bottom: 10px; color: var(--brand-violet); font-size: 12.5px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
-.tablet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
-.tablet { min-height: 382px; padding: 26px 24px; border: 1px solid #DDD5EE; background: #FFFFFF; box-shadow: none; }
-.tablet .icon { width: 46px; height: 46px; margin-bottom: 18px; display: grid; place-items: center; border-radius: 0; background: #21114F; color: var(--brand-gold); font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; }
-.tablet h3 { font-size: 18px; line-height: 1.5; margin: 0 0 10px; }
-.tablet p { color: var(--text-muted); font-size: 14px; line-height: 1.65; }
-.tablet a { color: var(--brand-violet); font-size: 14px; font-weight: 700; text-decoration: none; }
-.stats-band { padding: 46px 0; background: var(--sn-gradient); }
-.stats-grid { display: grid; grid-template-columns: repeat(5,1fr); }
-.stat-item { padding: 6px 18px; text-align: center; }
-.stat-icon { display: block; margin-bottom: 6px; font-size: 20px; }
-.stats-grid .num { display: block; color: var(--brand-gold); font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 700; }
-.stats-grid .lbl { color: var(--lavender-soft); font-size: 13px; margin-top: 4px; }
+/* .tablet-grid / .tablet / .tablet .icon etc. are owned by initiatives.css.
+   The old bare-class versions here leaked through on any property
+   initiatives.css didn't also redeclare (min-height:382px force-stretched
+   every card; width/height:46px clipped the icon badge) — cascade resolves
+   per property, not per rule, so a lower-specificity rule still wins any
+   property the higher-specificity rule leaves untouched. Removed. */
+/* .stats-band / .stats-grid are owned by stats.css (equal-specificity bare
+   classes, so they must not be redeclared here or this later import wins). */
 
 /* About, initiatives, courses, research, subscribe, contact, footer */
 .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: start; }
@@ -163,15 +95,9 @@ nav.links a:hover::after { width: 100%; }
 .donate-band p { color: var(--lavender-soft); }
 .donate-band .btn-primary { border-radius: 999px; background: linear-gradient(120deg, var(--brand-gold), var(--brand-gold-soft)); color: var(--brand-deep); }
 
-/* Footer and utilities */
-footer { position: relative; padding: 40px 0 20px; background: var(--sn-gradient); color: var(--lavender-light); }
-.footer-grid { display: grid; grid-template-columns: 1.35fr repeat(4,1fr); gap: 24px; padding: 0 0 24px; }
-.footer-brand { color: var(--lavender-light); font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
-footer h4 { color: var(--brand-gold); font-size: 13px; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; }
-footer a { color: var(--lavender-light); text-decoration: none; }
-.footer-social .social-link { display: flex; align-items: center; gap: 8px; color: #F3F0FA; }
-.footer-social .social-link svg { width: 20px; height: 20px; fill: #F3F0FA; }
-.footer-bottom { padding: 16px 0 0; border-top: 1px solid rgba(255,255,255,.16); color: var(--lavender-muted); text-align: center; font-size: 12.5px; }
+/* Footer is fully owned by footer.css (see the FINAL FOOTER OVERRIDES
+   removal note further down) — only utilities that footer.css doesn't
+   also define are kept here. */
 #backToTop { position: fixed; right: 24px; bottom: 96px; z-index: 999; width: 46px; height: 46px; border: 0; border-radius: 50%; background: linear-gradient(135deg,var(--brand-violet),var(--brand-violet-light)); color: #FFFFFF; opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .3s ease, transform .3s ease; }
 #backToTop.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
@@ -265,6 +191,45 @@ footer a { color: var(--lavender-light); text-decoration: none; }
 .modal-box input, .modal-box select { width: 100%; padding: 12px 14px; border: 1px solid rgba(90,46,166,.2); border-radius: 9px; font: inherit; }
 .modal-success { padding: 12px; border-radius: 8px; background: #E8F5E9; color: #2D6A37; font-size: 14px; }
 
+/* Site-wide ambient bubble layer (silver/gold), fixed behind all content */
+.site-bubbles { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.site-bubbles span {
+  position: absolute;
+  bottom: -100px;
+  border: 1px solid rgba(220,226,238,.48);
+  border-radius: 50%;
+  background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.52), rgba(192,202,220,.16) 35%, rgba(125,136,160,.04) 72%, transparent 75%);
+  box-shadow: inset 0 0 16px rgba(255,255,255,.24), 0 0 22px rgba(186,196,216,.16);
+  animation: silverBubbleRise linear infinite;
+}
+.site-bubbles span.gold {
+  border-color: rgba(232,195,74,.5);
+  background: radial-gradient(circle at 28% 22%, rgba(255,241,201,.6), rgba(232,195,74,.24) 38%, rgba(163,122,32,.05) 72%, transparent 75%);
+  box-shadow: inset 0 0 16px rgba(255,241,201,.3), 0 0 24px rgba(232,195,74,.26);
+}
+.site-bubbles span:nth-child(1)  { width: 42px; height: 42px; left: 4%;  animation-duration: 24s; animation-delay: -4s; }
+.site-bubbles span:nth-child(2)  { width: 18px; height: 18px; left: 12%; animation-duration: 17s; animation-delay: -9s; }
+.site-bubbles span:nth-child(3)  { width: 66px; height: 66px; left: 22%; animation-duration: 30s; animation-delay: -17s; }
+.site-bubbles span:nth-child(4)  { width: 26px; height: 26px; left: 33%; animation-duration: 20s; animation-delay: -6s; }
+.site-bubbles span:nth-child(5)  { width: 52px; height: 52px; left: 44%; animation-duration: 27s; animation-delay: -15s; }
+.site-bubbles span:nth-child(6)  { width: 20px; height: 20px; left: 55%; animation-duration: 19s; animation-delay: -3s; }
+.site-bubbles span:nth-child(7)  { width: 74px; height: 74px; left: 66%; animation-duration: 32s; animation-delay: -22s; }
+.site-bubbles span:nth-child(8)  { width: 30px; height: 30px; left: 77%; animation-duration: 23s; animation-delay: -12s; }
+.site-bubbles span:nth-child(9)  { width: 46px; height: 46px; left: 86%; animation-duration: 26s; animation-delay: -8s; }
+.site-bubbles span:nth-child(10) { width: 16px; height: 16px; left: 95%; animation-duration: 16s; animation-delay: -2s; }
+.site-bubbles span:nth-child(11) { width: 58px; height: 58px; left: 8%;  animation-duration: 29s; animation-delay: -19s; }
+.site-bubbles span:nth-child(12) { width: 24px; height: 24px; left: 60%; animation-duration: 18s; animation-delay: -5s; }
+@keyframes silverBubbleRise {
+  0%   { transform: translate3d(0,0,0) scale(.65); opacity: 0; }
+  12%  { opacity: .7; }
+  45%  { transform: translate3d(28px,-35vh,0) scale(1); opacity: .5; }
+  75%  { transform: translate3d(-22px,-72vh,0) scale(1.15); opacity: .3; }
+  100% { transform: translate3d(18px,-118vh,0) scale(1.3); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-bubbles span { animation: none !important; }
+}
+
 /* WhatsApp floating control */
 .whatsapp-float {
   position: fixed;
@@ -332,136 +297,12 @@ footer a { color: var(--lavender-light); text-decoration: none; }
   .independent-list .initiative-body h4 { font-size: 21px; }
 }
 
-/* ============================================================
-   FINAL FOOTER OVERRIDES — tighter spacing + darker background
-   ============================================================ */
-
-footer {
-  background: linear-gradient(115deg, #1F0F47 0%, #2E1560 43%, #4A1E9E 100%) !important;
-  padding: 40px 0 20px !important;
-}
-
-.footer-grid {
-  display: grid !important;
-  grid-template-columns: 1.35fr repeat(4, 1fr) !important;
-  gap: 24px !important;
-  padding: 0 0 24px !important;
-}
-
-.footer-grid h4 {
-  font-size: 13px !important;
-  letter-spacing: 1px !important;
-  margin-bottom: 12px !important;
-  color: var(--brand-gold) !important;
-  text-transform: uppercase !important;
-}
-
-.footer-grid > div > a {
-  display: block !important;
-  font-size: 14px !important;
-  text-decoration: none !important;
-  margin-bottom: 8px !important;
-  color: var(--lavender-light) !important;
-  line-height: 1.5 !important;
-  padding: 0 !important;
-}
-
-.footer-grid > div > a:hover {
-  color: var(--brand-gold) !important;
-  transform: translateX(4px);
-}
-
-.footer-grid p {
-  font-size: 14px !important;
-  max-width: 260px !important;
-  line-height: 1.6 !important;
-  color: var(--lavender-muted) !important;
-  margin: 0 0 8px 0 !important;
-}
-
-.footer-brand {
-  color: var(--lavender-light) !important;
-  font-family: 'Cormorant Garamond', serif !important;
-  font-size: 19px !important;
-  font-weight: 700 !important;
-  margin-bottom: 8px !important;
-}
-
-.footer-social h4 {
-  margin-bottom: 12px !important;
-}
-
-.footer-social .social-icons {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-}
-
-.footer-social .social-link {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  text-decoration: none !important;
-  margin: 0 !important;
-  color: #F3F0FA !important;
-  padding: 0 !important;
-  line-height: 1.4 !important;
-}
-
-.footer-social .social-link:hover {
-  color: var(--brand-gold) !important;
-  transform: translateX(4px);
-}
-
-.footer-social .social-link svg {
-  width: 20px !important;
-  height: 20px !important;
-  fill: currentColor !important;
-  flex: 0 0 20px !important;
-}
-
-.footer-social .social-link span:last-child {
-  font-size: 14px !important;
-}
-
-.footer-social .pivotra-icon {
-  width: 20px !important;
-  height: 20px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  flex: 0 0 20px !important;
-  border: 1px solid currentColor !important;
-  border-radius: 50% !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-}
-
-.footer-bottom {
-  padding: 16px 0 0 !important;
-  border-top: 1px solid rgba(255,255,255,0.12) !important;
-  font-size: 12.5px !important;
-  text-align: center !important;
-  color: var(--lavender-muted) !important;
-}
-
-@media (max-width: 900px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-}
-
-@media (max-width: 560px) {
-  .footer-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .footer-social .social-icons {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-  }
-}
+/* The old "FINAL FOOTER OVERRIDES" block used to live here: a wall of
+   !important bare-class rules (footer, .footer-grid, .footer-brand,
+   .footer-social...) that beat footer.css's compound `footer .foo`
+   selectors regardless of specificity, effectively making footer.css's
+   300 lines dead code. Removed — footer.css is now the single source of
+   truth for footer layout/spacing/colors. */
 
 /* ============================================================
    GOLD DIVIDER — thin line between page content and footer

@@ -1,5 +1,8 @@
 import Header from '../components/Header/Header.jsx';
 import Footer from '../components/Footer/Footer.jsx';
+import SiteBubbles from '../components/SiteBubbles.jsx';
+import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
+import DonateModal from '../components/Modals/DonateModal.jsx';
 import { PageHero, DetailRow, CtaBand } from '../components/PageSections/PageSections.jsx';
 import '../styles/pages.css';
 
@@ -67,6 +70,7 @@ const institutes = [
 export default function InstitutesPage() {
   return (
     <>
+      <SiteBubbles />
       <Header />
       <main>
         <PageHero
@@ -90,6 +94,8 @@ export default function InstitutesPage() {
         />
       </main>
       <Footer />
+      <DonateModal />
+      <WhatsAppFloat />
     </>
   );
 }

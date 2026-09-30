@@ -10,7 +10,7 @@ export const navLinks = [
 
 export const initiatives = [
   {
-    icon: 'Sv',
+    icon: 'Svādhyāya',
     title: 'Svādhyāya (Study & Research)',
     shortLabel: 'Study & Research',
     description:
@@ -20,7 +20,7 @@ export const initiatives = [
     devHref: 'https://reader.sastranidhi.org/homePage',
   },
   {
-    icon: 'Vi',
+    icon: 'Viśleṣaka',
     title: 'Viśleṣaka (Analyze & Assimilate)',
     linkedTitle: 'Bhagavatam : Puranatilakam',
     shortLabel: 'Analyze & Assimilate',
@@ -31,7 +31,7 @@ export const initiatives = [
     devHref: 'https://puranatilakam.com/',
   },
   {
-    icon: 'Pr',
+    icon: 'Paripraśna',
     title: 'Paripraśna (Questions & Answers)',
     shortLabel: 'Questions & Answers',
     description:
@@ -41,7 +41,7 @@ export const initiatives = [
     devHref: 'https://qna.sastranidhi.org/',
   },
   {
-    icon: 'Cd',
+    icon: 'Pravacana',
     title: 'Pravacana (Courses & Discourses)',
     shortLabel: 'Courses & Discourses',
     description:
@@ -116,8 +116,9 @@ export const footerPlatforms = [
 ];
 
 export const footerInstitution = [
-  { href: '/#about', label: 'About Us' },
-  { href: '/#research', label: 'Research' },
-  { href: '/#courses', label: 'Courses' },
-  { href: '/contact', label: 'Contact' },
+  { to: '/institutes', label: 'Institutes' },
+  { to: '/research', label: 'Research' },
+  { to: '/courses', label: 'Courses' },
+  { to: '/about', label: 'About Us' },
+  { to: '/contact', label: 'Contact' },
 ];

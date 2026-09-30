@@ -1,16 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext.jsx';
-import { footerPlatforms } from '../../data/siteData.js';
+import { footerPlatforms, footerInstitution } from '../../data/siteData.js';
 import '../../styles/footer.css';
-
-// Internal pages, rendered as <Link>s for client-side routing.
-const institutionLinks = [
-  { to: '/about', label: 'About Us' },
-  { to: '/research', label: 'Research' },
-  { to: '/courses', label: 'Courses' },
-  { to: '/contact', label: 'Contact' },
-];
 
 export default function Footer() {
   const { open } = useModal();
@@ -50,7 +42,7 @@ export default function Footer() {
         </div>
         <div>
           <h4>Institution</h4>
-          {institutionLinks.map((link) => (
+          {footerInstitution.map((link) => (
             <Link key={link.to} to={link.to}>
               {link.label}
             </Link>
