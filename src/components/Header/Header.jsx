@@ -1,21 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext.jsx';
+import { headerNav } from './navData.js';
 import '../../styles/header.css';
 
 const BRAND_LOGO_SRC = '/assets/logo-mark.png';
-
-const HOME_HREF = '/#home';
-
-// Internal pages, rendered as <Link>s for client-side routing.
-const routeLinks = [
-  { to: '/institutes', label: 'Institutes' },
-  { to: '/initiatives', label: 'Initiatives' },
-  { to: '/courses', label: 'Courses' },
-  { to: '/research', label: 'Research' },
-  { to: '/about', label: 'About Us' },
-  { to: '/contact', label: 'Contact' },
-];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -34,32 +23,27 @@ export default function Header() {
   }, []);
 
   const isActive = (to) => pathname === to;
+  const activeProps = (to) => ({
+    className: isActive(to) ? 'active' : undefined,
+    'aria-current': isActive(to) ? 'page' : undefined,
+  });
 
-  const handleHashClick = (e, href) => {
-    if (href.startsWith('/#') && pathname === '/') {
+  // Brand and "Home" always lead to "/"; already there, scroll up smoothly.
+  const goHome = (e) => {
+    if (pathname === '/') {
       e.preventDefault();
-      const id = href.replace('/#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        window.history.pushState(null, '', href);
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  // The dropdown stays open while its link keeps focus (focus-within), and a
+  // client-side route change doesn't reset focus, so release it on click.
+  const releaseFocus = (e) => e.currentTarget.blur();
 
   return (
     <header className={scrolled ? 'scrolled' : ''}>
       <div className="wrap nav">
-        <a
-          href="/#home"
-          className="brand"
-          onClick={(e) => {
-            if (pathname === '/') {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }}
-        >
+        <Link to="/" className="brand" onClick={goHome}>
           <span className="glyph">
             <span className="halo2"></span>
             <span className="halo"></span>
@@ -76,27 +60,38 @@ export default function Header() {
             <div className="name">ŚĀSTRANIDHI</div>
             <div className="sub">THE TREASURY OF ŚĀSTRAS</div>
           </span>
-        </a>
+        </Link>
 
         <nav className="links">
-          <a
-            href={HOME_HREF}
-            className={isActive('/') ? 'active' : undefined}
-            aria-current={isActive('/') ? 'page' : undefined}
-            onClick={(e) => handleHashClick(e, HOME_HREF)}
-          >
+          <Link to="/" {...activeProps('/')} onClick={goHome}>
             Home
-          </a>
-          {routeLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={isActive(link.to) ? 'active' : undefined}
-              aria-current={isActive(link.to) ? 'page' : undefined}
-            >
-              {link.label}
-            </Link>
-          ))}
+          </Link>
+          {headerNav.map((item) =>
+            item.menu ? (
+              <span className="nav-dd" key={item.to}>
+                <Link to={item.to} {...activeProps(item.to)}>
+                  {item.label}
+                  <span className="dd-caret" aria-hidden="true"></span>
+                </Link>
+                <span className="dd-menu">
+                  <span className="dd-panel">
+                    {item.menu.map((sub) => (
+                      <Link key={sub.to} to={sub.to} className="dd-item" onClick={releaseFocus}>
+                        {sub.label}
+                      </Link>
+                    ))}
+                    <Link to={item.to} className="dd-item dd-all" onClick={releaseFocus}>
+                      View all →
+                    </Link>
+                  </span>
+                </span>
+              </span>
+            ) : (
+              <Link key={item.to} to={item.to} {...activeProps(item.to)}>
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <a
@@ -172,6 +167,18 @@ export default function Header() {
             >
               <img src="/assets/pivotra-logo.png" alt="" />
             </a>
+            <a
+              className="sb-icon sb-wa"
+              href="https://whatsapp.com/channel/0029VbDKfR53mFY1T0Lfdb1O"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Śāstranidhi on WhatsApp"
+              title="WhatsApp"
+            >
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.84 9.84 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.24 8.24 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.230-1.470-1.380-1.720-.140-.250-.010-.380.110-.510.110-.110.250-.290.370-.430.130-.150.170-.250.250-.420.080-.160.040-.310-.020-.430-.060-.130-.560-1.350-.770-1.840-.200-.490-.410-.420-.560-.430h-.48a.92.92 0 0 0-.66.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.29Z" />
+              </svg>
+            </a>
           </div>
           <div className="sb-auth">
             <Link
@@ -193,26 +200,20 @@ export default function Header() {
       </div>
 
       <nav className={`mobile-nav${mobileOpen ? ' is-open' : ''}`}>
-        <a
-          href={HOME_HREF}
-          className={isActive('/') ? 'active' : undefined}
-          aria-current={isActive('/') ? 'page' : undefined}
+        <Link
+          to="/"
+          {...activeProps('/')}
           onClick={(e) => {
             closeMobile();
-            handleHashClick(e, HOME_HREF);
+            goHome(e);
           }}
         >
           Home
-        </a>
-        {routeLinks.map((link) => (
-          <Link
-            key={link.to}
-            to={link.to}
-            className={isActive(link.to) ? 'active' : undefined}
-            aria-current={isActive(link.to) ? 'page' : undefined}
-            onClick={closeMobile}
-          >
-            {link.label}
+        </Link>
+        {/* The static mobile nav is flat: parent routes only, no dropdowns. */}
+        {headerNav.map((item) => (
+          <Link key={item.to} to={item.to} {...activeProps(item.to)} onClick={closeMobile}>
+            {item.label}
           </Link>
         ))}
       </nav>
