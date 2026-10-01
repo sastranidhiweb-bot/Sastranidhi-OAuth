@@ -1104,6 +1104,9 @@ header {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 4px 22px rgba(22,9,49,.24);
+}
+
+.header-animate {
   animation: headerSlideIn .7s cubic-bezier(.22,1,.36,1) both;
 }
 
