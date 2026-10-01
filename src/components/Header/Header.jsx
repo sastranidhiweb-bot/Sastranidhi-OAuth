@@ -1,14 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext.jsx';
 import { headerNav } from './navData.js';
 import '../../styles/header.css';
 
 const BRAND_LOGO_SRC = '/assets/logo-mark.png';
+const HEADER_PLAYED_KEY = 'snHeaderPlayed';
+
+// sessionStorage can throw when storage is blocked; treat that as "not played".
+const headerAlreadyPlayed = () => {
+  try {
+    return sessionStorage.getItem(HEADER_PLAYED_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Slide-in plays once per browser session. Read the flag once at mount, and
+  // let the ref guard the write so StrictMode's double effect run is harmless.
+  const [animateIn] = useState(() => !headerAlreadyPlayed());
+  const playedMarked = useRef(false);
   const { open } = useModal();
   const { pathname } = useLocation();
 
@@ -21,6 +35,16 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!animateIn || playedMarked.current) return;
+    playedMarked.current = true;
+    try {
+      sessionStorage.setItem(HEADER_PLAYED_KEY, '1');
+    } catch {
+      // Storage unavailable: the animation just plays again next load.
+    }
+  }, [animateIn]);
 
   const isActive = (to) => pathname === to;
   const activeProps = (to) => ({
@@ -41,7 +65,9 @@ export default function Header() {
   const releaseFocus = (e) => e.currentTarget.blur();
 
   return (
-    <header className={scrolled ? 'scrolled' : ''}>
+    <header
+      className={[scrolled && 'scrolled', animateIn && 'header-animate'].filter(Boolean).join(' ')}
+    >
       <div className="wrap nav">
         <Link to="/" className="brand" onClick={goHome}>
           <span className="glyph">

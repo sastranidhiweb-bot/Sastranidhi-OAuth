@@ -16,6 +16,10 @@ header {
   z-index: 1000;
   padding: 0; /* re-asserted below: new-design.css adds 10px */
   transition: box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+/* Slide-in plays once per session; Header.jsx adds the class. */
+.header-animate {
   animation: headerSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 

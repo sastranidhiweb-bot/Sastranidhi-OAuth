@@ -396,8 +396,7 @@
   to   { transform: translateY(0); }
 }
 
-.contact-section ~ * header,
-header {
+.header-animate {
   animation: headerSlideIn .7s cubic-bezier(.22, 1, .36, 1) both;
 }
 
