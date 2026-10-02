@@ -2,7 +2,8 @@ export default function PlatformCard({
   icon,
   shortLabel,
   title,
-  linkedTitle,
+  subtitle,
+  subtitleUnderlined,
   description,
   href,
   linkLabel,
@@ -12,11 +13,11 @@ export default function PlatformCard({
       <div className="icon icon-pill">{shortLabel || icon}</div>
       <h3>
         {title}
-        {linkedTitle && (
-          <>
-            {' '}
-            <span style={{ textDecoration: 'underline' }}>{linkedTitle}</span>
-          </>
+        {(subtitle || subtitleUnderlined) && (
+          <span className="tablet-subtitle">
+            {subtitle}{' '}
+            <span style={{ textDecoration: 'underline' }}>{subtitleUnderlined}</span>
+          </span>
         )}
       </h3>
       <p>{description}</p>

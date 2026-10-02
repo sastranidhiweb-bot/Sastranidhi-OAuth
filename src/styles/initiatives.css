@@ -136,6 +136,11 @@ section#platforms {
   margin: 0 0 8px;
 }
 
+/* optional second title line (PlatformCard `subtitle`) */
+#platforms .tablet h3 .tablet-subtitle {
+  display: block;
+}
+
 /* ---------- Description ---------- */
 #platforms .tablet p {
   font-size: 14px;
@@ -232,6 +237,36 @@ section#platforms {
     radial-gradient(circle at 0% 0%,rgba(106,57,174,.055),transparent 32%),
     linear-gradient(135deg,#f5f2fa 0%,#eeeaf6 52%,#f8f6fc 100%) !important;
 }
+
+/* Seamless join with the hero arc: the arc is flat --lavender-light, so the
+   section starts on that exact colour and fades into the gradient above.
+   The generic section hairline (new-design.css) is dropped here because it
+   would draw a line right at the arc's bottom edge. */
+.homepage #platforms{
+  background:
+    linear-gradient(180deg,var(--lavender-light) 0,rgba(243,240,250,0) 140px),
+    radial-gradient(circle at 0% 0%,rgba(106,57,174,.055),transparent 32%),
+    linear-gradient(135deg,#f5f2fa 0%,#eeeaf6 52%,#f8f6fc 100%) !important;
+}
+#platforms::before{display:none;}
+
+/* Pull the Explore heading up into the arc's own lavender area so it sits
+   ~25px below the arc's peak. The heading moves up by the home arc height
+   (58px, hero.css) plus the section's 6px padding-top, which stays so the
+   negative margin doesn't collapse and drag the section background up too.
+   The section must not clip the heading, and its content has to stack
+   above .hero-curve (z-index 2) to stay visible. */
+.homepage #platforms{overflow:visible;}
+.homepage #platforms .wrap{z-index:3;}
+.homepage #platforms .section-head{margin-top:-64px !important;}
+
+/* No underline bar under any home section heading (Explore, Featured
+   Courses, Research, eMagazine): switches off the ported
+   .homepage .section-head h2::after bar above. The bar took 13px
+   (3px + 10px margin). */
+.homepage .section-head h2::after{display:none;}
+/* Explore: heading's bottom margin 18px -> 12px so the cards sit closer. */
+.homepage #platforms .section-head{margin-bottom:12px !important;}
 
 /* --- sastranidhi-visual-upgrade: Explore badge hover [home-only]
    (outranks the #platforms .tablet .icon-pill rules above) --- */

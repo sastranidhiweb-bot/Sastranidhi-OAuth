@@ -35,6 +35,7 @@ a { color: inherit; }
 img { max-width: 100%; display: block; }
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
 section { position: relative; padding: 76px 0; overflow: hidden; }
+section#platforms { padding-bottom: 24px; }
 section:not(.hero)::before {
   content: '';
   position: absolute;
@@ -158,6 +159,11 @@ section:not(.hero)::before {
 .subscribe-heading { margin-bottom: 30px; text-align: center; }
 .subscribe-heading h2 { margin: 14px 0; }
 .subscribe-heading p { max-width: 680px; margin: 0 auto; color: var(--text-muted); }
+/* Compact section top on home: 70px -> 32px above the heading block, no extra
+   gap between kicker and heading, 28px -> 20px above the subscribe card. */
+.homepage #subscribe { padding-top: 32px; }
+.homepage #subscribe .section-head { margin-bottom: 20px !important; }
+.homepage #subscribe .section-head h2 { margin-top: 0; }
 .subscribe-card { padding: 32px; border: 1px solid rgba(255,255,255,.12); border-top: 4px solid var(--brand-gold); border-radius: 16px; background: var(--sn-gradient); color: #FFFFFF; box-shadow: 0 10px 30px rgba(59,42,107,.35); }
 .subscribe-card-inner { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
 .subscribe-mark { width: 54px; height: 54px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,.15); color: #FFFFFF; font-size: 22px; }

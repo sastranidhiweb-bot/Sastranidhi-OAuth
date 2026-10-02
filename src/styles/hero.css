@@ -301,7 +301,7 @@ section.hero .hero-curve {
 @media (prefers-reduced-motion:reduce){.hero-vyasa{animation:none;}}
 
 /* --- sn-fix-levels: hero padding, page-hero, Vyasa --- */
-.hero:not(.page-hero){padding-top:40px !important;padding-bottom:128px !important;min-height:0 !important;}
+.hero:not(.page-hero){padding-top:28px !important;padding-bottom:128px !important;min-height:0 !important;}
 .hero .hero-inner{position:relative;z-index:3 !important;}
 .hero .lede{display:block !important;opacity:1;visibility:visible;}
 .page-hero{padding-top:28px !important;padding-bottom:124px !important;}
@@ -311,8 +311,14 @@ section.hero .hero-curve {
 
 /* --- sn-explore-tight: home curve + padding --- */
 .hero:not(.page-hero) .hero-curve{height:58px !important;}
+/* Home shows a single arc: drop the faint second arc drawn by
+   .hero .hero-curve::before (inner-page heroes keep it). */
+.hero:not(.page-hero) .hero-curve::before{display:none;}
 .hero:not(.page-hero){padding-bottom:84px !important;}
-.hero:not(.page-hero){padding-bottom:112px !important;}
+.hero:not(.page-hero){padding-bottom:80px !important;}
+/* Rest Vyasa on the arc: the arc's top edge is ~44px above the hero's
+   bottom at the image's centre (74px left it floating 30px above). */
+.hero:not(.page-hero) .hero-vyasa{bottom:44px;}
 
 /* --- sn-vyasa-op --- */
 .hero-vyasa{opacity:.22 !important;filter:none !important;}@media (max-width:760px){.hero-vyasa{opacity:.15 !important;}}
