@@ -332,3 +332,9 @@ section.hero .hero-curve {
 .hero.page-hero .hero-curve{height:58px !important;}
 .hero.page-hero .hero-curve::before{display:none;}
 .hero.page-hero .hero-vyasa{bottom:44px;}
+
+/* --- Home hero: no pale-gold light spot on the left ---
+   .orb1 is a blurred gold radial whose floatOrbPlus animation lifts it to
+   0.42-0.72 opacity, which reads as a bright patch beside the heading.
+   Hidden on home only; .orb2 (violet, right) and inner pages are unchanged. */
+.hero:not(.page-hero) .orb.orb1{display:none;}
