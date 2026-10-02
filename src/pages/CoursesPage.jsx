@@ -139,7 +139,6 @@ export default function CoursesPage() {
         <section id="courses" className="courses-page">
           <div className="wrap">
             <div className="section-head reveal">
-              <div className="kicker">IKS-LMS</div>
               <h2>Current Courses</h2>
               <p>Each course combines recorded lessons, readings and assessments.</p>
             </div>
