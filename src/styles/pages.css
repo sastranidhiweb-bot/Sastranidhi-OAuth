@@ -703,3 +703,21 @@
    its .detail-row / .cta-band rules were not ported.
    ============================================================ */
 .detail{padding:44px 0 !important;}
+
+/* First section after the detail-page hero only: sit close to the curve.
+   A first .detail keeps just its first row's own 28px top padding; the
+   /courses grid section (#courses, 48px) is brought down to the same 28px.
+   The section hairline is dropped here because it would draw a line right
+   under the curve. Later .detail sections keep the 44px above. */
+.page-hero + .detail{padding-top:0 !important;}
+.page-hero + #courses{padding-top:28px !important;}
+.page-hero + section::before{display:none;}
+
+/* /courses "Current Courses" head: pulled up into the hero arc's lavender
+   area so the letters start ~35px below the arc's peak (the arc is 58px
+   tall, hero.css), and sized as on the static courses.html. The section
+   must not clip the heading and has to stack above .hero-curve
+   (z-index 2). Scoped by .courses-page, so the home #courses is untouched. */
+.page-hero + #courses.courses-page{overflow:visible;z-index:3;}
+#courses.courses-page .section-head{margin-top:-79px;}
+#courses.courses-page .section-head h2{font-size:clamp(2rem,4vw,3.2rem);}

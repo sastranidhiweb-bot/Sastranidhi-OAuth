@@ -322,3 +322,13 @@ section.hero .hero-curve {
 
 /* --- sn-vyasa-op --- */
 .hero-vyasa{opacity:.22 !important;filter:none !important;}@media (max-width:760px){.hero-vyasa{opacity:.15 !important;}}
+
+/* --- Detail-page hero (PageHero) matched to the home hero ---
+   Same 58px single arc as home instead of the taller 92px double arc,
+   Vyasa resting on it, and ~28px between the lede and the arc's peak
+   (was 124px of bottom padding). .hero.page-hero outranks the
+   .page-hero / .hero .hero-curve rules above. */
+.hero.page-hero{padding-bottom:66px !important;}
+.hero.page-hero .hero-curve{height:58px !important;}
+.hero.page-hero .hero-curve::before{display:none;}
+.hero.page-hero .hero-vyasa{bottom:44px;}

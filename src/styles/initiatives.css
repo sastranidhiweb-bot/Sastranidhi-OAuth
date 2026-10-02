@@ -371,3 +371,7 @@ section#platforms {
 .homepage .section-head h2::after{display:none;}
 /* Explore: heading's bottom margin 18px -> 12px so the cards sit closer. */
 .homepage #platforms .section-head{margin-bottom:12px !important;}
+/* Centre the Explore heading between the arc's peak and the cards: 7px
+   moves from below the heading to above it (-64/12 -> -57/5), so the
+   letters have ~28px on each side and the cards stay where they were. */
+.homepage #platforms .section-head{margin-top:-57px !important;margin-bottom:5px !important;}
