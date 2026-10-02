@@ -19,7 +19,7 @@ export default function Initiatives() {
               subtitle={item.subtitle}
               subtitleUnderlined={item.subtitleUnderlined}
               description={item.description}
-              linkLabel={item.linkLabel}
+              more={item.more}
               href={import.meta.env.DEV && item.devHref ? item.devHref : item.href}
             />
           ))}

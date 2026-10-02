@@ -15,7 +15,8 @@ export const initiatives = [
     shortLabel: 'Svādhyāya',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
-    linkLabel: 'Open Platform →',
+    // shown inside the card when "More" is clicked (placeholder text)
+    more: 'More details about Svādhyāya will be added here.',
     href: 'https://reader.sastranidhi.org/homePage',
     devHref: 'https://reader.sastranidhi.org/homePage',
   },
@@ -28,7 +29,7 @@ export const initiatives = [
     shortLabel: 'Viśleṣaka',
     description:
       'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
-    linkLabel: 'Open Platform →',
+    more: 'More details about Viśleṣaka will be added here.',
     href: 'https://puranatilakam.com/',
     devHref: 'https://puranatilakam.com/',
   },
@@ -38,7 +39,7 @@ export const initiatives = [
     shortLabel: 'Paripraśna',
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
-    linkLabel: 'Open Platform →',
+    more: 'More details about Paripraśna will be added here.',
     href: 'https://qna.sastranidhi.org/',
     devHref: 'https://qna.sastranidhi.org/',
   },
@@ -48,7 +49,7 @@ export const initiatives = [
     shortLabel: 'Pravacana',
     description:
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
-    linkLabel: 'View Courses →',
+    more: 'More details about Pravacana will be added here.',
     href: 'https://sastranidhi.edmingle.com/',
     devHref: 'https://sastranidhi.edmingle.com/',
   },
