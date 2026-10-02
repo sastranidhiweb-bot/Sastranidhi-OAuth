@@ -11,8 +11,8 @@ export const navLinks = [
 export const initiatives = [
   {
     icon: 'Svādhyāya',
-    title: 'Svādhyāya (Study & Research)',
-    shortLabel: 'Study & Research',
+    title: 'Study & Research',
+    shortLabel: 'Svādhyāya',
     description:
       'Institutional information, research, publications, events, projects and scholar initiatives.',
     linkLabel: 'Open Platform →',
@@ -21,9 +21,11 @@ export const initiatives = [
   },
   {
     icon: 'Viśleṣaka',
-    title: 'Viśleṣaka (Analyze & Assimilate)',
-    linkedTitle: 'Bhagavatam : Puranatilakam',
-    shortLabel: 'Analyze & Assimilate',
+    title: 'Analyze & Assimilate',
+    // second title line; only the `subtitleUnderlined` part is underlined
+    subtitle: 'Bhagavatam :',
+    subtitleUnderlined: 'Puranatilakam',
+    shortLabel: 'Viśleṣaka',
     description:
       'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
     linkLabel: 'Open Platform →',
@@ -32,8 +34,8 @@ export const initiatives = [
   },
   {
     icon: 'Paripraśna',
-    title: 'Paripraśna (Questions & Answers)',
-    shortLabel: 'Questions & Answers',
+    title: 'Questions & Answers',
+    shortLabel: 'Paripraśna',
     description:
       'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
     linkLabel: 'Open Platform →',
@@ -42,8 +44,8 @@ export const initiatives = [
   },
   {
     icon: 'Pravacana',
-    title: 'Pravacana (Courses & Discourses)',
-    shortLabel: 'Courses & Discourses',
+    title: 'Courses & Discourses',
+    shortLabel: 'Pravacana',
     description:
       'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
     linkLabel: 'View Courses →',

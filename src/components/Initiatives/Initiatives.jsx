@@ -16,7 +16,8 @@ export default function Initiatives() {
               icon={item.icon}
               shortLabel={item.shortLabel}
               title={item.title}
-              linkedTitle={item.linkedTitle}
+              subtitle={item.subtitle}
+              subtitleUnderlined={item.subtitleUnderlined}
               description={item.description}
               linkLabel={item.linkLabel}
               href={import.meta.env.DEV && item.devHref ? item.devHref : item.href}

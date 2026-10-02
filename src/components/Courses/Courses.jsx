@@ -6,7 +6,6 @@ export default function Courses() {
     <section id="courses">
       <div className="wrap">
         <div className="section-head reveal">
-          <div className="kicker">IKS-LMS</div>
           <h2>Featured Courses</h2>
           <p>
             Structured online learning programs in Indian Knowledge Systems, Sanskrit

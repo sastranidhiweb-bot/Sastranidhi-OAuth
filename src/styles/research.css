@@ -220,3 +220,9 @@
 /* research-background-style (Shiny animated gold frame): dark-card hover glow,
    which outranks .detail .info-card in the static page. [trimmed to /research dark cards] */
 .detail.research-page .info-card.dark:hover{transform:translateY(-6px);box-shadow:0 0 28px rgba(232,195,74,.28),0 24px 48px rgba(41,20,81,.28) !important;}
+
+/* --- Compact section top: 36px -> 28px above the heading, and 28px -> 20px
+   between the heading block and the cards (outranks the home-wide
+   .section-head trim in initiatives.css). --- */
+.homepage #research{padding-top:28px;}
+.homepage #research .section-head{margin-bottom:20px !important;}

@@ -300,3 +300,46 @@ footer .pivotra-icon img {
     transform: none !important;
   }
 }
+/* ============================================================
+   COMPACT FOOTER — tighter spacing overrides
+   Kept at the end so they win over the rules above on equal
+   specificity. Content, colours, divider and logo are untouched.
+   ============================================================ */
+footer {
+  padding-top: 32px;
+}
+
+/* The `padding` shorthand above also zeroed .wrap's 28px side gutter;
+   restore it so the columns line up with the header again. */
+footer .footer-grid {
+  gap: 24px;
+  padding: 0 28px;
+}
+
+footer .footer-grid p {
+  margin: 0;
+}
+
+footer h4,
+footer .footer-social h4 {
+  margin-bottom: 8px;
+}
+
+/* One link per row. As inline-blocks the links ran together on a line
+   ("InstitutesResearchCourses"); fit-content keeps the hover target
+   as wide as the text only. */
+footer .footer-grid a {
+  display: block;
+  width: fit-content;
+  margin-bottom: 4px;
+}
+
+footer .social-icons {
+  gap: 6px;
+}
+
+footer .footer-bottom {
+  margin-top: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
