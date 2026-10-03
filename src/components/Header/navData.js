@@ -3,22 +3,22 @@
 // entry in each menu is the "View all →" link back to the parent route.
 export const headerNav = [
   {
+    to: '/initiatives',
+    label: 'Initiatives',
+    menu: [
+      { to: '/initiatives#svadhyaya', label: 'Svādhyāya · Study & Search' },
+      { to: '/initiatives#visleshaka', label: 'Viśleṣaka · Purāṇatilakam' },
+      { to: '/initiatives#pariprasna', label: 'Paripraśna · Inquire & Clarify' },
+      { to: '/initiatives#pravacana', label: 'Pravacana · Courses & Discourses' },
+    ],
+  },
+  {
     to: '/institutes',
     label: 'Institutes',
     menu: [
       { to: '/institutes#sri', label: 'Mudgala Rishikulam' },
       { to: '/institutes#isil', label: 'Institute of Sanskrit & Indic Languages' },
       { to: '/institutes#cds', label: 'Centre for Digital Śāstra' },
-    ],
-  },
-  {
-    to: '/initiatives',
-    label: 'Initiatives',
-    menu: [
-      { to: '/initiatives#svadhyaya', label: 'Svādhyāya · Study & Search' },
-      { to: '/initiatives#visleshaka', label: 'Viśleṣaka · Purāṇatilakam' },
-      { to: '/initiatives#pariprasna', label: 'Paripraśna · Questions & Answers' },
-      { to: '/initiatives#pravacana', label: 'Pravacana · Courses & Discourses' },
     ],
   },
   {

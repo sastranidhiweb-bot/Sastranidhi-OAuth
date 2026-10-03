@@ -79,7 +79,7 @@ const initiatives = [
   },
   {
     id: 'pariprasna',
-    kicker: 'Questions & Answers',
+    kicker: 'Inquire & Clarify',
     title: 'Paripraśna',
     paragraphs: [
       'Paripraśna is SASTRANIDHI’s interactive knowledge platform dedicated to questions, answers, and scholarly dialogue on Vedic literature and Indian Knowledge Systems (IKS).',

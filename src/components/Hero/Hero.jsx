@@ -11,10 +11,10 @@ export default function Hero() {
       <div className="orb orb1" />
       <div className="orb orb2" />
       <div className="wrap hero-inner">
-        <h1>THE TREASURY OF ŚĀSTRAS</h1>
+        <h1>A Living Treasury of Śāstras</h1>
         <p className="lede">
-          A unified digital home for scripture, research, philosophical inquiry,
-          Indian Knowledge Systems education and service.
+          One digital platform to explore, analyse, enquire, and learn India’s
+          knowledge traditions.
         </p>
       </div>
       <div className="gopuram-arch" />

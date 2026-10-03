@@ -123,18 +123,24 @@ section#platforms {
 }
 
 /* ---------- Title ---------- */
+/* 700 is the heaviest Cormorant weight the site loads, so the titles get
+   their extra prominence from size and tracking instead. */
 #platforms .tablet h3 {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
+  letter-spacing: 0.3px;
   line-height: 1.4;
   color: var(--text-primary);
   margin: 0 0 8px;
 }
 
-/* optional second title line (PlatformCard `subtitle`) */
+/* optional second title line (PlatformCard `subtitle`); stays at the
+   previous size so card 2's subtitle doesn't grow or wrap */
 #platforms .tablet h3 .tablet-subtitle {
   display: block;
+  font-size: 17px;
+  letter-spacing: normal;
 }
 
 /* linked underlined word: look like the plain title text, not the

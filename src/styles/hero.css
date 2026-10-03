@@ -338,3 +338,13 @@ section.hero .hero-curve {
    0.42-0.72 opacity, which reads as a bright patch beside the heading.
    Hidden on home only; .orb2 (violet, right) and inner pages are unchanged. */
 .hero:not(.page-hero) .orb.orb1{display:none;}
+
+/* --- Home hero: less purple above the H1 ---
+   28px -> 12px; with the H1's own space above its capitals this leaves
+   roughly 20-25px between the header and the letters. Bottom padding and
+   the arc are unchanged. */
+.hero:not(.page-hero){padding-top:12px !important;}
+
+/* --- Home hero: sub-line on one line on desktop ---
+   650px wrapped the sentence; inner-page heroes keep their own width. */
+.hero:not(.page-hero) .lede{max-width:900px;}

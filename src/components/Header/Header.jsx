@@ -84,7 +84,6 @@ export default function Header() {
           </span>
           <span>
             <div className="name">ŚĀSTRANIDHI</div>
-            <div className="sub">THE TREASURY OF ŚĀSTRAS</div>
           </span>
         </Link>
 

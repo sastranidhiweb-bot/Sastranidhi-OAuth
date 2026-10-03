@@ -36,7 +36,7 @@ export const initiatives = [
   },
   {
     icon: 'Paripraśna',
-    title: 'Questions & Answers',
+    title: 'Inquire & Clarify',
     shortLabel: 'Paripraśna',
     description:
       'Paripraśna is an interactive question-and-answer platform where seekers can ask, explore, and receive scholarly answers on Vedic literature and Indian Knowledge Systems.',
