@@ -16,9 +16,12 @@ export const headerNav = [
     to: '/institutes',
     label: 'Institutes',
     menu: [
-      { to: '/institutes#sri', label: 'Mudgala Rishikulam' },
-      { to: '/institutes#isil', label: 'Institute of Sanskrit & Indic Languages' },
-      { to: '/institutes#cds', label: 'Centre for Digital Śāstra' },
+      { to: '/institutes#sri', label: 'Śāstra Nidhi Research Institute (SRI)' },
+      { to: '/institutes#mudgala', label: 'Mudgala Rishikulam' },
+      { to: '/institutes#gargi', label: 'Gargi Rishikulam' },
+      { to: '/institutes#geetha', label: 'Gita Samskrita Gurukulam' },
+      { to: '/institutes#visvanatha', label: 'Viśvanātha Bhagavata Vidyapitha' },
+      { to: '/institutes#siksha', label: 'School of Indian Knowledge Systems and Heritage Applications (SIKSHA)' },
     ],
   },
   {
@@ -32,7 +35,7 @@ export const headerNav = [
       { to: '/courses#course-faq', label: 'Before you enrol' },
     ],
   },
-  { to: '/research', label: 'Research' },
+  { to: '/research', label: 'Publications' },
   { to: '/about', label: 'About Us' },
   { to: '/contact', label: 'Contact' },
 ];

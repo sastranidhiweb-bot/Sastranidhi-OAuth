@@ -10,6 +10,10 @@ import InitiativesPage from './pages/InitiativesPage.jsx';
 import CoursesPage from './pages/CoursesPage.jsx';
 import ResearchPage from './pages/ResearchPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
+import TermsOfUsePage from './pages/TermsOfUsePage.jsx';
+import AccessibilityPage from './pages/AccessibilityPage.jsx';
+import InternshipPage from './pages/InternshipPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupWizard from './pages/SignupWizard.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
@@ -108,6 +112,10 @@ function AppRoutes() {
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/research" element={<ResearchPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+        <Route path="/accessibility" element={<AccessibilityPage />} />
+        <Route path="/internship" element={<InternshipPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupWizard />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />

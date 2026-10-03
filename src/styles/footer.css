@@ -287,6 +287,10 @@ footer .pivotra-icon img {
   footer .social-link {
     min-width: 0 !important;
   }
+  /* full width, so each of its two link columns fits "Facebook" etc. */
+  footer .footer-social {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -342,4 +346,16 @@ footer .footer-bottom {
   margin-top: 20px;
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+/* Brand column: with the description paragraph gone the logo was the only
+   thing in its column, pinned to the top of a row sized by the link
+   columns. Centre it vertically in that row instead. */
+footer .footer-brand-col {
+  display: flex;
+  align-items: center;
+}
+
+footer .footer-brand-col .footer-brand {
+  margin-bottom: 0;
 }

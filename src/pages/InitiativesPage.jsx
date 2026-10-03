@@ -148,7 +148,6 @@ export default function InitiativesPage() {
       <Header />
       <main>
         <PageHero
-          crumb="Initiatives"
           title="Knowledge Initiatives"
           lede="Focused platforms and programmes for study, analysis, inquiry and learning across the Indian knowledge traditions."
         />

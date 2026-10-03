@@ -131,7 +131,6 @@ export default function CoursesPage() {
       <Header />
       <main>
         <PageHero
-          crumb="Courses"
           title="Featured Courses"
           lede="Structured online learning in Indian Knowledge Systems, Sanskrit and scriptural studies through IKS-LMS."
         />

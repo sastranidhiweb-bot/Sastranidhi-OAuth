@@ -9,7 +9,24 @@ import '../styles/pages.css';
 const institutes = [
   {
     id: 'sri',
-    kicker: 'Research',
+    title: 'Śāstra Nidhi Research Institute (SRI)',
+    paragraphs: [
+      'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
+      'Research is carried out with traditional scholars and university faculty, and results are published through Śāstranidhi’s repositories and publications.',
+    ],
+    ticks: [
+      'Vedic, Purāṇic and Itihāsa literature',
+      'Darśana and commentarial traditions',
+      'Manuscript survey and cataloguing',
+    ],
+    action: { to: '/contact', label: 'Enquire about research →' },
+    card: {
+      title: 'Programmes',
+      items: ['Critical edition projects', 'Research fellowships', 'Scholar colloquia'],
+    },
+  },
+  {
+    id: 'mudgala',
     title: 'Mudgala Rishikulam',
     titleHref: 'https://mudgala.org/',
     paragraphs: [
@@ -28,42 +45,75 @@ const institutes = [
     },
   },
   {
-    id: 'isil',
-    kicker: 'Language',
-    title: 'Institute of Sanskrit & Indic Languages',
+    id: 'gargi',
+    title: 'Gargi Rishikulam',
     paragraphs: [
-      'Sanskrit is taught as a living key to the śāstras. Courses move from script and pronunciation through grammar and vocabulary to reading verses with their commentaries.',
-      'Learners study online through IKS-LMS with guided sessions, graded exercises and assessments.',
+      'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
+      'Research is carried out with traditional scholars and university faculty, and results are published through Śāstranidhi’s repositories and publications.',
     ],
     ticks: [
-      'Devanāgarī script and pronunciation',
-      'Pāṇinian grammar foundations',
-      'Reading original texts with commentaries',
+      'Vedic, Purāṇic and Itihāsa literature',
+      'Darśana and commentarial traditions',
+      'Manuscript survey and cataloguing',
     ],
-    action: { to: '/courses', label: 'See language courses →' },
+    action: { to: '/contact', label: 'Enquire about research →' },
     card: {
-      dark: true,
       title: 'Programmes',
-      items: ['Sanskrit for Beginners', 'Intermediate reading circles', 'Teacher training'],
+      items: ['Critical edition projects', 'Research fellowships', 'Scholar colloquia'],
     },
   },
   {
-    id: 'cds',
-    kicker: 'Digital',
-    title: 'Centre for Digital Śāstra',
+    id: 'geetha',
+    title: 'Gita Samskrita Gurukulam',
     paragraphs: [
-      'The centre digitises texts and manuscripts, encodes them in searchable formats and builds the tools behind Śāstranidhi’s platforms, including the Vedic Digital Library and Purāṇatilakam.',
-      'Its goal is dependable, well-cited digital access to primary sources for students and researchers.',
+      'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
+      'Research is carried out with traditional scholars and university faculty, and results are published through Śāstranidhi’s repositories and publications.',
     ],
     ticks: [
-      'Digitisation and OCR of printed and manuscript sources',
-      'Structured text encoding and cross-referencing',
-      'Reader and search platforms',
+      'Vedic, Purāṇic and Itihāsa literature',
+      'Darśana and commentarial traditions',
+      'Manuscript survey and cataloguing',
     ],
-    action: { to: '/initiatives', label: 'View platforms →' },
+    action: { to: '/contact', label: 'Enquire about research →' },
     card: {
-      title: 'Platforms built',
-      items: ['Vedic Digital Library', 'Purāṇatilakam', 'Paripraśna'],
+      title: 'Programmes',
+      items: ['Critical edition projects', 'Research fellowships', 'Scholar colloquia'],
+    },
+  },
+  {
+    id: 'visvanatha',
+    title: 'Viśvanātha Bhagavata Vidyapitha',
+    paragraphs: [
+      'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
+      'Research is carried out with traditional scholars and university faculty, and results are published through Śāstranidhi’s repositories and publications.',
+    ],
+    ticks: [
+      'Vedic, Purāṇic and Itihāsa literature',
+      'Darśana and commentarial traditions',
+      'Manuscript survey and cataloguing',
+    ],
+    action: { to: '/contact', label: 'Enquire about research →' },
+    card: {
+      title: 'Programmes',
+      items: ['Critical edition projects', 'Research fellowships', 'Scholar colloquia'],
+    },
+  },
+  {
+    id: 'siksha',
+    title: 'School of Indian Knowledge Systems and Heritage Applications (SIKSHA)',
+    paragraphs: [
+      'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
+      'Research is carried out with traditional scholars and university faculty, and results are published through Śāstranidhi’s repositories and publications.',
+    ],
+    ticks: [
+      'Vedic, Purāṇic and Itihāsa literature',
+      'Darśana and commentarial traditions',
+      'Manuscript survey and cataloguing',
+    ],
+    action: { to: '/contact', label: 'Enquire about research →' },
+    card: {
+      title: 'Programmes',
+      items: ['Critical edition projects', 'Research fellowships', 'Scholar colloquia'],
     },
   },
 ];
@@ -75,7 +125,6 @@ export default function InstitutesPage() {
       <Header />
       <main>
         <PageHero
-          crumb="Institutes"
           title="Our Institutes"
           lede="Three centres carry the work of Śāstranidhi: textual research, language learning and digital preservation."
         />

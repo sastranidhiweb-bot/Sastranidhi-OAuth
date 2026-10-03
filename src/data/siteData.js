@@ -116,12 +116,11 @@ export const footerPlatforms = [
   { href: '#', label: 'Purāṇa Tilakam' },
   { href: '#', label: 'Vedic Digital Library' },
   { href: '#', label: 'Paripraśna' },
-  { href: '#', label: 'IKS-LMS' },
 ];
 
 export const footerInstitution = [
   { to: '/institutes', label: 'Institutes' },
-  { to: '/research', label: 'Research' },
+  { to: '/research', label: 'Publications' },
   { to: '/courses', label: 'Courses' },
   { to: '/about', label: 'About Us' },
   { to: '/contact', label: 'Contact' },

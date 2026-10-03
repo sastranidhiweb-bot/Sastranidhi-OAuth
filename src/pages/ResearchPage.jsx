@@ -81,7 +81,6 @@ export default function ResearchPage() {
       <Header />
       <main>
         <PageHero
-          crumb="Research"
           title="Research & Publications"
           lede="Authentic sources with digital access: projects, publications, events and the scholars behind them."
         />

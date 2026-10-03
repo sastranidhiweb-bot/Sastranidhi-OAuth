@@ -453,6 +453,33 @@ header .sb-auth {
   gap: 8px;
 }
 
+/* ---------- Internship link ----------
+   Sits between .sb-social and .sb-auth; the subbar's flex
+   space-between leaves equal space on either side of it. */
+header .sb-internship {
+  padding: 4px 2px 3px;
+  font: 800 12.5px/1 'Inter', system-ui, sans-serif;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--brand-gold);
+  text-decoration: none;
+  border-bottom: 2px solid var(--brand-gold);
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+header .sb-internship:hover,
+header .sb-internship:focus-visible {
+  color: #F9E27E;
+  border-color: #F9E27E;
+  transform: translateY(-2px);
+}
+
+header .sb-internship:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 3px;
+}
+
 header .sb-btn {
   position: relative;
   overflow: hidden;
@@ -557,6 +584,27 @@ header .mobile-nav a.active {
   header .btn-donate { margin-left: auto; }
 }
 
+@media (max-width: 900px) {
+  /* no room for three groups on one line: the link takes its own
+     centred line below social + auth */
+  header .subbar-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "social auth"
+      "intern intern";
+    row-gap: 6px;
+  }
+  header .sb-social { grid-area: social; }
+  header .sb-auth { grid-area: auth; justify-self: end; }
+  header .sb-internship {
+    grid-area: intern;
+    justify-self: center;
+    font-size: 11.5px;
+    letter-spacing: 0.8px;
+  }
+}
+
 @media (max-width: 700px) {
   header .nav { padding-top: 10px; padding-bottom: 10px; }
   header .brand .glyph { width: 50px; height: 50px; }
@@ -565,9 +613,19 @@ header .mobile-nav a.active {
   header .sb-kicker { display: none; }
   header .sb-icon { width: 30px; height: 30px; }
   header .sb-btn { padding: 0 11px; font-size: 11px; letter-spacing: 0.8px; }
+  header .sb-internship { font-size: 11px; }
 }
 
 @media (max-width: 480px) {
+  /* phones: the seven icons get the first line to themselves; the
+     internship link and Log in / Sign up share the second */
+  header .subbar-inner {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "social social"
+      "intern auth";
+  }
+  header .sb-internship { justify-self: start; }
   header .sb-social { gap: 7px; }
   header .sb-auth { gap: 6px; }
   header .sb-btn { padding: 0 9px; min-height: 30px; }

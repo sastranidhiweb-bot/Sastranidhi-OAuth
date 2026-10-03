@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // Building blocks shared by the inner pages (About, Institutes, Initiatives,
 // Courses, Research). Styles live in src/styles/pages.css.
 
-export function PageHero({ crumb, title, lede }) {
+export function PageHero({ title, lede }) {
   return (
     <section className="hero page-hero" id="top">
       <div className="hero-clouds" aria-hidden="true">
@@ -18,13 +18,8 @@ export function PageHero({ crumb, title, lede }) {
           <img className="hero-emblem" src="/assets/logo-mark.png" alt="" />
         </span>
         <div className="hero-text">
-          <nav className="crumb" aria-label="Breadcrumb">
-            <Link to="/">Home</Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">{crumb}</span>
-          </nav>
           <h1>{title}</h1>
-          <p className="lede">{lede}</p>
+          {lede && <p className="lede">{lede}</p>}
         </div>
       </div>
       <img className="hero-vyasa" src="/assets/vyasa-gold.png" alt="" aria-hidden="true" />
@@ -93,7 +88,7 @@ export function DetailRow({
   return (
     <div className="detail-row reveal" id={id}>
       <div>
-        <div className="kicker">{kicker}</div>
+        {kicker && <div className="kicker">{kicker}</div>}
         <h2>
           {titleHref ? (
             <a className="detail-title-link" href={titleHref} target="_blank" rel="noopener noreferrer">
@@ -133,6 +128,31 @@ export function Steps({ items }) {
         </li>
       ))}
     </ol>
+  );
+}
+
+// Single-column long-form text (Privacy Policy, Terms of Use).
+// sections: [{ title, body: [paragraph string | { list: [items] }] }]
+export function LegalDocument({ sections }) {
+  return (
+    <div className="legal-doc">
+      {sections.map((section) => (
+        <div className="legal-section" key={section.title}>
+          <h2>{section.title}</h2>
+          {section.body.map((block, i) =>
+            typeof block === 'string' ? (
+              <p key={i}>{block}</p>
+            ) : (
+              <ul key={i}>
+                {block.list.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            ),
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
 

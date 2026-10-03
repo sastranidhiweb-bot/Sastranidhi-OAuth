@@ -476,3 +476,31 @@
     linear-gradient(135deg,#eee9f6 0%,#e4ddef 48%,#f0ecf7 100%) !important;
 }
 .contact-section{padding:40px 0 52px !important;}
+
+/* ============================================================
+   INTERNSHIP PAGE — reuses the contact layout and form card above;
+   these rules only cover what differs (longer intro with lists).
+   ============================================================ */
+.internship-shell {
+  align-items: start;
+}
+
+.internship-intro h2 {
+  font-size: clamp(32px, 3.6vw, 44px);
+  line-height: 1.1;
+  margin: 0 0 18px;
+}
+
+.internship-intro .contact-lede {
+  margin: 0 0 14px;
+}
+
+.internship-intro h3 {
+  margin: 26px 0 10px;
+  font-size: 22px;
+  color: var(--text-primary);
+}
+
+.internship-intro .ticks {
+  margin: 4px 0 0;
+}

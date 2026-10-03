@@ -348,3 +348,8 @@ section.hero .hero-curve {
 /* --- Home hero: sub-line on one line on desktop ---
    650px wrapped the sentence; inner-page heroes keep their own width. */
 .hero:not(.page-hero) .lede{max-width:900px;}
+
+/* --- Detail-page heroes: same, no pale-gold light spot ---
+   The home rule above is scoped to :not(.page-hero); this hides .orb1 on
+   the inner-page heroes (PageHero) too, leaving a uniform purple banner. */
+.hero.page-hero .orb.orb1{display:none;}

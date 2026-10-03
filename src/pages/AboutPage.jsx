@@ -25,7 +25,6 @@ export default function AboutPage() {
       <Header />
       <main>
         <PageHero
-          crumb="About Us"
           title="About Śāstranidhi"
           lede="Preserving śāstra, enabling research and inspiring learning."
         />

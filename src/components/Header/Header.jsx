@@ -183,14 +183,16 @@ export default function Header() {
               </svg>
             </a>
             <a
-              className="sb-icon sb-pivotra"
-              href="https://www.pivotra.in/portal/pivotra/group/%C5%9B%C4%81stranidhi"
+              className="sb-icon"
+              href="https://twitter.com/sastranidhi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Pivotra"
-              title="Pivotra"
+              aria-label="Śāstranidhi on Twitter / X"
+              title="Twitter"
             >
-              <img src="/assets/pivotra-logo.png" alt="" />
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.6l5.24 6.93 6.06-6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41Z" />
+              </svg>
             </a>
             <a
               className="sb-icon sb-wa"
@@ -204,7 +206,32 @@ export default function Header() {
                 <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.84 9.84 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24a8.24 8.24 0 0 1 8.24 8.25c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.230-1.470-1.380-1.720-.140-.250-.010-.380.110-.510.110-.110.250-.290.370-.430.130-.150.170-.250.250-.420.080-.160.040-.310-.020-.430-.060-.130-.560-1.350-.770-1.840-.200-.490-.410-.420-.560-.430h-.48a.92.92 0 0 0-.66.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.29Z" />
               </svg>
             </a>
+            <a
+              className="sb-icon"
+              href="https://www.youtube.com/@sastranidhi"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Śāstranidhi on YouTube"
+              title="YouTube"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z" />
+              </svg>
+            </a>
+            <a
+              className="sb-icon sb-pivotra"
+              href="https://www.pivotra.in/portal/pivotra/group/%C5%9B%C4%81stranidhi"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Śāstranidhi on Pivotra"
+              title="Pivotra"
+            >
+              <img src="/assets/pivotra-logo.png" alt="" />
+            </a>
           </div>
+          <Link to="/internship" className="sb-internship">
+            Apply for Internship
+          </Link>
           <div className="sb-auth">
             <Link
               to="/login"

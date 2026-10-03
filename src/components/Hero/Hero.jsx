@@ -13,7 +13,7 @@ export default function Hero() {
       <div className="wrap hero-inner">
         <h1>A Living Treasury of Śāstras</h1>
         <p className="lede">
-          One digital platform to explore, analyse, enquire, and learn India’s
+          One digital platform to explore, analyse, inquire, and learn India’s
           knowledge traditions.
         </p>
       </div>

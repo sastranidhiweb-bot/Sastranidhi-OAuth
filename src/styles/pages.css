@@ -202,6 +202,49 @@
   color: var(--text-primary);
 }
 
+/* ---------- Legal pages (LegalDocument) ----------
+   One readable column for long text: Privacy Policy, Terms of Use. */
+.legal-doc {
+  max-width: 780px;
+}
+
+.legal-doc .legal-section + .legal-section {
+  margin-top: 30px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(76, 43, 127, 0.12);
+}
+
+.legal-doc h2 {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 2.4vw, 26px);
+  color: var(--text-primary);
+}
+
+.legal-doc p,
+.legal-doc li {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  /* long email addresses must wrap on narrow screens */
+  overflow-wrap: anywhere;
+}
+
+.legal-doc p {
+  margin: 0 0 12px;
+}
+
+.legal-doc ul {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.legal-doc li {
+  margin-bottom: 6px;
+}
+
+.legal-doc li::marker {
+  color: var(--brand-gold);
+}
+
 /* ---------- Tick list (gold diamonds) ---------- */
 .ticks {
   display: grid;
@@ -740,6 +783,22 @@
 .page-hero + .detail{padding-top:0 !important;}
 .page-hero + #courses{padding-top:28px !important;}
 .page-hero + section::before{display:none;}
+
+/* ~28px between the hero arc and the first content on every detail page.
+   The first section's box stays where it is (its flat background must not
+   cover the arc's purple edges); only its contents move up, painted above
+   .hero-curve (z-index 2) the same way the /courses head is below. */
+.page-hero + .detail,
+.page-hero + .contact-section{overflow:visible;z-index:3;}
+.page-hero + .detail > .wrap{margin-top:-13px;}
+.page-hero + .detail > .wrap > .detail-row:first-child{padding-top:0;}
+/* …but anchor jumps to that first row still stop 28px lower, like the others */
+.page-hero + .detail > .wrap > .detail-row:first-child{scroll-margin-top:28px;}
+.page-hero + .contact-section{padding-top:0 !important;}
+.page-hero + .contact-section > .wrap{margin-top:-10px;}
+/* /internship: flat lavender like .detail, so there is no colour seam
+   where the contact gradient meets the arc (/contact has no hero). */
+.page-hero + .contact-section{background:var(--lavender-light) !important;}
 
 /* /courses "Current Courses" head: pulled up into the hero arc's lavender
    area so the letters start ~35px below the arc's peak (the arc is 58px
