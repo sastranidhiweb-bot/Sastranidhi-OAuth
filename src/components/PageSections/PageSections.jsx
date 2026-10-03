@@ -59,7 +59,37 @@ export function TickList({ items }) {
   );
 }
 
-export function DetailRow({ id, kicker, title, titleHref, paragraphs = [], ticks, action, card }) {
+// One block of DetailRow body text: a string is a paragraph,
+// { heading } a subheading, { verse: [lines] } a quoted verse.
+function DetailBlock({ block }) {
+  if (typeof block === 'string') return <p>{block}</p>;
+  if (block.heading) return <h3 className="detail-subhead">{block.heading}</h3>;
+  return (
+    <blockquote className="detail-verse">
+      {block.verse.map((line, i) => (
+        <span key={i}>
+          {i > 0 && <br />}
+          {line}
+        </span>
+      ))}
+    </blockquote>
+  );
+}
+
+// `list` / `paragraphsAfter` (optional): a bulleted list after the paragraphs,
+// and more paragraphs after that list.
+export function DetailRow({
+  id,
+  kicker,
+  title,
+  titleHref,
+  paragraphs = [],
+  list,
+  paragraphsAfter = [],
+  ticks,
+  action,
+  card,
+}) {
   return (
     <div className="detail-row reveal" id={id}>
       <div>
@@ -73,8 +103,12 @@ export function DetailRow({ id, kicker, title, titleHref, paragraphs = [], ticks
             title
           )}
         </h2>
-        {paragraphs.map((text) => (
-          <p key={text}>{text}</p>
+        {paragraphs.map((block, i) => (
+          <DetailBlock key={i} block={block} />
+        ))}
+        {list && <TickList items={list} />}
+        {paragraphsAfter.map((block, i) => (
+          <DetailBlock key={i} block={block} />
         ))}
         {ticks && <TickList items={ticks} />}
         {action && <ActionLink to={action.to}>{action.label}</ActionLink>}

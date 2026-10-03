@@ -213,6 +213,27 @@ section#platforms {
   transform: translateX(3px);
 }
 
+/* ---------- Equal-height cards, "More…" on one line ----------
+   Grid items already stretch to the tallest card in their row; the card
+   and its content wrapper are flex columns so the content fills that
+   height and margin-top: auto pins "More…" to the bottom edge. */
+#platforms .tablet {
+  display: flex;
+  flex-direction: column;
+}
+
+#platforms .tablet .tablet-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#platforms .tablet .tablet-more {
+  margin-top: auto;
+  /* keep the link (and its hover target) only as wide as its text */
+  align-self: flex-start;
+}
+
 /* ---------- Expanded card ----------
    Only the clicked card grows. It spans a second grid row that holds its
    extra text, and takes its rows from the grid (subgrid) so the first row

@@ -1,4 +1,5 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function PlatformCard({
   icon,
@@ -9,10 +10,8 @@ export default function PlatformCard({
   subtitleHref,
   description,
   href,
-  more,
+  moreTo,
 }) {
-  const [open, setOpen] = useState(false);
-  const moreId = useId();
   // briefly shows "Opening…" on the name badge after it is clicked
   const [opening, setOpening] = useState(false);
 
@@ -23,9 +22,7 @@ export default function PlatformCard({
   }, [opening]);
 
   return (
-    // a data attribute, not a class: the scroll-reveal code adds its own
-    // class to this element, which a className change would wipe
-    <div className="tablet" data-open={open ? '' : undefined}>
+    <div className="tablet">
       <div className="tablet-main">
         <div className="tablet-head">
           <a
@@ -60,23 +57,12 @@ export default function PlatformCard({
           )}
         </h3>
         <p>{description}</p>
-        {more && (
-          <button
-            type="button"
-            className="tablet-more"
-            aria-expanded={open}
-            aria-controls={moreId}
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? 'Less' : 'More'}
-          </button>
+        {moreTo && (
+          <Link className="tablet-more" to={moreTo}>
+            More…
+          </Link>
         )}
       </div>
-      {more && open && (
-        <div className="tablet-more-text" id={moreId}>
-          <p>{more}</p>
-        </div>
-      )}
     </div>
   );
 }

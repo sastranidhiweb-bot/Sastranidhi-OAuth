@@ -15,7 +15,7 @@ export const headerNav = [
     to: '/initiatives',
     label: 'Initiatives',
     menu: [
-      { to: '/initiatives#svadhyaya', label: 'Svādhyāya · Study & Research' },
+      { to: '/initiatives#svadhyaya', label: 'Svādhyāya · Study & Search' },
       { to: '/initiatives#visleshaka', label: 'Viśleṣaka · Purāṇatilakam' },
       { to: '/initiatives#pariprasna', label: 'Paripraśna · Questions & Answers' },
       { to: '/initiatives#pravacana', label: 'Pravacana · Courses & Discourses' },

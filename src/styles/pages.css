@@ -186,6 +186,22 @@
   text-wrap: pretty;
 }
 
+/* subheading inside a row's body text (DetailRow `{ heading }` block) */
+.detail-row h3.detail-subhead {
+  margin: 24px 0 10px;
+  font-size: 22px;
+}
+
+/* quoted verse inside a row's body text (DetailRow `{ verse }` block) */
+.detail-row .detail-verse {
+  margin: 4px 0 16px;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--brand-gold);
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
 /* ---------- Tick list (gold diamonds) ---------- */
 .ticks {
   display: grid;

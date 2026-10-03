@@ -11,12 +11,12 @@ export const navLinks = [
 export const initiatives = [
   {
     icon: 'Svādhyāya',
-    title: 'Study & Research',
+    title: 'Study & Search',
     shortLabel: 'Svādhyāya',
     description:
-      'Institutional information, research, publications, events, projects and scholar initiatives.',
-    // shown inside the card when "More" is clicked (placeholder text)
-    more: 'More details about Svādhyāya will be added here.',
+      'Svādhyāya is a comprehensive digital knowledge platform for studying, searching, and exploring Vedic literature and the wider universe of Indian Knowledge Systems.',
+    // "More…" link target: the matching row on /initiatives
+    moreTo: '/initiatives#svadhyaya',
     href: 'https://reader.sastranidhi.org/homePage',
     devHref: 'https://reader.sastranidhi.org/homePage',
   },
@@ -29,8 +29,8 @@ export const initiatives = [
     subtitleHref: 'https://puranatilakam.com/',
     shortLabel: 'Viśleṣaka',
     description:
-      'Śrīmad-Bhāgavatam texts, commentaries, translations, cross-references and research tools.',
-    more: 'More details about Viśleṣaka will be added here.',
+      'Viśleṣaka is an advanced scriptural analysis platform that examines major sacred texts through commentaries, grammar, recitation, presentations, statistics, and multiple dimensions of study.',
+    moreTo: '/initiatives#visleshaka',
     href: 'https://puranatilakam.com/',
     devHref: 'https://puranatilakam.com/',
   },
@@ -39,8 +39,8 @@ export const initiatives = [
     title: 'Questions & Answers',
     shortLabel: 'Paripraśna',
     description:
-      'Philosophical questions and answers grounded in authentic Indian knowledge traditions.',
-    more: 'More details about Paripraśna will be added here.',
+      'Paripraśna is an interactive question-and-answer platform where seekers can ask, explore, and receive scholarly answers on Vedic literature and Indian Knowledge Systems.',
+    moreTo: '/initiatives#pariprasna',
     href: 'https://qna.sastranidhi.org/',
     devHref: 'https://qna.sastranidhi.org/',
   },
@@ -49,8 +49,8 @@ export const initiatives = [
     title: 'Courses & Discourses',
     shortLabel: 'Pravacana',
     description:
-      'Courses, lessons, assessments, certificates and guided Indian Knowledge Systems programs.',
-    more: 'More details about Pravacana will be added here.',
+      'Pravacana is SASTRANIDHI’s comprehensive learning platform for courses, discourses, guided study, assessments, and certification in Vedic literature and Indian Knowledge Systems.',
+    moreTo: '/initiatives#pravacana',
     href: 'https://sastranidhi.edmingle.com/',
     devHref: 'https://sastranidhi.edmingle.com/',
   },
