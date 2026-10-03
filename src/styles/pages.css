@@ -168,6 +168,18 @@
   color: var(--text-primary);
 }
 
+/* linked row heading (DetailRow `titleHref`): same look as the plain
+   heading, with an underline only on hover */
+.detail-row h2 a.detail-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.detail-row h2 a.detail-title-link:hover,
+.detail-row h2 a.detail-title-link:focus-visible {
+  text-decoration: underline;
+}
+
 .detail-row p {
   margin: 0 0 14px;
   color: var(--text-secondary);

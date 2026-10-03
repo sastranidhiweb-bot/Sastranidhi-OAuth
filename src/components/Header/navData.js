@@ -6,7 +6,7 @@ export const headerNav = [
     to: '/institutes',
     label: 'Institutes',
     menu: [
-      { to: '/institutes#sri', label: 'Śāstra Research Institute' },
+      { to: '/institutes#sri', label: 'Mudgala Rishikulam' },
       { to: '/institutes#isil', label: 'Institute of Sanskrit & Indic Languages' },
       { to: '/institutes#cds', label: 'Centre for Digital Śāstra' },
     ],

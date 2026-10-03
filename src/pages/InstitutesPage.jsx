@@ -10,7 +10,8 @@ const institutes = [
   {
     id: 'sri',
     kicker: 'Research',
-    title: 'Śāstra Research Institute',
+    title: 'Mudgala Rishikulam',
+    titleHref: 'https://mudgala.org/',
     paragraphs: [
       'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
       'Research is carried out with traditional scholars and university faculty, and results are published through Śāstranidhi’s repositories and publications.',

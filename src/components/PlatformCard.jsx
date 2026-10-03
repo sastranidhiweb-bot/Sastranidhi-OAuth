@@ -6,6 +6,7 @@ export default function PlatformCard({
   title,
   subtitle,
   subtitleUnderlined,
+  subtitleHref,
   description,
   href,
   more,
@@ -43,7 +44,18 @@ export default function PlatformCard({
           {(subtitle || subtitleUnderlined) && (
             <span className="tablet-subtitle">
               {subtitle}{' '}
-              <span style={{ textDecoration: 'underline' }}>{subtitleUnderlined}</span>
+              {subtitleHref ? (
+                <a
+                  className="tablet-subtitle-link"
+                  href={subtitleHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {subtitleUnderlined}
+                </a>
+              ) : (
+                <span style={{ textDecoration: 'underline' }}>{subtitleUnderlined}</span>
+              )}
             </span>
           )}
         </h3>

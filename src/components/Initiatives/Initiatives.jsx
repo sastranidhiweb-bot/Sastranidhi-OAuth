@@ -18,6 +18,7 @@ export default function Initiatives() {
               title={item.title}
               subtitle={item.subtitle}
               subtitleUnderlined={item.subtitleUnderlined}
+              subtitleHref={item.subtitleHref}
               description={item.description}
               more={item.more}
               href={import.meta.env.DEV && item.devHref ? item.devHref : item.href}

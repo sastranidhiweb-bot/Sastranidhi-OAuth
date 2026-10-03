@@ -137,6 +137,15 @@ section#platforms {
   display: block;
 }
 
+/* linked underlined word: look like the plain title text, not the
+   generic `#platforms .tablet a` link style */
+#platforms .tablet h3 a.tablet-subtitle-link {
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* ---------- Description ---------- */
 #platforms .tablet p {
   font-size: 14px;

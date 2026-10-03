@@ -199,6 +199,18 @@
   margin: -16px 0 20px;
   text-align: center;
 }
+/* The 01/02/03 numbers come from the shared `.step::before` counter in
+   pages.css (it styles the About/Courses step cards). Centre them in the
+   signup boxes and use a dark purple so they read on the gold boxes too. */
+.auth-steps .step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-steps .step::before {
+  margin: 0;
+  color: #45218B;
+}
 
 /* ============================================================
    Purple palette for the auth pages.

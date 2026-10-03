@@ -59,12 +59,20 @@ export function TickList({ items }) {
   );
 }
 
-export function DetailRow({ id, kicker, title, paragraphs = [], ticks, action, card }) {
+export function DetailRow({ id, kicker, title, titleHref, paragraphs = [], ticks, action, card }) {
   return (
     <div className="detail-row reveal" id={id}>
       <div>
         <div className="kicker">{kicker}</div>
-        <h2>{title}</h2>
+        <h2>
+          {titleHref ? (
+            <a className="detail-title-link" href={titleHref} target="_blank" rel="noopener noreferrer">
+              {title}
+            </a>
+          ) : (
+            title
+          )}
+        </h2>
         {paragraphs.map((text) => (
           <p key={text}>{text}</p>
         ))}
