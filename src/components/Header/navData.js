@@ -18,10 +18,12 @@ export const headerNav = [
     menu: [
       { to: '/institutes#sri', label: 'Śāstra Nidhi Research Institute (SRI)' },
       { to: '/institutes#mudgala', label: 'Mudgala Rishikulam' },
-      { to: '/institutes#gargi', label: 'Gargi Rishikulam' },
+      { to: '/institutes#gargi', label: 'Gārgī Gurukulam' },
       { to: '/institutes#geetha', label: 'Gita Samskrita Gurukulam' },
-      { to: '/institutes#visvanatha', label: 'Viśvanātha Bhagavata Vidyapitha' },
+      { to: '/institutes#visvanatha', label: 'Viśvanātha Bhāgavata Vidyāpīṭha' },
       { to: '/institutes#siksha', label: 'School of Indian Knowledge Systems and Heritage Applications (SIKSHA)' },
+      { to: '/institutes#silpa', label: 'ŚILPA' },
+      { to: '/institutes#bhaskara', label: 'BHĀSKARA' },
     ],
   },
   {

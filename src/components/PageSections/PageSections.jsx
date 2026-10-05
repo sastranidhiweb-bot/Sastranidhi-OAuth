@@ -72,17 +72,20 @@ function DetailBlock({ block }) {
 }
 
 // `list` / `paragraphsAfter` (optional): a bulleted list after the paragraphs,
-// and more paragraphs after that list.
+// and more paragraphs after that list. `feature` (optional): an element shown
+// between the heading and the paragraphs (e.g. a featured book card).
 export function DetailRow({
   id,
   kicker,
   title,
   titleHref,
+  feature,
   paragraphs = [],
   list,
   paragraphsAfter = [],
   ticks,
   action,
+  note,
   card,
 }) {
   return (
@@ -98,6 +101,7 @@ export function DetailRow({
             title
           )}
         </h2>
+        {feature}
         {paragraphs.map((block, i) => (
           <DetailBlock key={i} block={block} />
         ))}
@@ -107,11 +111,13 @@ export function DetailRow({
         ))}
         {ticks && <TickList items={ticks} />}
         {action && <ActionLink to={action.to}>{action.label}</ActionLink>}
+        {note && <p className="detail-note">{note}</p>}
       </div>
       {card && (
         <div className={card.dark ? 'info-card dark' : 'info-card'}>
           <h3 className="info-card-title">{card.title}</h3>
-          <TickList items={card.items} />
+          {card.text && <p>{card.text}</p>}
+          {card.items && <TickList items={card.items} />}
         </div>
       )}
     </div>
