@@ -14,6 +14,11 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
 import TermsOfUsePage from './pages/TermsOfUsePage.jsx';
 import AccessibilityPage from './pages/AccessibilityPage.jsx';
 import InternshipPage from './pages/InternshipPage.jsx';
+import SupportPage from './pages/SupportPage.jsx';
+import EventsPage from './pages/EventsPage.jsx';
+import SupportApplyPage from './pages/SupportApplyPage.jsx';
+import CollaboratePage from './pages/CollaboratePage.jsx';
+import CollaborateApplyPage from './pages/CollaborateApplyPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupWizard from './pages/SignupWizard.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
@@ -116,6 +121,11 @@ function AppRoutes() {
         <Route path="/terms-of-use" element={<TermsOfUsePage />} />
         <Route path="/accessibility" element={<AccessibilityPage />} />
         <Route path="/internship" element={<InternshipPage />} />
+        <Route path="/support" element={<SupportPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/support/apply" element={<SupportApplyPage />} />
+        <Route path="/collaborate" element={<CollaboratePage />} />
+        <Route path="/collaborate/apply" element={<CollaborateApplyPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupWizard />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />

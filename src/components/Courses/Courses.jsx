@@ -1,4 +1,5 @@
-import { courses } from '../../data/siteData.js';
+import { Link } from 'react-router-dom';
+import { courses, bhagavatamSeries } from '../../data/siteData.js';
 import '../../styles/courses.css';
 
 export default function Courses() {
@@ -33,6 +34,14 @@ export default function Courses() {
             </div>
           ))}
         </div>
+        <Link className="series-banner reveal" to="/courses#bhagavatam">
+          <div>
+            <div className="series-kicker">Course series · Skandhas 1–3</div>
+            <h3>{bhagavatamSeries.title}</h3>
+            <p>{bhagavatamSeries.intro}</p>
+          </div>
+          <span className="series-cta">Explore the series →</span>
+        </Link>
         <div className="section-more reveal">
           <a className="btn-outline" href="/courses">
             See all courses →

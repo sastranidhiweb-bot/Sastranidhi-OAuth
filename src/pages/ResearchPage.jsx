@@ -133,6 +133,7 @@ const researchAreas = [
     },
   },
   {
+    id: 'events',
     kicker: 'Events',
     title: 'Events',
     paragraphs: [
@@ -145,6 +146,7 @@ const researchAreas = [
     },
   },
   {
+    id: 'scholars',
     kicker: 'People',
     title: 'Scholars',
     paragraphs: [

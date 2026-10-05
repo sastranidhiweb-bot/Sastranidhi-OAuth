@@ -69,7 +69,7 @@ export default function Header() {
       className={[scrolled && 'scrolled', animateIn && 'header-animate'].filter(Boolean).join(' ')}
     >
       <div className="wrap nav">
-        <Link to="/" className="brand" onClick={goHome}>
+        <Link to="/" className="brand" onClick={goHome} aria-label="Śāstranidhi home">
           <span className="glyph">
             <span className="halo2"></span>
             <span className="halo"></span>
@@ -81,9 +81,6 @@ export default function Header() {
               decoding="async"
             />
             <span className="shine"></span>
-          </span>
-          <span>
-            <div className="name">ŚĀSTRANIDHI</div>
           </span>
         </Link>
 
@@ -145,7 +142,6 @@ export default function Header() {
       <div className="subbar">
         <div className="wrap subbar-inner">
           <div className="sb-social">
-            <span className="sb-kicker">Follow us</span>
             <a
               className="sb-icon"
               href="https://www.facebook.com/profile.php?id=61594228293761"

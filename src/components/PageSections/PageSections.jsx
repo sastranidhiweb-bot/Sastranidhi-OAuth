@@ -1,3 +1,4 @@
+import { isValidElement } from 'react';
 import { Link } from 'react-router-dom';
 
 // Building blocks shared by the inner pages (About, Institutes, Initiatives,
@@ -6,11 +7,6 @@ import { Link } from 'react-router-dom';
 export function PageHero({ title, lede }) {
   return (
     <section className="hero page-hero" id="top">
-      <div className="hero-clouds" aria-hidden="true">
-        <span className="hero-cloud" />
-        <span className="hero-cloud" />
-        <span className="hero-cloud" />
-      </div>
       <div className="orb orb1" />
       <div className="orb orb2" />
       <div className="wrap hero-inner">
@@ -22,6 +18,8 @@ export function PageHero({ title, lede }) {
           {lede && <p className="lede">{lede}</p>}
         </div>
       </div>
+      {/* same as the home hero: the sage on both sides, the left one mirrored */}
+      <img className="hero-vyasa hero-vyasa-mirror" src="/assets/vyasa-gold.png" alt="" aria-hidden="true" />
       <img className="hero-vyasa" src="/assets/vyasa-gold.png" alt="" aria-hidden="true" />
       <div className="hero-curve" />
     </section>
@@ -55,9 +53,11 @@ export function TickList({ items }) {
 }
 
 // One block of DetailRow body text: a string is a paragraph,
-// { heading } a subheading, { verse: [lines] } a quoted verse.
+// { heading } a subheading, { verse: [lines] } a quoted verse, and a React
+// element (e.g. a <p> with <strong> phrases) is rendered as given.
 function DetailBlock({ block }) {
   if (typeof block === 'string') return <p>{block}</p>;
+  if (isValidElement(block)) return block;
   if (block.heading) return <h3 className="detail-subhead">{block.heading}</h3>;
   return (
     <blockquote className="detail-verse">

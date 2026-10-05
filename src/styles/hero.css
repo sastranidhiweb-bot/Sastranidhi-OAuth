@@ -353,3 +353,183 @@ section.hero .hero-curve {
    The home rule above is scoped to :not(.page-hero); this hides .orb1 on
    the inner-page heroes (PageHero) too, leaving a uniform purple banner. */
 .hero.page-hero .orb.orb1{display:none;}
+
+/* --- Home hero: "Śāstranidhi" name above the H1 ---
+   Moved here from the header brand. Cinzel (loaded in index.html) to set
+   it apart from the Cormorant H1, white with a slow gold glow. */
+.hero .hero-brand {
+  margin: 0 0 4px;
+  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(30px, 3.6vw, 48px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.15;
+  color: #FFFDF5;
+  text-shadow:
+    0 0 6px rgba(255, 246, 214, 0.55),
+    0 0 18px rgba(232, 195, 74, 0.55),
+    0 0 36px rgba(232, 195, 74, 0.35);
+  animation:
+    heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both,
+    heroBrandGlow 4s ease-in-out 1s infinite;
+}
+
+@keyframes heroBrandGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 6px rgba(255, 246, 214, 0.55),
+      0 0 18px rgba(232, 195, 74, 0.55),
+      0 0 36px rgba(232, 195, 74, 0.35);
+  }
+  50% {
+    text-shadow:
+      0 0 8px rgba(255, 246, 214, 0.75),
+      0 0 26px rgba(232, 195, 74, 0.8),
+      0 0 52px rgba(232, 195, 74, 0.5);
+  }
+}
+
+/* Glowing gold underline, the width of the word, pulsing with the text.
+   `width: fit-content` + auto margins keep the block centred. */
+.hero .hero-brand {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+.hero .hero-brand::after {
+  content: "";
+  position: absolute;
+  left: 0.12em; /* trims the trailing letter-spacing so the line looks centred */
+  right: 0.24em;
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, #F3DFA0 18%, #FFF6D6 50%, #F3DFA0 82%, transparent);
+  box-shadow:
+    0 0 6px rgba(255, 246, 214, 0.55),
+    0 0 16px rgba(232, 195, 74, 0.55),
+    0 0 30px rgba(232, 195, 74, 0.35);
+  animation: heroBrandLineGlow 4s ease-in-out 1s infinite;
+}
+
+@keyframes heroBrandLineGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 6px rgba(255, 246, 214, 0.55),
+      0 0 16px rgba(232, 195, 74, 0.55),
+      0 0 30px rgba(232, 195, 74, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 8px rgba(255, 246, 214, 0.75),
+      0 0 24px rgba(232, 195, 74, 0.8),
+      0 0 44px rgba(232, 195, 74, 0.5);
+  }
+}
+
+@media (max-width: 700px) {
+  .hero .hero-brand { font-size: clamp(28px, 8.5vw, 38px); letter-spacing: 0.08em; }
+  .hero .hero-brand::after { left: 0.08em; right: 0.16em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-brand,
+  .hero .hero-brand::after { animation: none; }
+}
+
+/* --- Home hero: mirrored sage on the left ---
+   Same image, size, height and opacity as the right-hand .hero-vyasa,
+   flipped and placed the same distance from the left. The float keyframes
+   carry the flip too (the base vyasaFloat would reset the transform), and
+   the static transform keeps it flipped when animation is turned off. */
+.hero-vyasa.hero-vyasa-mirror {
+  right: auto;
+  left: max(3%, calc(50% - 600px));
+  transform: scaleX(-1);
+  animation-name: vyasaFloatMirror;
+}
+
+@keyframes vyasaFloatMirror {
+  0%, 100% { transform: scaleX(-1) translateY(0); }
+  50% { transform: scaleX(-1) translateY(-6px); }
+}
+
+@media (max-width: 760px) {
+  .hero-vyasa.hero-vyasa-mirror { right: auto; left: 8px; }
+}
+
+/* --- Home hero: "breathing" Śāstranidhi ---
+   A slow 4% swell in step with the glow (same 4s cycle). Uses the `scale`
+   property, not `transform`, so it doesn't fight heroFadeUp's transform;
+   the underline (::after) breathes with the word. */
+.hero .hero-brand {
+  transform-origin: center;
+  animation:
+    heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both,
+    heroBrandGlow 4s ease-in-out 1s infinite,
+    heroBrandBreathe 4s ease-in-out 1s infinite;
+}
+
+@keyframes heroBrandBreathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.04; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-brand { animation: none; }
+}
+
+/* --- Home hero: smoother breathing (replaces the animations above) ---
+   Animating text-shadow / box-shadow repaints every frame and stuttered.
+   Now only `scale` and `opacity` animate, which the browser composites on
+   the GPU: the word keeps a static glow, a stronger-glow copy
+   (.hero-brand-glow) fades in at each "inhale", and the underline's glow
+   fades the same way. 5.5s, sine-like easing, for a natural breath. */
+.hero .hero-brand {
+  will-change: scale;
+  backface-visibility: hidden;
+  animation:
+    heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both,
+    heroBrandBreathe 5.5s cubic-bezier(0.37, 0, 0.63, 1) 1s infinite;
+}
+
+.hero .hero-brand .hero-brand-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  user-select: none;
+  text-shadow:
+    0 0 8px rgba(255, 246, 214, 0.75),
+    0 0 26px rgba(232, 195, 74, 0.8),
+    0 0 52px rgba(232, 195, 74, 0.5);
+  opacity: 0;
+  will-change: opacity;
+  animation: heroBrandGlowFade 5.5s cubic-bezier(0.37, 0, 0.63, 1) 1s infinite;
+}
+
+.hero .hero-brand::after {
+  animation: heroBrandLineFade 5.5s cubic-bezier(0.37, 0, 0.63, 1) 1s infinite;
+  will-change: opacity;
+}
+
+@keyframes heroBrandGlowFade {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes heroBrandLineFade {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-brand,
+  .hero .hero-brand .hero-brand-glow,
+  .hero .hero-brand::after { animation: none; }
+}

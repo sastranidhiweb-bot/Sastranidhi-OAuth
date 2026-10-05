@@ -186,7 +186,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="detail">
+        <section className="detail" id="team">
           <div className="wrap">
             <div className="section-head reveal">
               <div className="kicker">Our people</div>

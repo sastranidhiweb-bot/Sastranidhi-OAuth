@@ -17,8 +17,7 @@ html{scroll-behavior:smooth;scroll-padding-top:118px}
 @media(max-width:900px){ html{scroll-padding-top:145px;} }
 @media(max-width:700px){ html{scroll-padding-top:130px;} }
 @media(max-width:480px){ html{scroll-padding-top:140px;} }
-body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--blue)}
-a{text-decoration:none;color:inherit}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--blue)}a{text-decoration:none;color:inherit}
 button,input,select,textarea{font:inherit}
 .container{width:min(1200px,94%);margin:auto}
 h1,h2,h3{font-family:Georgia,"Times New Roman",serif}

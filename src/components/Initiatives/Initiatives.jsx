@@ -4,11 +4,8 @@ import '../../styles/initiatives.css';
 
 export default function Initiatives() {
   return (
-    <section id="platforms">
+    <section id="platforms" aria-label="Explore Śāstranidhi">
       <div className="wrap">
-        <div className="section-head reveal">
-          <h2>Explore Śāstranidhi</h2>
-        </div>
         <div className="tablet-grid stagger">
           {initiatives.map((item) => (
             <PlatformCard

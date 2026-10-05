@@ -14,7 +14,7 @@ export const initiatives = [
     title: 'Study & Search',
     shortLabel: 'Svādhyāya',
     description:
-      'Svādhyāya is a comprehensive digital knowledge platform for studying, searching, and exploring Vedic literature and the wider universe of Indian Knowledge Systems.',
+      'A digital platform to study, search, and explore Vedic literature and Indian Knowledge Systems.',
     // "More…" link target: the matching row on /initiatives
     moreTo: '/initiatives#svadhyaya',
     href: 'https://reader.sastranidhi.org/homePage',
@@ -29,7 +29,7 @@ export const initiatives = [
     subtitleHref: 'https://puranatilakam.com/',
     shortLabel: 'Viśleṣaka',
     description:
-      'Viśleṣaka is an advanced scriptural analysis platform that examines major sacred texts through commentaries, grammar, recitation, presentations, statistics, and multiple dimensions of study.',
+      'Analyse sacred texts through commentaries, grammar, recitation, and statistics.',
     moreTo: '/initiatives#visleshaka',
     href: 'https://puranatilakam.com/',
     devHref: 'https://puranatilakam.com/',
@@ -39,7 +39,7 @@ export const initiatives = [
     title: 'Inquire & Clarify',
     shortLabel: 'Paripraśna',
     description:
-      'Paripraśna is an interactive question-and-answer platform where seekers can ask, explore, and receive scholarly answers on Vedic literature and Indian Knowledge Systems.',
+      'Ask questions and receive scholarly answers on Vedic literature and Indian Knowledge Systems.',
     moreTo: '/initiatives#pariprasna',
     href: 'https://qna.sastranidhi.org/',
     devHref: 'https://qna.sastranidhi.org/',
@@ -49,7 +49,7 @@ export const initiatives = [
     title: 'Courses & Discourses',
     shortLabel: 'Pravacana',
     description:
-      'Pravacana is SASTRANIDHI’s comprehensive learning platform for courses, discourses, guided study, assessments, and certification in Vedic literature and Indian Knowledge Systems.',
+      'Courses, discourses, guided study, assessments, and certification in Indian Knowledge Systems.',
     moreTo: '/initiatives#pravacana',
     href: 'https://sastranidhi.edmingle.com/',
     devHref: 'https://sastranidhi.edmingle.com/',
@@ -61,37 +61,91 @@ export const stats = [
   { icon: '👥', value: '10,000+', label: 'Users' },
   { icon: '📜', value: '500+', label: 'Śāstras' },
   { icon: '🎓', value: '3+', label: 'Courses' },
+  { icon: '📚', value: '1', label: 'Publications' },
 ];
 
 export const courses = [
+  // The courses (shown on /courses and the home page). `id` is the
+  // matching detail row on /courses. No lesson count or level yet, so the
+  // card shows a "New course" badge and where it runs instead.
   {
-    topLabel: 'Introduction to Indian Philosophy',
-    lessons: '12 Lessons',
-    level: 'Beginner',
-    title: 'Indian Philosophy Foundations',
+    id: 'sanskrit-shastric',
+    isNew: true,
+    topLabel: 'Sanskrit for Śāstra',
+    lessons: 'Online · IKS-LMS',
+    level: 'New course',
+    title: 'Sanskrit for Śāstric Study',
     description:
-      'Understand the major darśanas, central questions and foundational terminology.',
+      'Learn Sanskrit with a focused approach to reading, understanding, and studying Śāstric texts.',
     href: 'https://sastranidhi.edmingle.com/',
   },
   {
-    topLabel: 'Bhagavad-gītā Study',
-    lessons: '18 Lessons',
-    level: 'Intermediate',
-    title: 'Bhagavad-gītā: Text and Meaning',
+    id: 'iks-intro',
+    isNew: true,
+    topLabel: 'Indian Knowledge Systems',
+    lessons: 'Online · IKS-LMS',
+    level: 'New course',
+    title: 'Introduction to Indian Knowledge Systems',
     description:
-      'A structured study of selected verses with traditional explanations.',
+      'Discover the foundations, scope, disciplines, and continuing relevance of India’s vast knowledge traditions.',
     href: 'https://sastranidhi.edmingle.com/',
   },
   {
-    topLabel: 'Sanskrit for Beginners',
-    lessons: '20 Lessons',
-    level: 'Beginner',
-    title: 'Reading Sanskrit Scriptures',
+    id: 'gita-gaudiya',
+    isNew: true,
+    topLabel: 'Bhagavad-gītā',
+    lessons: 'Online · IKS-LMS',
+    level: 'New course',
+    title: 'Bhagavad-gītā with Gauḍīya Commentaries',
     description:
-      'Build the skills required to read simple Sanskrit verses and terminology.',
+      'Study the Bhagavad-gītā through the rich philosophical and devotional insights of the Gauḍīya Vaiṣṇava commentarial tradition.',
     href: 'https://sastranidhi.edmingle.com/',
   },
 ];
+
+// "Bhāgavatam As It Is": a course series, one course per Skandha (canto).
+// Shown under its own heading on /courses (#bhagavatam) and as a banner
+// below the courses on the home page. `id` is each course's detail row.
+export const bhagavatamSeries = {
+  title: 'Bhāgavatam As It Is',
+  intro:
+    'A systematic study of Śrīmad-Bhāgavatam, canto by canto, combining the original text, Śrīla Prabhupāda’s Bhaktivedanta purports, traditional Vaiṣṇava commentarial insights, thematic study, recitation, presentations, and structured learning resources.',
+  courses: [
+    {
+      id: 'bhagavatam-1',
+      isNew: true,
+      topLabel: 'Skandha 1',
+      lessons: 'Online · IKS-LMS',
+      level: 'Course series',
+      title: 'Bhāgavatam As It Is — Skandha 1',
+      description:
+        'Enter the world of Śrīmad-Bhāgavatam through its foundational teachings, personalities, questions, and the circumstances that lead to the narration of the Bhāgavata.',
+      href: 'https://sastranidhi.edmingle.com/',
+    },
+    {
+      id: 'bhagavatam-2',
+      isNew: true,
+      topLabel: 'Skandha 2',
+      lessons: 'Online · IKS-LMS',
+      level: 'Course series',
+      title: 'Bhāgavatam As It Is — Skandha 2',
+      description:
+        'A focused study of the universal form, creation, meditation, the process of hearing, and the deeper philosophical structure of Śrīmad-Bhāgavatam.',
+      href: 'https://sastranidhi.edmingle.com/',
+    },
+    {
+      id: 'bhagavatam-3',
+      isNew: true,
+      topLabel: 'Skandha 3',
+      lessons: 'Online · IKS-LMS',
+      level: 'Course series',
+      title: 'Bhāgavatam As It Is — Skandha 3',
+      description:
+        'Explore creation, cosmology, Varāha-līlā, the teachings of Kapiladeva, and the profound journey of Kardama Muni and Devahūti.',
+      href: 'https://sastranidhi.edmingle.com/',
+    },
+  ],
+};
 
 export const researchFeatures = [
   {

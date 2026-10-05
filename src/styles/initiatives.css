@@ -411,3 +411,21 @@ section#platforms {
    moves from below the heading to above it (-64/12 -> -57/5), so the
    letters have ~28px on each side and the cards stay where they were. */
 .homepage #platforms .section-head{margin-top:-57px !important;margin-bottom:5px !important;}
+
+/* --- Home: no "Explore Śāstranidhi" heading ---
+   The heading used to sit in the arc's lavender area (margin-top -57px
+   above). With it gone, the cards move up into that space instead. */
+.homepage #platforms .tablet-grid{margin-top:-30px;}
+
+/* --- Home cards: name badge centred in the card, slightly larger ---
+   Only the badge row is centred; title and text stay left-aligned. */
+#platforms .tablet .tablet-head{text-align:center;}
+#platforms .tablet .icon-pill{font-size:20px;}
+#platforms .tablet .icon-pill .pill-arrow{font-size:14px;}
+
+/* --- Home cards: title centred under the badge, in the badge's colours ---
+   Title in the badge's royal violet; the optional second line in a deep
+   antique gold (dark enough to read on the white card). Description and
+   "More..." stay left-aligned. */
+#platforms .tablet h3{text-align:center;color:#45218B;}
+#platforms .tablet h3 .tablet-subtitle{color:#8A5A12;}

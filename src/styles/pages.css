@@ -1019,3 +1019,266 @@ a.inst-card-link:focus-visible {
 .page-hero + #courses.courses-page{overflow:visible;z-index:3;}
 #courses.courses-page .section-head{margin-top:-79px;}
 #courses.courses-page .section-head h2{font-size:clamp(2rem,4vw,3.2rem);}
+
+/* ---------- /collaborate ---------- */
+/* tick list in two columns (Who Can Collaborate?) */
+.ticks.ticks-2col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+}
+
+/* "Our Collaborations": what each partner entry will show, until
+   partners are listed */
+.collab-showcase {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 32px;
+  border: 1.5px dashed rgba(76, 43, 127, 0.3);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(246, 242, 251, 0.74));
+}
+
+.collab-showcase p {
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+}
+
+.collab-showcase .ticks {
+  margin: 0 0 16px;
+}
+
+.collab-showcase p.collab-showcase-note {
+  margin: 0;
+}
+
+/* closing line of "Let Us Work Together" */
+.info-card.about-vision p.collab-closing {
+  margin-top: 20px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--brand-gold);
+}
+
+/* a button inside a light info card sits below its text */
+.info-card .btn-outline {
+  margin-top: 6px;
+}
+
+@media (max-width: 700px) {
+  .ticks.ticks-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .collab-showcase {
+    padding: 22px 20px;
+  }
+}
+
+/* in-text link on /collaborate/apply */
+a.collab-inline-link {
+  color: var(--brand-violet);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+a.collab-inline-link:hover {
+  color: var(--brand-violet-light);
+}
+
+/* ---------- /support ---------- */
+/* card: number badge, Sanskrit name, gold tagline, text, link pinned to
+   the bottom so all six links line up */
+.inst-card.support-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.inst-card.support-card p.support-tagline {
+  margin: -4px 0 10px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 600;
+  color: #8A5A12;
+}
+
+.inst-card.support-card a.support-card-link {
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+/* ---------- /events ---------- */
+/* intro line on its own, no heading above it */
+.detail .section-head p:only-child {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* event card: date block left, details right (stacked on phones) */
+.event-card {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 30px 32px;
+  border: 1px solid rgba(76, 43, 127, 0.16);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(246, 242, 251, 0.8));
+  box-shadow: 0 14px 34px rgba(48, 28, 88, 0.1);
+}
+
+/* the upcoming event gets the gold left band, like the featured book */
+.event-card-upcoming {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffffff 0%, #f6f1fd 55%, #ece3fa 100%);
+}
+
+.event-card-upcoming::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, #F3DFA0, var(--brand-gold) 45%, #B8912A);
+}
+
+.event-date {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  min-height: 150px;
+  padding: 18px 10px;
+  border-radius: 12px;
+  background: var(--sn-gradient, linear-gradient(135deg, #21114F, #45218B));
+  color: var(--brand-gold);
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(41, 20, 81, 0.22);
+}
+
+.event-date-day {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.event-date-month {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #F3DFA0;
+}
+
+.event-date-year {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--lavender-light);
+}
+
+.event-label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a97619;
+}
+
+.event-body h3 {
+  margin: 0 0 14px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.15;
+  color: var(--brand-violet);
+}
+
+.event-body p {
+  margin: 0 0 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.event-body .btn-outline {
+  margin-top: 6px;
+}
+
+/* the four platforms in the launch announcement */
+.event-platforms {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.event-platforms li {
+  position: relative;
+  padding-left: 24px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.event-platforms li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  background: var(--brand-gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 3px rgba(232, 195, 74, 0.2);
+}
+
+.event-platforms a {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--brand-violet);
+  text-decoration: underline;
+  text-decoration-color: rgba(232, 195, 74, 0.7);
+  text-underline-offset: 3px;
+}
+
+.event-platforms a:hover {
+  color: var(--brand-violet-light);
+}
+
+@media (max-width: 700px) {
+  .event-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 24px 20px;
+  }
+
+  .event-date {
+    min-height: 0;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 12px;
+    padding: 14px 18px;
+  }
+
+  .event-date-day {
+    font-size: 40px;
+  }
+}
+
+/* /courses: italic one-line summary at the top of each new course row */
+.detail-row p.course-lede {
+  margin: -2px 0 16px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--brand-violet);
+}
