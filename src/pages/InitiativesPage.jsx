@@ -3,12 +3,15 @@ import Footer from '../components/Footer/Footer.jsx';
 import SiteBubbles from '../components/SiteBubbles.jsx';
 import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
 import DonateModal from '../components/Modals/DonateModal.jsx';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { PageHero, DetailRow } from '../components/PageSections/PageSections.jsx';
 import '../styles/pages.css';
 
 const initiatives = [
   {
     id: 'svadhyaya',
+    theme: 'violet',
+    watermark: 'स्वाध्याय',
     kicker: 'Study & Search',
     title: 'Svādhyāya',
     paragraphs: [
@@ -48,6 +51,8 @@ const initiatives = [
   },
   {
     id: 'visleshaka',
+    theme: 'teal',
+    watermark: 'विश्लेषक',
     kicker: 'Analyze & Assimilate',
     title: 'Viśleṣaka: Purāṇatilakam',
     paragraphs: [
@@ -79,6 +84,8 @@ const initiatives = [
   },
   {
     id: 'pariprasna',
+    theme: 'saffron',
+    watermark: 'परिप्रश्न',
     kicker: 'Inquire & Clarify',
     title: 'Paripraśna',
     paragraphs: [
@@ -112,6 +119,8 @@ const initiatives = [
   },
   {
     id: 'pravacana',
+    theme: 'rose',
+    watermark: 'प्रवचन',
     kicker: 'Courses & Discourses',
     title: 'Pravacana',
     paragraphs: [
@@ -141,7 +150,16 @@ const initiatives = [
   },
 ];
 
+// /initiatives lists every initiative; /initiatives/:id (the header dropdown
+// and the homepage "More…" links) shows just that one on its own page.
 export default function InitiativesPage() {
+  const { id } = useParams();
+  const current = id ? initiatives.find((row) => row.id === id) : null;
+
+  if (id && !current) return <Navigate to="/initiatives" replace />;
+
+  const rows = current ? [current] : initiatives;
+
   return (
     <>
       <SiteBubbles />
@@ -154,9 +172,21 @@ export default function InitiativesPage() {
 
         <section className="detail">
           <div className="wrap">
-            {initiatives.map((row) => (
-              <DetailRow key={row.title} {...row} />
+            {rows.map((row) => (
+              <DetailRow
+                key={row.id}
+                {...row}
+                actionInTitle
+                className={`feature-panel feature-panel--${row.theme}`}
+              />
             ))}
+            {current && (
+              <div className="section-more">
+                <Link className="btn-outline" to="/initiatives">
+                  ← All initiatives
+                </Link>
+              </div>
+            )}
           </div>
         </section>
       </main>

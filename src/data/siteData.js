@@ -15,8 +15,8 @@ export const initiatives = [
     shortLabel: 'Svādhyāya',
     description:
       'A digital platform to study, search, and explore Vedic literature and Indian Knowledge Systems.',
-    // "More…" link target: the matching row on /initiatives
-    moreTo: '/initiatives#svadhyaya',
+    // "More…" link target: the initiative's own page, /initiatives/:id
+    moreTo: '/initiatives/svadhyaya',
     href: 'https://reader.sastranidhi.org/homePage',
     devHref: 'https://reader.sastranidhi.org/homePage',
   },
@@ -30,7 +30,7 @@ export const initiatives = [
     shortLabel: 'Viśleṣaka',
     description:
       'Analyse sacred texts through commentaries, grammar, recitation, and statistics.',
-    moreTo: '/initiatives#visleshaka',
+    moreTo: '/initiatives/visleshaka',
     href: 'https://puranatilakam.com/',
     devHref: 'https://puranatilakam.com/',
   },
@@ -40,7 +40,7 @@ export const initiatives = [
     shortLabel: 'Paripraśna',
     description:
       'Ask questions and receive scholarly answers on Vedic literature and Indian Knowledge Systems.',
-    moreTo: '/initiatives#pariprasna',
+    moreTo: '/initiatives/pariprasna',
     href: 'https://qna.sastranidhi.org/',
     devHref: 'https://qna.sastranidhi.org/',
   },
@@ -50,7 +50,7 @@ export const initiatives = [
     shortLabel: 'Pravacana',
     description:
       'Courses, discourses, guided study, assessments, and certification in Indian Knowledge Systems.',
-    moreTo: '/initiatives#pravacana',
+    moreTo: '/initiatives/pravacana',
     href: 'https://sastranidhi.edmingle.com/',
     devHref: 'https://sastranidhi.edmingle.com/',
   },

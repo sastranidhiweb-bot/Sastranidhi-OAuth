@@ -74,6 +74,9 @@ function DetailBlock({ block }) {
 // `list` / `paragraphsAfter` (optional): a bulleted list after the paragraphs,
 // and more paragraphs after that list. `feature` (optional): an element shown
 // between the heading and the paragraphs (e.g. a featured book card).
+// `actionInTitle` (optional): put the `action` button beside the heading
+// instead of after the body text. `className` / `watermark` (optional): extra
+// classes on the row, and text drawn as a faint backdrop (data-watermark).
 export function DetailRow({
   id,
   kicker,
@@ -85,22 +88,40 @@ export function DetailRow({
   paragraphsAfter = [],
   ticks,
   action,
+  actionInTitle = false,
+  className,
+  watermark,
   note,
   card,
 }) {
+  const heading = (
+    <h2>
+      {titleHref ? (
+        <a className="detail-title-link" href={titleHref} target="_blank" rel="noopener noreferrer">
+          {title}
+        </a>
+      ) : (
+        title
+      )}
+    </h2>
+  );
+
   return (
-    <div className="detail-row reveal" id={id}>
+    <div
+      className={className ? `detail-row reveal ${className}` : 'detail-row reveal'}
+      id={id}
+      data-watermark={watermark}
+    >
       <div>
         {kicker && <div className="kicker">{kicker}</div>}
-        <h2>
-          {titleHref ? (
-            <a className="detail-title-link" href={titleHref} target="_blank" rel="noopener noreferrer">
-              {title}
-            </a>
-          ) : (
-            title
-          )}
-        </h2>
+        {action && actionInTitle ? (
+          <div className="detail-title-row">
+            {heading}
+            <ActionLink to={action.to}>{action.label}</ActionLink>
+          </div>
+        ) : (
+          heading
+        )}
         {feature}
         {paragraphs.map((block, i) => (
           <DetailBlock key={i} block={block} />
@@ -110,7 +131,7 @@ export function DetailRow({
           <DetailBlock key={i} block={block} />
         ))}
         {ticks && <TickList items={ticks} />}
-        {action && <ActionLink to={action.to}>{action.label}</ActionLink>}
+        {action && !actionInTitle && <ActionLink to={action.to}>{action.label}</ActionLink>}
         {note && <p className="detail-note">{note}</p>}
       </div>
       {card && (

@@ -3,12 +3,15 @@ import Footer from '../components/Footer/Footer.jsx';
 import SiteBubbles from '../components/SiteBubbles.jsx';
 import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
 import DonateModal from '../components/Modals/DonateModal.jsx';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { PageHero, DetailRow, CtaBand } from '../components/PageSections/PageSections.jsx';
 import '../styles/pages.css';
 
 const institutes = [
   {
     id: 'sri',
+    theme: 'violet',
+    watermark: 'शास्त्रनिधि',
     title: 'Śāstra Nidhi Research Institute (SRI)',
     paragraphs: [
       'SASTRANIDHI Research Institute (SRI) is the research and scholarly wing of SASTRANIDHI, established to promote rigorous study, preservation, interpretation, and contemporary exploration of Śāstra and Indian Knowledge Systems (IKS). The Institute brings together traditional scholarship, academic research, textual studies, digital humanities, technology, and interdisciplinary enquiry.',
@@ -32,6 +35,8 @@ const institutes = [
   },
   {
     id: 'mudgala',
+    theme: 'saffron',
+    watermark: 'मुद्गल',
     title: 'Mudgala Rishikulam',
     titleHref: 'https://mudgala.org/',
     paragraphs: [
@@ -57,6 +62,8 @@ const institutes = [
   },
   {
     id: 'gargi',
+    theme: 'rose',
+    watermark: 'गार्गी',
     title: 'Gārgī Gurukulam',
     paragraphs: [
       'Gārgī Gurukulam is a dedicated e-school for girls, envisioned to nurture knowledgeable, skilled, confident, cultured, and value-centred young women through an integrated model of education rooted in Śāstra and Indian Knowledge Systems. Named after the celebrated Vedic scholar Gārgī Vācaknavī, the Gurukulam revives the ideal of deep learning, intellectual inquiry, character, discipline, and cultural refinement while preparing students for the contemporary world.',
@@ -82,6 +89,8 @@ const institutes = [
   },
   {
     id: 'geetha',
+    theme: 'teal',
+    watermark: 'गीता',
     title: 'Gita Samskrita Gurukulam',
     paragraphs: [
       'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
@@ -100,6 +109,8 @@ const institutes = [
   },
   {
     id: 'visvanatha',
+    theme: 'plum',
+    watermark: 'विश्वनाथ',
     title: 'Viśvanātha Bhāgavata Vidyāpīṭha',
     paragraphs: [
       'Viśvanātha Bhāgavata Vidyāpīṭha is a specialised institution of SASTRANIDHI dedicated exclusively to the Śrīmad-Bhāgavatam, its traditional commentarial heritage, and the revival of the living culture of Bhāgavata study, recitation, teaching, and transmission.',
@@ -127,6 +138,8 @@ const institutes = [
   },
   {
     id: 'siksha',
+    theme: 'green',
+    watermark: 'शिक्षा',
     title: 'School of Indian Knowledge Systems and Heritage Applications (SIKSHA)',
     paragraphs: [
       'SIKSHA — School of Indian Knowledge Systems and Heritage Applications — is an educational initiative of SASTRANIDHI that integrates Indian Knowledge Systems, heritage, culture, and traditional wisdom with contemporary learning and practical applications. SIKSHA seeks to bridge the depth of India’s traditional knowledge with the needs of present-day learners.',
@@ -150,6 +163,8 @@ const institutes = [
   },
   {
     id: 'silpa',
+    theme: 'amber',
+    watermark: 'शिल्प',
     title: 'ŚILPA — Śilpa-Kalā-Kauśala Kendra',
     paragraphs: [
       'ŚILPA is SASTRANIDHI’s centre for preserving, teaching, and revitalising India’s traditional arts, crafts, practical skills, and artisan knowledge. India’s traditional knowledge includes a vast body of applied knowledge transmitted through generations of skilled practitioners — ŚILPA recognises, documents, teaches, and sustains these living traditions.',
@@ -173,6 +188,8 @@ const institutes = [
   },
   {
     id: 'bhaskara',
+    theme: 'indigo',
+    watermark: 'भास्कर',
     title: 'BHĀSKARA — Jyotiṣa-Gaṇita-Khagoḷa-Kāla Adhyayana Kendra',
     paragraphs: [
       'BHĀSKARA is SASTRANIDHI’s centre for the study and research of Jyotiṣa, Gaṇita, astronomy, Pañcāṅga, Kāla, and traditional Indian time sciences. Named in the spirit of India’s great astronomical and mathematical tradition, BHĀSKARA brings together classical textual sources, traditional methods, and rigorous contemporary study.',
@@ -196,7 +213,16 @@ const institutes = [
   },
 ];
 
+// /institutes lists every institute; /institutes/:id (the header dropdown and
+// the About page links) shows just that one on its own page.
 export default function InstitutesPage() {
+  const { id } = useParams();
+  const current = id ? institutes.find((row) => row.id === id) : null;
+
+  if (id && !current) return <Navigate to="/institutes" replace />;
+
+  const rows = current ? [current] : institutes;
+
   return (
     <>
       <SiteBubbles />
@@ -209,9 +235,21 @@ export default function InstitutesPage() {
 
         <section className="detail">
           <div className="wrap">
-            {institutes.map((row) => (
-              <DetailRow key={row.title} {...row} />
+            {rows.map((row) => (
+              <DetailRow
+                key={row.id}
+                {...row}
+                actionInTitle
+                className={`feature-panel feature-panel--${row.theme}`}
+              />
             ))}
+            {current && (
+              <div className="section-more">
+                <Link className="btn-outline" to="/institutes">
+                  ← All institutes
+                </Link>
+              </div>
+            )}
           </div>
         </section>
 

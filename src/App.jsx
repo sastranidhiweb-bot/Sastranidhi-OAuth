@@ -113,7 +113,9 @@ function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/institutes" element={<InstitutesPage />} />
+        <Route path="/institutes/:id" element={<InstitutesPage />} />
         <Route path="/initiatives" element={<InitiativesPage />} />
+        <Route path="/initiatives/:id" element={<InitiativesPage />} />
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/research" element={<ResearchPage />} />
         <Route path="/contact" element={<ContactPage />} />

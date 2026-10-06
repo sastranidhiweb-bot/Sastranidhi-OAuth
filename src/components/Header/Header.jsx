@@ -46,7 +46,8 @@ export default function Header() {
     }
   }, [animateIn]);
 
-  const isActive = (to) => pathname === to;
+  // A section tab stays active on its sub-pages (e.g. /initiatives/svadhyaya).
+  const isActive = (to) => pathname === to || (to !== '/' && pathname.startsWith(`${to}/`));
   const activeProps = (to) => ({
     className: isActive(to) ? 'active' : undefined,
     'aria-current': isActive(to) ? 'page' : undefined,
