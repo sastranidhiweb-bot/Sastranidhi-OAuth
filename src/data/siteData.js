@@ -65,14 +65,14 @@ export const stats = [
 ];
 
 export const courses = [
-  // The courses (shown on /courses and the home page). `id` is the
+  // The self-paced courses (shown on /courses and the home page). `id` is the
   // matching detail row on /courses. No lesson count or level yet, so the
   // card shows a "New course" badge and where it runs instead.
   {
     id: 'sanskrit-shastric',
     isNew: true,
     topLabel: 'Sanskrit for Śāstra',
-    lessons: 'Online · IKS-LMS',
+    lessons: 'Self-paced · IKS-LMS',
     level: 'New course',
     title: 'Sanskrit for Śāstric Study',
     description:
@@ -83,7 +83,7 @@ export const courses = [
     id: 'iks-intro',
     isNew: true,
     topLabel: 'Indian Knowledge Systems',
-    lessons: 'Online · IKS-LMS',
+    lessons: 'Self-paced · IKS-LMS',
     level: 'New course',
     title: 'Introduction to Indian Knowledge Systems',
     description:
@@ -94,7 +94,7 @@ export const courses = [
     id: 'gita-gaudiya',
     isNew: true,
     topLabel: 'Bhagavad-gītā',
-    lessons: 'Online · IKS-LMS',
+    lessons: 'Self-paced · IKS-LMS',
     level: 'New course',
     title: 'Bhagavad-gītā with Gauḍīya Commentaries',
     description:
@@ -115,7 +115,7 @@ export const bhagavatamSeries = {
       id: 'bhagavatam-1',
       isNew: true,
       topLabel: 'Skandha 1',
-      lessons: 'Online · IKS-LMS',
+      lessons: 'Live · IKS-LMS',
       level: 'Course series',
       title: 'Bhāgavatam As It Is — Skandha 1',
       description:
@@ -126,7 +126,7 @@ export const bhagavatamSeries = {
       id: 'bhagavatam-2',
       isNew: true,
       topLabel: 'Skandha 2',
-      lessons: 'Online · IKS-LMS',
+      lessons: 'Live · IKS-LMS',
       level: 'Course series',
       title: 'Bhāgavatam As It Is — Skandha 2',
       description:
@@ -137,7 +137,7 @@ export const bhagavatamSeries = {
       id: 'bhagavatam-3',
       isNew: true,
       topLabel: 'Skandha 3',
-      lessons: 'Online · IKS-LMS',
+      lessons: 'Live · IKS-LMS',
       level: 'Course series',
       title: 'Bhāgavatam As It Is — Skandha 3',
       description:

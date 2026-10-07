@@ -378,3 +378,7 @@
    (pages.css: #courses.courses-page .section-head { margin-top: -79px });
    the series heading sits normally inside its panel. */
 #courses.courses-page .course-series .section-head { margin-top: 0; }
+
+/* Second part of the page (self-paced courses), below the live series panel. */
+#courses .course-group { margin-top: 64px; }
+#courses.courses-page .course-group .section-head { margin-top: 0; }

@@ -66,19 +66,33 @@ const institutions = [
 
 const people = [
   {
-    icon: 'MGP',
-    title: 'Madhava Gopinath Prabhu',
+    name: 'Madhava Gopinath Prabhu',
+    role: 'Principal Visionary',
     text: 'Principal visionary and leader of the Śāstranidhi mission. Has led the integration of śāstric scholarship, education, research, preservation, technology, and digital knowledge systems.',
   },
   {
-    icon: 'RA',
-    title: 'Rajeswari Aluri',
+    name: 'Rajeswari Aluri',
+    role: 'Śāstra Teacher',
     text: 'Involved since the project began. Teaches śāstras to women learners and supports Śrīmad-Bhāgavatam śloka recitation activities.',
   },
   {
-    icon: 'OK',
-    title: 'Ogeti Krupaluh',
+    name: 'Ogeti Krupaluh',
+    role: 'Leader, Gītā Saṁskṛta Kendram',
     text: 'Leader of Gītā Saṁskṛta Kendram. Promotes spoken Sanskrit along with recitation, reflection, and realisation of Bhagavad-gītā teachings.',
+  },
+];
+
+// Voice-over artists credited for the padya recitations, shown as person
+// cards like the team; `text` names the padyas they voiced.
+// TODO: replace these placeholders with the actual artists.
+const voices = [
+  {
+    name: 'Voice Artist Name',
+    text: 'Voice-over for the padyas of …',
+  },
+  {
+    name: 'Voice Artist Name 2',
+    text: 'Voice-over for the padyas of …',
   },
 ];
 
@@ -108,6 +122,24 @@ function CardGrid({ items }) {
   );
 }
 
+// Person cards: a purple band with the full name and an optional `role`,
+// over the `text` description.
+function PeopleGrid({ items }) {
+  return (
+    <div className="inst-grid stagger">
+      {items.map((person) => (
+        <article className="person-card" key={person.name}>
+          <div className="person-head">
+            <h3>{person.name}</h3>
+            {person.role && <div className="person-role">{person.role}</div>}
+          </div>
+          <p>{person.text}</p>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
     <>
@@ -119,7 +151,7 @@ export default function AboutPage() {
           lede="A living treasury of Śāstra and Indian Knowledge Systems."
         />
 
-        <section className="detail">
+        <section className="detail" id="about-us">
           <div className="wrap">
             <DetailRow
               kicker="Who we are"
@@ -192,7 +224,21 @@ export default function AboutPage() {
               <div className="kicker">Our people</div>
               <h2>The People Behind Śāstranidhi</h2>
             </div>
-            <CardGrid items={people} />
+            <PeopleGrid items={people} />
+          </div>
+        </section>
+
+        <section className="detail" id="voices">
+          <div className="wrap">
+            <div className="section-head reveal">
+              <div className="kicker">With gratitude</div>
+              <h2>Voices</h2>
+              <p>
+                The padyas on Śāstranidhi are brought to life by these voice artists, who lent their
+                voices to the recitations.
+              </p>
+            </div>
+            <PeopleGrid items={voices} />
           </div>
         </section>
 

@@ -395,14 +395,10 @@ export default function CoursesPage() {
 
         <section id="courses" className="courses-page">
           <div className="wrap">
-            <div className="section-head reveal">
-              <h2>Current Courses</h2>
-              <p>Each course combines recorded lessons, readings and assessments.</p>
-            </div>
-            <div className="course-grid stagger">
-              {courses.map((course) => (
-                <CourseCard course={course} key={course.title} />
-              ))}
+            <div className="section-head reveal" id="live-courses">
+              <div className="kicker">Part 1</div>
+              <h2>Live Courses</h2>
+              <p>Scheduled online classes taught live by teachers.</p>
             </div>
 
             {/* Bhāgavatam As It Is: one series heading over its Skandha courses */}
@@ -414,6 +410,19 @@ export default function CoursesPage() {
               </div>
               <div className="course-grid stagger">
                 {bhagavatamSeries.courses.map((course) => (
+                  <CourseCard course={course} key={course.title} />
+                ))}
+              </div>
+            </div>
+
+            <div className="course-group" id="self-paced-courses">
+              <div className="section-head reveal">
+                <div className="kicker">Part 2</div>
+                <h2>Self-paced Courses</h2>
+                <p>Recorded lessons, readings and assessments you can work through at your own pace.</p>
+              </div>
+              <div className="course-grid stagger">
+                {courses.map((course) => (
                   <CourseCard course={course} key={course.title} />
                 ))}
               </div>

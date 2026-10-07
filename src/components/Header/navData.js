@@ -48,7 +48,11 @@ export const headerNav = [
   {
     to: '/about',
     label: 'About',
-    menu: [{ to: '/about#team', label: 'Our Team' }],
+    menu: [
+      { to: '/about#about-us', label: 'About Us' },
+      { to: '/about#team', label: 'Our Team' },
+      { to: '/about#voices', label: 'Voices' },
+    ],
   },
   { to: '/support', label: 'Support' },
   { to: '/contact', label: 'Contact' },
