@@ -2,6 +2,7 @@ import Header from '../components/Header/Header.jsx';
 import Hero from '../components/Hero/Hero.jsx';
 import Initiatives from '../components/Initiatives/Initiatives.jsx';
 import Stats from '../components/Stats/Stats.jsx';
+import LaunchCountdown from '../components/LaunchCountdown/LaunchCountdown.jsx';
 import About from '../components/About/About.jsx';
 import Courses from '../components/Courses/Courses.jsx';
 import Research from '../components/Research/Research.jsx';
@@ -22,6 +23,7 @@ export default function HomePage() {
         <main>
           <Hero />
           <Initiatives />
+          <LaunchCountdown />
           <Stats />
           <Courses />
           <Research />
