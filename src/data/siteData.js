@@ -26,13 +26,13 @@ export const initiatives = [
     // second title line; only the `subtitleUnderlined` part is underlined
     subtitle: 'Bhagavatam :',
     subtitleUnderlined: 'Puranatilakam',
-    subtitleHref: 'https://puranatilakam.com/',
+    subtitleHref: 'https://vislesaka.sastranidhi.org/',
     shortLabel: 'Viśleṣaka',
     description:
       'Analyse sacred texts through commentaries, grammar, recitation, and statistics.',
     moreTo: '/initiatives/visleshaka',
-    href: 'https://puranatilakam.com/',
-    devHref: 'https://puranatilakam.com/',
+    href: 'https://vislesaka.sastranidhi.org/',
+    devHref: 'https://vislesaka.sastranidhi.org/',
   },
   {
     icon: 'Paripraśna',
