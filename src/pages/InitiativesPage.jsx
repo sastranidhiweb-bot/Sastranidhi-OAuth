@@ -71,7 +71,10 @@ const initiatives = [
       'Translations and cross-references',
       'Search and research tools',
     ],
-    action: { to: 'https://puranatilakam.com/', label: 'Open Purāṇatilakam →' },
+    action: [
+      { to: 'https://vislesaka.sastranidhi.org/', label: 'Open Viśleṣaka →' },
+      { to: 'https://puranatilakam.com/', label: 'Open Purāṇatilakam →' },
+    ],
     card: {
       dark: true,
       title: 'Best for',

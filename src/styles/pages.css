@@ -183,6 +183,12 @@
   margin: 0;
 }
 
+.detail-row .detail-title-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .detail-row .detail-title-row .btn-outline {
   padding: 9px 18px;
   font-size: 13px;

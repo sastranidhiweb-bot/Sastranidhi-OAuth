@@ -798,3 +798,289 @@ header .subbar-inner .sb-internship {
 @media (max-width: 480px) {
   header .subbar-inner .sb-internship { font-size: 12px; letter-spacing: 0.8px; }
 }
+
+/* ============================================================
+   HEADER POLISH — jaali texture, glass nav capsule with pill
+   links, two-tone subbar with a gold rule, internship badge.
+   Loaded last, so it layers over the ported rules above.
+   ============================================================ */
+
+/* faint jaali (lattice) texture over the existing gradient;
+   `html body header` outranks the earlier !important backgrounds */
+html body header {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M18 0L36 18L18 36L0 18Z' fill='none' stroke='%23F3DFA0' stroke-opacity='.07'/%3E%3Ccircle cx='18' cy='18' r='1.4' fill='%23F3DFA0' fill-opacity='.14'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 15% 0%, rgba(232, 196, 90, 0.18), transparent 38%),
+    radial-gradient(circle at 85% 120%, rgba(160, 110, 240, 0.38), transparent 52%),
+    linear-gradient(115deg, #3A1C82 0%, #5129A8 46%, #7A45D6 100%) !important;
+  box-shadow: 0 8px 28px rgba(30, 12, 80, 0.32) !important;
+}
+
+/* logo: a soft gold aura around the existing ring */
+html body header .brand .glyph {
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 0 0 6px rgba(232, 195, 74, 0.16),
+    0 0 26px 4px rgba(232, 195, 74, 0.32);
+}
+
+/* nav links sit in a glass capsule */
+header nav.links {
+  gap: 2px;
+  padding: 5px 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(243, 223, 160, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 8px 24px rgba(20, 8, 50, 0.25);
+}
+
+header nav.links > a,
+header nav.links .nav-dd > a {
+  padding: 7px 12px;
+  border-radius: 999px;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+header nav.links > a::after,
+header nav.links .nav-dd > a::after {
+  display: none;
+}
+
+header nav.links > a:hover,
+header nav.links .nav-dd > a:hover,
+header nav.links .nav-dd:focus-within > a {
+  transform: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+header nav.links > a.active,
+header nav.links .nav-dd > a.active {
+  background: linear-gradient(135deg, rgba(246, 218, 106, 0.24), rgba(232, 195, 74, 0.1));
+  box-shadow: inset 0 0 0 1px rgba(232, 195, 74, 0.6), 0 0 14px rgba(232, 195, 74, 0.22);
+}
+
+@media (max-width: 1240px) {
+  header nav.links > a,
+  header nav.links .nav-dd > a { padding: 6px 8px; }
+}
+
+/* subbar: darker glass band under a gold rule that fades at the ends */
+html body header .subbar {
+  background: rgba(20, 8, 50, 0.24);
+  border-top: none;
+}
+
+header .subbar::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(243, 223, 160, 0.65) 20%, rgba(243, 223, 160, 0.65) 80%, transparent);
+}
+
+/* internship link as a gold badge with a live dot */
+html body header .subbar-inner .sb-internship {
+  position: relative;
+  padding: 6px 16px 6px 30px;
+  border: 1px solid rgba(232, 195, 74, 0.6);
+  border-radius: 999px;
+  background: rgba(232, 195, 74, 0.1);
+  box-shadow: 0 0 16px rgba(232, 195, 74, 0.18);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+header .subbar-inner .sb-internship::before {
+  content: "";
+  position: absolute;
+  left: 13px; top: 50%;
+  width: 8px; height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--brand-gold);
+  animation: internDot 2s ease-out infinite !important;
+}
+
+@keyframes internDot {
+  0%   { box-shadow: 0 0 0 0 rgba(232, 195, 74, 0.7); }
+  100% { box-shadow: 0 0 0 8px rgba(232, 195, 74, 0); }
+}
+
+html body header .subbar-inner .sb-internship:hover,
+html body header .subbar-inner .sb-internship:focus-visible {
+  color: #21163F;
+  background: linear-gradient(135deg, #F6DA6A, #E8C34A);
+  border-color: #F6DA6A;
+  box-shadow: 0 6px 18px rgba(232, 195, 74, 0.35);
+}
+
+html body header .subbar-inner .sb-internship:hover::before,
+html body header .subbar-inner .sb-internship:focus-visible::before {
+  background: #21163F;
+}
+
+@media (max-width: 480px) {
+  html body header .subbar-inner .sb-internship { padding: 5px 12px 5px 26px; }
+  header .subbar-inner .sb-internship::before { left: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header .subbar-inner .sb-internship::before { animation: none !important; }
+}
+
+/* ============================================================
+   HEADER 3D — cursor light, coin-spin logo, raised capsule and
+   pills, chunky press-down buttons, flipping social icons.
+   ============================================================ */
+
+/* cursor-following light (Header.jsx sets --mx / --my) */
+header .hdr-spot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(243, 223, 160, 0.16), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+header:hover .hdr-spot { opacity: 1; }
+
+/* the rows sit above the light; the nav row above the subbar so its
+   dropdowns still overlap it */
+header .nav { position: relative; z-index: 3; }
+
+/* logo: a gold coin that spins in 3D every few seconds and tilts on hover */
+header .brand { perspective: 600px; }
+html body header .brand .glyph {
+  transform-style: preserve-3d;
+  animation: logoPulse 4.5s ease-in-out infinite, coinSpin 9s cubic-bezier(0.65, 0, 0.35, 1) 1.5s infinite;
+}
+@keyframes coinSpin {
+  0%, 84% { transform: rotateY(0); }
+  100%    { transform: rotateY(360deg); }
+}
+html body header .brand:hover .glyph {
+  animation: logoPulse 4.5s ease-in-out infinite;
+  transform: rotateX(14deg) rotateY(-18deg) scale(1.06);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* capsule: embossed glass with a lit top edge and shaded bottom edge */
+html body header nav.links {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -2px 0 rgba(20, 8, 50, 0.35),
+    0 10px 26px rgba(20, 8, 50, 0.35),
+    0 2px 0 rgba(20, 8, 50, 0.25);
+  perspective: 500px;
+}
+
+header nav.links > a,
+header nav.links .nav-dd > a {
+  text-shadow: 0 1px 0 rgba(20, 8, 50, 0.45), 0 2px 6px rgba(20, 8, 50, 0.3);
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease,
+              transform 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* hover: the pill lifts toward the viewer */
+html body header nav.links > a:hover,
+html body header nav.links .nav-dd > a:hover,
+html body header nav.links .nav-dd:focus-within > a {
+  transform: translateY(-2px) rotateX(12deg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 14px rgba(20, 8, 50, 0.35);
+}
+
+/* current page: a raised gold pill */
+html body header nav.links > a.active,
+html body header nav.links .nav-dd > a.active {
+  background: linear-gradient(180deg, rgba(246, 218, 106, 0.34), rgba(201, 160, 50, 0.14));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 190, 0.55),
+    inset 0 0 0 1px rgba(232, 195, 74, 0.7),
+    0 3px 0 rgba(150, 110, 20, 0.55),
+    0 8px 18px rgba(232, 195, 74, 0.25);
+  text-shadow: 0 1px 0 rgba(20, 8, 50, 0.6), 0 0 10px rgba(232, 195, 74, 0.45);
+}
+
+/* Donate / Sign up: chunky gold keys with a visible edge that press down */
+html body header .btn-donate,
+html body header .sb-signup {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(150, 110, 20, 0.35),
+    0 4px 0 #A8842A,
+    0 10px 22px rgba(10, 4, 28, 0.45),
+    0 0 22px rgba(232, 195, 74, 0.3) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+html body header .btn-donate:hover,
+html body header .sb-signup:hover {
+  transform: translateY(-2px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(150, 110, 20, 0.35),
+    0 6px 0 #A8842A,
+    0 16px 30px rgba(10, 4, 28, 0.5),
+    0 0 30px rgba(232, 195, 74, 0.45) !important;
+}
+html body header .btn-donate:active,
+html body header .sb-signup:active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 0 #A8842A,
+    0 4px 10px rgba(10, 4, 28, 0.4) !important;
+}
+
+html body header .sb-login {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 0 rgba(20, 8, 50, 0.45), 0 8px 18px rgba(10, 4, 28, 0.35) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+html body header .sb-login:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 rgba(20, 8, 50, 0.45) !important;
+}
+
+/* social icons: glassy spheres that flip in 3D on hover */
+header .sb-social { perspective: 500px; }
+html body header .sb-icon {
+  background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.06) 55%, rgba(20, 8, 50, 0.25) 100%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(20, 8, 50, 0.35), 0 4px 10px rgba(10, 4, 28, 0.35);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+html body header .sb-pivotra { background: #fff; }
+html body header .sb-icon:hover,
+html body header .sb-icon:focus-visible {
+  transform: translateY(-3px) rotateY(360deg);
+}
+html body header .sb-icon:hover svg { transform: scale(1.1); }
+
+/* gold rule above the subbar: a bright glint runs along it */
+header .subbar::after {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 180px;
+  height: 3px;
+  background: radial-gradient(ellipse at center, rgba(255, 244, 200, 0.95), rgba(243, 223, 160, 0.4) 40%, transparent 70%);
+  filter: blur(0.5px);
+  animation: ruleGlint 7s ease-in-out infinite !important;
+  pointer-events: none;
+}
+@keyframes ruleGlint {
+  0%   { transform: translateX(-200px); opacity: 0; }
+  10%  { opacity: 1; }
+  60%  { transform: translateX(calc(100vw + 20px)); opacity: 1; }
+  61%, 100% { transform: translateX(calc(100vw + 20px)); opacity: 0; }
+}
+
+@media (hover: none) {
+  header .hdr-spot { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body header .brand .glyph,
+  header .subbar::after { animation: none !important; }
+  html body header .sb-icon:hover,
+  html body header .sb-icon:focus-visible { transform: translateY(-2px); }
+}

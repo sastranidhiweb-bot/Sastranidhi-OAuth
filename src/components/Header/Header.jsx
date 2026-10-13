@@ -65,10 +65,20 @@ export default function Header() {
   // client-side route change doesn't reset focus, so release it on click.
   const releaseFocus = (e) => e.currentTarget.blur();
 
+  // Cursor-following light (.hdr-spot): write the position straight to CSS
+  // variables so moving the mouse doesn't re-render the header.
+  const trackSpot = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+  };
+
   return (
     <header
       className={[scrolled && 'scrolled', animateIn && 'header-animate'].filter(Boolean).join(' ')}
+      onMouseMove={trackSpot}
     >
+      <span className="hdr-spot" aria-hidden="true"></span>
       <div className="wrap nav">
         <Link to="/" className="brand" onClick={goHome} aria-label="Śāstranidhi home">
           <span className="glyph">

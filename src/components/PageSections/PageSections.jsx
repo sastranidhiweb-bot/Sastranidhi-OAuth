@@ -74,7 +74,8 @@ function DetailBlock({ block }) {
 // `list` / `paragraphsAfter` (optional): a bulleted list after the paragraphs,
 // and more paragraphs after that list. `feature` (optional): an element shown
 // between the heading and the paragraphs (e.g. a featured book card).
-// `actionInTitle` (optional): put the `action` button beside the heading
+// `action` may be a single { to, label } or an array of them.
+// `actionInTitle` (optional): put the `action` button(s) beside the heading
 // instead of after the body text. `className` / `watermark` (optional): extra
 // classes on the row, and text drawn as a faint backdrop (data-watermark).
 export function DetailRow({
@@ -106,6 +107,13 @@ export function DetailRow({
     </h2>
   );
 
+  const actions = action ? [].concat(action) : [];
+  const actionLinks = actions.map((a) => (
+    <ActionLink key={a.to} to={a.to}>
+      {a.label}
+    </ActionLink>
+  ));
+
   return (
     <div
       className={className ? `detail-row reveal ${className}` : 'detail-row reveal'}
@@ -114,10 +122,10 @@ export function DetailRow({
     >
       <div>
         {kicker && <div className="kicker">{kicker}</div>}
-        {action && actionInTitle ? (
+        {actions.length > 0 && actionInTitle ? (
           <div className="detail-title-row">
             {heading}
-            <ActionLink to={action.to}>{action.label}</ActionLink>
+            <div className="detail-title-actions">{actionLinks}</div>
           </div>
         ) : (
           heading
@@ -131,7 +139,7 @@ export function DetailRow({
           <DetailBlock key={i} block={block} />
         ))}
         {ticks && <TickList items={ticks} />}
-        {action && !actionInTitle && <ActionLink to={action.to}>{action.label}</ActionLink>}
+        {actions.length > 0 && !actionInTitle && actionLinks}
         {note && <p className="detail-note">{note}</p>}
       </div>
       {card && (
