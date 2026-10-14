@@ -31,8 +31,8 @@ export const initiatives = [
     description:
       'Analyse sacred texts through commentaries, grammar, recitation, and statistics.',
     moreTo: '/initiatives/visleshaka',
-    href: 'https://vislesaka.sastranidhi.org/explore',
-    devHref: 'https://vislesaka.sastranidhi.org/explore',
+    href: 'https://vislesaka.sastranidhi.org/',
+    devHref: 'https://vislesaka.sastranidhi.org/',
   },
   {
     icon: 'Paripraśna',
