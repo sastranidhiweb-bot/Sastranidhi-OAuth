@@ -72,7 +72,7 @@ const initiatives = [
       'Search and research tools',
     ],
     action: [
-      { to: 'https://vislesaka.sastranidhi.org/', label: 'Open Viśleṣaka →' },
+      { to: 'https://vislesaka.sastranidhi.org/explore', label: 'Open Viśleṣaka →' },
       { to: 'https://puranatilakam.com/', label: 'Open Purāṇatilakam →' },
     ],
     card: {
