@@ -144,7 +144,7 @@ const initiatives = [
       'Assessments and certificates',
       'Discourse recordings',
     ],
-    action: { to: '/courses', label: 'Open Pravacana →' },
+    action: { to: 'https://pravacana-anzxchov.onslate.in/', label: 'Open Pravacana →' },
     card: {
       dark: true,
       title: 'Featured tracks',
