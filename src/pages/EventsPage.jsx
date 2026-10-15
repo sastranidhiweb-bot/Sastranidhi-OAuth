@@ -111,7 +111,7 @@ export default function EventsPage() {
                   vision, bringing together texts, commentaries, translations, study resources,
                   recitations, presentations, and analytical tools within one integrated platform.
                 </p>
-                <ActionLink to="https://puranatilakam.com/">Visit Purāṇa Tilakam →</ActionLink>
+                <ActionLink to="https://vislesaka.sastranidhi.org/puranatilakam/">Visit Purāṇa Tilakam →</ActionLink>
               </div>
             </article>
           </div>

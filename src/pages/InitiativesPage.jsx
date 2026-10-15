@@ -73,7 +73,7 @@ const initiatives = [
     ],
     action: [
       { to: 'https://vislesaka.sastranidhi.org/', label: 'Open Viśleṣaka →' },
-      { to: 'https://puranatilakam.com/', label: 'Open Purāṇatilakam →' },
+      { to: 'https://vislesaka.sastranidhi.org/puranatilakam/', label: 'Open Purāṇatilakam →' },
     ],
     card: {
       dark: true,
