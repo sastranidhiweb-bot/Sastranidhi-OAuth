@@ -51,8 +51,8 @@ export const initiatives = [
     description:
       'Courses, discourses, guided study, assessments, and certification in Indian Knowledge Systems.',
     moreTo: '/initiatives/pravacana',
-    href: 'https://sastranidhi.edmingle.com/',
-    devHref: 'https://sastranidhi.edmingle.com/',
+    href: 'https://pravacana-anzxchov.onslate.in/',
+    devHref: 'https://pravacana-anzxchov.onslate.in/',
   },
 ];
 
