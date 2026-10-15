@@ -51,8 +51,8 @@ export const initiatives = [
     description:
       'Courses, discourses, guided study, assessments, and certification in Indian Knowledge Systems.',
     moreTo: '/initiatives/pravacana',
-    href: 'https://pravacana-anzxchov.onslate.in/',
-    devHref: 'https://pravacana-anzxchov.onslate.in/',
+    href: 'https://pravacana.onslate.in/',
+    devHref: 'https://pravacana.onslate.in/',
   },
 ];
 
