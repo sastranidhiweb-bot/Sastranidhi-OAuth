@@ -32,7 +32,7 @@ function TickerItem({ remaining }) {
     <span className="lc-item">
       <span className="lc-ornament">✦</span>
       <span className="lc-text">
-        The <strong>SASTRANIDHI Digital Platform</strong> launches on
+        <strong>SASTRANIDHI Digital Platform</strong> launches on
       </span>
       <span className="lc-date">27 · Dec · 2026</span>
       <span className="lc-clock">
