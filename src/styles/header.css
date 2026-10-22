@@ -1069,3 +1069,20 @@ header .subbar::after {
   html body header .sb-icon:hover,
   html body header .sb-icon:focus-visible { transform: translateY(-2px); }
 }
+
+/* --- Subbar: larger on desktop (icons, internship badge, Log in / Sign up).
+   Tablet and phone layouts (<= 900px) keep their own compact sizes. --- */
+@media (min-width: 901px) {
+  header .subbar-inner { padding-top: 10px; padding-bottom: 10px; }
+  header .sb-social { gap: 12px; }
+  header .sb-icon { width: 40px; height: 40px; }
+  header .sb-icon svg { width: 19px; height: 19px; }
+  header .sb-pivotra img { width: 22px; height: 27px; }
+  html body header .subbar-inner .sb-internship {
+    padding: 8px 20px 8px 34px;
+    font-size: 16px;
+  }
+  header .subbar-inner .sb-internship::before { left: 15px; }
+  header .sb-auth { gap: 10px; }
+  header .sb-btn { min-height: 40px; padding: 0 20px; font-size: 14px; }
+}
