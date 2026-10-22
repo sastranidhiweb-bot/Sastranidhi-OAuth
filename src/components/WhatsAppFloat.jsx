@@ -7,7 +7,7 @@ export default function WhatsAppFloat() {
         href="https://whatsapp.com/channel/0029VbDKfR53mFY1T0Lfdb1O"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Follow Sastranidhi on WhatsApp"
+        aria-label="Follow Sastra Nidhi on WhatsApp"
       >
         <span className="wa-ring" />
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

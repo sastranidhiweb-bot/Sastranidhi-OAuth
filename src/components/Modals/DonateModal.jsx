@@ -37,10 +37,10 @@ export default function DonateModal() {
       id="donateModal"
       isOpen={openModal === 'donate'}
       onClose={close}
-      title="Support Sastranidhi"
+      title="Support Sastra Nidhi"
     >
       <form onSubmit={handleSubmit}>
-        <input type="hidden" name="_subject" value="New Sastranidhi Donation / Support Enquiry" />
+        <input type="hidden" name="_subject" value="New Sastra Nidhi Donation / Support Enquiry" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <input type="text" name="name" required placeholder="Full name" />

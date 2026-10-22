@@ -14,7 +14,7 @@ const institutes = [
     watermark: 'शास्त्रनिधि',
     title: 'Śāstra Nidhi Research Institute (SRI)',
     paragraphs: [
-      'SASTRANIDHI Research Institute (SRI) is the research and scholarly wing of SASTRANIDHI, established to promote rigorous study, preservation, interpretation, and contemporary exploration of Śāstra and Indian Knowledge Systems (IKS). The Institute brings together traditional scholarship, academic research, textual studies, digital humanities, technology, and interdisciplinary enquiry.',
+      'SASTRA NIDHI Research Institute (SRI) is the research and scholarly wing of SASTRA NIDHI, established to promote rigorous study, preservation, interpretation, and contemporary exploration of Śāstra and Indian Knowledge Systems (IKS). The Institute brings together traditional scholarship, academic research, textual studies, digital humanities, technology, and interdisciplinary enquiry.',
     ],
     ticks: [
       'Vedic literature, Purāṇas, Itihāsas, Darśanas, Vaiṣṇava literature, and Sanskrit',
@@ -94,7 +94,7 @@ const institutes = [
     title: 'Gita Samskrita Gurukulam',
     paragraphs: [
       'The institute studies primary texts in their original languages and traditional frameworks. Its work includes critical editions, comparative studies and the documentation of manuscripts held in private and institutional collections.',
-      'Research is carried out with traditional scholars and university faculty, and results are published through Śāstranidhi’s repositories and publications.',
+      'Research is carried out with traditional scholars and university faculty, and results are published through Śāstra Nidhi’s repositories and publications.',
     ],
     ticks: [
       'Vedic, Purāṇic and Itihāsa literature',
@@ -113,7 +113,7 @@ const institutes = [
     watermark: 'विश्वनाथ',
     title: 'Viśvanātha Bhāgavata Vidyāpīṭha',
     paragraphs: [
-      'Viśvanātha Bhāgavata Vidyāpīṭha is a specialised institution of SASTRANIDHI dedicated exclusively to the Śrīmad-Bhāgavatam, its traditional commentarial heritage, and the revival of the living culture of Bhāgavata study, recitation, teaching, and transmission.',
+      'Viśvanātha Bhāgavata Vidyāpīṭha is a specialised institution of SASTRA NIDHI dedicated exclusively to the Śrīmad-Bhāgavatam, its traditional commentarial heritage, and the revival of the living culture of Bhāgavata study, recitation, teaching, and transmission.',
       'The Vidyāpīṭha provides a systematic and comprehensive study of the Bhāgavatam together with the commentaries of the great Vaiṣṇava ācāryas, including Śrīdhara Svāmī and later Vaiṣṇava commentators. Its aim is to enable students and scholars to engage not only with the text of the Bhāgavatam, but also with the rich interpretative traditions that have preserved and explained its philosophy, theology, devotion, aesthetics, and spiritual practice across generations.',
     ],
     ticks: [
@@ -142,7 +142,7 @@ const institutes = [
     watermark: 'शिक्षा',
     title: 'School of Indian Knowledge Systems and Heritage Applications (SIKSHA)',
     paragraphs: [
-      'SIKSHA — School of Indian Knowledge Systems and Heritage Applications — is an educational initiative of SASTRANIDHI that integrates Indian Knowledge Systems, heritage, culture, and traditional wisdom with contemporary learning and practical applications. SIKSHA seeks to bridge the depth of India’s traditional knowledge with the needs of present-day learners.',
+      'SIKSHA — School of Indian Knowledge Systems and Heritage Applications — is an educational initiative of SASTRA NIDHI that integrates Indian Knowledge Systems, heritage, culture, and traditional wisdom with contemporary learning and practical applications. SIKSHA seeks to bridge the depth of India’s traditional knowledge with the needs of present-day learners.',
     ],
     ticks: [
       'Śāstra, philosophy, culture, heritage, and Sanskrit',
@@ -167,7 +167,7 @@ const institutes = [
     watermark: 'शिल्प',
     title: 'ŚILPA — Śilpa-Kalā-Kauśala Kendra',
     paragraphs: [
-      'ŚILPA is SASTRANIDHI’s centre for preserving, teaching, and revitalising India’s traditional arts, crafts, practical skills, and artisan knowledge. India’s traditional knowledge includes a vast body of applied knowledge transmitted through generations of skilled practitioners — ŚILPA recognises, documents, teaches, and sustains these living traditions.',
+      'ŚILPA is SASTRA NIDHI’s centre for preserving, teaching, and revitalising India’s traditional arts, crafts, practical skills, and artisan knowledge. India’s traditional knowledge includes a vast body of applied knowledge transmitted through generations of skilled practitioners — ŚILPA recognises, documents, teaches, and sustains these living traditions.',
     ],
     ticks: [
       'Traditional crafts and visual and decorative arts',
@@ -192,7 +192,7 @@ const institutes = [
     watermark: 'भास्कर',
     title: 'BHĀSKARA — Jyotiṣa-Gaṇita-Khagoḷa-Kāla Adhyayana Kendra',
     paragraphs: [
-      'BHĀSKARA is SASTRANIDHI’s centre for the study and research of Jyotiṣa, Gaṇita, astronomy, Pañcāṅga, Kāla, and traditional Indian time sciences. Named in the spirit of India’s great astronomical and mathematical tradition, BHĀSKARA brings together classical textual sources, traditional methods, and rigorous contemporary study.',
+      'BHĀSKARA is SASTRA NIDHI’s centre for the study and research of Jyotiṣa, Gaṇita, astronomy, Pañcāṅga, Kāla, and traditional Indian time sciences. Named in the spirit of India’s great astronomical and mathematical tradition, BHĀSKARA brings together classical textual sources, traditional methods, and rigorous contemporary study.',
     ],
     ticks: [
       'Jyotiṣa, Gaṇita, and Khagoḷa',
@@ -230,7 +230,7 @@ export default function InstitutesPage() {
       <main>
         <PageHero
           title="Our Institutes"
-          lede="Three centres carry the work of Śāstranidhi: textual research, language learning and digital preservation."
+          lede="Three centres carry the work of Śāstra Nidhi: textual research, language learning and digital preservation."
         />
 
         <section className="detail">

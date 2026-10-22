@@ -52,7 +52,7 @@ export default function SubscribeSection() {
               <div className="subscribe-label">FREE · DELIVERED TO YOUR INBOX</div>
               <p className="subscribe-description">
                 Join our readership and receive every new issue — articles, research
-                notes and stories from the Sastranidhi community — as soon as it is
+                notes and stories from the Sastra Nidhi community — as soon as it is
                 published.
               </p>
 

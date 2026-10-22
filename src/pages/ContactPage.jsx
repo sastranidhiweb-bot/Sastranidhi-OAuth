@@ -61,7 +61,7 @@ export default function ContactPage() {
       data.append('email', formData.email);
       data.append('subject', formData.subject);
       data.append('message', formData.message);
-      data.append('_subject', 'New message from Sastranidhi Contact page');
+      data.append('_subject', 'New message from Sastra Nidhi Contact page');
       data.append('_captcha', 'false');
       data.append('_template', 'table');
       data.append('_replyto', formData.email);
@@ -95,7 +95,7 @@ export default function ContactPage() {
             <div className="wrap">
               <div className="contact-shell">
                 <div className="contact-intro reveal">
-                  <div className="contact-badge">✦ CONNECT WITH ŚĀSTRANIDHI</div>
+                  <div className="contact-badge">✦ CONNECT WITH ŚĀSTRA NIDHI</div>
                   <h2>
                     Preserving <span>Śāstra.</span>
                     <br />
@@ -103,17 +103,17 @@ export default function ContactPage() {
                   </h2>
                   <p className="contact-lede">
                     Have a question, research idea, course enquiry or collaboration proposal? Reach
-                    out to the Śāstranidhi team. We usually respond within one business day.
+                    out to the Śāstra Nidhi team. We usually respond within one business day.
                   </p>
 
                   <div className="contact-logo-card">
                     <div className="contact-logo-orbit">
                       <span className="orbit orbit-a"></span>
                       <span className="orbit orbit-b"></span>
-                      <img src="/images/logo.png" alt="Śāstranidhi emblem" />
+                      <img src="/images/logo.png" alt="Śāstra Nidhi emblem" />
                     </div>
                     <div>
-                      <strong>Śāstranidhi</strong>
+                      <strong>Śāstra Nidhi</strong>
                       <small>SVĀDHYĀYA · VIŚLEṢAKA · PARIPRAŚNA · PRAVACANA</small>
                     </div>
                   </div>
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   </div>
                   <h3>Send us a message</h3>
                   <p>
-                    Tell us how we can help. Your message will be sent securely to our Sastranidhi
+                    Tell us how we can help. Your message will be sent securely to our Sastra Nidhi
                     inbox.
                   </p>
 
@@ -264,7 +264,7 @@ export default function ContactPage() {
             href="https://whatsapp.com/channel/0029VbDKfR53mFY1T0Lfdb1O"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Follow Sastranidhi on WhatsApp"
+            aria-label="Follow Sastra Nidhi on WhatsApp"
           >
             <span className="wa-ring" />
             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

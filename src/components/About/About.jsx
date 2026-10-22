@@ -5,10 +5,10 @@ export default function About() {
     <section id="about">
       <div className="wrap about-grid">
         <div className="about-copy reveal">
-          <div className="kicker">ABOUT SASTRANIDHI</div>
+          <div className="kicker">ABOUT SASTRA NIDHI</div>
           <h2>Preserving Śāstra. Enabling Research. Inspiring Learning.</h2>
           <p>
-            Sastranidhi is dedicated to the study, preservation and dissemination of
+            Sastra Nidhi is dedicated to the study, preservation and dissemination of
             India's scriptural and knowledge traditions. Through research repositories,
             educational programs, publications, technology platforms and scholar
             collaboration, the institution makes authentic learning accessible to

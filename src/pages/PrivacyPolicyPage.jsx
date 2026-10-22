@@ -10,7 +10,7 @@ const sections = [
   {
     title: 'Introduction',
     body: [
-      'Śāstranidhi (“we”, “our”, “us”) operates the website sastranidhi.org and its related subdomains and services. This Privacy Policy explains what information we collect, how we use it, and the choices you have.',
+      'Śāstra Nidhi (“we”, “our”, “us”) operates the website sastranidhi.org and its related subdomains and services. This Privacy Policy explains what information we collect, how we use it, and the choices you have.',
       'By using our website, you agree to the practices described here.',
     ],
   },

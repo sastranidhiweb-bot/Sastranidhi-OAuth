@@ -80,14 +80,14 @@ export default function Header() {
     >
       <span className="hdr-spot" aria-hidden="true"></span>
       <div className="wrap nav">
-        <Link to="/" className="brand" onClick={goHome} aria-label="Śāstranidhi home">
+        <Link to="/" className="brand" onClick={goHome} aria-label="Śāstra Nidhi home">
           <span className="glyph">
             <span className="halo2"></span>
             <span className="halo"></span>
             <span className="spark"></span>
             <img
               src={BRAND_LOGO_SRC}
-              alt="Śāstranidhi emblem"
+              alt="Śāstra Nidhi emblem"
               loading="eager"
               decoding="async"
             />
@@ -158,7 +158,7 @@ export default function Header() {
               href="https://www.facebook.com/profile.php?id=61594228293761"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Facebook"
+              aria-label="Śāstra Nidhi on Facebook"
               title="Facebook"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -170,7 +170,7 @@ export default function Header() {
               href="https://www.linkedin.com/in/shastra-nidhi-367125436/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on LinkedIn"
+              aria-label="Śāstra Nidhi on LinkedIn"
               title="LinkedIn"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -182,7 +182,7 @@ export default function Header() {
               href="https://www.instagram.com/media.shastranidhi?stkn=MWtmdDR3am1qNjY4dA=="
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Instagram"
+              aria-label="Śāstra Nidhi on Instagram"
               title="Instagram"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -194,7 +194,7 @@ export default function Header() {
               href="https://twitter.com/sastranidhi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Twitter / X"
+              aria-label="Śāstra Nidhi on Twitter / X"
               title="Twitter"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -206,7 +206,7 @@ export default function Header() {
               href="https://whatsapp.com/channel/0029VbDKfR53mFY1T0Lfdb1O"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on WhatsApp"
+              aria-label="Śāstra Nidhi on WhatsApp"
               title="WhatsApp"
             >
               <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
@@ -218,7 +218,7 @@ export default function Header() {
               href="https://www.youtube.com/@sastranidhi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on YouTube"
+              aria-label="Śāstra Nidhi on YouTube"
               title="YouTube"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -230,7 +230,7 @@ export default function Header() {
               href="https://www.pivotra.in/portal/pivotra/group/%C5%9B%C4%81stranidhi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Pivotra"
+              aria-label="Śāstra Nidhi on Pivotra"
               title="Pivotra"
             >
               <img src="/assets/pivotra-logo.png" alt="" />

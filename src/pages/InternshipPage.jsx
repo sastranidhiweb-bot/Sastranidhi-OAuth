@@ -100,13 +100,13 @@ export default function InternshipPage() {
           <div className="wrap">
             <div className="contact-shell internship-shell">
               <div className="contact-intro internship-intro reveal">
-                <h2>Internship at Śāstranidhi</h2>
+                <h2>Internship at Śāstra Nidhi</h2>
                 <p className="contact-lede">
-                  Śāstranidhi welcomes students and recent graduates who wish to contribute to the
+                  Śāstra Nidhi welcomes students and recent graduates who wish to contribute to the
                   study, preservation, and dissemination of Indian Knowledge Systems.
                 </p>
                 <p className="contact-lede">
-                  An internship at Śāstranidhi is an opportunity to work alongside our research,
+                  An internship at Śāstra Nidhi is an opportunity to work alongside our research,
                   editorial, and technology teams on real projects — from digitisation of texts and
                   editorial work to Sanskrit transcription, content writing, web development, design,
                   and community outreach.
@@ -262,7 +262,7 @@ export default function InternshipPage() {
                   </div>
                   <div className="field">
                     <label htmlFor="i-message">
-                      Why do you want to intern with Śāstranidhi? <i>*</i>
+                      Why do you want to intern with Śāstra Nidhi? <i>*</i>
                     </label>
                     <textarea
                       id="i-message"

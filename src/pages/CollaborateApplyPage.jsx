@@ -95,7 +95,7 @@ export default function CollaborateApplyPage() {
           <div className="wrap">
             <div className="contact-shell internship-shell">
               <div className="contact-intro internship-intro reveal">
-                <h2>Partner with Śāstranidhi</h2>
+                <h2>Partner with Śāstra Nidhi</h2>
                 <p className="contact-lede">
                   Institutions, scholars, and organisations who share our commitment to preserving,
                   studying, teaching, and advancing Indian Knowledge Systems are welcome to propose a

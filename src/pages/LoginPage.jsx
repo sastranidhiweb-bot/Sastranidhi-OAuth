@@ -52,7 +52,7 @@ export default function LoginPage() {
   };
 
   return (
-    <AuthLayout title="Welcome back" subtitle="Sign in to access Sastranidhi and its connected platforms.">
+    <AuthLayout title="Welcome back" subtitle="Sign in to access Sastra Nidhi and its connected platforms.">
       {message && <div className={messageType === 'error' ? 'auth-error' : 'auth-success'}>{message}</div>}
 
       <form className="form" onSubmit={handleSubmit} style={{ marginTop: message ? 14 : 0 }}>

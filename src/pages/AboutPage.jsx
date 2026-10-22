@@ -24,7 +24,7 @@ const institutions = [
     icon: 'Mudgala',
     to: '/institutes/mudgala',
     title: 'Mudgala Ṛṣikulam',
-    text: 'English-medium IKS-based school under Śāstranidhi Trust, established in 2024.',
+    text: 'English-medium IKS-based school under Śāstra Nidhi Trust, established in 2024.',
   },
   {
     icon: 'Gārgī',
@@ -35,7 +35,7 @@ const institutions = [
   {
     icon: 'SRI',
     to: '/institutes/sri',
-    title: 'Śāstranidhi Research Institute',
+    title: 'Śāstra Nidhi Research Institute',
     text: 'Research and innovation in Indian Knowledge Systems.',
   },
   {
@@ -68,7 +68,7 @@ const people = [
   {
     name: 'Madhava Gopinath Prabhu',
     role: 'Principal Visionary',
-    text: 'Principal visionary and leader of the Śāstranidhi mission. Has led the integration of śāstric scholarship, education, research, preservation, technology, and digital knowledge systems.',
+    text: 'Principal visionary and leader of the Śāstra Nidhi mission. Has led the integration of śāstric scholarship, education, research, preservation, technology, and digital knowledge systems.',
   },
   {
     name: 'Rajeswari Aluri',
@@ -147,7 +147,7 @@ export default function AboutPage() {
       <Header />
       <main>
         <PageHero
-          title="About Śāstranidhi"
+          title="About Śāstra Nidhi"
           lede="A living treasury of Śāstra and Indian Knowledge Systems."
         />
 
@@ -155,10 +155,10 @@ export default function AboutPage() {
           <div className="wrap">
             <DetailRow
               kicker="Who we are"
-              title="Śāstranidhi — A Living Knowledge Ecosystem"
+              title="Śāstra Nidhi — A Living Knowledge Ecosystem"
               paragraphs={[
-                'Śāstranidhi is an integrated digital, educational, research, and institutional ecosystem dedicated to preserving, studying, analysing, teaching, and transmitting Bhāratīya Jñāna Parampārā. It brings together traditional śāstric scholarship and modern technology so that authentic Indian knowledge remains living, accessible, searchable, teachable, and relevant for future generations.',
-                'The name Śāstranidhi means “a treasure-house of śāstra.” It expresses the aspiration to preserve, organise, study, share, and transmit the knowledge contained in India’s sacred, philosophical, scientific, literary, and traditional knowledge systems.',
+                'Śāstra Nidhi is an integrated digital, educational, research, and institutional ecosystem dedicated to preserving, studying, analysing, teaching, and transmitting Bhāratīya Jñāna Parampārā. It brings together traditional śāstric scholarship and modern technology so that authentic Indian knowledge remains living, accessible, searchable, teachable, and relevant for future generations.',
+                'The name Śāstra Nidhi means “a treasure-house of śāstra.” It expresses the aspiration to preserve, organise, study, share, and transmit the knowledge contained in India’s sacred, philosophical, scientific, literary, and traditional knowledge systems.',
               ]}
               card={{
                 dark: true,
@@ -185,7 +185,7 @@ export default function AboutPage() {
               kicker="What we do"
               title="Four Digital Knowledge Pillars"
               paragraphs={[
-                'Śāstranidhi’s work is organised through four digital knowledge pillars, complemented by a growing family of educational institutions and specialised centres.',
+                'Śāstra Nidhi’s work is organised through four digital knowledge pillars, complemented by a growing family of educational institutions and specialised centres.',
               ]}
               list={[
                 'Svādhyāya — Discover and Explore',
@@ -207,10 +207,10 @@ export default function AboutPage() {
         <section className="detail">
           <div className="wrap">
             <div className="section-head reveal">
-              <div className="kicker">The Śāstranidhi ecosystem</div>
+              <div className="kicker">The Śāstra Nidhi ecosystem</div>
               <h2>One ecosystem, many doors</h2>
               <p>
-                Śāstranidhi’s work is organised through its institutions and specialised centres, so that
+                Śāstra Nidhi’s work is organised through its institutions and specialised centres, so that
                 research, teaching, preservation, and public engagement reinforce one another.
               </p>
             </div>
@@ -222,7 +222,7 @@ export default function AboutPage() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="kicker">Our people</div>
-              <h2>The People Behind Śāstranidhi</h2>
+              <h2>The People Behind Śāstra Nidhi</h2>
             </div>
             <PeopleGrid items={people} />
           </div>
@@ -234,7 +234,7 @@ export default function AboutPage() {
               <div className="kicker">With gratitude</div>
               <h2>Voices</h2>
               <p>
-                The padyas on Śāstranidhi are brought to life by these voice artists, who lent their
+                The padyas on Śāstra Nidhi are brought to life by these voice artists, who lent their
                 voices to the recitations.
               </p>
             </div>
@@ -247,7 +247,7 @@ export default function AboutPage() {
             <div className="info-card dark about-vision reveal">
               <h2>Our Long-Term Vision</h2>
               <p>
-                The long-term vision of Śāstranidhi is to create a trusted, globally accessible ecosystem in
+                The long-term vision of Śāstra Nidhi is to create a trusted, globally accessible ecosystem in
                 which the breadth and depth of India’s knowledge traditions can be preserved and actively used.
               </p>
               <p>

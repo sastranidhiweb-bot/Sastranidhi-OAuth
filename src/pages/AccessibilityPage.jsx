@@ -10,7 +10,7 @@ const sections = [
   {
     title: 'Our commitment',
     body: [
-      'Śāstranidhi is committed to making its website and digital services accessible to as many people as possible, including users with visual, hearing, motor, or cognitive disabilities.',
+      'Śāstra Nidhi is committed to making its website and digital services accessible to as many people as possible, including users with visual, hearing, motor, or cognitive disabilities.',
       'We want every visitor to be able to read our texts, navigate the site, follow our courses, and reach us to ask questions, regardless of the device or assistive technology they use.',
     ],
   },

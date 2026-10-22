@@ -23,9 +23,9 @@ export default function Footer() {
             <img
               className="footer-logo"
               src="/assets/logo-mark.png"
-              alt="Śāstranidhi Research Institute emblem"
+              alt="Śāstra Nidhi Research Institute emblem"
             />
-            <span>Sastranidhi</span>
+            <span>Sastra Nidhi</span>
           </div>
         </div>
         <div>
@@ -60,7 +60,7 @@ export default function Footer() {
             Donate
           </a>
         </div>
-        <div className="footer-social" aria-label="Śāstranidhi social media links">
+        <div className="footer-social" aria-label="Śāstra Nidhi social media links">
           <h4>Follow Us</h4>
           <div className="social-icons">
             <a
@@ -68,7 +68,7 @@ export default function Footer() {
               href="https://www.facebook.com/profile.php?id=61594228293761"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Facebook"
+              aria-label="Śāstra Nidhi on Facebook"
               title="Facebook"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -81,7 +81,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/shastra-nidhi-367125436/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on LinkedIn"
+              aria-label="Śāstra Nidhi on LinkedIn"
               title="LinkedIn"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -94,7 +94,7 @@ export default function Footer() {
               href="https://www.instagram.com/media.shastranidhi?stkn=MWtmdDR3am1qNjY4dA=="
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Instagram"
+              aria-label="Śāstra Nidhi on Instagram"
               title="Instagram"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -107,7 +107,7 @@ export default function Footer() {
               href="https://twitter.com/sastranidhi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Twitter"
+              aria-label="Śāstra Nidhi on Twitter"
               title="Twitter"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -120,7 +120,7 @@ export default function Footer() {
               href="https://www.youtube.com/@sastranidhi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on YouTube"
+              aria-label="Śāstra Nidhi on YouTube"
               title="YouTube"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -133,7 +133,7 @@ export default function Footer() {
               href="https://www.pivotra.in/portal/pivotra/group/%C5%9B%C4%81stranidhi"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Śāstranidhi on Pivotra"
+              aria-label="Śāstra Nidhi on Pivotra"
               title="Pivotra"
             >
               <span className="pivotra-icon">
@@ -144,7 +144,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="wrap footer-bottom">© 2026 Sastranidhi. All rights reserved.</div>
+      <div className="wrap footer-bottom">© 2026 Sastra Nidhi. All rights reserved.</div>
       <button
         id="backToTop"
         className={showBackToTop ? 'show' : ''}

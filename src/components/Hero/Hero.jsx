@@ -8,8 +8,8 @@ export default function Hero() {
       <div className="wrap hero-inner">
         <p className="hero-brand">
           {/* stronger-glow copy that fades in and out over the word (see hero.css) */}
-          <span className="hero-brand-glow" aria-hidden="true">Śāstranidhi</span>
-          Śāstranidhi
+          <span className="hero-brand-glow" aria-hidden="true">Śāstra Nidhi</span>
+          Śāstra Nidhi
         </p>
         <h1>A Living Treasury of Śāstras</h1>
         <p className="lede">

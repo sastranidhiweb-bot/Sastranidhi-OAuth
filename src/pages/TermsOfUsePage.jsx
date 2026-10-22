@@ -16,7 +16,7 @@ const sections = [
   {
     title: 'About the Site',
     body: [
-      'Śāstranidhi is a non-profit educational initiative dedicated to the study, preservation, and dissemination of Indian Knowledge Systems. The Site provides access to texts, research materials, courses, publications, and community platforms.',
+      'Śāstra Nidhi is a non-profit educational initiative dedicated to the study, preservation, and dissemination of Indian Knowledge Systems. The Site provides access to texts, research materials, courses, publications, and community platforms.',
     ],
   },
   {
@@ -37,7 +37,7 @@ const sections = [
   {
     title: 'Intellectual property',
     body: [
-      'Unless otherwise stated, all content on the Site — including text, translations, commentaries, images, logos, and design — is the property of Śāstranidhi or its contributors and is protected by copyright.',
+      'Unless otherwise stated, all content on the Site — including text, translations, commentaries, images, logos, and design — is the property of Śāstra Nidhi or its contributors and is protected by copyright.',
       'You may read, share links to, and quote short passages of the Site for personal study, teaching, or non-commercial research, provided you clearly attribute the source.',
       'For any other use — including republication, translation, or commercial use — you must obtain written permission by writing to noreply@sastranidhi.org.',
     ],
@@ -63,7 +63,7 @@ const sections = [
   {
     title: 'Limitation of liability',
     body: [
-      'To the fullest extent permitted by law, Śāstranidhi will not be liable for any indirect, incidental, or consequential loss arising from your use of the Site.',
+      'To the fullest extent permitted by law, Śāstra Nidhi will not be liable for any indirect, incidental, or consequential loss arising from your use of the Site.',
     ],
   },
   {

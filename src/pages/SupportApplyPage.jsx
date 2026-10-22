@@ -101,7 +101,7 @@ export default function SupportApplyPage() {
       <SiteBubbles />
       <Header />
       <main>
-        <PageHero title="Support Śāstranidhi" />
+        <PageHero title="Support Śāstra Nidhi" />
 
         <section className="contact-section">
           <div className="wrap">

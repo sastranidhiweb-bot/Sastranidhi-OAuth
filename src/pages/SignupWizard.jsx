@@ -139,7 +139,7 @@ export default function SignupWizard() {
   const activeIndex = Math.max(0, step - 2); // step 1 & 2 both map to "Verify Email"
 
   return (
-    <AuthLayout title="Create your account" subtitle={step < 4 ? 'Join the Sastranidhi knowledge ecosystem.' : undefined}>
+    <AuthLayout title="Create your account" subtitle={step < 4 ? 'Join the Sastra Nidhi knowledge ecosystem.' : undefined}>
       {step < 4 && (
         <>
           <div className="auth-steps">

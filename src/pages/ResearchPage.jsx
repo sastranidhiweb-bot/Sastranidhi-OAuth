@@ -21,7 +21,7 @@ function BookCard() {
         text’s central message.
       </p>
       <p className="book-card-meta">
-        Publisher: Śāstranidhi · Language: English · ISBN 978-81-95394-0-4
+        Publisher: Śāstra Nidhi · Language: English · ISBN 978-81-95394-0-4
         <br />
         Printed in India (Hyderabad)
       </p>
@@ -97,7 +97,7 @@ const researchAreas = [
     title: 'Publications',
     feature: <BookCard />,
     paragraphs: [
-      'Books, articles, translations, reports and educational resources produced by Śāstranidhi and its scholars.',
+      'Books, articles, translations, reports and educational resources produced by Śāstra Nidhi and its scholars.',
     ],
     ticks: [
       'Books and monographs',
@@ -150,7 +150,7 @@ const researchAreas = [
     kicker: 'People',
     title: 'Scholars',
     paragraphs: [
-      'Profiles of teachers, researchers, contributors and institutional partners who shape Śāstranidhi’s work.',
+      'Profiles of teachers, researchers, contributors and institutional partners who shape Śāstra Nidhi’s work.',
     ],
     ticks: ['Teachers and researchers', 'Contributors and volunteers', 'Partner institutions'],
     action: { to: '/contact', label: 'Get in touch →' },

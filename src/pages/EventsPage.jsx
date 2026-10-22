@@ -42,7 +42,7 @@ export default function EventsPage() {
           <div className="wrap">
             <div className="section-head reveal">
               <p>
-                SASTRANIDHI conducts and supports programmes related to{' '}
+                SASTRA NIDHI conducts and supports programmes related to{' '}
                 <strong>
                   Śāstra, Indian Knowledge Systems, research, education, publications, and digital
                   learning
@@ -64,12 +64,12 @@ export default function EventsPage() {
               <EventDate day="27" month="Dec" year="2026" />
               <div className="event-body">
                 <div className="event-label">Platform launch · 27 December 2026</div>
-                <h3>Launch of the SASTRANIDHI Digital Platform</h3>
+                <h3>Launch of the SASTRA NIDHI Digital Platform</h3>
                 <p>
-                  The <strong>SASTRANIDHI Digital Platform</strong> will be formally launched on{' '}
+                  The <strong>SASTRA NIDHI Digital Platform</strong> will be formally launched on{' '}
                   <strong>27 December 2026</strong>.
                 </p>
-                <p>The platform brings together SASTRANIDHI’s four core digital initiatives:</p>
+                <p>The platform brings together SASTRA NIDHI’s four core digital initiatives:</p>
                 <ul className="event-platforms">
                   {initiatives.map((item) => (
                     <li key={item.shortLabel}>
@@ -81,7 +81,7 @@ export default function EventsPage() {
                   ))}
                 </ul>
                 <p>
-                  The launch marks an important milestone in SASTRANIDHI’s vision to create an
+                  The launch marks an important milestone in SASTRA NIDHI’s vision to create an
                   integrated digital ecosystem for the preservation, study, research, teaching, and
                   dissemination of Śāstra and Indian Knowledge Systems.
                 </p>
@@ -103,7 +103,7 @@ export default function EventsPage() {
                 <div className="event-label">Platform launch · 2025</div>
                 <h3>Purāṇa Tilakam Launch</h3>
                 <p>
-                  In 2025, SASTRANIDHI launched <strong>Purāṇa Tilakam</strong>, a comprehensive
+                  In 2025, SASTRA NIDHI launched <strong>Purāṇa Tilakam</strong>, a comprehensive
                   digital platform for the study and analysis of <strong>Śrīmad-Bhāgavatam</strong>.
                 </p>
                 <p>

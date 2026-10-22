@@ -4,7 +4,7 @@ import '../../styles/initiatives.css';
 
 export default function Initiatives() {
   return (
-    <section id="platforms" aria-label="Explore Śāstranidhi">
+    <section id="platforms" aria-label="Explore Śāstra Nidhi">
       <div className="wrap">
         <div className="tablet-grid stagger">
           {initiatives.map((item) => (

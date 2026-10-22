@@ -9,7 +9,7 @@ export default function Research() {
           <div className="kicker">Research &amp; Publications</div>
           <h2>Authentic Sources, Digital Access</h2>
           <p>
-            Explore the wider Sastranidhi ecosystem of scholarship, publications,
+            Explore the wider Sastra Nidhi ecosystem of scholarship, publications,
             events and institutional collaboration.
           </p>
         </div>

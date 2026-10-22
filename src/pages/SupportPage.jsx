@@ -16,7 +16,7 @@ export default function SupportPage() {
       <Header />
       <main>
         <PageHero
-          title="Support Śāstranidhi"
+          title="Support Śāstra Nidhi"
           lede="Become a part of preserving and transmitting Śāstra and Bhāratīya Jñāna Paramparā for future generations."
         />
 
@@ -59,7 +59,7 @@ export default function SupportPage() {
         <CtaBand
           title="Become a supporter"
           text="Tell us how you would like to support, and our team will get in touch with the next steps."
-          action={{ to: APPLY_PATH, label: 'Support Śāstranidhi →' }}
+          action={{ to: APPLY_PATH, label: 'Support Śāstra Nidhi →' }}
         />
       </main>
       <Footer />

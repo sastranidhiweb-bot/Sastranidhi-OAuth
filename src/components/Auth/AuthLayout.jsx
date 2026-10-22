@@ -13,7 +13,7 @@ export default function AuthLayout({ title, subtitle, children }) {
         <a className="auth-brand" href="/">
           <span className="mark">卐</span>
           <span>
-            SASTRANIDHI
+            SASTRA NIDHI
             <small>THE TREASURY OF ŚĀSTRAS</small>
           </span>
         </a>

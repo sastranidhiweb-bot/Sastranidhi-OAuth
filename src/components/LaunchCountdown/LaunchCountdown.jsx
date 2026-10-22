@@ -32,7 +32,7 @@ function TickerItem({ remaining }) {
     <span className="lc-item">
       <span className="lc-ornament">✦</span>
       <span className="lc-text">
-        <strong>SASTRANIDHI Digital Platform</strong> launches on
+        <strong>SASTRA NIDHI Digital Platform</strong> launches on
       </span>
       <span className="lc-date">27 · Dec · 2026</span>
       <span className="lc-clock">
@@ -63,7 +63,7 @@ export default function LaunchCountdown() {
     <div
       className="launch-countdown"
       role="timer"
-      aria-label={`${remaining.days} days, ${remaining.hours} hours and ${remaining.minutes} minutes until the SASTRANIDHI Digital Platform launch on 27 December 2026`}
+      aria-label={`${remaining.days} days, ${remaining.hours} hours and ${remaining.minutes} minutes until the SASTRA NIDHI Digital Platform launch on 27 December 2026`}
     >
       <div className="lc-shine" aria-hidden="true" />
 

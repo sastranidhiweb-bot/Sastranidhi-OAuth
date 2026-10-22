@@ -26,7 +26,7 @@ export default function CollaboratePage() {
       <main>
         <PageHero
           title="Collaborate"
-          lede="Partner with Śāstranidhi in preserving, studying, teaching, and advancing Indian Knowledge Systems."
+          lede="Partner with Śāstra Nidhi in preserving, studying, teaching, and advancing Indian Knowledge Systems."
         />
 
         <section className="detail">
@@ -36,7 +36,7 @@ export default function CollaboratePage() {
                 <div className="kicker">Collaborate with us</div>
                 <h2>Shared scholarship, shared purpose</h2>
                 <p>
-                  SASTRANIDHI welcomes meaningful collaborations with{' '}
+                  SASTRA NIDHI welcomes meaningful collaborations with{' '}
                   <strong>
                     scholars, universities, research institutions, traditional learning centres,
                     educational organisations, publishers, technology partners, cultural institutions,
@@ -100,7 +100,7 @@ export default function CollaboratePage() {
               <div className="kicker">Partners</div>
               <h2>Our Collaborations</h2>
               <p>
-                SASTRANIDHI works with institutions and individuals across different areas of
+                SASTRA NIDHI works with institutions and individuals across different areas of
                 education, research, technology, culture, and knowledge preservation.
               </p>
             </div>
@@ -149,7 +149,7 @@ export default function CollaboratePage() {
             <div className="info-card dark about-vision reveal">
               <h2>Let Us Work Together</h2>
               <p>
-                SASTRANIDHI believes that India’s knowledge traditions can be preserved and
+                SASTRA NIDHI believes that India’s knowledge traditions can be preserved and
                 strengthened most effectively through{' '}
                 <strong>shared scholarship, shared resources, and shared responsibility</strong>.
               </p>
