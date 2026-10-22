@@ -95,8 +95,9 @@ div.stats-band {
 
 .stats-band .stats-grid .num {
   display: block;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 30px;
+  /* Times New Roman runs larger than Cormorant, so 27px keeps the same visual size */
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 27px;
   font-weight: 700;
   line-height: 1.1;
   background: linear-gradient(
