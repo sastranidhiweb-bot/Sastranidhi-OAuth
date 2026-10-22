@@ -16,7 +16,9 @@ const headerAlreadyPlayed = () => {
   }
 };
 
-export default function Header() {
+// betweenBars: optional content shown between the nav row and the subbar
+// (the home page puts its launch countdown there).
+export default function Header({ betweenBars }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   // Slide-in plays once per browser session. Read the flag once at mount, and
@@ -149,6 +151,8 @@ export default function Header() {
           <span></span>
         </button>
       </div>
+
+      {betweenBars}
 
       <div className="subbar">
         <div className="wrap subbar-inner">

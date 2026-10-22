@@ -1,5 +1,6 @@
 /* ============================================================
-   LAUNCH COUNTDOWN — thin ticker pinned above the header.
+   LAUNCH COUNTDOWN — thin ticker inside the sticky header,
+   between the nav row and the subbar (passed in by HomePage).
    A fixed "Launching Soon" badge sits on the left; the track holds
    two identical halves and slides from -50% to 0, so the text drifts
    left → right and loops without a seam.
@@ -22,19 +23,14 @@
   white-space: nowrap;
 }
 
-/* HomePage wraps the ribbon and the header so both stay on screen while
-   scrolling; the header's own sticky has no room to act inside it. */
-.home-sticky-top {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+/* Above the header's hover light, below the nav row's dropdowns */
+header .launch-countdown { z-index: 2; }
 
 /* Section jumps clear the ribbon too (base.css values + ribbon height) */
-html:has(.home-sticky-top) { scroll-padding-top: 158px; }
-@media (max-width: 900px) { html:has(.home-sticky-top) { scroll-padding-top: 185px; } }
-@media (max-width: 700px) { html:has(.home-sticky-top) { scroll-padding-top: 170px; } }
-@media (max-width: 480px) { html:has(.home-sticky-top) { scroll-padding-top: 176px; } }
+html:has(header .launch-countdown) { scroll-padding-top: 158px; }
+@media (max-width: 900px) { html:has(header .launch-countdown) { scroll-padding-top: 185px; } }
+@media (max-width: 700px) { html:has(header .launch-countdown) { scroll-padding-top: 170px; } }
+@media (max-width: 480px) { html:has(header .launch-countdown) { scroll-padding-top: 176px; } }
 
 /* Animated gold hairlines along the top and bottom edges */
 .launch-countdown::before,
