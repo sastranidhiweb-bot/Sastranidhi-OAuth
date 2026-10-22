@@ -355,11 +355,11 @@ section.hero .hero-curve {
 .hero.page-hero .orb.orb1{display:none;}
 
 /* --- Home hero: "Śāstranidhi" name above the H1 ---
-   Moved here from the header brand. Cinzel (loaded in index.html) to set
-   it apart from the Cormorant H1, white with a slow gold glow. */
+   Moved here from the header brand. Gentium Plus (loaded in index.html),
+   matching the platform names on the cards, white with a slow gold glow. */
 .hero .hero-brand {
   margin: 0 0 4px;
-  font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Gentium Plus', Georgia, serif;
   font-size: clamp(30px, 3.6vw, 48px);
   font-weight: 700;
   letter-spacing: 0.12em;
