@@ -237,7 +237,7 @@ section.hero {
 
 section.hero h1 {
   font-size: clamp(32px, 4.05vw, 52px);
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 }
 
 section.hero .lede {
