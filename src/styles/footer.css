@@ -359,3 +359,20 @@ footer .footer-brand-col {
 footer .footer-brand-col .footer-brand {
   margin-bottom: 0;
 }
+
+/* Brand name styled like the home hero's ŚĀSTRA NIDHI (hero.css .hero-brand):
+   Gentium Plus (loaded in index.html), all caps with diacritics, ivory with
+   a steady gold glow */
+footer .footer-brand .footer-brand-name {
+  font-family: 'Gentium Plus', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.15;
+  color: #FFFDF5;
+  text-shadow:
+    0 0 8px rgba(255, 246, 214, 0.75),
+    0 0 26px rgba(232, 195, 74, 0.8),
+    0 0 52px rgba(232, 195, 74, 0.5);
+}

@@ -25,7 +25,7 @@ export default function Footer() {
               src="/assets/logo-mark.png"
               alt="Śāstra Nidhi Research Institute emblem"
             />
-            <span>Sastra Nidhi</span>
+            <span className="footer-brand-name">Śāstra Nidhi</span>
           </div>
         </div>
         <div>
