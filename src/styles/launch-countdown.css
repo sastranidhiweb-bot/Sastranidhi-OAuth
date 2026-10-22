@@ -1,5 +1,5 @@
 /* ============================================================
-   LAUNCH COUNTDOWN — thin ticker pinned under the header.
+   LAUNCH COUNTDOWN — thin ticker pinned above the header.
    A fixed "Launching Soon" badge sits on the left; the track holds
    two identical halves and slides from -50% to 0, so the text drifts
    left → right and loops without a seam.
@@ -22,7 +22,7 @@
   white-space: nowrap;
 }
 
-/* HomePage wraps the header and the ribbon so both stay on screen while
+/* HomePage wraps the ribbon and the header so both stay on screen while
    scrolling; the header's own sticky has no room to act inside it. */
 .home-sticky-top {
   position: sticky;
