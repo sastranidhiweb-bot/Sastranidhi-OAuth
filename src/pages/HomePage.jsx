@@ -19,7 +19,11 @@ export default function HomePage() {
   return (
     <>
       <div className="homepage">
-        <Header betweenBars={<LaunchCountdown />} />
+        {/* Launch ribbon and header stick to the top together */}
+        <div className="home-sticky-top">
+          <LaunchCountdown />
+          <Header />
+        </div>
         <main>
           <Hero />
           <Initiatives />
