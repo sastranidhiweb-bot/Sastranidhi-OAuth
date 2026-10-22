@@ -27,7 +27,7 @@ export const countries = [
   { code: 'BM', name: "Bermuda", dial: '+1 441' },
   { code: 'BT', name: "Bhutan", dial: '+975' },
   { code: 'BO', name: "Bolivia", dial: '+591' },
-  { code: 'BQ', name: "Bonaire, Saint Eustatius and Saba ", dial: '+599' },
+  { code: 'BQ', name: "Bonaire, Saint Eustatius and Saba", dial: '+599' },
   { code: 'BA', name: "Bosnia and Herzegovina", dial: '+387' },
   { code: 'BW', name: "Botswana", dial: '+267' },
   { code: 'BR', name: "Brazil", dial: '+55' },
