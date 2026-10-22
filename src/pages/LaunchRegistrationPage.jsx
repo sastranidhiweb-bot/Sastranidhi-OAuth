@@ -69,7 +69,7 @@ export default function LaunchRegistrationPage() {
       if (!res.ok) throw new Error('send failed');
 
       setStatus('success');
-      showToast('You are registered. We will send launch details to your email.');
+      showToast('Thank you for registering! We look forward to welcoming you at the launch.');
       setFormData(EMPTY_FORM);
 
       setTimeout(() => setStatus('idle'), 2600);
@@ -91,30 +91,43 @@ export default function LaunchRegistrationPage() {
           <div className="wrap">
             <div className="contact-shell internship-shell">
               <div className="contact-intro internship-intro reveal">
-                <h2>Register for the Śāstra Nidhi Launch</h2>
+                <h2>Join Us for the Launch of Śāstra Nidhi</h2>
                 <p className="contact-lede">
-                  The <strong>Śāstra Nidhi Digital Platform</strong> will be formally launched on{' '}
-                  <strong>27 December 2026</strong>.
+                  On <strong>27 December 2026</strong>, the{' '}
+                  <strong>Śāstra Nidhi Digital Platform</strong> will be formally launched: a
+                  revolutionary initiative that brings India’s vast śāstric heritage into one living
+                  digital treasury.
                 </p>
                 <p className="contact-lede">
-                  The platform brings together Svādhyāya, Viśleṣaka, Paripraśna and Pravacana, one
-                  place to study, analyse, inquire and learn India’s knowledge traditions.
+                  For the first time, Svādhyāya, Viśleṣaka, Paripraśna and Pravacana come together on
+                  a single platform to study, analyse, inquire into and learn the knowledge
+                  traditions of Bhārata, for everyone, everywhere.
+                </p>
+                <p className="contact-lede">
+                  This is more than a launch. It is an auspicious occasion and a shared offering to
+                  our tradition. We warmly invite students, scholars, teachers, institutions and every
+                  well-wisher of Indian Knowledge Systems to come together and be a part of this
+                  historic moment.
                 </p>
 
-                <h3>Why register</h3>
+                <h3>Be a part of it</h3>
                 <TickList
                   items={[
+                    'Witness the launch of a revolutionary platform for Indian Knowledge Systems.',
                     'Receive the launch programme and joining details by email.',
-                    'Hear first when each platform opens.',
-                    'Stay in touch with Śāstra Nidhi’s programmes and events.',
+                    'Be among the first to explore each platform as it opens.',
+                    'Join a growing community devoted to preserving and sharing śāstric wisdom.',
                   ]}
                 />
+                <p className="contact-lede">
+                  <strong>Register today and join us on this auspicious day.</strong>
+                </p>
               </div>
 
               <div className="contact-form-card reveal">
                 <div className="form-glow"></div>
                 <h3>Register for the launch</h3>
-                <p>Fields marked * are required.</p>
+                <p>Be part of this historic moment. Fields marked * are required.</p>
 
                 <form onSubmit={handleSubmit} noValidate>
                   <div className="field-row">
