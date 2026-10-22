@@ -57,11 +57,12 @@ export const initiatives = [
 ];
 
 export const stats = [
-  { icon: '🌐', value: '250,000+', label: 'Website Hits' },
-  { icon: '👥', value: '10,000+', label: 'Users' },
-  { icon: '📜', value: '500+', label: 'Śāstras' },
-  { icon: '🎓', value: '3+', label: 'Courses' },
-  { icon: '📚', value: '1', label: 'Publications' },
+  // `icon` names a line icon in Stats.jsx (STAT_ICONS)
+  { icon: 'globe', value: '250,000+', label: 'Website Hits' },
+  { icon: 'users', value: '10,000+', label: 'Users' },
+  { icon: 'scroll', value: '500+', label: 'Śāstras' },
+  { icon: 'cap', value: '3+', label: 'Courses' },
+  { icon: 'books', value: '1', label: 'Publications' },
 ];
 
 export const courses = [

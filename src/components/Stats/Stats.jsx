@@ -2,6 +2,47 @@ import { useEffect, useRef, useState } from 'react';
 import { stats } from '../../data/siteData.js';
 import '../../styles/stats.css';
 
+// Single-colour line icons (stroke = currentColor) for the stat bubbles,
+// keyed by `icon` in siteData.js. Paths adapted from Lucide (ISC licence).
+const STAT_ICONS = {
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </>
+  ),
+  users: (
+    <>
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </>
+  ),
+  scroll: (
+    <>
+      <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+      <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
+    </>
+  ),
+  cap: (
+    <>
+      <path d="M22 10v6" />
+      <path d="M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+    </>
+  ),
+  books: (
+    <>
+      <path d="M16 6l4 14" />
+      <path d="M12 6v14" />
+      <path d="M8 8v12" />
+      <path d="M4 4v16" />
+    </>
+  ),
+};
+
 function parseStatValue(value) {
   const match = value.match(/^([\d,]+)(.*)$/);
   if (!match) return { target: 0, suffix: value };
@@ -88,7 +129,9 @@ export default function Stats() {
       <div className="wrap stats-grid stagger" ref={gridRef}>
         {stats.map((stat) => (
           <div className="stat-item" key={stat.label}>
-            <div className="stat-icon">{stat.icon}</div>
+            <div className="stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">{STAT_ICONS[stat.icon]}</svg>
+            </div>
             <div className="num">
               <AnimatedNumber value={stat.value} start={started} />
             </div>
