@@ -8,6 +8,10 @@ const GOLD = '#F6C343';
 const CREAM = '#FFF6E0';
 const GREEN = '#3E9B6E';
 const GREEN_DARK = '#1F5E43';
+// white lotus petals
+const PETAL = '#FFFFFF';
+const PETAL_HEART = '#FFF1D2';
+const VEIN = '#D9B65C';
 
 const angles = (count, offset = 0) =>
   Array.from({ length: count }, (_, i) => offset + (360 / count) * i);
@@ -19,9 +23,9 @@ export default function SwastikaEmblem({ className }) {
   return (
     <svg className={className} viewBox="-50 -50 100 100" aria-hidden="true" focusable="false">
       {/* lotus: tiny dots ringing the flower, green leaves behind, then
-          layered red petals (saffron heart, fine veins) */}
+          layered white petals (cream heart, fine gold veins) */}
       {angles(16, 11.25).map((a) => (
-        <circle key={`o${a}`} cx="0" cy="-48.5" r="1" fill={RED} transform={`rotate(${a})`} />
+        <circle key={`o${a}`} cx="0" cy="-48.5" r="1" fill={GOLD} transform={`rotate(${a})`} />
       ))}
       {angles(8, 22.5).map((a) => (
         <path
@@ -38,19 +42,19 @@ export default function SwastikaEmblem({ className }) {
           {/* outer petal with a pointed lotus tip */}
           <path
             d="M0 -48 C5 -45 12 -38 9 -31 C6 -28 -6 -28 -9 -31 C-12 -38 -5 -45 0 -48 Z"
-            fill={RED}
+            fill={PETAL}
             stroke={GOLD}
             strokeWidth="1"
           />
           {/* inner petal */}
           <path
             d="M0 -44 C4 -41 7 -36 5 -31 L-5 -31 C-7 -36 -4 -41 0 -44 Z"
-            fill={SAFFRON}
+            fill={PETAL_HEART}
           />
           {/* veins fanning from the base */}
           <path
             d="M0 -31 V-42 M0 -31 L3 -39 M0 -31 L-3 -39 M0 -31 L5 -35 M0 -31 L-5 -35"
-            stroke={RED}
+            stroke={VEIN}
             strokeWidth="0.6"
             strokeLinecap="round"
           />
