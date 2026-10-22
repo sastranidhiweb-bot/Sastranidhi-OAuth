@@ -237,8 +237,11 @@ section.hero {
 
 section.hero h1 {
   font-size: clamp(32px, 4.05vw, 52px);
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
+
+/* Home: tighter line box so the tagline sits snug under the heading */
+section.hero:not(.page-hero) h1 { line-height: 1.05; }
 
 section.hero .lede {
   line-height: 1.5;
