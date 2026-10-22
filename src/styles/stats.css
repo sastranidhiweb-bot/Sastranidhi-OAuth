@@ -118,13 +118,18 @@ div.stats-band {
   /* elegant small capitals in bright white, spaced out, with a short gold
      rule above to separate them from the figures */
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: 2.2px;
   text-transform: uppercase;
   margin-top: 5px;
   color: #FFFFFF;
-  text-shadow: 0 1px 2px rgba(20, 8, 50, 0.6);
+  /* dark lift for contrast, then a soft white-gold glow */
+  text-shadow:
+    0 1px 2px rgba(20, 8, 50, 0.6),
+    0 0 6px rgba(255, 244, 199, 0.75),
+    0 0 14px rgba(243, 223, 160, 0.55),
+    0 0 24px rgba(232, 195, 74, 0.35);
 }
 
 .stats-band .stats-grid .lbl::before {
