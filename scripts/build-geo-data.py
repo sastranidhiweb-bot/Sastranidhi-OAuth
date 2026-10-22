@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # Uninhabited territories with no dialling code; nobody registers from these.
 SKIP = {'AQ', 'BV', 'GS', 'HM', 'TF'}
+# Former countries GeoNames still lists.
+FORMER = {'CS', 'AN'}
 # GeoNames leaves Kosovo's code blank.
 DIAL_FIXES = {'XK': '383'}
 
@@ -41,7 +43,7 @@ def main(src):
             continue
         cols = line.split('\t')
         iso, name, phone = cols[0], cols[4], cols[12]
-        if iso in SKIP:
+        if iso in SKIP or iso in FORMER:
             continue
         countries.append({'code': iso, 'name': name, 'dial': dial_code(iso, phone)})
     countries.sort(key=lambda c: c['name'])

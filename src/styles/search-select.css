@@ -14,21 +14,56 @@
   opacity: 0.6;
 }
 
-.search-select-list {
+.search-select-pop {
   position: absolute;
   top: calc(100% - 12px);
   left: 0;
   right: 0;
   z-index: 30;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e4def3;
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(48, 22, 110, 0.18);
+}
+
+.search-select-list {
   max-height: 248px;
   overflow-y: auto;
   margin: 0;
   padding: 6px;
   list-style: none;
-  background: #fff;
-  border: 1px solid #e4def3;
-  border-radius: 12px;
-  box-shadow: 0 14px 34px rgba(48, 22, 110, 0.18);
+}
+
+/* A-Z bar (letterIndex) */
+.search-select-letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 8px;
+  border-bottom: 1px solid #ece7f7;
+  background: #faf8ff;
+}
+
+.search-select-letters button {
+  min-width: 24px;
+  height: 24px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--brand-violet, #5129A8);
+  font: 700 12px Inter, system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.search-select-letters button:hover {
+  background: rgba(106, 75, 196, 0.12);
+}
+
+.search-select-letters button.is-current {
+  background: var(--brand-violet, #5129A8);
+  color: #fff;
 }
 
 .search-select-list li {

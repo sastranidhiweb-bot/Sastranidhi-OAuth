@@ -248,6 +248,7 @@ export default function LaunchRegistrationPage() {
                         onChange={handleCountry}
                         placeholder="Start typing your country"
                         invalidMessage="Please choose your country from the list."
+                        letterIndex
                         required
                       />
                     </div>

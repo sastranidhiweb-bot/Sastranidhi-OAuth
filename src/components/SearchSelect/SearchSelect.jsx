@@ -28,6 +28,8 @@ function rank(option, q) {
  * onChange(value, option|null)
  * allowCustom: keep whatever is typed (suggestions are optional); otherwise
  *   the value must be one of the options and typing alone does not select.
+ * letterIndex: show an A-Z bar above the list; a letter lists the options
+ *   starting with it (typing still searches as usual).
  */
 export default function SearchSelect({
   id,
@@ -41,12 +43,14 @@ export default function SearchSelect({
   allowCustom = false,
   invalidMessage = 'Please choose an option from the list.',
   emptyText = 'No matches',
+  letterIndex = false,
 }) {
   const listId = useId();
   const inputRef = useRef(null);
   const listRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const [letter, setLetter] = useState('');
 
   const selected = allowCustom ? null : options.find((o) => o.value === value) || null;
   const [query, setQuery] = useState(allowCustom ? value : selected?.label || '');
@@ -58,14 +62,24 @@ export default function SearchSelect({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, options]);
 
+  // nothing typed, or the box still shows the current pick: browsing, not searching
+  const q = normalize(query);
+  const browsing =
+    !q || (allowCustom ? options.some((o) => o.value === query) : selected && query === selected.label);
+
+  const letters = useMemo(
+    () =>
+      letterIndex
+        ? [...new Set(options.map((o) => normalize(o.label).charAt(0).toUpperCase()))].filter((l) => /[A-Z]/.test(l)).sort()
+        : [],
+    [letterIndex, options],
+  );
+
   const results = useMemo(() => {
-    const q = normalize(query);
-    // nothing typed, or the box still shows the current pick: list from the top
-    const showingPick = allowCustom
-      ? options.some((o) => o.value === query)
-      : selected && query === selected.label;
-    if (!q || showingPick) {
-      return options.slice(0, MAX_RESULTS);
+    if (browsing) {
+      if (letter) return options.filter((o) => normalize(o.label).startsWith(letter.toLowerCase()));
+      // the A-Z bar makes the whole list easy to move through, so show it all
+      return letterIndex ? options : options.slice(0, MAX_RESULTS);
     }
     return options
       .map((o) => [rank(o, q), o])
@@ -73,7 +87,7 @@ export default function SearchSelect({
       .sort((a, b) => a[0] - b[0])
       .slice(0, MAX_RESULTS)
       .map(([, o]) => o);
-  }, [query, options, allowCustom, selected]);
+  }, [q, browsing, letter, letterIndex, options]);
 
   // Native form validation: a pick from the list is required unless custom.
   useEffect(() => {
@@ -94,6 +108,7 @@ export default function SearchSelect({
   const choose = (option) => {
     setQuery(allowCustom ? option.value : option.label);
     setOpen(false);
+    setLetter('');
     onChange(option.value, option);
   };
 
@@ -102,6 +117,7 @@ export default function SearchSelect({
     setQuery(text);
     setOpen(true);
     setActive(0);
+    setLetter('');
     // Without allowCustom, typing only filters: the current pick stays until
     // another is chosen (blur snaps the text back to it).
     if (allowCustom) onChange(text, null);
@@ -124,8 +140,15 @@ export default function SearchSelect({
     }
   };
 
+  const pickLetter = (l) => {
+    setLetter(l);
+    setActive(0);
+    if (listRef.current) listRef.current.scrollTop = 0;
+  };
+
   const handleBlur = () => {
     setOpen(false);
+    setLetter('');
     if (allowCustom) return;
     // An exact (case/accent-insensitive) name counts as a pick; anything
     // else snaps back to the current selection.
@@ -158,30 +181,62 @@ export default function SearchSelect({
         onKeyDown={handleKeyDown}
       />
       {open && !disabled && (
-        <ul className="search-select-list" id={listId} role="listbox" ref={listRef}>
-          {results.length === 0 ? (
-            <li className="search-select-empty">{allowCustom && query.trim() ? `Use “${query.trim()}”` : emptyText}</li>
-          ) : (
-            results.map((o, i) => (
-              <li
-                key={`${o.value}-${i}`}
-                id={`${listId}-${i}`}
-                role="option"
-                aria-selected={i === active}
-                className={i === active ? 'is-active' : undefined}
-                // mousedown, not click: fires before the input's blur
+        <div className="search-select-pop">
+          {letterIndex && browsing && (
+            // mouse/touch shortcut; keyboard users type to search instead
+            <div className="search-select-letters" aria-hidden="true">
+              <button
+                type="button"
+                tabIndex={-1}
+                className={letter ? undefined : 'is-current'}
                 onMouseDown={(e) => {
                   e.preventDefault();
-                  choose(o);
+                  pickLetter('');
                 }}
-                onMouseEnter={() => setActive(i)}
               >
-                <span>{o.label}</span>
-                {o.hint && <small>{o.hint}</small>}
-              </li>
-            ))
+                All
+              </button>
+              {letters.map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  tabIndex={-1}
+                  className={l === letter ? 'is-current' : undefined}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    pickLetter(l);
+                  }}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
           )}
-        </ul>
+          <ul className="search-select-list" id={listId} role="listbox" ref={listRef}>
+            {results.length === 0 ? (
+              <li className="search-select-empty">{allowCustom && query.trim() ? `Use “${query.trim()}”` : emptyText}</li>
+            ) : (
+              results.map((o, i) => (
+                <li
+                  key={`${o.value}-${i}`}
+                  id={`${listId}-${i}`}
+                  role="option"
+                  aria-selected={i === active}
+                  className={i === active ? 'is-active' : undefined}
+                  // mousedown, not click: fires before the input's blur
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    choose(o);
+                  }}
+                  onMouseEnter={() => setActive(i)}
+                >
+                  <span>{o.label}</span>
+                  {o.hint && <small>{o.hint}</small>}
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
       )}
     </div>
   );
