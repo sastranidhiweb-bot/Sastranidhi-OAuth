@@ -505,17 +505,17 @@ section.hero .hero-curve {
     0 0 52px rgba(232, 195, 74, 0.5);
 }
 
-/* Purple streaks glide steadily along the gold underline, left to right,
-   with no gap. #4A298F is the hero background just below the line (the
-   #402080 gradient stop under the 28% #6540B5 radial glow). The streak
-   tile repeats every 50% of the line; shifting background-position by
-   100% moves it exactly one tile, so the loop is seamless. */
+/* One purple streak glides steadily along the gold underline, left to
+   right. #4A298F is the hero background just below the line (the #402080
+   gradient stop under the 28% #6540B5 radial glow). The streak is 40% of
+   the line; -66.7% / 166.7% put it just off each end, so it re-enters on
+   the left the moment it leaves on the right. */
 .hero .hero-brand::after {
   background:
-    linear-gradient(90deg, transparent, #4A298F 50%, transparent) repeat-x,
+    linear-gradient(90deg, transparent, #4A298F 50%, transparent) no-repeat,
     linear-gradient(90deg, transparent, #F3DFA0 18%, #FFF6D6 50%, #F3DFA0 82%, transparent);
-  background-size: 50% 100%, 100% 100%;
-  animation: heroBrandLineSweep 3.5s linear infinite;
+  background-size: 40% 100%, 100% 100%;
+  animation: heroBrandLineSweep 3s linear infinite;
   box-shadow:
     0 0 8px rgba(255, 246, 214, 0.75),
     0 0 24px rgba(232, 195, 74, 0.8),
@@ -523,8 +523,8 @@ section.hero .hero-curve {
 }
 
 @keyframes heroBrandLineSweep {
-  from { background-position: 0% 0, 0 0; }
-  to   { background-position: 100% 0, 0 0; }
+  from { background-position: -66.7% 0, 0 0; }
+  to   { background-position: 166.7% 0, 0 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
