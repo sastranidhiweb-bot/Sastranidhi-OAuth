@@ -1,0 +1,113 @@
+/* ============================================================
+   SEARCH SELECT (components/SearchSelect) and the phone field with
+   a country dialling prefix. The input itself takes the form's own
+   field styles (contact-page.css .contact-form-card input), including
+   its 16px bottom margin, which the list below allows for.
+   ============================================================ */
+
+.search-select {
+  position: relative;
+}
+
+.search-select input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.search-select-list {
+  position: absolute;
+  top: calc(100% - 12px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 248px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e4def3;
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(48, 22, 110, 0.18);
+}
+
+.search-select-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  font: 500 14px Inter, system-ui, sans-serif;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.search-select-list li small {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.search-select-list li.is-active {
+  background: rgba(106, 75, 196, 0.1);
+  color: var(--brand-violet, #5129A8);
+}
+
+.search-select-list li.search-select-empty {
+  cursor: default;
+  color: var(--text-muted);
+}
+
+/* ---------- Phone with automatic country prefix ---------- */
+.phone-field {
+  display: flex;
+  align-items: stretch;
+  margin: 0 0 16px;
+}
+
+.phone-prefix {
+  display: inline-flex;
+  align-items: center;
+  min-width: 58px;
+  justify-content: center;
+  padding: 0 12px;
+  border: 1px solid #e4def3;
+  border-right: 0;
+  border-radius: 12px 0 0 12px;
+  background: #efeaf9;
+  color: var(--brand-violet, #5129A8);
+  font: 700 14px Inter, system-ui, sans-serif;
+  white-space: nowrap;
+}
+
+.contact-form-card .phone-field input {
+  margin: 0;
+  border-radius: 0 12px 12px 0;
+}
+
+/* read by screen readers, not shown */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* data attribution under the registration form (GeoNames, CC BY 4.0) */
+.geo-credit {
+  margin: 12px 0 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.geo-credit a {
+  color: inherit;
+  text-decoration: underline;
+}

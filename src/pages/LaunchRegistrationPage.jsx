@@ -1,20 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Header from '../components/Header/Header.jsx';
 import Footer from '../components/Footer/Footer.jsx';
 import SiteBubbles from '../components/SiteBubbles.jsx';
 import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
 import DonateModal from '../components/Modals/DonateModal.jsx';
 import { PageHero, TickList } from '../components/PageSections/PageSections.jsx';
+import SearchSelect from '../components/SearchSelect/SearchSelect.jsx';
+import { countries } from '../data/countries.js';
 import '../styles/pages.css';
 import '../styles/contact-page.css';
 
 const ROLES = ['Student', 'Scholar / Teacher', 'Researcher', 'Institution representative', 'Well-wisher', 'Other'];
 
+// Other names people may type when searching for a country
+const COUNTRY_KEYWORDS = {
+  IN: 'Bharat Bharata Hindustan',
+  US: 'USA America United States of America',
+  GB: 'UK Britain Great Britain England Scotland Wales Northern Ireland',
+  AE: 'UAE Emirates Dubai',
+  NL: 'Netherlands Holland',
+  KR: 'Korea Republic of Korea',
+  KP: 'Korea DPRK',
+  CZ: 'Czech Republic',
+  CI: 'Cote dIvoire',
+  CV: 'Cape Verde',
+  SZ: 'Swaziland',
+  MM: 'Burma',
+  TR: 'Turkiye',
+  RU: 'Russian Federation',
+  PS: 'Palestine',
+  VA: 'Holy See Vatican City',
+  LK: 'Ceylon',
+};
+
+const COUNTRY_OPTIONS = countries.map((c) => ({
+  value: c.code,
+  label: c.name,
+  hint: c.dial,
+  keywords: `${c.code} ${COUNTRY_KEYWORDS[c.code] || ''}`,
+}));
+
+// City lists are per country in public/data/cities/<ISO>.json
+// (scripts/build-geo-data.py); each is fetched once when its country is picked.
+const cityCache = new Map();
+
 const EMPTY_FORM = {
   name: '',
   email: '',
-  phone: '',
+  country: '',
   city: '',
+  phone: '',
   role: '',
   organisation: '',
   message: '',
@@ -24,8 +59,11 @@ const EMPTY_FORM = {
 // Layout and submission flow follow InternshipPage (FormSubmit AJAX endpoint).
 export default function LaunchRegistrationPage() {
   const [formData, setFormData] = useState(EMPTY_FORM);
+  const [cities, setCities] = useState([]);
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [toastMessage, setToastMessage] = useState('');
+
+  const country = useMemo(() => countries.find((c) => c.code === formData.country), [formData.country]);
 
   const showToast = (msg) => {
     setToastMessage(msg);
@@ -35,6 +73,40 @@ export default function LaunchRegistrationPage() {
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  // A new country clears the city; the effect below loads its city list.
+  const handleCountry = (code) => {
+    setFormData((prev) => (prev.country === code ? prev : { ...prev, country: code, city: '' }));
+  };
+
+  useEffect(() => {
+    const code = formData.country;
+    if (!code) {
+      setCities([]);
+      return undefined;
+    }
+    let cancelled = false;
+    const load = cityCache.get(code) || fetch(`/data/cities/${code}.json`).then((r) => (r.ok ? r.json() : []));
+    cityCache.set(code, load);
+    load
+      .then((rows) => {
+        if (cancelled) return;
+        setCities(
+          rows.map(([city, region]) => ({
+            value: region ? `${city}, ${region}` : city,
+            label: city,
+            hint: region,
+          })),
+        );
+      })
+      .catch(() => {
+        cityCache.delete(code);
+        if (!cancelled) setCities([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [formData.country]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,8 +122,9 @@ export default function LaunchRegistrationPage() {
       const data = new FormData();
       data.append('name', formData.name);
       data.append('email', formData.email);
-      data.append('phone', formData.phone);
-      data.append('city_country', formData.city);
+      data.append('country', country ? country.name : '');
+      data.append('city', formData.city);
+      data.append('phone', `${country?.dial || ''} ${formData.phone}`.trim());
       data.append('i_am_a', formData.role);
       data.append('organisation', formData.organisation);
       data.append('message', formData.message);
@@ -164,37 +237,68 @@ export default function LaunchRegistrationPage() {
                   </div>
                   <div className="field-row">
                     <div className="field">
-                      <label htmlFor="r-phone">
-                        Phone number <i>*</i>
+                      <label htmlFor="r-country">
+                        Country <i>*</i>
                       </label>
-                      <input
-                        id="r-phone"
-                        type="tel"
-                        name="phone"
-                        autoComplete="tel"
-                        placeholder="+91 98765 43210"
-                        value={formData.phone}
-                        onChange={handleChange}
+                      <SearchSelect
+                        id="r-country"
+                        name="country"
+                        options={COUNTRY_OPTIONS}
+                        value={formData.country}
+                        onChange={handleCountry}
+                        placeholder="Start typing your country"
+                        invalidMessage="Please choose your country from the list."
                         required
                       />
                     </div>
                     <div className="field">
                       <label htmlFor="r-city">
-                        City / Country <i>*</i>
+                        City <i>*</i>
                       </label>
-                      <input
+                      <SearchSelect
                         id="r-city"
-                        type="text"
                         name="city"
-                        autoComplete="address-level2"
-                        placeholder="e.g. Bengaluru, India"
+                        options={cities}
                         value={formData.city}
-                        onChange={handleChange}
+                        onChange={(city) => setFormData((prev) => ({ ...prev, city }))}
+                        placeholder={formData.country ? 'Start typing your city' : 'Choose a country first'}
+                        disabled={!formData.country}
+                        invalidMessage="Please enter your city."
+                        emptyText="Type your city"
+                        allowCustom
                         required
                       />
                     </div>
                   </div>
                   <div className="field-row">
+                    <div className="field">
+                      <label htmlFor="r-phone">
+                        Phone number <i>*</i>
+                      </label>
+                      {/* the prefix follows the chosen country */}
+                      <div className="phone-field">
+                        <span className="phone-prefix" aria-hidden="true">
+                          {country?.dial || '+'}
+                        </span>
+                        <input
+                          id="r-phone"
+                          type="tel"
+                          name="phone"
+                          autoComplete="tel-national"
+                          inputMode="tel"
+                          aria-describedby="r-phone-code"
+                          placeholder={country ? 'Phone number' : 'Choose a country first'}
+                          pattern="[0-9 ()\-]{4,20}"
+                          title="Your number without the country code"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <span id="r-phone-code" className="visually-hidden">
+                        {country ? `Country code ${country.dial} is added automatically.` : 'Choose your country to set the country code.'}
+                      </span>
+                    </div>
                     <div className="field">
                       <label htmlFor="r-role">
                         I am a <i>*</i>
@@ -214,18 +318,18 @@ export default function LaunchRegistrationPage() {
                         ))}
                       </select>
                     </div>
-                    <div className="field">
-                      <label htmlFor="r-org">Institution / Organisation</label>
-                      <input
-                        id="r-org"
-                        type="text"
-                        name="organisation"
-                        autoComplete="organization"
-                        placeholder="Optional"
-                        value={formData.organisation}
-                        onChange={handleChange}
-                      />
-                    </div>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="r-org">Institution / Organisation</label>
+                    <input
+                      id="r-org"
+                      type="text"
+                      name="organisation"
+                      autoComplete="organization"
+                      placeholder="Optional"
+                      value={formData.organisation}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="r-message">Anything you would like to tell us?</label>
@@ -253,6 +357,13 @@ export default function LaunchRegistrationPage() {
                     </span>
                     <span className="btn-check">✓</span>
                   </button>
+                  <p className="geo-credit">
+                    Country and city lists from{' '}
+                    <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">
+                      GeoNames
+                    </a>{' '}
+                    (CC BY 4.0).
+                  </p>
                 </form>
               </div>
             </div>
