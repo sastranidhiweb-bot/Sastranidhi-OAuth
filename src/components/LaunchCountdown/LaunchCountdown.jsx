@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import '../../styles/launch-countdown.css';
 
-// Platform launch, 16 December 2026 at midnight IST (see EventsPage.jsx).
-const LAUNCH_DATE = new Date('2026-12-16T00:00:00+05:30');
+// Platform launch, 27 December 2026 at midnight IST (see EventsPage.jsx).
+const LAUNCH_DATE = new Date('2026-12-27T00:00:00+05:30');
 
 function getRemaining() {
   const diff = Math.max(LAUNCH_DATE.getTime() - Date.now(), 0);
@@ -34,7 +34,7 @@ function TickerItem({ remaining }) {
       <span className="lc-text">
         The <strong>SASTRANIDHI Digital Platform</strong> launches on
       </span>
-      <span className="lc-date">16 · Dec · 2026</span>
+      <span className="lc-date">27 · Dec · 2026</span>
       <span className="lc-clock">
         <TimeChip value={remaining.days} unit="Days" />
         <span className="lc-colon">:</span>
@@ -63,7 +63,7 @@ export default function LaunchCountdown() {
     <div
       className="launch-countdown"
       role="timer"
-      aria-label={`${remaining.days} days, ${remaining.hours} hours and ${remaining.minutes} minutes until the SASTRANIDHI Digital Platform launch on 16 December 2026`}
+      aria-label={`${remaining.days} days, ${remaining.hours} hours and ${remaining.minutes} minutes until the SASTRANIDHI Digital Platform launch on 27 December 2026`}
     >
       <div className="lc-shine" aria-hidden="true" />
 

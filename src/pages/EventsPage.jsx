@@ -61,13 +61,13 @@ export default function EventsPage() {
             </div>
 
             <article className="event-card event-card-upcoming reveal">
-              <EventDate day="16" month="Dec" year="2026" />
+              <EventDate day="27" month="Dec" year="2026" />
               <div className="event-body">
-                <div className="event-label">Platform launch · 16 December 2026</div>
+                <div className="event-label">Platform launch · 27 December 2026</div>
                 <h3>Launch of the SASTRANIDHI Digital Platform</h3>
                 <p>
                   The <strong>SASTRANIDHI Digital Platform</strong> will be formally launched on{' '}
-                  <strong>16 December 2026</strong>.
+                  <strong>27 December 2026</strong>.
                 </p>
                 <p>The platform brings together SASTRANIDHI’s four core digital initiatives:</p>
                 <ul className="event-platforms">
