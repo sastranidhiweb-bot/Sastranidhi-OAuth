@@ -544,7 +544,7 @@ section.hero .hero-curve {
   .hero .hero-brand::after { animation: none; }
 }
 
-/* --- Home hero: a small glowing gold star on each side of the name ---
+/* --- Home hero: a small glowing gold swastika (卐) on each side of the name ---
    Positioned outside the word so the centring and underline are unchanged. */
 .hero .hero-brand .hero-brand-star {
   position: absolute;
