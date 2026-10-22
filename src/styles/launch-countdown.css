@@ -159,16 +159,18 @@ html:has(.home-sticky-top) { scroll-padding-top: 158px; }
   animation: lcTwinkle 2.4s ease-in-out infinite;
 }
 
+/* The date is the eye-catcher: bigger, bright gold and softly glowing */
 .lc-date {
-  padding: 3px 10px;
-  border: 1px solid rgba(232, 195, 74, 0.55);
+  padding: 3px 14px;
+  border: 1px solid #F3DFA0;
   border-radius: 999px;
-  background: rgba(232, 195, 74, 0.1);
-  color: var(--brand-gold-soft, #F3DFA0);
+  background: rgba(232, 195, 74, 0.18);
+  color: #FFF4C7;
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
+  animation: lcDateGlow 2.4s ease-in-out infinite;
 }
 
 /* ---------- Clock chips ---------- */
@@ -252,6 +254,17 @@ html:has(.home-sticky-top) { scroll-padding-top: 158px; }
   to   { transform: translateY(0); opacity: 1; }
 }
 
+@keyframes lcDateGlow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(243, 223, 160, 0.6), 0 0 10px rgba(232, 195, 74, 0.45);
+    box-shadow: 0 0 6px rgba(232, 195, 74, 0.35), inset 0 0 6px rgba(232, 195, 74, 0.15);
+  }
+  50% {
+    text-shadow: 0 0 6px #FFF4C7, 0 0 16px rgba(243, 223, 160, 0.95), 0 0 28px rgba(232, 195, 74, 0.8);
+    box-shadow: 0 0 14px rgba(243, 223, 160, 0.75), 0 0 28px rgba(232, 195, 74, 0.45), inset 0 0 10px rgba(232, 195, 74, 0.3);
+  }
+}
+
 @keyframes lcBlink {
   50% { opacity: 0.25; }
 }
@@ -264,6 +277,7 @@ html:has(.home-sticky-top) { scroll-padding-top: 158px; }
   .lc-item { padding: 0 22px; gap: 8px; }
   .lc-chip { padding: 2px 5px; }
   .lc-chip-val { font-size: 13px; }
+  .lc-date { font-size: 15px; padding: 2px 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -274,7 +288,13 @@ html:has(.home-sticky-top) { scroll-padding-top: 158px; }
   .lc-badge-dot::after,
   .lc-ornament,
   .lc-chip-val,
-  .lc-colon {
+  .lc-colon,
+  .lc-date {
     animation: none !important;
+  }
+  /* no pulse, but keep the date lit */
+  .lc-date {
+    text-shadow: 0 0 6px rgba(243, 223, 160, 0.8);
+    box-shadow: 0 0 10px rgba(232, 195, 74, 0.5);
   }
 }
