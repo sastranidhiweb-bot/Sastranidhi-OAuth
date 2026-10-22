@@ -564,3 +564,20 @@ section.hero .hero-curve {
 
 .hero .hero-brand .hero-brand-star-left { right: calc(100% + 0.88em); }
 .hero .hero-brand .hero-brand-star-right { left: calc(100% + 0.67em); }
+
+/* the swastikas turn slowly clockwise (pradakṣiṇa). `rotate` is separate
+   from the transform that centres them vertically, so the two combine. */
+.hero .hero-brand .hero-brand-star {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  animation: heroSwastikaSpin 6s linear infinite;
+}
+
+@keyframes heroSwastikaSpin {
+  from { rotate: 0deg; }
+  to   { rotate: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-brand .hero-brand-star { animation: none; }
+}
