@@ -40,14 +40,16 @@ const COUNTRY_OPTIONS = countries.map((c) => ({
   keywords: `${c.code} ${COUNTRY_KEYWORDS[c.code] || ''}`,
 }));
 
-// City lists are per country in public/data/cities/<ISO>.json
+// States and cities are per country in public/data/places/<ISO>.json
 // (scripts/build-geo-data.py); each is fetched once when its country is picked.
-const cityCache = new Map();
+const placesCache = new Map();
+const NO_PLACES = { states: [], cities: [] };
 
 const EMPTY_FORM = {
   name: '',
   email: '',
   country: '',
+  state: '',
   city: '',
   phone: '',
   role: '',
@@ -59,7 +61,8 @@ const EMPTY_FORM = {
 // Layout and submission flow follow InternshipPage (FormSubmit AJAX endpoint).
 export default function LaunchRegistrationPage() {
   const [formData, setFormData] = useState(EMPTY_FORM);
-  const [cities, setCities] = useState([]);
+  // places.code tells which country the loaded lists belong to (null while loading)
+  const [places, setPlaces] = useState({ code: null, ...NO_PLACES });
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [toastMessage, setToastMessage] = useState('');
 
@@ -74,39 +77,59 @@ export default function LaunchRegistrationPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // A new country clears the city; the effect below loads its city list.
+  // Country -> state -> city: each choice clears the ones after it.
   const handleCountry = (code) => {
-    setFormData((prev) => (prev.country === code ? prev : { ...prev, country: code, city: '' }));
+    setFormData((prev) => (prev.country === code ? prev : { ...prev, country: code, state: '', city: '' }));
+  };
+
+  const handleState = (state) => {
+    setFormData((prev) => (prev.state === state ? prev : { ...prev, state, city: '' }));
   };
 
   useEffect(() => {
     const code = formData.country;
     if (!code) {
-      setCities([]);
+      setPlaces({ code: null, ...NO_PLACES });
       return undefined;
     }
     let cancelled = false;
-    const load = cityCache.get(code) || fetch(`/data/cities/${code}.json`).then((r) => (r.ok ? r.json() : []));
-    cityCache.set(code, load);
+    setPlaces({ code: null, ...NO_PLACES });
+    const load =
+      placesCache.get(code) || fetch(`/data/places/${code}.json`).then((r) => (r.ok ? r.json() : NO_PLACES));
+    placesCache.set(code, load);
     load
-      .then((rows) => {
-        if (cancelled) return;
-        setCities(
-          rows.map(([city, region]) => ({
-            value: region ? `${city}, ${region}` : city,
-            label: city,
-            hint: region,
-          })),
-        );
+      .then((data) => {
+        if (!cancelled) setPlaces({ code, ...data });
       })
       .catch(() => {
-        cityCache.delete(code);
-        if (!cancelled) setCities([]);
+        placesCache.delete(code);
+        if (!cancelled) setPlaces({ code, ...NO_PLACES });
       });
     return () => {
       cancelled = true;
     };
   }, [formData.country]);
+
+  const placesLoaded = Boolean(formData.country) && places.code === formData.country;
+  // A few small countries (e.g. Singapore, Vatican City) have no states.
+  const hasStates = placesLoaded && places.states.length > 0;
+
+  const stateOptions = useMemo(() => places.states.map((n) => ({ value: n, label: n })), [places]);
+
+  // Cities of the chosen state (or of the whole country if it has no states)
+  const cityOptions = useMemo(() => {
+    if (!placesLoaded) return [];
+    const stateIndex = hasStates ? places.states.indexOf(formData.state) : -1;
+    if (hasStates && stateIndex < 0) return [];
+    return places.cities
+      .filter(([, i]) => !hasStates || i === stateIndex)
+      .map(([city]) => ({ value: city, label: city }));
+  }, [places, placesLoaded, hasStates, formData.state]);
+
+  let statePlaceholder = 'Choose a country first';
+  if (formData.country) statePlaceholder = !placesLoaded ? 'Loading…' : hasStates ? 'Start typing your state' : 'Not applicable';
+  let cityPlaceholder = 'Choose a country first';
+  if (formData.country) cityPlaceholder = hasStates && !formData.state ? 'Choose a state first' : 'Start typing your city';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -123,6 +146,7 @@ export default function LaunchRegistrationPage() {
       data.append('name', formData.name);
       data.append('email', formData.email);
       data.append('country', country ? country.name : '');
+      data.append('state_province', formData.state);
       data.append('city', formData.city);
       data.append('phone', `${country?.dial || ''} ${formData.phone}`.trim());
       data.append('i_am_a', formData.role);
@@ -253,25 +277,42 @@ export default function LaunchRegistrationPage() {
                       />
                     </div>
                     <div className="field">
+                      <label htmlFor="r-state">
+                        State / Province {hasStates && <i>*</i>}
+                      </label>
+                      <SearchSelect
+                        id="r-state"
+                        name="state"
+                        options={stateOptions}
+                        value={formData.state}
+                        onChange={handleState}
+                        placeholder={statePlaceholder}
+                        disabled={!hasStates}
+                        invalidMessage="Please choose your state or province from the list."
+                        letterIndex
+                        required={hasStates}
+                      />
+                    </div>
+                  </div>
+                  <div className="field-row">
+                    <div className="field">
                       <label htmlFor="r-city">
                         City <i>*</i>
                       </label>
                       <SearchSelect
                         id="r-city"
                         name="city"
-                        options={cities}
+                        options={cityOptions}
                         value={formData.city}
                         onChange={(city) => setFormData((prev) => ({ ...prev, city }))}
-                        placeholder={formData.country ? 'Start typing your city' : 'Choose a country first'}
-                        disabled={!formData.country}
+                        placeholder={cityPlaceholder}
+                        disabled={!placesLoaded || (hasStates && !formData.state)}
                         invalidMessage="Please enter your city."
                         emptyText="Type your city"
                         allowCustom
                         required
                       />
                     </div>
-                  </div>
-                  <div className="field-row">
                     <div className="field">
                       <label htmlFor="r-phone">
                         Phone number <i>*</i>
@@ -300,6 +341,8 @@ export default function LaunchRegistrationPage() {
                         {country ? `Country code ${country.dial} is added automatically.` : 'Choose your country to set the country code.'}
                       </span>
                     </div>
+                  </div>
+                  <div className="field-row">
                     <div className="field">
                       <label htmlFor="r-role">
                         I am a <i>*</i>
@@ -319,18 +362,18 @@ export default function LaunchRegistrationPage() {
                         ))}
                       </select>
                     </div>
-                  </div>
-                  <div className="field">
-                    <label htmlFor="r-org">Institution / Organisation</label>
-                    <input
-                      id="r-org"
-                      type="text"
-                      name="organisation"
-                      autoComplete="organization"
-                      placeholder="Optional"
-                      value={formData.organisation}
-                      onChange={handleChange}
-                    />
+                    <div className="field">
+                      <label htmlFor="r-org">Institution / Organisation</label>
+                      <input
+                        id="r-org"
+                        type="text"
+                        name="organisation"
+                        autoComplete="organization"
+                        placeholder="Optional"
+                        value={formData.organisation}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="field">
                     <label htmlFor="r-message">Anything you would like to tell us?</label>
