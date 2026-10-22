@@ -291,6 +291,10 @@ footer .pivotra-icon img {
   footer .footer-social {
     grid-column: 1 / -1;
   }
+  /* logo + one-line name need the full width on phones */
+  footer .footer-brand-col {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -365,10 +369,12 @@ footer .footer-brand-col .footer-brand {
    a steady gold glow */
 footer .footer-brand .footer-brand-name {
   font-family: 'Gentium Plus', Georgia, serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  /* one line, as before; the first grid column widens to fit it */
+  white-space: nowrap;
   line-height: 1.15;
   color: #FFFDF5;
   text-shadow:
