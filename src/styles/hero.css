@@ -523,7 +523,7 @@ section.hero .hero-curve {
   position: absolute;
   top: 50%;
   transform: translateY(-62%);
-  font-size: 0.32em;
+  font-size: 0.24em;
   letter-spacing: 0;
   line-height: 1;
   color: #FFF4C7;
@@ -535,5 +535,5 @@ section.hero .hero-curve {
   user-select: none;
 }
 
-.hero .hero-brand .hero-brand-star-left { right: calc(100% + 0.66em); }
-.hero .hero-brand .hero-brand-star-right { left: calc(100% + 0.5em); }
+.hero .hero-brand .hero-brand-star-left { right: calc(100% + 0.88em); }
+.hero .hero-brand .hero-brand-star-right { left: calc(100% + 0.67em); }
