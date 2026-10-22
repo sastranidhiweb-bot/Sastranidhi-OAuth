@@ -14,6 +14,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
 import TermsOfUsePage from './pages/TermsOfUsePage.jsx';
 import AccessibilityPage from './pages/AccessibilityPage.jsx';
 import InternshipPage from './pages/InternshipPage.jsx';
+import LaunchRegistrationPage from './pages/LaunchRegistrationPage.jsx';
 import SupportPage from './pages/SupportPage.jsx';
 import EventsPage from './pages/EventsPage.jsx';
 import SupportApplyPage from './pages/SupportApplyPage.jsx';
@@ -123,6 +124,7 @@ function AppRoutes() {
         <Route path="/terms-of-use" element={<TermsOfUsePage />} />
         <Route path="/accessibility" element={<AccessibilityPage />} />
         <Route path="/internship" element={<InternshipPage />} />
+        <Route path="/launch-registration" element={<LaunchRegistrationPage />} />
         <Route path="/support" element={<SupportPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/support/apply" element={<SupportApplyPage />} />

@@ -1086,3 +1086,10 @@ header .subbar::after {
   header .sb-auth { gap: 10px; }
   header .sb-btn { min-height: 40px; padding: 0 20px; font-size: 14px; }
 }
+
+/* --- Subbar: launch registration badge labels (Header.jsx) --- */
+header .sb-reg-short { display: none; }
+@media (max-width: 480px) {
+  header .sb-reg-full { display: none; }
+  header .sb-reg-short { display: inline; }
+}
