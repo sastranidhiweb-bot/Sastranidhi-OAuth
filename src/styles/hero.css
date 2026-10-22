@@ -149,7 +149,7 @@
 
 .hero h1 {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(34px, 4.2vw, 54px);
+  font-size: clamp(32px, 4.05vw, 52px);
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--brand-gold);
@@ -236,7 +236,7 @@ section.hero {
 }
 
 section.hero h1 {
-  font-size: clamp(34px, 4.2vw, 54px);
+  font-size: clamp(32px, 4.05vw, 52px);
   margin-bottom: 12px;
 }
 
@@ -256,7 +256,7 @@ section.hero .hero-curve {
     min-height: 0;
   }
   section.hero h1 {
-    font-size: clamp(30px, 9vw, 42px);
+    font-size: clamp(28px, 8.6vw, 40px);
   }
   .hero::before {
     width: 420px;
