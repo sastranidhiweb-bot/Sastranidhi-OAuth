@@ -95,9 +95,11 @@ div.stats-band {
 
 .stats-band .stats-grid .num {
   display: block;
-  /* Times New Roman runs larger than Cormorant, so 27px keeps the same visual size */
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 27px;
+  /* same as the launch countdown's clock digits: Inter, bold, even-width figures.
+     Inter runs large, so 24px keeps the band's numbers about the same size */
+  font-family: 'Inter', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: 24px;
   font-weight: 700;
   line-height: 1.1;
   background: linear-gradient(
