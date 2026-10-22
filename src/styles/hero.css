@@ -505,14 +505,15 @@ section.hero .hero-curve {
     0 0 52px rgba(232, 195, 74, 0.5);
 }
 
-/* A brand-purple streak glides along the gold underline, left to right,
-   on a loop (a white highlight was lost against the bright gold) */
+/* A purple streak glides slowly along the gold underline, left to right,
+   on a loop. #4A298F is the hero background just below the line (the
+   #402080 gradient stop under the 28% #6540B5 radial glow). */
 .hero .hero-brand::after {
   background:
-    linear-gradient(90deg, transparent, #7A45D6 30%, #4A1F9E 50%, #7A45D6 70%, transparent) no-repeat,
+    linear-gradient(90deg, transparent, #4A298F 30%, #4A298F 70%, transparent) no-repeat,
     linear-gradient(90deg, transparent, #F3DFA0 18%, #FFF6D6 50%, #F3DFA0 82%, transparent);
   background-size: 35% 100%, 100% 100%;
-  animation: heroBrandLineSweep 4.5s ease-in-out infinite;
+  animation: heroBrandLineSweep 7s ease-in-out infinite;
   box-shadow:
     0 0 8px rgba(255, 246, 214, 0.75),
     0 0 24px rgba(232, 195, 74, 0.8),
