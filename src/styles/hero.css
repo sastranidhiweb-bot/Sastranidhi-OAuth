@@ -169,6 +169,15 @@
   animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
 }
 
+/* Home tagline in Cormorant Garamond, like the H1; a few px larger since
+   it runs smaller than Inter at the same size. Other pages keep Inter. */
+.hero:not(.page-hero) .lede {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
 /* Gopuram arch (currently hidden in new design) */
 .gopuram-arch {
   display: none;
