@@ -178,12 +178,6 @@
   letter-spacing: 0.2px;
 }
 
-/* Home: pull the tagline up closer to the H1 (was 12px + default line-height) */
-section.hero:not(.page-hero) h1 {
-  margin-bottom: 2px;
-  line-height: 1.1;
-}
-
 /* Gopuram arch (currently hidden in new design) */
 .gopuram-arch {
   display: none;
