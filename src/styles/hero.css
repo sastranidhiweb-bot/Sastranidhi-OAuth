@@ -549,7 +549,9 @@ section.hero .hero-curve {
 .hero .hero-brand .hero-brand-star {
   position: absolute;
   top: 50%;
-  transform: translateY(-62%);
+  /* `translate`, not `transform`: it's applied after `rotate`, so the
+     symbol spins on its own centre instead of orbiting */
+  translate: 0 -62%;
   font-size: 0.24em;
   letter-spacing: 0;
   line-height: 1;
@@ -565,8 +567,7 @@ section.hero .hero-curve {
 .hero .hero-brand .hero-brand-star-left { right: calc(100% + 0.88em); }
 .hero .hero-brand .hero-brand-star-right { left: calc(100% + 0.67em); }
 
-/* the swastikas turn slowly clockwise (pradakṣiṇa). `rotate` is separate
-   from the transform that centres them vertically, so the two combine. */
+/* the swastikas turn in place, slowly clockwise (pradakṣiṇa) */
 .hero .hero-brand .hero-brand-star {
   display: inline-block;
   transform-origin: 50% 50%;
