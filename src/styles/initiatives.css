@@ -111,7 +111,8 @@ section#platforms {
   border-radius: 10px;
   background: linear-gradient(135deg, #21114F, #45218B);
   color: var(--brand-gold);
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  /* Gentium Plus (index.html) renders the IAST diacritics cleanly */
+  font-family: 'Gentium Plus', Georgia, serif;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0.4px;
