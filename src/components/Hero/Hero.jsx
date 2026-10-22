@@ -9,7 +9,9 @@ export default function Hero() {
         <p className="hero-brand">
           {/* stronger-glow copy that fades in and out over the word (see hero.css) */}
           <span className="hero-brand-glow" aria-hidden="true">Śāstra Nidhi</span>
+          <span className="hero-brand-star hero-brand-star-left" aria-hidden="true">✦</span>
           Śāstra Nidhi
+          <span className="hero-brand-star hero-brand-star-right" aria-hidden="true">✦</span>
         </p>
         <h1>A Living Treasury of Śāstras</h1>
         <p className="lede">

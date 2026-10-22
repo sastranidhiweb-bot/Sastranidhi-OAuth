@@ -516,3 +516,24 @@ section.hero .hero-curve {
 @media (prefers-reduced-motion: reduce) {
   .hero .hero-brand { animation: none; }
 }
+
+/* --- Home hero: a small glowing gold star on each side of the name ---
+   Positioned outside the word so the centring and underline are unchanged. */
+.hero .hero-brand .hero-brand-star {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-62%);
+  font-size: 0.42em;
+  letter-spacing: 0;
+  line-height: 1;
+  color: #FFF4C7;
+  text-shadow:
+    0 0 4px #FFF4C7,
+    0 0 10px rgba(243, 223, 160, 0.95),
+    0 0 20px rgba(232, 195, 74, 0.8);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero .hero-brand .hero-brand-star-left { right: calc(100% + 0.5em); }
+.hero .hero-brand .hero-brand-star-right { left: calc(100% + 0.38em); }
