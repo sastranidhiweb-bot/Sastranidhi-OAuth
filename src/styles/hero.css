@@ -515,7 +515,7 @@ section.hero .hero-curve {
     linear-gradient(90deg, transparent, #4A298F 50%, transparent) no-repeat,
     linear-gradient(90deg, transparent, #F3DFA0 18%, #FFF6D6 50%, #F3DFA0 82%, transparent);
   background-size: 40% 100%, 100% 100%;
-  animation: heroBrandLineSweep 3s linear infinite;
+  animation: heroBrandLineSweep 5s linear infinite;
   box-shadow:
     0 0 8px rgba(255, 246, 214, 0.75),
     0 0 24px rgba(232, 195, 74, 0.8),
