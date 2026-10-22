@@ -505,16 +505,27 @@ section.hero .hero-curve {
     0 0 52px rgba(232, 195, 74, 0.5);
 }
 
+/* A bright highlight glides along the underline, left to right, on a loop */
 .hero .hero-brand::after {
-  animation: none;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent) no-repeat,
+    linear-gradient(90deg, transparent, #F3DFA0 18%, #FFF6D6 50%, #F3DFA0 82%, transparent);
+  background-size: 35% 100%, 100% 100%;
+  animation: heroBrandLineSweep 2.8s ease-in-out infinite;
   box-shadow:
     0 0 8px rgba(255, 246, 214, 0.75),
     0 0 24px rgba(232, 195, 74, 0.8),
     0 0 44px rgba(232, 195, 74, 0.5);
 }
 
+@keyframes heroBrandLineSweep {
+  from { background-position: -60% 0, 0 0; }
+  to   { background-position: 160% 0, 0 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero .hero-brand { animation: none; }
+  .hero .hero-brand,
+  .hero .hero-brand::after { animation: none; }
 }
 
 /* --- Home hero: a small glowing gold star on each side of the name ---
