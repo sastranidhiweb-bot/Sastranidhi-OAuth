@@ -236,8 +236,15 @@ export default function Header() {
               <img src="/assets/pivotra-logo.png" alt="" />
             </a>
           </div>
-          <Link to="/internship" className="sb-internship">
-            Apply for Internship
+          {/* launch registration badge (styled as .sb-internship); phones get
+              the short label so it fits beside Log in / Sign up */}
+          <Link
+            to="/launch-registration"
+            className="sb-internship"
+            aria-label="Register for Sastra Nidhi Launch"
+          >
+            <span className="sb-reg-full">Register for Sastra Nidhi Launch</span>
+            <span className="sb-reg-short">Register for Launch</span>
           </Link>
           <div className="sb-auth">
             <Link
