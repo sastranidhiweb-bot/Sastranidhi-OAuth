@@ -102,25 +102,38 @@ div.stats-band {
   font-size: 26px;
   font-weight: 700;
   line-height: 1.1;
-  background: linear-gradient(
-    135deg,
-    var(--brand-gold),
-    var(--brand-gold-soft) 60%,
-    var(--brand-gold)
-  );
+  letter-spacing: 0.5px;
+  /* bright ivory-to-gold, top to bottom, so the figures read clearly on purple */
+  background: linear-gradient(180deg, #FFFBEA 0%, #F8E7A8 45%, #E8C34A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* a dark lift for contrast plus a faint gold halo (text-shadow can't be
+     used with clipped-background text, so drop-shadow does the job) */
+  filter: drop-shadow(0 2px 2px rgba(20, 8, 50, 0.6)) drop-shadow(0 0 8px rgba(232, 195, 74, 0.3));
 }
 
 .stats-band .stats-grid .lbl {
   /* Cormorant runs small, so a little larger and heavier than the old Inter 13px */
+  /* elegant small capitals in bright white, spaced out, with a short gold
+     rule above to separate them from the figures */
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
-  color: var(--lavender-soft);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(20, 8, 50, 0.6);
+}
+
+.stats-band .stats-grid .lbl::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1px;
+  margin: 0 auto 5px;
+  background: linear-gradient(90deg, transparent, #F3DFA0, transparent);
 }
 
 /* ---------- Floating bubbles layer ----------
