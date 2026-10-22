@@ -131,10 +131,6 @@ html:has(.home-sticky-top) { scroll-padding-top: 158px; }
   animation: lcScroll 45s linear infinite;
 }
 
-.launch-countdown:hover .lc-track {
-  animation-play-state: paused;
-}
-
 .lc-half {
   display: flex;
   flex-shrink: 0;
