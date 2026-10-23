@@ -1,18 +1,73 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header/Header.jsx';
 import Footer from '../components/Footer/Footer.jsx';
 import '../styles/new-design.css';
 import '../styles/contact-page.css';
 
+// Zoho CRM Web-to-Lead form (supplied by the CRM team). Field names and
+// hidden token values must match the form configured in Zoho CRM.
+const ZOHO_FORM_ID = '1449582000000575031';
+const ZOHO_ACTION = 'https://crm.zoho.in/crm/WebToLeadForm';
+const ZOHO_ANALYTICS_SRC =
+  'https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=4625314ad58d7303d4821a3304ba3785d4c85698237aee30f0c44a473b64e1f243c7472329e242426691a0322532b259gid5619463566f6cee7dbec3644d97191946cf218019790698776d8952551744997gid654483cb8792b4cff86283e5ce0cd62f92cb07e771bf9a1539673f7a4670c4e2gid8849b9b587343d7ef0d35018a7e311c8408d9316583bfa8472c9744647eb090c&tw=770e499c86f862e2b5fba01ace3a0725d2a33fb54fce2a73d0c4ccf38c7ab322&version=v2';
+const ZOHO_FRAME = 'zoho-crm-submit-frame';
+
+const SUBJECTS = [
+  ['General Enquiry', 'General Enquiry'],
+  ['Courses and Discourses', 'Courses and Discourses'],
+  ['Research and Collaboration', 'Research and Collaboration'],
+  ['Technical Support', 'Technical Support'],
+  ['Donation/ Support', 'Donation / Support'],
+];
+
+const AREAS = [
+  'Courses / Learning',
+  'Volunteering',
+  'Donations',
+  'General Enquiry',
+  'Research / Collaboration',
+  'Other',
+];
+
+const EMPTY_FORM = { name: '', email: '', mobile: '', subject: '', area: '', message: '' };
+
+const REQUIRED_FIELDS = [
+  ['name', 'Name'],
+  ['email', 'Email address'],
+  ['mobile', 'Mobile'],
+  ['subject', 'Subject'],
+  ['area', 'Area of Interest'],
+  ['message', 'Message'],
+];
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState(EMPTY_FORM);
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [toastMessage, setToastMessage] = useState('');
+  const [invalidField, setInvalidField] = useState('');
+  const [formError, setFormError] = useState('');
+  const [isSmartUrl] = useState(
+    () => new URLSearchParams(window.location.search).get('service') === 'smarturl'
+  );
+  const formRef = useRef(null);
+  const submittingRef = useRef(false);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    // Zoho web-form analytics: must load after the form is in the DOM.
+    window._wfa_fstprtcken = window._wfa_fstprtcken || {};
+    window._wfa_fstprtcken[ZOHO_FORM_ID] = true;
+
+    const script = document.createElement('script');
+    script.id = 'wf_anal';
+    script.src = ZOHO_ANALYTICS_SRC;
+    document.body.appendChild(script);
+
+    return () => {
+      script.remove();
+      clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     // Scroll reveal
@@ -41,50 +96,63 @@ export default function ContactPage() {
     setTimeout(() => setToastMessage(''), 3600);
   };
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (key) => (e) => {
+    setFormData((prev) => ({ ...prev, [key]: e.target.value }));
+    if (invalidField === key && e.target.value.trim()) {
+      setInvalidField('');
+      setFormError('');
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const fail = (e, key, msg) => {
     e.preventDefault();
+    setInvalidField(key);
+    setFormError(msg);
+    formRef.current?.querySelector(`[data-key="${key}"]`)?.focus();
+  };
 
-    if (!e.target.checkValidity()) {
-      e.target.reportValidity();
-      return;
+  // Validates, then lets the browser POST natively to Zoho. The response
+  // loads into a hidden iframe so the visitor stays on this page.
+  const handleSubmit = (e) => {
+    for (const [key, label] of REQUIRED_FIELDS) {
+      if (!formData[key].trim()) {
+        return fail(e, key, `${label} is required. Please complete this field.`);
+      }
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      return fail(e, 'email', 'Please enter a valid email address.');
+    }
+    const phoneDigits = formData.mobile.replace(/\D/g, '');
+    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+      return fail(e, 'mobile', 'Please enter a valid mobile number.');
     }
 
+    setInvalidField('');
+    setFormError('');
     setStatus('loading');
+    submittingRef.current = true;
 
-    try {
-      const data = new FormData();
-      data.append('name', formData.name);
-      data.append('email', formData.email);
-      data.append('subject', formData.subject);
-      data.append('message', formData.message);
-      data.append('_subject', 'New message from Sastra Nidhi Contact page');
-      data.append('_captcha', 'false');
-      data.append('_template', 'table');
-      data.append('_replyto', formData.email);
-
-      const res = await fetch('https://formsubmit.co/ajax/noreply@sastranidhi.org', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
-      });
-
-      if (!res.ok) throw new Error('send failed');
-
-      setStatus('success');
-      showToast('Message sent successfully. We will get back to you within 1 business day.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-
-      setTimeout(() => setStatus('idle'), 2600);
-    } catch (err) {
+    timeoutRef.current = setTimeout(() => {
+      if (!submittingRef.current) return;
+      submittingRef.current = false;
       setStatus('error');
       showToast('Something went wrong. Please try again.');
       setTimeout(() => setStatus('idle'), 2600);
-    }
+    }, 20000);
   };
+
+  const handleFrameLoad = () => {
+    if (!submittingRef.current) return; // ignore the iframe's initial blank load
+    submittingRef.current = false;
+    clearTimeout(timeoutRef.current);
+
+    setStatus('success');
+    showToast('Message sent successfully. We will get back to you within 1 business day.');
+    setFormData(EMPTY_FORM);
+    setTimeout(() => setStatus('idle'), 2600);
+  };
+
+  const fieldClass = (key) => (invalidField === key ? 'is-invalid' : undefined);
 
   return (
     <>
@@ -163,71 +231,177 @@ export default function ContactPage() {
                     inbox.
                   </p>
 
-                  <form onSubmit={handleSubmit} noValidate>
+                  <iframe
+                    name={ZOHO_FRAME}
+                    title="Zoho CRM form submission"
+                    onLoad={handleFrameLoad}
+                    hidden
+                  />
+                  <form
+                    ref={formRef}
+                    id={`webform${ZOHO_FORM_ID}`}
+                    name={`WebToLeads${ZOHO_FORM_ID}`}
+                    action={ZOHO_ACTION}
+                    method="POST"
+                    acceptCharset="UTF-8"
+                    target={ZOHO_FRAME}
+                    onSubmit={handleSubmit}
+                    noValidate
+                  >
+                    {/* Zoho CRM hidden integration fields */}
+                    <input
+                      type="hidden"
+                      name="xnQsjsdp"
+                      value="ee1dd053d4ce23aa0affe1c9d46ff1a73a9333f75d677e34914513a331f96052"
+                    />
+                    <input type="hidden" name="zc_gad" id="zc_gad" defaultValue="" />
+                    <input
+                      type="hidden"
+                      name="xmIwtLD"
+                      value="ed24f3fdf2c45a54ce1b4dd60e66584e9f500b019f6700bb37aa680c4cb4f3631beb79e06caf90c4493d7092da61ed48"
+                    />
+                    <input type="hidden" name="actionType" value="TGVhZHM=" />
+                    <input type="hidden" name="returnURL" value="null" />
+                    {isSmartUrl && <input type="hidden" name="service" value="smarturl" />}
+
                     <div className="field-row">
                       <div className="field">
-                        <label htmlFor="c-name">
-                          Full name <i>*</i>
+                        <label htmlFor="Last_Name">
+                          Name <i>*</i>
                         </label>
                         <input
-                          id="c-name"
+                          id="Last_Name"
+                          data-key="name"
                           type="text"
-                          name="name"
+                          name="Last Name"
+                          maxLength={80}
                           placeholder="Your full name"
+                          autoComplete="name"
+                          className={fieldClass('name')}
                           value={formData.name}
-                          onChange={handleChange}
+                          onChange={handleChange('name')}
                           required
                         />
                       </div>
                       <div className="field">
-                        <label htmlFor="c-email">
+                        <label htmlFor="Email">
                           Email address <i>*</i>
                         </label>
                         <input
-                          id="c-email"
+                          id="Email"
+                          data-key="email"
                           type="email"
-                          name="email"
+                          name="Email"
+                          ftype="email"
+                          maxLength={100}
                           placeholder="you@example.com"
+                          autoComplete="email"
+                          className={fieldClass('email')}
                           value={formData.email}
-                          onChange={handleChange}
+                          onChange={handleChange('email')}
                           required
                         />
                       </div>
                     </div>
+                    <div className="field-row">
+                      <div className="field">
+                        <label htmlFor="Mobile">
+                          Mobile <i>*</i>
+                        </label>
+                        <input
+                          id="Mobile"
+                          data-key="mobile"
+                          type="tel"
+                          name="Mobile"
+                          maxLength={30}
+                          placeholder="Your phone number"
+                          autoComplete="tel"
+                          className={fieldClass('mobile')}
+                          value={formData.mobile}
+                          onChange={handleChange('mobile')}
+                          required
+                        />
+                      </div>
+                      <div className="field">
+                        <label htmlFor="LEADCF1">
+                          Subject <i>*</i>
+                        </label>
+                        <select
+                          id="LEADCF1"
+                          data-key="subject"
+                          name="LEADCF1"
+                          className={fieldClass('subject')}
+                          value={formData.subject}
+                          onChange={handleChange('subject')}
+                          required
+                        >
+                          <option value="" disabled>
+                            Select a subject
+                          </option>
+                          {SUBJECTS.map(([value, label]) => (
+                            <option key={value} value={value}>
+                              {label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
                     <div className="field">
-                      <label htmlFor="c-subject">
-                        Subject <i>*</i>
+                      <label htmlFor="LEADCF4">
+                        Area of Interest <i>*</i>
                       </label>
                       <select
-                        id="c-subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
+                        id="LEADCF4"
+                        data-key="area"
+                        name="LEADCF4"
+                        className={fieldClass('area')}
+                        value={formData.area}
+                        onChange={handleChange('area')}
                         required
                       >
                         <option value="" disabled>
-                          Select a subject
+                          Select an area
                         </option>
-                        <option>General Inquiry</option>
-                        <option>Courses & Discourses</option>
-                        <option>Research Collaboration</option>
-                        <option>Technical Support</option>
-                        <option>Donation / Support</option>
+                        {AREAS.map((area) => (
+                          <option key={area} value={area}>
+                            {area}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="field">
-                      <label htmlFor="c-message">
+                      <label htmlFor="Description">
                         Message <i>*</i>
                       </label>
                       <textarea
-                        id="c-message"
-                        name="message"
+                        id="Description"
+                        data-key="message"
+                        name="Description"
+                        maxLength={32000}
                         placeholder="Type your message here..."
+                        className={fieldClass('message')}
                         value={formData.message}
-                        onChange={handleChange}
+                        onChange={handleChange('message')}
                         required
                       ></textarea>
                     </div>
+
+                    {/* Zoho honeypot: keep hidden */}
+                    <input
+                      type="text"
+                      name="aG9uZXlwb3Q"
+                      defaultValue=""
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      className="zoho-honeypot"
+                    />
+
+                    {formError && (
+                      <div className="contact-form-error" role="alert">
+                        {formError}
+                      </div>
+                    )}
 
                     <button
                       type="submit"
