@@ -9,89 +9,236 @@
   position: relative;
 }
 
+.contact-form-card .search-select input {
+  padding-right: 40px;
+}
+
 .search-select input:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
+/* Chevron inside the field (the input keeps a 16px bottom margin) */
+.search-select-chevron {
+  position: absolute;
+  right: 14px;
+  top: calc((100% - 16px) / 2);
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  fill: none;
+  stroke: var(--brand-violet, #5129A8);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: transform 0.25s cubic-bezier(.16, 1, .3, 1), opacity 0.2s;
+}
+.search-select.is-open .search-select-chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+.search-select.is-disabled .search-select-chevron { opacity: 0.3; }
+
+/* ---------- Dropdown panel ---------- */
 .search-select-pop {
   position: absolute;
-  top: calc(100% - 12px);
+  top: calc(100% - 10px);
   left: 0;
   right: 0;
   z-index: 30;
   overflow: hidden;
   background: #fff;
-  border: 1px solid #e4def3;
-  border-radius: 12px;
-  box-shadow: 0 14px 34px rgba(48, 22, 110, 0.18);
+  border: 1px solid #e6dff5;
+  border-radius: 16px;
+  box-shadow:
+    0 2px 6px rgba(48, 22, 110, 0.06),
+    0 18px 44px rgba(48, 22, 110, 0.18);
+  transform-origin: top center;
+  animation: ssDrop 0.22s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* gold hairline along the top edge */
+.search-select-pop::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  z-index: 2;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(90deg, transparent, #E8C34A 30%, #F3DFA0 50%, #E8C34A 70%, transparent);
 }
 
 .search-select-list {
-  max-height: 248px;
+  max-height: 260px;
   overflow-y: auto;
   margin: 0;
   padding: 6px;
   list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(106, 75, 196, 0.35) transparent;
+}
+.search-select-list::-webkit-scrollbar { width: 8px; }
+.search-select-list::-webkit-scrollbar-thumb {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: rgba(106, 75, 196, 0.35);
 }
 
-/* A-Z bar (letterIndex) */
+/* ---------- A-Z bar (letterIndex) ---------- */
 .search-select-letters {
   display: flex;
   flex-wrap: wrap;
-  gap: 3px;
-  padding: 8px;
-  border-bottom: 1px solid #ece7f7;
-  background: #faf8ff;
+  gap: 4px;
+  padding: 12px 10px 10px;
+  border-bottom: 1px solid #efe9fa;
+  background: linear-gradient(180deg, #faf7ff, #f6f1fe);
 }
 
 .search-select-letters button {
-  min-width: 24px;
-  height: 24px;
-  padding: 0 5px;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(48, 22, 110, 0.06);
   color: var(--brand-violet, #5129A8);
   font: 700 12px Inter, system-ui, sans-serif;
   cursor: pointer;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
 .search-select-letters button:hover {
-  background: rgba(106, 75, 196, 0.12);
+  transform: translateY(-1px);
+  border-color: rgba(106, 75, 196, 0.3);
+  box-shadow: 0 4px 10px rgba(48, 22, 110, 0.12);
 }
 
 .search-select-letters button.is-current {
-  background: var(--brand-violet, #5129A8);
+  border-color: transparent;
+  background: linear-gradient(135deg, #45218B, #6933C9);
+  box-shadow: 0 4px 12px rgba(69, 33, 139, 0.35);
   color: #fff;
 }
 
+/* ---------- Items ---------- */
 .search-select-list li {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 9px 11px;
-  border-radius: 8px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px 10px 14px;
+  border-radius: 10px;
   font: 500 14px Inter, system-ui, sans-serif;
   color: var(--text-primary);
   cursor: pointer;
+  transition: background 0.15s, color 0.15s, padding 0.15s;
+}
+
+/* violet-to-gold accent bar that slides in on the active item */
+.search-select-list li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #6933C9, #E8C34A);
+  transform: translateY(-50%);
+  transition: height 0.2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.search-select-label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .search-select-list li small {
   flex-shrink: 0;
-  font-size: 12px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: #f4f0fb;
+  font-size: 11.5px;
+  font-weight: 600;
   color: var(--text-muted);
+}
+
+.search-select-list li mark {
+  background: none;
+  color: var(--brand-violet, #5129A8);
+  font-weight: 800;
 }
 
 .search-select-list li.is-active {
-  background: rgba(106, 75, 196, 0.1);
+  padding-left: 18px;
+  background: linear-gradient(90deg, rgba(106, 75, 196, 0.11), rgba(106, 75, 196, 0.04));
   color: var(--brand-violet, #5129A8);
+}
+.search-select-list li.is-active::before { height: 60%; }
+
+.search-select-list li.is-selected { font-weight: 700; }
+
+.search-select-check {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #6933C9;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* "Other": pinned to the bottom so it is reachable in long lists */
+.search-select-list li.is-other {
+  position: sticky;
+  bottom: -6px;
+  margin: 4px -6px -6px;
+  padding: 12px 18px;
+  border-top: 1px solid #efe9fa;
+  border-radius: 0;
+  background: linear-gradient(180deg, #fbf9ff, #f6f1fe);
+  font-weight: 700;
+  color: var(--brand-violet, #5129A8);
+}
+.search-select-list li.is-other.is-active {
+  padding-left: 22px;
+  background: linear-gradient(180deg, #f3edfd, #ede4fc);
+}
+.search-select-list li.is-other::before { left: 8px; }
+
+.search-select-pen {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
 }
 
 .search-select-list li.search-select-empty {
+  justify-content: center;
+  padding: 18px 12px;
   cursor: default;
   color: var(--text-muted);
+  font-style: italic;
+}
+
+@keyframes ssDrop {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-select-pop { animation: none; }
 }
 
 /* ---------- Phone with automatic country prefix ---------- */
