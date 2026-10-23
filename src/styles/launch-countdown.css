@@ -22,19 +22,19 @@
   white-space: nowrap;
 }
 
-/* HomePage wraps the ribbon and the header so both stay on screen while
+/* Header.jsx wraps the ribbon and the header so both stay on screen while
    scrolling; the header's own sticky has no room to act inside it. */
-.home-sticky-top {
+.site-sticky-top {
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 /* Section jumps clear the ribbon too (base.css values + ribbon height) */
-html:has(.home-sticky-top) { scroll-padding-top: 158px; }
-@media (max-width: 900px) { html:has(.home-sticky-top) { scroll-padding-top: 185px; } }
-@media (max-width: 700px) { html:has(.home-sticky-top) { scroll-padding-top: 170px; } }
-@media (max-width: 480px) { html:has(.home-sticky-top) { scroll-padding-top: 176px; } }
+html:has(.site-sticky-top) { scroll-padding-top: 158px; }
+@media (max-width: 900px) { html:has(.site-sticky-top) { scroll-padding-top: 185px; } }
+@media (max-width: 700px) { html:has(.site-sticky-top) { scroll-padding-top: 170px; } }
+@media (max-width: 480px) { html:has(.site-sticky-top) { scroll-padding-top: 176px; } }
 
 /* Animated gold hairlines along the top and bottom edges */
 .launch-countdown::before,

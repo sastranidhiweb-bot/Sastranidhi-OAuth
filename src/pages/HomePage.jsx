@@ -2,7 +2,7 @@ import Header from '../components/Header/Header.jsx';
 import Hero from '../components/Hero/Hero.jsx';
 import Initiatives from '../components/Initiatives/Initiatives.jsx';
 import Stats from '../components/Stats/Stats.jsx';
-import LaunchCountdown from '../components/LaunchCountdown/LaunchCountdown.jsx';
+import LaunchPopup from '../components/LaunchPopup/LaunchPopup.jsx';
 import About from '../components/About/About.jsx';
 import Courses from '../components/Courses/Courses.jsx';
 import Research from '../components/Research/Research.jsx';
@@ -19,11 +19,7 @@ export default function HomePage() {
   return (
     <>
       <div className="homepage">
-        {/* Launch ribbon and header stick to the top together */}
-        <div className="home-sticky-top">
-          <LaunchCountdown />
-          <Header />
-        </div>
+        <Header />
         <main>
           <Hero />
           <Initiatives />
@@ -36,6 +32,7 @@ export default function HomePage() {
           {/* <Contact /> */}
         </main>
         <Footer />
+        <LaunchPopup />
         <div className="whatsapp-float">
           <span className="wa-tooltip">Follow us on WhatsApp</span>
           <a

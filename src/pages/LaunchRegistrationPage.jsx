@@ -6,6 +6,7 @@ import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
 import DonateModal from '../components/Modals/DonateModal.jsx';
 import { PageHero, TickList } from '../components/PageSections/PageSections.jsx';
 import SearchSelect from '../components/SearchSelect/SearchSelect.jsx';
+import { markLaunchRegistered } from '../components/LaunchPopup/LaunchPopup.jsx';
 import { countries } from '../data/countries.js';
 import '../styles/pages.css';
 import '../styles/contact-page.css';
@@ -57,7 +58,7 @@ const EMPTY_FORM = {
   message: '',
 };
 
-// Registration for the platform launch (27 December 2026, see EventsPage.jsx).
+// Registration for the platform launch (27–31 December 2026, see EventsPage.jsx).
 // Layout and submission flow follow InternshipPage (FormSubmit AJAX endpoint).
 export default function LaunchRegistrationPage() {
   const [formData, setFormData] = useState(EMPTY_FORM);
@@ -165,6 +166,7 @@ export default function LaunchRegistrationPage() {
 
       if (!res.ok) throw new Error('send failed');
 
+      markLaunchRegistered();
       setStatus('success');
       showToast('Thank you for registering! We look forward to welcoming you at the launch.');
       setFormData(EMPTY_FORM);
@@ -190,7 +192,7 @@ export default function LaunchRegistrationPage() {
               <div className="contact-intro internship-intro reveal">
                 <h2>Join Us for the Launch of Śāstra Nidhi</h2>
                 <p className="contact-lede">
-                  On <strong>27 December 2026</strong>, the{' '}
+                  From <strong>27 to 31 December 2026</strong>, over five days of celebration, the{' '}
                   <strong>Śāstra Nidhi Digital Platform</strong> will be formally launched: a
                   revolutionary initiative that brings India’s vast śāstric heritage into one living
                   digital treasury.
@@ -217,7 +219,7 @@ export default function LaunchRegistrationPage() {
                   ]}
                 />
                 <p className="contact-lede">
-                  <strong>Register today and join us on this auspicious day.</strong>
+                  <strong>Register today and join us for this auspicious occasion.</strong>
                 </p>
               </div>
 
@@ -310,6 +312,9 @@ export default function LaunchRegistrationPage() {
                         invalidMessage="Please enter your city."
                         emptyText="Type your city"
                         allowCustom
+                        otherLabel="Other (my city is not listed)"
+                        otherPlaceholder="Type your city name"
+                        letterIndex
                         required
                       />
                     </div>
