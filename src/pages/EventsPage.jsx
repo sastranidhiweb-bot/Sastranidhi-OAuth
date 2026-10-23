@@ -20,7 +20,9 @@ const launchRoles = {
 function EventDate({ day, month, year }) {
   return (
     <div className="event-date" aria-hidden="true">
-      {day && <span className="event-date-day">{day}</span>}
+      {day && (
+        <span className={`event-date-day${day.length > 2 ? ' event-date-range' : ''}`}>{day}</span>
+      )}
       {month && <span className="event-date-month">{month}</span>}
       <span className={day ? 'event-date-year' : 'event-date-day'}>{year}</span>
     </div>
@@ -61,13 +63,13 @@ export default function EventsPage() {
             </div>
 
             <article className="event-card event-card-upcoming reveal">
-              <EventDate day="27" month="Dec" year="2026" />
+              <EventDate day="27–31" month="Dec" year="2026" />
               <div className="event-body">
-                <div className="event-label">Platform launch · 27 December 2026</div>
+                <div className="event-label">Platform launch · 27–31 December 2026</div>
                 <h3>Launch of the SASTRA NIDHI Digital Platform</h3>
                 <p>
-                  The <strong>SASTRA NIDHI Digital Platform</strong> will be formally launched on{' '}
-                  <strong>27 December 2026</strong>.
+                  The <strong>SASTRA NIDHI Digital Platform</strong> will be formally launched in a
+                  five-day event from <strong>27 to 31 December 2026</strong>.
                 </p>
                 <p>The platform brings together SASTRA NIDHI’s four core digital initiatives:</p>
                 <ul className="event-platforms">

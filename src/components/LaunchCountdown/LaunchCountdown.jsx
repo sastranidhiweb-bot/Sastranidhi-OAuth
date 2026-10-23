@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import '../../styles/launch-countdown.css';
 
-// Platform launch, 27 December 2026 at midnight IST (see EventsPage.jsx).
-const LAUNCH_DATE = new Date('2026-12-27T00:00:00+05:30');
+// Platform launch: a five-day event, 27–31 December 2026 (IST; see EventsPage.jsx).
+// The countdown runs to the first day.
+export const LAUNCH_DATE = new Date('2026-12-27T00:00:00+05:30');
+export const LAUNCH_END = new Date('2027-01-01T00:00:00+05:30');
 
 function getRemaining() {
   const diff = Math.max(LAUNCH_DATE.getTime() - Date.now(), 0);

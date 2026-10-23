@@ -1282,6 +1282,12 @@ a.collab-inline-link:hover {
   line-height: 1;
 }
 
+/* multi-day events ("27–31") */
+.event-date-day.event-date-range {
+  font-size: 40px;
+  white-space: nowrap;
+}
+
 .event-date-month {
   font-size: 14px;
   font-weight: 800;
