@@ -263,6 +263,23 @@
   transform: translateY(-1px);
 }
 
+.contact-form-card .is-invalid {
+  border-color: #d64545;
+}
+
+.contact-form-error {
+  margin: -4px 0 14px;
+  color: #a32626;
+  font-size: 13px;
+}
+
+.contact-form-card .zoho-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
 .contact-submit {
   width: 100%;
   height: 52px;
