@@ -280,12 +280,148 @@
   height: 1px;
 }
 
+/* Email and phone fields with an inline Verify button, then a green tick once verified
+   (components/VerifyCode, LaunchRegistrationPage) */
+.verify-field {
+  position: relative;
+  margin: 0 0 16px;
+}
+
+/* The Verify button needs ~110px inside its field, so when the form itself
+   is narrow (tablets, small laptops, where the card shares the row with the
+   intro) the paired fields stack one per row instead of two. Measured on
+   the form, not the screen, because the card's width depends on layout. */
+.verify-form { container-type: inline-size; }
+@container (max-width: 560px) {
+  .contact-form-card .verify-form .field-row { grid-template-columns: 1fr; gap: 0; }
+}
+/* small phones: a slimmer button leaves more room to type the number */
+@container (max-width: 340px) {
+  .contact-form-card .verify-form .verify-field:not(.is-verified) input { padding-right: 96px; }
+  .verify-form .verify-btn { min-width: 0; height: 30px; padding: 0 12px; font-size: 12px; right: 6px; }
+}
+.contact-form-card .verify-field input {
+  margin: 0;
+  padding-right: 118px;
+}
+.contact-form-card .verify-field.is-verified input {
+  padding-right: 46px;
+  border-color: rgba(47,174,107,.55);
+}
+.verify-btn {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  height: 34px;
+  min-width: 76px;
+  margin: 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--brand-violet, #45218B), var(--brand-violet-light, #6933C9));
+  color: #fff;
+  font: 700 13px Inter, system-ui, sans-serif;
+  letter-spacing: .02em;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(90,46,166,.28);
+  transition: box-shadow .2s, filter .2s;
+}
+.verify-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 16px rgba(90,46,166,.36);
+}
+.verify-btn:focus-visible {
+  outline: 3px solid rgba(106,75,196,.35);
+  outline-offset: 2px;
+}
+/* while sending, or while the code box below is open */
+.verify-btn:disabled {
+  background: #e9e3f7;
+  color: var(--brand-violet, #5129A8);
+  box-shadow: none;
+  cursor: default;
+}
+.verified-tick {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #2fae6b;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  animation: tickPop .3s ease;
+}
+@keyframes tickPop {
+  from { transform: scale(.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.verify-code {
+  margin: -6px 0 16px;
+  padding: 12px;
+  border: 1px dashed #d9cff0;
+  border-radius: 12px;
+  background: #fbfaff;
+}
+.verify-code-note {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+.verify-code-row {
+  display: flex;
+  gap: 8px;
+}
+.contact-form-card .verify-code-row input {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  letter-spacing: .3em;
+  font-weight: 700;
+}
+.verify-code-confirm {
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--brand-violet, #45218B);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.verify-code-confirm:disabled { opacity: .6; cursor: default; }
+.verify-code-resend {
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand-violet, #5129A8);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.verify-code-resend:disabled {
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: default;
+}
+
 .contact-submit {
   width: 100%;
   height: 52px;
   border: 0;
   border-radius: 13px;
-  background: linear-gradient(120deg, var(--brand-violet-dark), var(--brand-violet-light));
+  background: linear-gradient(120deg, var(--brand-violet, #45218B), var(--brand-violet-light, #6933C9));
   color: #fff;
   font-size: 15px;
   font-weight: 800;
@@ -383,6 +519,7 @@
 @media (prefers-reduced-motion: reduce) {
   .contact-logo-orbit .orbit { animation: none; }
   .contact-info, .contact-submit { transition: none; }
+  .verified-tick { animation: none; }
 }
 
 

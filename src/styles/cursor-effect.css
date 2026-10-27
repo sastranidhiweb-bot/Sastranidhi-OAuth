@@ -1,0 +1,16 @@
+/* Mouse effect (components/CursorEffect): a canvas of white and purple sparkles that trail
+   the pointer. It takes no clicks and sits above everything, the Zoho chat
+   widget included. */
+
+.cursor-sparkles {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2147483647;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-sparkles { display: none; }
+}

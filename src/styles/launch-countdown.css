@@ -217,7 +217,7 @@ html:has(.site-sticky-top) { scroll-padding-top: 158px; }
 }
 
 .lc-togo {
-  font-style: italic;
+  font-style: normal;
   opacity: 0.8;
 }
 

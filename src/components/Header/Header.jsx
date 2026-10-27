@@ -256,7 +256,7 @@ export default function Header() {
                 className={`sb-btn sb-login${isActive('/login') ? ' active' : ''}`}
                 aria-current={isActive('/login') ? 'page' : undefined}
               >
-                Log in
+                Login
               </Link>
               <Link
                 to="/signup"

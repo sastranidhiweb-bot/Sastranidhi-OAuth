@@ -635,3 +635,24 @@ footer::before {
   margin-top: 4px;
   transition: transform .3s ease, box-shadow .3s ease;
 }
+
+/* WhatsApp button lives bottom-left, so it doesn't sit on the Zoho
+   SalesIQ chat bubble that takes the bottom-right corner. The tooltip
+   opens to its right. `html body` outranks the right-side rules in
+   homepage.css and above. */
+html body .whatsapp-float {
+  left: 10px;
+  bottom: 10px;
+  right: auto;
+  flex-direction: row-reverse;
+}
+html body .whatsapp-float .wa-tooltip { transform: translateX(-8px); }
+html body .whatsapp-float:hover .wa-tooltip { transform: translateX(0); }
+/* tucked right into the corner, and a little smaller on tablets and phones,
+   where page text runs closer to the screen edge */
+@media (max-width: 920px) {
+  html body .whatsapp-float { left: 8px; bottom: 8px; }
+  html body .wa-btn { width: 46px; height: 46px; }
+  html body .wa-btn svg { width: 23px; height: 23px; }
+  html body .wa-ring { inset: -4px; }
+}
