@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ModalProvider } from './context/ModalContext.jsx';
 import DonateModal from './components/Modals/DonateModal.jsx';
+import CursorEffect from './components/CursorEffect/CursorEffect.jsx';
 
 import HomePage from './pages/HomePage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
@@ -103,6 +104,7 @@ function AppRoutes() {
 
   return (
     <>
+      <CursorEffect />
       {showBubbles && (
         <div className="site-bubbles" aria-hidden="true">
           {Array.from({ length: 12 }, (_, i) => (

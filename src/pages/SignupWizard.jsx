@@ -244,7 +244,7 @@ export default function SignupWizard() {
       {step < 4 && (
         <p className="auth-links" style={{ justifyContent: 'center' }}>
           Already have an account?{' '}
-          <a href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ''}`}>Log in</a>
+          <a href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ''}`}>Login</a>
         </p>
       )}
     </AuthLayout>

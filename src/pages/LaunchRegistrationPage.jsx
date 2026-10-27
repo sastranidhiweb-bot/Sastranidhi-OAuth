@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Header from '../components/Header/Header.jsx';
 import Footer from '../components/Footer/Footer.jsx';
 import SiteBubbles from '../components/SiteBubbles.jsx';
@@ -6,8 +6,11 @@ import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
 import DonateModal from '../components/Modals/DonateModal.jsx';
 import { PageHero, TickList } from '../components/PageSections/PageSections.jsx';
 import SearchSelect from '../components/SearchSelect/SearchSelect.jsx';
+import { useCodeVerification, VerifyButton, VerifyCodeBox } from '../components/VerifyCode/VerifyCode.jsx';
 import { markLaunchRegistered } from '../components/LaunchPopup/LaunchPopup.jsx';
 import { countries } from '../data/countries.js';
+import { apiPost, ApiError } from '../services/api.js';
+import { sendPhoneCode, resetPhoneVerification } from '../services/phoneVerification.js';
 import '../styles/pages.css';
 import '../styles/contact-page.css';
 
@@ -58,6 +61,19 @@ const EMPTY_FORM = {
   message: '',
 };
 
+// Email codes come from the IdP's endpoints (see SignupWizard.jsx).
+// /auth/register/resend is used to send because, unlike /register/start, it
+// doesn't refuse addresses that already have an account.
+// Phone codes come from Firebase (services/phoneVerification.js).
+const friendlyApiError = (err, fallback) => {
+  const e = new Error(err instanceof ApiError && err.status !== 0 ? err.message : fallback);
+  e.retryAfterSeconds = err.details?.retryAfterSeconds;
+  return e;
+};
+
+// Number in international format, e.g. +91 98765 43210 -> +919876543210
+const toE164 = (dial, phone) => `${dial}${phone.replace(/\D/g, '').replace(/^0+/, '')}`;
+
 // Registration for the platform launch (27–31 December 2026, see EventsPage.jsx).
 // Layout and submission flow follow InternshipPage (FormSubmit AJAX endpoint).
 export default function LaunchRegistrationPage() {
@@ -66,8 +82,48 @@ export default function LaunchRegistrationPage() {
   const [places, setPlaces] = useState({ code: null, ...NO_PLACES });
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [toastMessage, setToastMessage] = useState('');
-
   const country = useMemo(() => countries.find((c) => c.code === formData.country), [formData.country]);
+
+  const emailCheck = useCodeVerification({
+    codeLabel: 'email',
+    send: async () => {
+      try {
+        const res = await apiPost('/auth/register/resend', { email: formData.email.trim() });
+        return { cooldownSeconds: res.resendCooldownSeconds };
+      } catch (err) {
+        throw friendlyApiError(err, 'We could not send the code right now. Please try again in a moment.');
+      }
+    },
+    confirm: async (code) => {
+      try {
+        await apiPost('/auth/register/verify', { email: formData.email.trim(), code });
+      } catch (err) {
+        throw friendlyApiError(err, 'We could not check the code right now. Please try again.');
+      }
+    },
+  });
+
+  const confirmPhoneRef = useRef(null);
+  const phoneCheck = useCodeVerification({
+    codeLabel: 'SMS',
+    send: async () => {
+      confirmPhoneRef.current = await sendPhoneCode(toE164(country.dial, formData.phone), 'r-recaptcha');
+      return {};
+    },
+    confirm: (code) => confirmPhoneRef.current(code),
+  });
+
+  useEffect(() => resetPhoneVerification, []);
+
+  // Checks the field with the browser's own validation before sending a code.
+  const sendIfValid = (inputId, check) => () => {
+    const input = document.getElementById(inputId);
+    if (!input.checkValidity()) {
+      input.reportValidity();
+      return;
+    }
+    check.sendCode();
+  };
 
   const showToast = (msg) => {
     setToastMessage(msg);
@@ -78,8 +134,21 @@ export default function LaunchRegistrationPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // A changed email or phone number has to be verified again.
+  const handleEmailChange = (e) => {
+    handleChange(e);
+    emailCheck.reset();
+  };
+
+  const handlePhoneChange = (e) => {
+    handleChange(e);
+    phoneCheck.reset();
+  };
+
   // Country -> state -> city: each choice clears the ones after it.
+  // It also changes the phone's country code, so the phone needs verifying again.
   const handleCountry = (code) => {
+    if (code !== formData.country) phoneCheck.reset();
     setFormData((prev) => (prev.country === code ? prev : { ...prev, country: code, state: '', city: '' }));
   };
 
@@ -140,12 +209,25 @@ export default function LaunchRegistrationPage() {
       return;
     }
 
+    if (!emailCheck.verified) {
+      emailCheck.setError('Please verify your email address before registering.');
+      document.getElementById('r-email').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (!phoneCheck.verified) {
+      phoneCheck.setError('Please verify your phone number before registering.');
+      document.getElementById('r-phone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     setStatus('loading');
 
     try {
       const data = new FormData();
       data.append('name', formData.name);
       data.append('email', formData.email);
+      data.append('email_verified', 'Yes');
+      data.append('phone_verified', 'Yes');
       data.append('country', country ? country.name : '');
       data.append('state_province', formData.state);
       data.append('city', formData.city);
@@ -170,6 +252,8 @@ export default function LaunchRegistrationPage() {
       setStatus('success');
       showToast('Thank you for registering! We look forward to welcoming you at the launch.');
       setFormData(EMPTY_FORM);
+      emailCheck.reset();
+      phoneCheck.reset();
 
       setTimeout(() => setStatus('idle'), 2600);
     } catch (err) {
@@ -184,13 +268,13 @@ export default function LaunchRegistrationPage() {
       <SiteBubbles />
       <Header />
       <main>
-        <PageHero title="Launch Registration" />
+        <PageHero title="Launch Event Registration" />
 
         <section className="contact-section">
           <div className="wrap">
             <div className="contact-shell internship-shell">
               <div className="contact-intro internship-intro reveal">
-                <h2>Join Us for the Launch of Śāstra Nidhi</h2>
+                <h2>Join us for the launch of Śāstra Nidhi</h2>
                 <p className="contact-lede">
                   From <strong>27 to 31 December 2026</strong>, over five days of celebration, the{' '}
                   <strong>Śāstra Nidhi Digital Platform</strong> will be formally launched: a
@@ -228,7 +312,7 @@ export default function LaunchRegistrationPage() {
                 <h3>Register for the launch</h3>
                 <p>Be part of this historic moment. Fields marked * are required.</p>
 
-                <form onSubmit={handleSubmit} noValidate>
+                <form className="verify-form" onSubmit={handleSubmit} noValidate>
                   <div className="field-row">
                     <div className="field">
                       <label htmlFor="r-name">
@@ -249,16 +333,21 @@ export default function LaunchRegistrationPage() {
                       <label htmlFor="r-email">
                         Email address <i>*</i>
                       </label>
-                      <input
-                        id="r-email"
-                        type="email"
-                        name="email"
-                        autoComplete="email"
-                        placeholder="you@example.com"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                      />
+                      <div className={`verify-field ${emailCheck.verified ? 'is-verified' : ''}`}>
+                        <input
+                          id="r-email"
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          placeholder="you@example.com"
+                          aria-describedby="r-email-status"
+                          value={formData.email}
+                          onChange={handleEmailChange}
+                          required
+                        />
+                        <VerifyButton v={emailCheck} onClick={sendIfValid('r-email', emailCheck)} />
+                      </div>
+                      <VerifyCodeBox v={emailCheck} id="r-email" sentTo={formData.email} via="email" />
                     </div>
                   </div>
                   <div className="field-row">
@@ -323,7 +412,7 @@ export default function LaunchRegistrationPage() {
                         Phone number <i>*</i>
                       </label>
                       {/* the prefix follows the chosen country */}
-                      <div className="phone-field">
+                      <div className={`phone-field verify-field ${phoneCheck.verified ? 'is-verified' : ''}`}>
                         <span className="phone-prefix" aria-hidden="true">
                           {country?.dial || '+'}
                         </span>
@@ -333,18 +422,34 @@ export default function LaunchRegistrationPage() {
                           name="phone"
                           autoComplete="tel-national"
                           inputMode="tel"
-                          aria-describedby="r-phone-code"
+                          aria-describedby="r-phone-code r-phone-status"
                           placeholder={country ? 'Phone number' : 'Choose a country first'}
                           pattern="[0-9 ()\-]{4,20}"
                           title="Your number without the country code"
                           value={formData.phone}
-                          onChange={handleChange}
+                          onChange={handlePhoneChange}
                           required
+                        />
+                        <VerifyButton
+                          v={phoneCheck}
+                          onClick={
+                            country
+                              ? sendIfValid('r-phone', phoneCheck)
+                              : () => phoneCheck.setError('Please choose your country first.')
+                          }
                         />
                       </div>
                       <span id="r-phone-code" className="visually-hidden">
                         {country ? `Country code ${country.dial} is added automatically.` : 'Choose your country to set the country code.'}
                       </span>
+                      <VerifyCodeBox
+                        v={phoneCheck}
+                        id="r-phone"
+                        sentTo={country ? `${country.dial} ${formData.phone}` : formData.phone}
+                        via="SMS"
+                      />
+                      {/* Firebase's invisible reCAPTCHA attaches here */}
+                      <div id="r-recaptcha"></div>
                     </div>
                   </div>
                   <div className="field-row">
