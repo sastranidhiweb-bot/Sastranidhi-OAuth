@@ -658,3 +658,96 @@
 .internship-intro .ticks {
   margin: 4px 0 0;
 }
+
+/* ============================================================
+   LAUNCH REGISTRATION PAGE — a more compact take on the internship
+   layout: shorter intro with platform tiles, tighter form card.
+   ============================================================ */
+@media (min-width: 901px) {
+  .launch-shell { grid-template-columns: .85fr 1.15fr; gap: 44px; }
+}
+
+.launch-intro .contact-badge { font-size: 10px; letter-spacing: 1.6px; }
+
+.launch-intro h2 {
+  font-size: clamp(30px, 3.2vw, 40px);
+  margin: 16px 0 14px;
+}
+
+.launch-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 0 6px;
+  padding: 0;
+  list-style: none;
+}
+.launch-pillars li {
+  position: relative;
+  padding: 14px 12px 12px;
+  text-align: center;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(90,46,166,.12);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(28,20,54,.06);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.launch-pillars li::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-violet), #e8c34a);
+}
+.launch-pillars li:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(28,20,54,.10); }
+.launch-pillars strong {
+  display: block;
+  font: 700 18px 'Cormorant Garamond', Georgia, serif;
+  color: var(--brand-violet);
+}
+.launch-pillars small {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.launch-intro h3 { margin: 22px 0 8px; font-size: 20px; }
+.launch-intro .ticks { gap: 7px; font-size: 14.5px; }
+
+.launch-invite {
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  border-left: 3px solid #e8c34a;
+  border-radius: 0 12px 12px 0;
+  background: rgba(255,255,255,.6);
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Tighter form card */
+.launch-form { padding: 28px 30px 22px; }
+.launch-form h3 { font-size: 26px; margin-bottom: 4px; }
+.launch-form > p { font-size: 13px; margin-bottom: 18px; }
+.launch-form .field label { margin-bottom: 5px; }
+.launch-form input,
+.launch-form select { padding: 11px 13px; margin-bottom: 12px; }
+.launch-form .verify-field { margin-bottom: 12px; }
+.launch-form .contact-submit { margin-top: 4px; }
+
+/* Email and phone sit in rows of their own or have room for the Verify
+   button, so pairs stay side by side down to a narrower form than the
+   560px used elsewhere (see .verify-form above). */
+@container (min-width: 440px) {
+  .launch-form .verify-form .field-row { grid-template-columns: 1fr 1fr; gap: 14px; }
+}
+
+@media (max-width: 600px) {
+  .launch-pillars { grid-template-columns: repeat(2, 1fr); }
+  .launch-form { padding: 24px 18px 18px; }
+}
