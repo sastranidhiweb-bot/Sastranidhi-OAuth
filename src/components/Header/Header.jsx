@@ -251,20 +251,29 @@ export default function Header() {
               <span className="sb-reg-short">Launch Event</span>
             </Link>
             <div className="sb-auth">
-              <Link
-                to="/login"
-                className={`sb-btn sb-login${isActive('/login') ? ' active' : ''}`}
-                aria-current={isActive('/login') ? 'page' : undefined}
+              {/* Open the Login / Sign up popup (AuthModal) on the current page */}
+              <button
+                type="button"
+                className="sb-btn sb-login"
+                aria-haspopup="dialog"
+                onClick={() => {
+                  closeMobile();
+                  open('login');
+                }}
               >
                 Login
-              </Link>
-              <Link
-                to="/signup"
-                className={`sb-btn sb-signup${isActive('/signup') ? ' active' : ''}`}
-                aria-current={isActive('/signup') ? 'page' : undefined}
+              </button>
+              <button
+                type="button"
+                className="sb-btn sb-signup"
+                aria-haspopup="dialog"
+                onClick={() => {
+                  closeMobile();
+                  open('signup');
+                }}
               >
                 Sign up
-              </Link>
+              </button>
             </div>
           </div>
         </div>

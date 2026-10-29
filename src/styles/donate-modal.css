@@ -1,0 +1,625 @@
+/* ============================================================
+   DONATE MODAL — "Support Sastra Nidhi" (DonateModal.jsx).
+   Same family as the launch and Login / Sign up popups (shared
+   .lp-* layers from launch-popup.css), but set apart as the grand
+   one: saffron and maroon light instead of plain violet, a thicker
+   and faster gold border, a lit diya with turning rays, and gold
+   selection tiles for where the support goes.
+   ============================================================ */
+
+.donate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: flex;
+  padding: 12px;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 159, 28, 0.22), transparent 55%),
+    radial-gradient(circle at 50% 60%, rgba(107, 50, 198, 0.28), transparent 65%),
+    rgba(12, 4, 22, 0.82);
+  backdrop-filter: blur(7px);
+  animation: dmFade 0.4s ease;
+}
+
+/* Outer shell: a thicker, brighter travelling gold border */
+.donate-modal {
+  --mx: 50%; /* cursor spotlight position, set by trackSpotlight */
+  --my: 0%;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 2.5px;
+  border-radius: 30px;
+  overflow: hidden;
+  isolation: isolate;
+  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+  box-shadow:
+    0 40px 110px rgba(6, 2, 20, 0.75),
+    0 0 0 1px rgba(255, 207, 90, 0.18),
+    0 0 90px rgba(255, 170, 40, 0.28),
+    0 0 160px rgba(232, 195, 74, 0.14);
+  animation: dmRise 0.8s cubic-bezier(.16, 1, .3, 1);
+}
+.donate-modal::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    #8A6414,
+    #FFF3C9 10%,
+    #E8C34A 20%,
+    #FF9F1C 32%,
+    #8A6414 45%,
+    #FFF3C9 60%,
+    #E8C34A 72%,
+    #FF9F1C 84%,
+    #8A6414
+  );
+  animation: dmSpin 6s linear infinite;
+}
+
+.dm-inner {
+  position: relative;
+  padding: 24px 28px 20px;
+  border-radius: 27.5px;
+  overflow: hidden;
+  text-align: center;
+  color: #EDE3F5;
+  background:
+    radial-gradient(ellipse 85% 45% at 50% 0%, rgba(255, 170, 40, 0.24), transparent),
+    radial-gradient(ellipse at 100% 100%, rgba(176, 56, 143, 0.38), transparent 60%),
+    radial-gradient(ellipse at 0% 85%, rgba(107, 50, 198, 0.5), transparent 55%),
+    linear-gradient(165deg, #2a0d3e 0%, #431552 48%, #1e0930 100%);
+}
+/* Warmer aurora than the other popups */
+.donate-modal .lp-aurora span:nth-child(2) { background: #FF7A1A; opacity: 0.32; }
+.donate-modal .lp-aurora span:nth-child(3) { opacity: 0.2; }
+.donate-modal .lp-frame { border-color: rgba(255, 207, 90, 0.3); }
+
+.dm-content {
+  position: relative;
+  z-index: 2;
+}
+.dm-content > * { animation: dmUp 0.7s cubic-bezier(.16, 1, .3, 1) both; }
+.dm-content > :nth-child(2) { animation-delay: 0.1s; }
+.dm-content > :nth-child(3) { animation-delay: 0.16s; }
+.dm-content > :nth-child(4) { animation-delay: 0.22s; }
+.dm-content > :nth-child(5) { animation-delay: 0.28s; }
+.dm-content > :nth-child(n + 6) { animation-delay: 0.34s; }
+
+/* ---------- Diya emblem ----------
+   The diya faces the viewer, its flame rising from the spout at the
+   front; the rays and glow are centred on the flame. */
+.dm-emblem {
+  --flame-x: 50%;
+  --flame-y: 46%;
+  position: relative;
+  width: 104px;
+  height: 78px;
+  margin: 0 auto 4px;
+}
+.dm-rays {
+  position: absolute;
+  left: var(--flame-x);
+  top: var(--flame-y);
+  width: 130px;
+  height: 130px;
+  margin: -65px 0 0 -65px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 224, 122, 0.3) 0deg 1.6deg,
+    transparent 1.6deg 12deg
+  );
+  -webkit-mask: radial-gradient(circle, #000 10%, transparent 65%);
+  mask: radial-gradient(circle, #000 10%, transparent 65%);
+  animation: dmSpin 40s linear infinite;
+}
+.dm-glow {
+  position: absolute;
+  left: var(--flame-x);
+  top: var(--flame-y);
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 200, 90, 0.75), rgba(255, 140, 30, 0.2) 45%, transparent 70%);
+  animation: dmBreathe 3s ease-in-out infinite;
+}
+.dm-diya {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px rgba(255, 159, 28, 0.3));
+}
+
+/* Flame: the whole flame sways, the core flickers on its own rhythm */
+.dm-flame,
+.dm-flame-core,
+.dm-flame-halo {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.dm-flame { animation: dmFlicker 2.6s ease-in-out infinite; }
+.dm-flame-core { animation: dmCore 1.3s ease-in-out infinite; }
+.dm-flame-halo {
+  transform-origin: 50% 50%;
+  animation: dmHalo 2.6s ease-in-out infinite;
+}
+.dm-oil-glint,
+.dm-reflect { animation: dmShimmer 2.6s ease-in-out infinite; }
+
+.dm-ember {
+  opacity: 0;
+  transform-box: fill-box;
+  animation: dmEmber 3.2s ease-out infinite;
+}
+
+/* ---------- Heading ---------- */
+.donate-modal .lp-kicker {
+  margin-bottom: 4px;
+  color: #FFCF5A;
+}
+.dm-heading { margin: 0; font-weight: normal; }
+.donate-modal .lp-title-pre { margin-bottom: 2px; color: #E9DAF5; font-size: 15px; }
+.donate-modal .lp-title-main { font-size: 32px; }
+.donate-modal .lp-divider { margin: 8px auto 6px; }
+
+.dm-lede {
+  margin: 0 auto 14px;
+  max-width: 400px;
+  font-family: 'Gentium Plus', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #F1E8FA;
+}
+
+/* ---------- Form ---------- */
+.dm-form {
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+.dm-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.dm-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 7px;
+  padding: 0;
+  font: 600 10.5px/1 'Cinzel', Georgia, serif;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: #FFE7A3;
+}
+.dm-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(232, 195, 74, 0.55), transparent);
+}
+
+/* Support-area tiles */
+.dm-areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.dm-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 231, 163, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+  color: #F5EDFB;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.25s cubic-bezier(.16, 1, .3, 1);
+}
+.dm-area input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.dm-area svg {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 9px;
+  background: rgba(232, 195, 74, 0.14);
+  fill: none;
+  stroke: #FFCF5A;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: background 0.25s, stroke 0.25s;
+}
+.dm-area:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 207, 90, 0.55);
+}
+.dm-area:focus-within {
+  border-color: #FFCF5A;
+  box-shadow: 0 0 0 3px rgba(255, 207, 90, 0.2);
+}
+.dm-area.is-selected {
+  border-color: #FFCF5A;
+  background: linear-gradient(135deg, rgba(255, 207, 90, 0.3), rgba(255, 159, 28, 0.12));
+  box-shadow: 0 10px 24px rgba(255, 159, 28, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+.dm-area.is-selected svg {
+  background: linear-gradient(135deg, #FFE7A3, #E8C34A);
+  stroke: #3A1046;
+}
+/* Gold check badge on the chosen tile */
+.dm-area.is-selected::after {
+  content: "✓";
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFF3C9, #E8C34A);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  color: #3A1046;
+  font-size: 11px;
+  font-weight: 900;
+  animation: dmPop 0.35s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* Amount chips + custom amount */
+.dm-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+/* "Or enter an amount of your own" gets its own line under the chips */
+.dm-amount-field { grid-column: 1 / -1; }
+.dm-chip {
+  padding: 0 2px;
+  min-height: 42px;
+  border: 1px solid rgba(255, 231, 163, 0.28);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFE7A3;
+  font: 700 13px/1 'Manrope', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.25s cubic-bezier(.16, 1, .3, 1), box-shadow 0.25s;
+}
+.dm-chip:hover {
+  transform: translateY(-2px);
+  border-color: #FFCF5A;
+}
+.dm-chip.is-selected {
+  border-color: #FFF3C9;
+  background: linear-gradient(135deg, #FFE7A3, #E8C34A 55%, #D4A72C);
+  box-shadow: 0 8px 20px rgba(232, 195, 74, 0.35);
+  color: #2A0D3E;
+}
+.dm-chip:focus-visible {
+  outline: 2px solid #FFF3C9;
+  outline-offset: 2px;
+}
+
+/* Custom amount: a gold-rimmed field with a ₹ coin on the left and the
+   text centred (plain prompt; large gold digits once typed). The input
+   is padded on the right by the coin's width so it centres on the field. */
+.dm-amount-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: 1.2px solid transparent;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(74, 28, 92, 0.95), rgba(46, 14, 62, 0.95)) padding-box,
+    linear-gradient(90deg, rgba(232, 195, 74, 0.25), #FFE7A3 50%, rgba(232, 195, 74, 0.25)) border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 20px rgba(8, 3, 24, 0.25);
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.dm-amount-field:hover {
+  background:
+    linear-gradient(180deg, rgba(84, 32, 104, 0.95), rgba(52, 16, 70, 0.95)) padding-box,
+    linear-gradient(90deg, rgba(232, 195, 74, 0.45), #FFF3C9 50%, rgba(232, 195, 74, 0.45)) border-box;
+}
+.dm-amount-field:focus-within {
+  background:
+    linear-gradient(180deg, rgba(84, 32, 104, 0.95), rgba(52, 16, 70, 0.95)) padding-box,
+    linear-gradient(90deg, #E8C34A, #FFF3C9 50%, #E8C34A) border-box;
+  box-shadow:
+    0 0 0 4px rgba(255, 207, 90, 0.16),
+    0 10px 26px rgba(255, 159, 28, 0.2);
+}
+.dm-amount-field span {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FFF6D6, #E8C34A 55%, #A87A1A);
+  box-shadow: 0 0 0 2px rgba(255, 231, 163, 0.25), 0 3px 10px rgba(0, 0, 0, 0.3), inset 0 -2px 3px rgba(110, 70, 10, 0.4);
+  color: #3A1046;
+  font: 800 17px/1 'Manrope', system-ui, sans-serif;
+  pointer-events: none;
+}
+.dm-form .dm-amount-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 39px 6px 0; /* coin width + gap, so the text centres on the field */
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #FFE7A3;
+  text-align: center;
+  font: 700 20px/1.2 'Cinzel', Georgia, serif;
+  letter-spacing: 1px;
+  -moz-appearance: textfield;
+}
+.dm-form .dm-amount-field input:hover,
+.dm-form .dm-amount-field input:focus {
+  outline: none;
+  border: 0;
+  box-shadow: none;
+}
+.dm-form .dm-amount-field input::placeholder {
+  color: #D9CBEE;
+  font: 500 14.5px/1.2 'Manrope', system-ui, sans-serif;
+  letter-spacing: 0.2px;
+}
+.dm-amount-field input::-webkit-inner-spin-button,
+.dm-amount-field input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+.dm-form input[type="text"],
+.dm-form input[type="email"] {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid rgba(255, 231, 163, 0.22);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(8, 3, 24, 0.22);
+  color: #fff;
+  font: 500 15px/1.3 'Manrope', system-ui, sans-serif;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.dm-form input::placeholder { color: #C2B2D8; font-weight: 400; }
+.dm-form input:hover { border-color: rgba(255, 231, 163, 0.4); }
+.dm-form input:focus {
+  outline: none;
+  border-color: #FFCF5A;
+  box-shadow:
+    0 0 0 4px rgba(255, 207, 90, 0.16),
+    0 10px 26px rgba(255, 159, 28, 0.16);
+}
+.dm-form input:-webkit-autofill {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0 40px #431552 inset;
+  caret-color: #fff;
+}
+
+.dm-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dm-error {
+  padding: 11px 14px;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  border-radius: 12px;
+  background: rgba(248, 113, 113, 0.14);
+  color: #FFE1E1;
+  font-size: 13.5px;
+}
+
+/* ---------- Pledge button: the brightest thing on the card ---------- */
+.dm-submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 2px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #FFB627 0%, #FFE7A3 42%, #E8C34A 62%, #D48A1C 100%);
+  background-size: 160% 100%;
+  box-shadow:
+    0 16px 38px rgba(255, 159, 28, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -3px 0 rgba(140, 80, 10, 0.3);
+  color: #2A0D3E;
+  font: 800 16px/1 'Manrope', system-ui, sans-serif;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  animation: dmGlow 2.6s ease-in-out infinite;
+  transition: transform 0.25s cubic-bezier(.16, 1, .3, 1), background-position 0.6s;
+}
+.dm-submit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.75) 50%, transparent 65%);
+  background-size: 250% 100%;
+  animation: lpSweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+.dm-submit svg {
+  width: 20px;
+  height: 20px;
+  fill: #B3261E;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5));
+  animation: dmBeat 1.6s ease-in-out infinite;
+}
+.dm-submit:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+  background-position: 100% 0;
+}
+.dm-submit:focus-visible {
+  outline: 2px solid #FFF3C9;
+  outline-offset: 3px;
+}
+.dm-submit:disabled {
+  opacity: 0.75;
+  cursor: wait;
+  animation: none;
+}
+
+/* ---------- Thank-you state ---------- */
+.dm-thanks {
+  padding: 4px 6px 4px;
+}
+.dm-thanks-mark {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin: 4px auto 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFF3C9, #E8C34A 55%, #D48A1C);
+  box-shadow: 0 0 0 8px rgba(255, 207, 90, 0.15), 0 0 40px rgba(255, 170, 40, 0.5);
+  color: #2A0D3E;
+  font-size: 28px;
+  font-weight: 900;
+  animation: dmPop 0.6s cubic-bezier(.16, 1, .3, 1);
+}
+.dm-thanks h3 {
+  margin: 0 0 8px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 22px;
+  color: #FFE7A3;
+}
+.dm-thanks p {
+  margin: 0 0 20px;
+  font-family: 'Gentium Plus', Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #F1E8FA;
+}
+.dm-thanks strong {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-style: normal;
+  color: #FFE7A3;
+}
+.dm-done {
+  padding: 12px 34px;
+  border: 1.5px solid rgba(255, 231, 163, 0.6);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFE7A3;
+  font: 700 14.5px/1 'Manrope', system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.dm-done:hover {
+  background: rgba(255, 231, 163, 0.14);
+  border-color: #FFE7A3;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 480px) {
+  .dm-inner { padding: 22px 16px 18px; }
+  .donate-modal .lp-title-main { font-size: 28px; }
+  .dm-area { padding: 7px 8px; font-size: 12px; gap: 7px; }
+  .dm-area svg { width: 24px; height: 24px; padding: 4px; }
+  .dm-row { grid-template-columns: 1fr; }
+}
+
+/* Short screens (most laptops at 125–150% scaling): drop the lede and shrink
+   the emblem so the whole card fits without scrolling */
+@media (max-height: 760px) {
+  .dm-lede { display: none; }
+  .donate-modal .lp-divider { margin-bottom: 12px; }
+}
+@media (max-height: 660px) {
+  .dm-inner { padding-top: 18px; padding-bottom: 16px; }
+  .dm-emblem { width: 80px; height: 60px; }
+  .dm-rays { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
+  .dm-glow { width: 50px; height: 50px; margin: -25px 0 0 -25px; }
+  .donate-modal .lp-title-pre { display: none; }
+  .donate-modal .lp-title-main { font-size: 28px; }
+  .dm-form { gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .donate-overlay,
+  .donate-modal,
+  .donate-modal::before,
+  .dm-content > *,
+  .dm-rays,
+  .dm-glow,
+  .dm-flame,
+  .dm-flame-core,
+  .dm-flame-halo,
+  .dm-oil-glint,
+  .dm-reflect,
+  .dm-submit,
+  .dm-submit::after,
+  .dm-submit svg,
+  .dm-area.is-selected::after,
+  .dm-thanks-mark { animation: none; }
+  .dm-ember { display: none; }
+}
+
+@keyframes dmFade { from { opacity: 0; } }
+@keyframes dmRise { from { opacity: 0; transform: translateY(40px) scale(.95); } }
+@keyframes dmUp { from { opacity: 0; transform: translateY(14px); } }
+@keyframes dmSpin { to { transform: rotate(360deg); } }
+@keyframes dmBreathe { 50% { transform: scale(1.2); opacity: 0.75; } }
+@keyframes dmFlicker {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); }
+  20% { transform: scale(0.95, 1.06) skewX(-3deg); }
+  40% { transform: scale(1.03, 0.96) skewX(2deg); }
+  60% { transform: scale(0.97, 1.04) skewX(-1.5deg); }
+  80% { transform: scale(1.02, 0.98) skewX(1deg); }
+}
+@keyframes dmCore {
+  0%, 100% { transform: scale(1, 1); opacity: 1; }
+  50% { transform: scale(0.9, 1.08); opacity: 0.88; }
+}
+@keyframes dmHalo {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  40% { transform: scale(1.12, 1.06); opacity: 0.7; }
+  70% { transform: scale(0.94); opacity: 0.45; }
+}
+@keyframes dmShimmer { 50% { opacity: 0.4; } }
+@keyframes dmEmber {
+  0% { opacity: 0; transform: translate(0, 0); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(4px, -22px); }
+}
+@keyframes dmPop { from { transform: scale(0); } }
+@keyframes dmBeat { 0%, 60%, 100% { transform: scale(1); } 30% { transform: scale(1.18); } }
+@keyframes dmGlow {
+  0%, 100% { box-shadow: 0 16px 38px rgba(255, 159, 28, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -3px 0 rgba(140, 80, 10, 0.3); }
+  50%      { box-shadow: 0 18px 50px rgba(255, 159, 28, 0.62), 0 0 0 5px rgba(255, 207, 90, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -3px 0 rgba(140, 80, 10, 0.3); }
+}

@@ -2,7 +2,6 @@ import Header from '../components/Header/Header.jsx';
 import Footer from '../components/Footer/Footer.jsx';
 import SiteBubbles from '../components/SiteBubbles.jsx';
 import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
-import DonateModal from '../components/Modals/DonateModal.jsx';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { PageHero, DetailRow, CtaBand } from '../components/PageSections/PageSections.jsx';
 import '../styles/pages.css';
@@ -260,7 +259,6 @@ export default function InstitutesPage() {
         />
       </main>
       <Footer />
-      <DonateModal />
       <WhatsAppFloat />
     </>
   );
