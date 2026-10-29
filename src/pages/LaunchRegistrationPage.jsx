@@ -85,6 +85,7 @@ const EMPTY_FORM = {
   phone: '',
   role: '',
   organisation: '',
+  message: '',
 };
 
 // Email codes come from the IdP's endpoints (see SignupWizard.jsx).
@@ -300,6 +301,7 @@ export default function LaunchRegistrationPage() {
     data.append('phone', phoneWithCode);
     data.append('i_am_a', roleLabel);
     data.append('organisation', formData.organisation);
+    data.append('message', formData.message);
     data.append('_subject', 'New Registration: Śāstra Nidhi Launch');
     data.append('_captcha', 'false');
     data.append('_template', 'table');
@@ -579,6 +581,17 @@ export default function LaunchRegistrationPage() {
                       />
                     </div>
                   </div>
+                  <div className="field">
+                    <label htmlFor="r-message">Anything you would like to tell us?</label>
+                    <textarea
+                      id="r-message"
+                      name="message"
+                      maxLength={32000}
+                      placeholder="Optional"
+                      value={formData.message}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
 
                   <button
                     type="submit"
@@ -639,6 +652,7 @@ export default function LaunchRegistrationPage() {
                   <input type="hidden" name="Phone" value={phoneWithCode} />
                   <input type="hidden" name="LEADCF5" value={formData.role || '-None-'} />
                   <input type="hidden" name="Company" value={formData.organisation.trim()} />
+                  <input type="hidden" name="Description" value={formData.message.trim()} />
                   {/* Zoho honeypot: always empty */}
                   <input type="hidden" name="aG9uZXlwb3Q" value="" />
                 </form>
