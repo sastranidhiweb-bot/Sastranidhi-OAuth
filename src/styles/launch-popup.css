@@ -566,6 +566,22 @@
 .lp-petal-b { background: linear-gradient(135deg, #FFF0BF, #E8C34A); }
 .lp-petal-c { background: linear-gradient(135deg, #F7A1C4, #C2477F); }
 
+/* Whole flowers (Support popup): same fall as the petals, with a soft shadow */
+.lp-flower {
+  position: absolute;
+  top: -24px;
+  opacity: 0;
+  filter: drop-shadow(0 2px 3px rgba(20, 5, 30, 0.35));
+  animation-name: lpFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.lp-flower svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* Lotus blooming behind the logo */
 .lp-lotus {
   position: absolute;
@@ -654,4 +670,78 @@
   .lp-petals { display: none; }
   .lp-corner path { animation: none; stroke-dashoffset: 0; }
   .lp-corner rect { animation: none; opacity: 1; }
+}
+
+/* ---------- Close (×) ----------
+   Shared by the Login / Sign up and Support popups (AuthModal, DonateModal). */
+/* A gold-rimmed medallion: deep violet face, gold ring and glow, so it
+   reads clearly against the busy card. Pulses twice on open to be noticed;
+   on hover it fills with gold and the × turns a quarter. */
+.popup-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1.5px solid transparent;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 35%, #3a1d7a, #1c0c42) padding-box,
+    linear-gradient(135deg, #FFF3C9, #E8C34A 45%, #9C7A1E) border-box;
+  box-shadow:
+    0 0 0 4px rgba(232, 195, 74, 0.1),
+    0 0 18px rgba(232, 195, 74, 0.35),
+    0 8px 18px rgba(6, 2, 20, 0.5);
+  color: #FFF3C9;
+  cursor: pointer;
+  animation: lpCloseIn 0.6s cubic-bezier(.16, 1, .3, 1) 0.3s backwards,
+             lpCloseHint 1.6s ease-in-out 1s 2;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s, transform 0.3s cubic-bezier(.16, 1, .3, 1);
+}
+.popup-close svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(243, 223, 160, 0.6));
+  transition: transform 0.4s cubic-bezier(.16, 1, .3, 1);
+}
+.popup-close:hover,
+.popup-close:focus-visible {
+  outline: none;
+  transform: scale(1.08);
+  background:
+    linear-gradient(135deg, #FBE7A6, #E8C34A 50%, #D4A72C) padding-box,
+    linear-gradient(135deg, #FFF3C9, #E8C34A 45%, #9C7A1E) border-box;
+  box-shadow:
+    0 0 0 5px rgba(232, 195, 74, 0.18),
+    0 0 26px rgba(232, 195, 74, 0.6),
+    0 10px 22px rgba(6, 2, 20, 0.5);
+  color: #24104F;
+}
+.popup-close:hover svg,
+.popup-close:focus-visible svg {
+  transform: rotate(90deg);
+  filter: none;
+}
+.popup-close:active { transform: scale(0.96); }
+
+@keyframes lpCloseIn { from { opacity: 0; transform: scale(0.4) rotate(-90deg); } }
+@keyframes lpCloseHint {
+  50% {
+    box-shadow:
+      0 0 0 9px rgba(232, 195, 74, 0.16),
+      0 0 30px rgba(232, 195, 74, 0.65),
+      0 8px 18px rgba(6, 2, 20, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popup-close { animation: none; }
 }

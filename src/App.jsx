@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ModalProvider } from './context/ModalContext.jsx';
 import DonateModal from './components/Modals/DonateModal.jsx';
+import AuthModal from './components/Modals/AuthModal.jsx';
 import CursorEffect from './components/CursorEffect/CursorEffect.jsx';
 
 import HomePage from './pages/HomePage.jsx';
@@ -150,8 +151,9 @@ export default function App() {
     <ModalProvider>
       <BrowserRouter>
         <AppRoutes />
-        {/* Rendered once so the header's Donate button works on every route */}
+        {/* Rendered once so the header's Donate / Login / Sign up buttons work on every route */}
         <DonateModal />
+        <AuthModal />
       </BrowserRouter>
     </ModalProvider>
   );

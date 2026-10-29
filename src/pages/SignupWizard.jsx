@@ -11,9 +11,14 @@
 // component's React state (e.g. via devtools) doesn't help — the token is
 // a signed, server-issued value with a 15-minute expiry checked
 // server-side (see verificationService.js on the backend).
+//
+// The header's Sign up button shows this same wizard in AuthModal
+// (`inModal`): finishing closes the popup, and "Login" swaps the popup to
+// the login form instead of navigating away.
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth, ApiError } from '../context/AuthContext.jsx';
+import { useModal } from '../context/ModalContext.jsx';
 import { apiPost } from '../services/api.js';
 import AuthLayout from '../components/Auth/AuthLayout.jsx';
 import PasswordInput from '../components/Auth/PasswordInput.jsx';
@@ -22,8 +27,9 @@ import PasswordMatch from '../components/Auth/PasswordMatch.jsx';
 
 const STEPS = ['Verify Email', 'Account Details', 'Complete'];
 
-export default function SignupWizard() {
+export default function SignupWizard({ inModal = false }) {
   const { login, register } = useAuth();
+  const { open, close } = useModal();
   const params = new URLSearchParams(window.location.search);
   const returnTo = params.get('returnTo');
 
@@ -38,6 +44,14 @@ export default function SignupWizard() {
 
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  // Count the resend cooldown down once a second so "Resend code" becomes
+  // available again; without this it stayed disabled after the first send.
+  useEffect(() => {
+    if (resendCooldown <= 0) return undefined;
+    const timer = setTimeout(() => setResendCooldown((s) => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [resendCooldown]);
 
   // ---- Step 1: email ----
   const submitEmail = async (e) => {
@@ -127,11 +141,19 @@ export default function SignupWizard() {
     setSubmitting(true);
     try {
       const result = await login(email, details.password, returnTo);
+      if (inModal && !result.returnTo) {
+        close();
+        return;
+      }
       window.location.href = result.returnTo || '/';
     } catch {
       // Account was created successfully even if this auto-login fails
       // for some reason -- don't strand the user on an error, just send
       // them to log in manually.
+      if (inModal) {
+        open('login');
+        return;
+      }
       window.location.href = `/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ''}`;
     }
   };
@@ -139,7 +161,7 @@ export default function SignupWizard() {
   const activeIndex = Math.max(0, step - 2); // step 1 & 2 both map to "Verify Email"
 
   return (
-    <AuthLayout title="Create your account" subtitle={step < 4 ? 'Join the Sastra Nidhi knowledge ecosystem.' : undefined}>
+    <AuthLayout inModal={inModal} title="Create your account" subtitle={step < 4 ? 'Join the Sastra Nidhi knowledge ecosystem.' : undefined}>
       {step < 4 && (
         <>
           <div className="auth-steps">
@@ -198,7 +220,7 @@ export default function SignupWizard() {
               disabled={resendCooldown > 0}
               style={{ background: 'none', border: 'none', color: 'var(--navy)', fontWeight: 700, cursor: resendCooldown > 0 ? 'default' : 'pointer', padding: 0, opacity: resendCooldown > 0 ? 0.5 : 1 }}
             >
-              Resend code
+              {resendCooldown > 0 ? `Resend code (${resendCooldown}s)` : 'Resend code'}
             </button>
           </div>
         </>
@@ -207,8 +229,8 @@ export default function SignupWizard() {
       {step === 3 && (
         <form className="form" onSubmit={submitDetails}>
           <p style={{ fontSize: 13, color: 'var(--green)', marginTop: -8 }}>✓ {email} verified</p>
-          <input required placeholder="First name" value={details.firstName} onChange={updateDetail('firstName')} />
-          <input required placeholder="Last name" value={details.lastName} onChange={updateDetail('lastName')} />
+          <input required placeholder="First name" value={details.firstName} onChange={updateDetail('firstName')} autoComplete="given-name" />
+          <input required placeholder="Last name" value={details.lastName} onChange={updateDetail('lastName')} autoComplete="family-name" />
           <input required placeholder="Username" value={details.username} onChange={updateDetail('username')} autoComplete="username" />
           <PasswordInput
             value={details.password}
@@ -244,7 +266,13 @@ export default function SignupWizard() {
       {step < 4 && (
         <p className="auth-links" style={{ justifyContent: 'center' }}>
           Already have an account?{' '}
-          <a href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ''}`}>Login</a>
+          {inModal ? (
+            <button type="button" className="auth-link-btn" onClick={() => open('login')}>
+              Login
+            </button>
+          ) : (
+            <a href={`/login${returnTo ? `?returnTo=${encodeURIComponent(returnTo)}` : ''}`}>Login</a>
+          )}
         </p>
       )}
     </AuthLayout>
