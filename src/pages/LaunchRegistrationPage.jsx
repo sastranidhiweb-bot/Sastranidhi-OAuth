@@ -10,7 +10,7 @@ import { markLaunchRegistered } from '../components/LaunchPopup/LaunchPopup.jsx'
 import { countries } from '../data/countries.js';
 import { zohoCountries, zohoStates } from '../data/zohoPlaces.js';
 import { apiPost, ApiError } from '../services/api.js';
-import { sendPhoneCode, resetPhoneVerification } from '../services/phoneVerification.js';
+import { sendPhoneCode, resetPhoneVerification, phoneVerificationConfigured } from '../services/phoneVerification.js';
 import '../styles/pages.css';
 import '../styles/contact-page.css';
 
@@ -265,7 +265,8 @@ export default function LaunchRegistrationPage() {
       document.getElementById('r-email').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    if (!phoneCheck.verified) {
+    // Phone verification only applies once the Firebase keys are in .env.
+    if (phoneVerificationConfigured && !phoneCheck.verified) {
       phoneCheck.setError('Please verify your phone number before registering.');
       document.getElementById('r-phone').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -294,7 +295,7 @@ export default function LaunchRegistrationPage() {
     data.append('name', fullName);
     data.append('email', formData.email);
     data.append('email_verified', 'Yes');
-    data.append('phone_verified', 'Yes');
+    data.append('phone_verified', phoneCheck.verified ? 'Yes' : 'No');
     data.append('country', country ? country.name : '');
     data.append('state_province', formData.state);
     data.append('city', formData.city);
@@ -524,14 +525,16 @@ export default function LaunchRegistrationPage() {
                         onChange={handlePhoneChange}
                         required
                       />
-                      <VerifyButton
-                        v={phoneCheck}
-                        onClick={
-                          country
-                            ? sendIfValid('r-phone', phoneCheck)
-                            : () => phoneCheck.setError('Please choose your country first.')
-                        }
-                      />
+                      {phoneVerificationConfigured && (
+                        <VerifyButton
+                          v={phoneCheck}
+                          onClick={
+                            country
+                              ? sendIfValid('r-phone', phoneCheck)
+                              : () => phoneCheck.setError('Please choose your country first.')
+                          }
+                        />
+                      )}
                     </div>
                     <span id="r-phone-code" className="visually-hidden">
                       {country ? `Country code ${country.dial} is added automatically.` : 'Choose your country to set the country code.'}
