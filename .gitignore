@@ -27,3 +27,6 @@ build/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local copies of backend secrets
+src/Important/
