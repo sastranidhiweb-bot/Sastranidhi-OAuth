@@ -9,7 +9,7 @@ import { useCodeVerification, VerifyButton, VerifyCodeBox } from '../components/
 import { markLaunchRegistered } from '../components/LaunchPopup/LaunchPopup.jsx';
 import { countries } from '../data/countries.js';
 import { zohoCountries, zohoStates } from '../data/zohoPlaces.js';
-import { apiPost, ApiError } from '../services/api.js';
+import { apiPostForm, ApiError } from '../services/api.js';
 import { sendPhoneCode, resetPhoneVerification, phoneVerificationConfigured } from '../services/phoneVerification.js';
 import '../styles/pages.css';
 import '../styles/contact-page.css';
@@ -139,7 +139,7 @@ export default function LaunchRegistrationPage() {
     codeLabel: 'email',
     send: async () => {
       try {
-        const res = await apiPost('/auth/register/resend', { email: formData.email.trim() });
+        const res = await apiPostForm('/auth/register/resend', { email: formData.email.trim() });
         return { cooldownSeconds: res.resendCooldownSeconds };
       } catch (err) {
         throw friendlyApiError(err, 'We could not send the code right now. Please try again in a moment.');
@@ -147,7 +147,7 @@ export default function LaunchRegistrationPage() {
     },
     confirm: async (code) => {
       try {
-        await apiPost('/auth/register/verify', { email: formData.email.trim(), code });
+        await apiPostForm('/auth/register/verify', { email: formData.email.trim(), code });
       } catch (err) {
         throw friendlyApiError(err, 'We could not check the code right now. Please try again.');
       }
