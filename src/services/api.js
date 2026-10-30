@@ -46,7 +46,7 @@ export class ApiError extends Error {
  *    { error, error_description } shape (see errorHandler.js on the
  *    backend) so every caller gets a consistent, readable error
  */
-export async function apiFetch(path, { method = 'GET', body, headers = {} } = {}) {
+export async function apiFetch(path, { method = 'GET', body, form = false, headers = {} } = {}) {
   const url = path.startsWith('http') ? path : `${API_BASE_URL}${path}`;
 
   let response;
@@ -55,10 +55,11 @@ export async function apiFetch(path, { method = 'GET', body, headers = {} } = {}
       method,
       credentials: 'include', // send + store the SSO session cookie
       headers: {
-        ...(body ? { 'Content-Type': 'application/json' } : {}),
+        ...(body && !form ? { 'Content-Type': 'application/json' } : {}),
         ...headers,
       },
-      body: body ? JSON.stringify(body) : undefined,
+      // a URLSearchParams body is sent as application/x-www-form-urlencoded
+      body: body ? (form ? new URLSearchParams(body) : JSON.stringify(body)) : undefined,
     });
   } catch (networkErr) {
     // fetch() throws a plain TypeError for network failures (backend
@@ -86,5 +87,12 @@ export async function apiFetch(path, { method = 'GET', body, headers = {} } = {}
 
 export const apiGet = (path) => apiFetch(path, { method: 'GET' });
 export const apiPost = (path, body) => apiFetch(path, { method: 'POST', body });
+
+// Same, but as a plain form post (flat string fields only). Browsers send a
+// form post without a CORS preflight, and on Catalyst AppSail the platform
+// answers preflights itself, without CORS headers for origins missing from
+// its own Authorized Domains list. The IdP parses form bodies
+// (express.urlencoded in app.js).
+export const apiPostForm = (path, body) => apiFetch(path, { method: 'POST', body, form: true });
 
 export { API_BASE_URL };
