@@ -15,6 +15,7 @@ import ContactPage from './pages/ContactPage.jsx';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
 import TermsOfUsePage from './pages/TermsOfUsePage.jsx';
 import AccessibilityPage from './pages/AccessibilityPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 import InternshipPage from './pages/InternshipPage.jsx';
 import LaunchRegistrationPage from './pages/LaunchRegistrationPage.jsx';
 import SupportPage from './pages/SupportPage.jsx';
@@ -133,6 +134,7 @@ function AppRoutes() {
         <Route path="/support/apply" element={<SupportApplyPage />} />
         <Route path="/collaborate" element={<CollaboratePage />} />
         <Route path="/collaborate/apply" element={<CollaborateApplyPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupWizard />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />

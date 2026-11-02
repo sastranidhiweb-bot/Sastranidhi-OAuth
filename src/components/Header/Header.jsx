@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useModal } from '../../context/ModalContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
+import UserMenu from './UserMenu.jsx';
 import { headerNav } from './navData.js';
 import LaunchCountdown from '../LaunchCountdown/LaunchCountdown.jsx';
 import '../../styles/header.css';
@@ -25,6 +27,7 @@ export default function Header() {
   const [animateIn] = useState(() => !headerAlreadyPlayed());
   const playedMarked = useRef(false);
   const { open } = useModal();
+  const { user, loading } = useAuth();
   const { pathname } = useLocation();
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
@@ -251,29 +254,39 @@ export default function Header() {
               <span className="sb-reg-short">Launch Event</span>
             </Link>
             <div className="sb-auth">
-              {/* Open the Login / Sign up popup (AuthModal) on the current page */}
-              <button
-                type="button"
-                className="sb-btn sb-login"
-                aria-haspopup="dialog"
-                onClick={() => {
-                  closeMobile();
-                  open('login');
-                }}
-              >
-                Login
-              </button>
-              <button
-                type="button"
-                className="sb-btn sb-signup"
-                aria-haspopup="dialog"
-                onClick={() => {
-                  closeMobile();
-                  open('signup');
-                }}
-              >
-                Sign up
-              </button>
+              {/* Nothing until the session check answers, so a signed-in visitor
+                  doesn't see Login flash up on every page load */}
+              {user ? (
+                <UserMenu user={user} onOpen={closeMobile} />
+              ) : (
+                !loading && (
+                  <>
+                    {/* Open the Login / Sign up popup (AuthModal) on the current page */}
+                    <button
+                      type="button"
+                      className="sb-btn sb-login"
+                      aria-haspopup="dialog"
+                      onClick={() => {
+                        closeMobile();
+                        open('login');
+                      }}
+                    >
+                      Login
+                    </button>
+                    <button
+                      type="button"
+                      className="sb-btn sb-signup"
+                      aria-haspopup="dialog"
+                      onClick={() => {
+                        closeMobile();
+                        open('signup');
+                      }}
+                    >
+                      Sign up
+                    </button>
+                  </>
+                )
+              )}
             </div>
           </div>
         </div>
