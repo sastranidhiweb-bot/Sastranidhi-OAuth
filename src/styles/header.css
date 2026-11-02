@@ -1230,3 +1230,206 @@ html body header .sb-login:focus-visible {
     letter-spacing: 0.8px;
   }
 }
+
+/* ---------- Signed-in user menu (UserMenu.jsx), in place of Login / Sign up ---------- */
+.user-avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F6DA6A 0%, #E2B93C 100%);
+  color: #21163F;
+  font: 700 12px/1 'Inter', system-ui, sans-serif;
+}
+.user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.user-avatar-lg { width: 46px; height: 46px; font-size: 16px; }
+.user-avatar-xl { width: 84px; height: 84px; font-size: 28px; }
+
+header .sb-user { position: relative; }
+
+/* gold pill, the same gold as Donate and Sign up, so it catches the eye */
+header .sb-user-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 2px 9px 2px 3px;
+  overflow: hidden;
+  border: 1px solid #F9E27E;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #F9E27E 0%, #EDCB55 55%, #E2B93C 100%);
+  box-shadow: 0 6px 18px rgba(10, 4, 28, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  color: #21163F;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+header .sb-user-trigger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  pointer-events: none;
+}
+header .sb-user-trigger:hover,
+header .sb-user-trigger[aria-expanded="true"] {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(10, 4, 28, 0.48), 0 0 0 3px rgba(246, 218, 106, 0.35);
+}
+header .sb-user-trigger:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+header .sb-user-trigger .user-avatar {
+  width: 29px;
+  height: 29px;
+  background: linear-gradient(135deg, #3A1C82, #5B31B8);
+  box-shadow: 0 0 0 2px #fff;
+  color: #F6DA6A;
+}
+
+header .sb-user-text { position: relative; display: flex; flex-direction: column; gap: 2px; text-align: left; }
+header .sb-user-hi {
+  max-width: 165px;
+  overflow: hidden;
+  font: 800 13.5px/1.15 'Inter', system-ui, sans-serif;
+  color: #1A0B45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+header .sb-user-welcome { font: 700 10.5px/1.1 'Inter', system-ui, sans-serif; color: #1A0B45; white-space: nowrap; }
+
+header .sb-user-caret {
+  position: relative;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin: -3px 3px 0 3px;
+  border-right: 2px solid #2A1466;
+  border-bottom: 2px solid #2A1466;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease, margin 0.25s ease;
+}
+header .sb-user-trigger[aria-expanded="true"] .sb-user-caret { margin-top: 3px; transform: rotate(-135deg); }
+
+/* "your profile is here" bubble under the pill */
+header .sb-user-hint {
+  position: absolute;
+  top: calc(100% + 11px);
+  right: 0;
+  z-index: 55;
+  padding: 8px 13px;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(20, 8, 50, 0.38);
+  color: #3A1C82;
+  font: 700 12.5px/1.2 'Inter', system-ui, sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+}
+header .sb-user-hint::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 24px;
+  width: 11px;
+  height: 11px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  header .sb-user-trigger { animation: sb-user-glow 2.4s ease-in-out 5; }
+  header .sb-user-trigger::before { animation: sb-user-sheen 6s ease-in-out 1s infinite; }
+  header .sb-user-hint { animation: sb-user-bob 1.4s ease-in-out infinite; }
+}
+@keyframes sb-user-glow {
+  0%, 100% { box-shadow: 0 6px 18px rgba(10, 4, 28, 0.4), 0 0 0 0 rgba(246, 218, 106, 0.55); }
+  50% { box-shadow: 0 6px 18px rgba(10, 4, 28, 0.4), 0 0 0 7px rgba(246, 218, 106, 0); }
+}
+@keyframes sb-user-sheen {
+  0% { left: -60%; }
+  30%, 100% { left: 120%; }
+}
+@keyframes sb-user-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* same look as the nav dropdowns (.dd-panel) */
+header .sb-user-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 60;
+  display: none;
+  width: 290px;
+  max-width: calc(100vw - 24px);
+  padding: 8px;
+  background: linear-gradient(160deg, #3A1C82, #4A26A0);
+  border: 1px solid rgba(232, 195, 74, 0.55);
+  box-shadow: 0 18px 40px rgba(20, 8, 50, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+header .sb-user-panel.is-open { display: block; }
+
+header .sb-user-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 8px 14px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(232, 195, 74, 0.25);
+}
+header .sb-user-who { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+header .sb-user-who strong { font: 700 15px/1.25 'Inter', system-ui, sans-serif; color: #F6DA6A; overflow-wrap: anywhere; }
+header .sb-user-who span { font: 400 12.5px/1.3 'Inter', system-ui, sans-serif; color: #F3F0FA; overflow-wrap: anywhere; }
+
+header .sb-user-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 10px 14px;
+  border: 0;
+  border-left: 2px solid transparent;
+  background: none;
+  color: #F3F0FA;
+  font: 600 14px/1.2 'Inter', system-ui, sans-serif;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+header .sb-user-item svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #F6DA6A;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+header .sb-user-logout {
+  margin-top: 6px;
+  border-top: 1px solid rgba(232, 195, 74, 0.25);
+}
+header .sb-user-item:hover,
+header .sb-user-item:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: #E8C34A;
+  color: #E8C34A;
+}
+
+@media (max-width: 480px) {
+  /* shares a line with the launch link on phones */
+  header .sb-user-welcome { display: none; }
+  header .sb-user-hi { max-width: 90px; font-size: 13px; }
+  header .sb-user-trigger { min-height: 34px; gap: 6px; padding: 2px 9px 2px 3px; }
+  header .sb-user-trigger .user-avatar { width: 28px; height: 28px; font-size: 11px; }
+}
