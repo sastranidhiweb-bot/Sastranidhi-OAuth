@@ -21,7 +21,7 @@ import '../styles/contact-page.css';
 const ZOHO_FORM_ID = '1449582000000732001';
 const ZOHO_ACTION = 'https://crm.zoho.in/crm/WebToLeadForm';
 const ZOHO_ANALYTICS_SRC =
-  'https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=c7e62174ef8bdf30547974193e2c6c7fbc22f7974d1a5100fc59d63352ed61baf844ab8773a0e9f223aeb19d1176e39agid7553c51992a4f1289deaeda354f57ffd22f61fa0ab14256f2d52c2aa78d61b08gid83f1e2575a3eafa719391c7e5f3d6ef21082227d019518c9fb2181f586845edbgide14369318cbc3226f05e8ac39a48e246b973ddfbe0fe6a59e3c707cad5efe560&tw=4d9e8784df24e2d5e9f505852e2c8a3d5537fbc2ff5095fefe10cf09ae0be188&version=v2';
+  'https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=60c42e4fbb0b6b10e51cb41a8c65867cfe0267ec997bfa3e1447169dfbb7aa683af7546fdef5650fd0519a2f666f13a4gid4db16bee18ec8df1f83fffb74d709d271dd921e19b8e4784297ff02c09861036giddc482e081572e704f01a594b8878f67f62daf7c2326f985d13f376df15b119b4gidd510df25fc9cb0029a357e31aae4186de56755601dc887aa5db291d1f5da1ed5&tw=f67e958952c9037954ce370ed647012e0e69af436e41c29a55e7a1e59e6811d9&version=v2';
 const ZOHO_FRAME = 'zoho-registration-submit-frame';
 
 // [Zoho picklist value, label]. The values are spelled as in Zoho CRM.
@@ -635,13 +635,13 @@ export default function LaunchRegistrationPage() {
                   <input
                     type="hidden"
                     name="xnQsjsdp"
-                    value="f26892215be11dc498bfe36610e0eaab6ffc041fa9aceac27132c8e75243a724"
+                    value="d13749ed2fe40a7e6107b43163891d5aae76912d9240d69d58ad290d2570753c"
                   />
                   <input type="hidden" name="zc_gad" id="zc_gad" defaultValue="" />
                   <input
                     type="hidden"
                     name="xmIwtLD"
-                    value="cf7d5ea2bf7963eb3984b0855756ee44dafe77532ea154a69f9b1043a3ecd2139f38b41d06140f2e035b6afbccd9e1cd"
+                    value="80e3beeac3e09719cd59d32f7e0a89d3e85d435ff02df4abd2fcb9a44e424f613fd10d9f614abc18131e2b5a203a6223"
                   />
                   <input type="hidden" name="actionType" value="TGVhZHM=" />
                   <input type="hidden" name="returnURL" value="null" />
