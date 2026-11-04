@@ -20,9 +20,29 @@ import '../styles/contact-page.css';
 // Field names and hidden token values must match the form in Zoho CRM.
 const ZOHO_FORM_ID = '1449582000000732001';
 const ZOHO_ACTION = 'https://crm.zoho.in/crm/WebToLeadForm';
+// Tokens and analytics URL copied from the current Zoho export (Untitled.html).
+// If the form is re-generated in Zoho, copy all three again.
+const ZOHO_XNQSJSDP = 'd13749ed2fe40a7e6107b43163891d5aae76912d9240d69d58ad290d2570753c';
+const ZOHO_XMIWTLD =
+  '80e3beeac3e09719cd59d32f7e0a89d3e85d435ff02df4abd2fcb9a44e424f613fd10d9f614abc18131e2b5a203a6223';
 const ZOHO_ANALYTICS_SRC =
-  'https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=4be9a3ea41db6f1b0d23a966a76272b50f94781e26d9d34deecd2c6224ed192ba551d82072e2d650332f42955522e784gid3a00b76b8d60bbc31515f04407c0a872afb8a5375d739760a8725c37be49af3agid907b283850a84a5b6a472ee8841b0bcc7e90fa2f55d103457a4826828e4aa5d6gid2de63da5628f587463a50942c387f91140af6d3f4a8cd38c6ff0c25b5a55f8ea&tw=f21752b1c1489bffbab5f795a83730f01414714aa3a5db83c67aadfaba2a7ca5&version=v2';
+  'https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=60c42e4fbb0b6b10e51cb41a8c65867cfe0267ec997bfa3e1447169dfbb7aa683af7546fdef5650fd0519a2f666f13a4gid4db16bee18ec8df1f83fffb74d709d271dd921e19b8e4784297ff02c09861036giddc482e081572e704f01a594b8878f67f62daf7c2326f985d13f376df15b119b4gidd510df25fc9cb0029a357e31aae4186de56755601dc887aa5db291d1f5da1ed5&tw=f67e958952c9037954ce370ed647012e0e69af436e41c29a55e7a1e59e6811d9&version=v2';
 const ZOHO_FRAME = 'zoho-registration-submit-frame';
+
+// Visible field id -> the hidden Zoho field it fills. Used to replay focus
+// events on the Zoho form, the way Zoho's script expects to see a real visitor.
+const ZOHO_FIELD_BY_ID = {
+  'r-first-name': 'First Name',
+  'r-last-name': 'Last Name',
+  'r-email': 'Email',
+  'r-country': 'Address - Country / Region',
+  'r-state': 'Address - State / Province',
+  'r-city': 'Address - City',
+  'r-phone': 'Phone',
+  'r-role': 'LEADCF5',
+  'r-org': 'Company',
+  'r-message': 'Description',
+};
 
 // [Zoho picklist value, label]. The values are spelled as in Zoho CRM.
 const ROLES = [
@@ -121,12 +141,29 @@ export default function LaunchRegistrationPage() {
 
   useEffect(() => {
     // Zoho web-form analytics: must load after the form is in the DOM.
+    // Zoho requires it: the script adds one-time hidden fields (wbfIanaFrD, rw,
+    // la, eo, te, ...) to the form and Zoho silently drops leads without them.
+    // It only fills them in through the form's DOM onsubmit, and only for a
+    // form it has "seen" on screen. Our Zoho form is hidden, so:
+    //  1. give it a DOM onsubmit before the script loads (the script wraps it);
+    //  2. tell the script the form is visible once it has loaded.
+    window._wFa_ajax_will_be_replaced = false;
     window._wfa_fstprtcken = window._wfa_fstprtcken || {};
     window._wfa_fstprtcken[ZOHO_FORM_ID] = true;
+
+    const zohoForm = zohoFormRef.current;
+    zohoForm.onsubmit = () => undefined; // must return undefined, not false
 
     const script = document.createElement('script');
     script.id = 'wf_anal';
     script.src = ZOHO_ANALYTICS_SRC;
+    script.onload = () => {
+      try {
+        window._wfa_track?.wfa_setVisible?.(zohoForm);
+      } catch {
+        // analytics changed shape; the submit still goes through
+      }
+    };
     document.body.appendChild(script);
 
     return () => {
@@ -165,6 +202,19 @@ export default function LaunchRegistrationPage() {
   });
 
   useEffect(() => resetPhoneVerification, []);
+
+  // Zoho's script listens for focusin/focusout on its own form's fields (that
+  // is what sends its "form started" signal). Visitors type in the visible
+  // form, so pass each focus change on to the matching hidden Zoho field.
+  const forwardFocusToZoho = (e) => {
+    const id =
+      e.target.id in ZOHO_FIELD_BY_ID
+        ? e.target.id
+        : e.target.closest?.('.field')?.querySelector('label')?.htmlFor;
+    const zohoInput = zohoFormRef.current?.elements.namedItem(ZOHO_FIELD_BY_ID[id]);
+    if (!zohoInput) return;
+    zohoInput.dispatchEvent(new FocusEvent(e.type === 'focus' ? 'focusin' : 'focusout', { bubbles: true }));
+  };
 
   // Checks the field with the browser's own validation before sending a code.
   const sendIfValid = (inputId, check) => () => {
@@ -260,6 +310,24 @@ export default function LaunchRegistrationPage() {
       return;
     }
 
+    // Zoho rejects these when blank, and `required` lets "   " through.
+    const blank = [
+      ['r-first-name', formData.firstName, 'Please enter your first name.'],
+      ['r-last-name', formData.lastName, 'Please enter your last name.'],
+      ['r-city', formData.city, 'Please enter your city.'],
+    ].find(([, value]) => !value.trim());
+    if (blank) {
+      const [id, , msg] = blank;
+      showToast(msg);
+      document.getElementById(id)?.focus();
+      return;
+    }
+    if (formData.phone.replace(/\D/g, '').length < 4) {
+      showToast('Please enter a valid phone number.');
+      document.getElementById('r-phone')?.focus();
+      return;
+    }
+
     if (!emailCheck.verified) {
       emailCheck.setError('Please verify your email address before registering.');
       document.getElementById('r-email').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -277,9 +345,14 @@ export default function LaunchRegistrationPage() {
 
     // The browser posts the hidden Zoho form natively; Zoho's reply loads
     // into a hidden iframe (handleFrameLoad) so the visitor stays here.
+    // requestSubmit fires the form's onsubmit, where Zoho's script fills in its
+    // hidden fields; submit() doesn't, so call it ourselves in that case.
     const zohoForm = zohoFormRef.current;
     if (zohoForm.requestSubmit) zohoForm.requestSubmit();
-    else zohoForm.submit();
+    else {
+      zohoForm.onsubmit?.({ target: zohoForm });
+      zohoForm.submit();
+    }
 
     timeoutRef.current = setTimeout(() => {
       if (!submittingRef.current) return;
@@ -332,6 +405,9 @@ export default function LaunchRegistrationPage() {
   // Values as the Zoho form expects them
   const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`.trim();
   const phoneWithCode = `${country?.dial || ''} ${formData.phone.trim()}`.trim();
+  // Zoho silently drops the lead if Phone is like "+91 98765 43210"; digits
+  // only works (tested). The country goes to Zoho in its own field.
+  const zohoPhone = formData.phone.replace(/\D/g, '');
   const roleLabel = ROLES.find(([value]) => value === formData.role)?.[1] || '';
   const zohoCountry = country ? zohoCountries[country.code] || country.name : '-None-';
   const zohoState = formData.state ? zohoStates[formData.country]?.[formData.state] || formData.state : '-None-';
@@ -390,7 +466,13 @@ export default function LaunchRegistrationPage() {
                 <h3>Register for the launch</h3>
                 <p>Be part of this historic moment. Fields marked * are required.</p>
 
-                <form className="verify-form" onSubmit={handleSubmit} noValidate>
+                <form
+                  className="verify-form"
+                  onSubmit={handleSubmit}
+                  onFocus={forwardFocusToZoho}
+                  onBlur={forwardFocusToZoho}
+                  noValidate
+                >
                   <div className="field-row">
                     <div className="field">
                       <label htmlFor="r-first-name">
@@ -632,17 +714,9 @@ export default function LaunchRegistrationPage() {
                   target={ZOHO_FRAME}
                   hidden
                 >
-                  <input
-                    type="hidden"
-                    name="xnQsjsdp"
-                    value="33098486e10802d7c65e46d4416182029dd4973c024c8cd2b30a11b041756436"
-                  />
+                  <input type="hidden" name="xnQsjsdp" value={ZOHO_XNQSJSDP} />
                   <input type="hidden" name="zc_gad" id="zc_gad" defaultValue="" />
-                  <input
-                    type="hidden"
-                    name="xmIwtLD"
-                    value="dca1dc79568a417de79bfc51710d6ceb2e248dc9ef59505cbe3690bcd09f3835180a386f4c14c00cb560e82d3a343e85"
-                  />
+                  <input type="hidden" name="xmIwtLD" value={ZOHO_XMIWTLD} />
                   <input type="hidden" name="actionType" value="TGVhZHM=" />
                   <input type="hidden" name="returnURL" value="null" />
                   {isSmartUrl && <input type="hidden" name="service" value="smarturl" />}
@@ -651,8 +725,8 @@ export default function LaunchRegistrationPage() {
                   <input type="hidden" name="Email" value={formData.email.trim()} />
                   <input type="hidden" name="Address - Country / Region" value={zohoCountry} />
                   <input type="hidden" name="Address - State / Province" value={zohoState} />
-                  <input type="hidden" name="Address - City" value={formData.city} />
-                  <input type="hidden" name="Phone" value={phoneWithCode} />
+                  <input type="hidden" name="Address - City" value={formData.city.trim()} />
+                  <input type="hidden" name="Phone" value={zohoPhone} />
                   <input type="hidden" name="LEADCF5" value={formData.role || '-None-'} />
                   <input type="hidden" name="Company" value={formData.organisation.trim()} />
                   <input type="hidden" name="Description" value={formData.message.trim()} />
