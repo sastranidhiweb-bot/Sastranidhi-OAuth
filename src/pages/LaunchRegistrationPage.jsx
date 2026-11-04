@@ -29,20 +29,15 @@ const ZOHO_ANALYTICS_SRC =
   'https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=60c42e4fbb0b6b10e51cb41a8c65867cfe0267ec997bfa3e1447169dfbb7aa683af7546fdef5650fd0519a2f666f13a4gid4db16bee18ec8df1f83fffb74d709d271dd921e19b8e4784297ff02c09861036giddc482e081572e704f01a594b8878f67f62daf7c2326f985d13f376df15b119b4gidd510df25fc9cb0029a357e31aae4186de56755601dc887aa5db291d1f5da1ed5&tw=f67e958952c9037954ce370ed647012e0e69af436e41c29a55e7a1e59e6811d9&version=v2';
 const ZOHO_FRAME = 'zoho-registration-submit-frame';
 
-// Visible field id -> the hidden Zoho field it fills. Used to replay focus
-// events on the Zoho form, the way Zoho's script expects to see a real visitor.
-const ZOHO_FIELD_BY_ID = {
-  'r-first-name': 'First Name',
-  'r-last-name': 'Last Name',
-  'r-email': 'Email',
-  'r-country': 'Address - Country / Region',
-  'r-state': 'Address - State / Province',
-  'r-city': 'Address - City',
-  'r-phone': 'Phone',
-  'r-role': 'LEADCF5',
-  'r-org': 'Company',
-  'r-message': 'Description',
-};
+// Zoho's own list of the Country and State values this form accepts (part of
+// the same Zoho embed code). Zoho silently drops a lead whose State is not in
+// this list (tested), so states it doesn't know are sent as "-None-".
+const ZOHO_PICKLIST_SRC =
+  'https://crm.zohopublic.in/crm/WebFormDependencies?rid=081bd54867b4cb267bb41722c3d85de80071d72ef74b6481b6796c5a48379ce2';
+
+// Countries missing from Zoho's list (Country is required, so the lead would
+// be dropped): send the nearest country Zoho has. The real one goes in Description.
+const ZOHO_COUNTRY_STANDIN = { PF: 'France', VI: 'United States', UM: 'United States' };
 
 // [Zoho picklist value, label]. The values are spelled as in Zoho CRM.
 const ROLES = [
@@ -138,32 +133,32 @@ export default function LaunchRegistrationPage() {
   const submittingRef = useRef(false);
   const timeoutRef = useRef(null);
   const country = useMemo(() => countries.find((c) => c.code === formData.country), [formData.country]);
+  // Zoho's accepted states per country (null until Zoho's list has loaded)
+  const [zohoStatesByCountry, setZohoStatesByCountry] = useState(null);
 
   useEffect(() => {
-    // Zoho web-form analytics: must load after the form is in the DOM.
-    // Zoho requires it: the script adds one-time hidden fields (wbfIanaFrD, rw,
-    // la, eo, te, ...) to the form and Zoho silently drops leads without them.
-    // It only fills them in through the form's DOM onsubmit, and only for a
-    // form it has "seen" on screen. Our Zoho form is hidden, so:
-    //  1. give it a DOM onsubmit before the script loads (the script wraps it);
-    //  2. tell the script the form is visible once it has loaded.
+    const readList = () => window[`mapObj${ZOHO_FORM_ID}`]?.countryVsStates || null;
+    if (readList()) {
+      setZohoStatesByCountry(readList());
+      return undefined;
+    }
+    const script = document.createElement('script');
+    script.src = ZOHO_PICKLIST_SRC;
+    script.onload = () => setZohoStatesByCountry(readList());
+    document.body.appendChild(script);
+    return () => script.remove();
+  }, []);
+
+  useEffect(() => {
+    // Zoho web-form analytics (from Zoho's embed code): must load after the
+    // form is in the DOM. Leads are created without any extra handling (tested).
     window._wFa_ajax_will_be_replaced = false;
     window._wfa_fstprtcken = window._wfa_fstprtcken || {};
     window._wfa_fstprtcken[ZOHO_FORM_ID] = true;
 
-    const zohoForm = zohoFormRef.current;
-    zohoForm.onsubmit = () => undefined; // must return undefined, not false
-
     const script = document.createElement('script');
     script.id = 'wf_anal';
     script.src = ZOHO_ANALYTICS_SRC;
-    script.onload = () => {
-      try {
-        window._wfa_track?.wfa_setVisible?.(zohoForm);
-      } catch {
-        // analytics changed shape; the submit still goes through
-      }
-    };
     document.body.appendChild(script);
 
     return () => {
@@ -202,19 +197,6 @@ export default function LaunchRegistrationPage() {
   });
 
   useEffect(() => resetPhoneVerification, []);
-
-  // Zoho's script listens for focusin/focusout on its own form's fields (that
-  // is what sends its "form started" signal). Visitors type in the visible
-  // form, so pass each focus change on to the matching hidden Zoho field.
-  const forwardFocusToZoho = (e) => {
-    const id =
-      e.target.id in ZOHO_FIELD_BY_ID
-        ? e.target.id
-        : e.target.closest?.('.field')?.querySelector('label')?.htmlFor;
-    const zohoInput = zohoFormRef.current?.elements.namedItem(ZOHO_FIELD_BY_ID[id]);
-    if (!zohoInput) return;
-    zohoInput.dispatchEvent(new FocusEvent(e.type === 'focus' ? 'focusin' : 'focusout', { bubbles: true }));
-  };
 
   // Checks the field with the browser's own validation before sending a code.
   const sendIfValid = (inputId, check) => () => {
@@ -345,14 +327,9 @@ export default function LaunchRegistrationPage() {
 
     // The browser posts the hidden Zoho form natively; Zoho's reply loads
     // into a hidden iframe (handleFrameLoad) so the visitor stays here.
-    // requestSubmit fires the form's onsubmit, where Zoho's script fills in its
-    // hidden fields; submit() doesn't, so call it ourselves in that case.
     const zohoForm = zohoFormRef.current;
     if (zohoForm.requestSubmit) zohoForm.requestSubmit();
-    else {
-      zohoForm.onsubmit?.({ target: zohoForm });
-      zohoForm.submit();
-    }
+    else zohoForm.submit();
 
     timeoutRef.current = setTimeout(() => {
       if (!submittingRef.current) return;
@@ -405,12 +382,27 @@ export default function LaunchRegistrationPage() {
   // Values as the Zoho form expects them
   const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`.trim();
   const phoneWithCode = `${country?.dial || ''} ${formData.phone.trim()}`.trim();
-  // Zoho silently drops the lead if Phone is like "+91 98765 43210"; digits
-  // only works (tested). The country goes to Zoho in its own field.
+  // Zoho silently drops the lead if Phone is "+91 98765 43210" or
+  // "+919876543210"; digits only works (all tested). The country goes to Zoho
+  // in its own field.
   const zohoPhone = formData.phone.replace(/\D/g, '');
   const roleLabel = ROLES.find(([value]) => value === formData.role)?.[1] || '';
-  const zohoCountry = country ? zohoCountries[country.code] || country.name : '-None-';
-  const zohoState = formData.state ? zohoStates[formData.country]?.[formData.state] || formData.state : '-None-';
+  const countryStandIn = country ? ZOHO_COUNTRY_STANDIN[country.code] : undefined;
+  const zohoCountry = country ? countryStandIn || zohoCountries[country.code] || country.name : '-None-';
+  const mappedState = formData.state ? zohoStates[formData.country]?.[formData.state] || formData.state : '';
+  // Only send a state Zoho knows for this country. If Zoho's list hasn't
+  // loaded, send none: the lead matters more than the state.
+  const stateAccepted =
+    !countryStandIn && Boolean(mappedState) && Boolean(zohoStatesByCountry?.[zohoCountry]?.includes(mappedState));
+  const zohoState = stateAccepted ? mappedState : '-None-';
+  // Keep what Zoho couldn't take, so the team still sees it on the lead.
+  const lostPlace = [
+    countryStandIn && `Country: ${country.name}`,
+    formData.state && !stateAccepted && `State / Province: ${formData.state}`,
+  ].filter(Boolean);
+  const zohoDescription = [lostPlace.length ? `[${lostPlace.join('; ')}]` : '', formData.message.trim()]
+    .filter(Boolean)
+    .join('\n');
 
   return (
     <>
@@ -466,13 +458,7 @@ export default function LaunchRegistrationPage() {
                 <h3>Register for the launch</h3>
                 <p>Be part of this historic moment. Fields marked * are required.</p>
 
-                <form
-                  className="verify-form"
-                  onSubmit={handleSubmit}
-                  onFocus={forwardFocusToZoho}
-                  onBlur={forwardFocusToZoho}
-                  noValidate
-                >
+                <form className="verify-form" onSubmit={handleSubmit} noValidate>
                   <div className="field-row">
                     <div className="field">
                       <label htmlFor="r-first-name">
@@ -729,7 +715,7 @@ export default function LaunchRegistrationPage() {
                   <input type="hidden" name="Phone" value={zohoPhone} />
                   <input type="hidden" name="LEADCF5" value={formData.role || '-None-'} />
                   <input type="hidden" name="Company" value={formData.organisation.trim()} />
-                  <input type="hidden" name="Description" value={formData.message.trim()} />
+                  <input type="hidden" name="Description" value={zohoDescription} />
                   {/* Zoho honeypot: always empty */}
                   <input type="hidden" name="aG9uZXlwb3Q" value="" />
                 </form>
