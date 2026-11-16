@@ -3,8 +3,8 @@
    Same family as the launch and Login / Sign up popups (shared
    .lp-* layers from launch-popup.css), but set apart as the grand
    one: saffron and maroon light instead of plain violet, a thicker
-   and faster gold border, a lit diya with turning rays, and gold
-   selection tiles for where the support goes.
+   and faster gold border, falling flowers, the same logo + lotus
+   emblem as Login, and a gold dropdown for where the support goes.
    ============================================================ */
 
 .donate-overlay {
@@ -28,7 +28,7 @@
   --my: 0%;
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 620px;
   margin: auto;
   padding: 2.5px;
   border-radius: 30px;
@@ -64,7 +64,7 @@
 
 .dm-inner {
   position: relative;
-  padding: 24px 28px 20px;
+  padding: 36px 52px 28px;
   border-radius: 27.5px;
   overflow: hidden;
   text-align: center;
@@ -91,75 +91,21 @@
 .dm-content > :nth-child(5) { animation-delay: 0.28s; }
 .dm-content > :nth-child(n + 6) { animation-delay: 0.34s; }
 
-/* ---------- Diya emblem ----------
-   The diya faces the viewer, its flame rising from the spout at the
-   front; the rays and glow are centred on the flame. */
-.dm-emblem {
-  --flame-x: 50%;
-  --flame-y: 46%;
-  position: relative;
+/* ---------- Emblem ----------
+   Same logo + blooming lotus as the Login / Sign up popup (PopupEmblem,
+   styled by launch-popup.css), drawn larger so the logo reads clearly
+   on the wider card. */
+.donate-modal .dm-emblem {
+  width: 132px;
+  height: 132px;
+  margin: 4px auto 14px;
+}
+.donate-modal .dm-emblem img {
   width: 104px;
-  height: 78px;
-  margin: 0 auto 4px;
+  height: 104px;
+  filter: drop-shadow(0 0 14px rgba(232, 195, 74, 0.6));
 }
-.dm-rays {
-  position: absolute;
-  left: var(--flame-x);
-  top: var(--flame-y);
-  width: 130px;
-  height: 130px;
-  margin: -65px 0 0 -65px;
-  border-radius: 50%;
-  background: repeating-conic-gradient(
-    from 0deg,
-    rgba(255, 224, 122, 0.3) 0deg 1.6deg,
-    transparent 1.6deg 12deg
-  );
-  -webkit-mask: radial-gradient(circle, #000 10%, transparent 65%);
-  mask: radial-gradient(circle, #000 10%, transparent 65%);
-  animation: dmSpin 40s linear infinite;
-}
-.dm-glow {
-  position: absolute;
-  left: var(--flame-x);
-  top: var(--flame-y);
-  width: 70px;
-  height: 70px;
-  margin: -35px 0 0 -35px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 200, 90, 0.75), rgba(255, 140, 30, 0.2) 45%, transparent 70%);
-  animation: dmBreathe 3s ease-in-out infinite;
-}
-.dm-diya {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  filter: drop-shadow(0 4px 10px rgba(255, 159, 28, 0.3));
-}
-
-/* Flame: the whole flame sways, the core flickers on its own rhythm */
-.dm-flame,
-.dm-flame-core,
-.dm-flame-halo {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-}
-.dm-flame { animation: dmFlicker 2.6s ease-in-out infinite; }
-.dm-flame-core { animation: dmCore 1.3s ease-in-out infinite; }
-.dm-flame-halo {
-  transform-origin: 50% 50%;
-  animation: dmHalo 2.6s ease-in-out infinite;
-}
-.dm-oil-glint,
-.dm-reflect { animation: dmShimmer 2.6s ease-in-out infinite; }
-
-.dm-ember {
-  opacity: 0;
-  transform-box: fill-box;
-  animation: dmEmber 3.2s ease-out infinite;
-}
+.donate-modal .dm-emblem .lp-orbit-b { inset: 8px; }
 
 /* ---------- Heading ---------- */
 .donate-modal .lp-kicker {
@@ -168,12 +114,12 @@
 }
 .dm-heading { margin: 0; font-weight: normal; }
 .donate-modal .lp-title-pre { margin-bottom: 2px; color: #E9DAF5; font-size: 15px; }
-.donate-modal .lp-title-main { font-size: 32px; }
-.donate-modal .lp-divider { margin: 8px auto 6px; }
+.donate-modal .lp-title-main { font-size: 36px; }
+.donate-modal .lp-divider { margin: 12px auto 10px; }
 
 .dm-lede {
-  margin: 0 auto 14px;
-  max-width: 400px;
+  margin: 0 auto 22px;
+  max-width: 440px;
   font-family: 'Gentium Plus', Georgia, serif;
   font-style: italic;
   font-size: 15px;
@@ -184,9 +130,10 @@
 /* ---------- Form ---------- */
 .dm-form {
   display: grid;
-  gap: 12px;
+  gap: 18px;
   text-align: left;
 }
+.dm-section { min-width: 0; }
 .dm-fieldset {
   margin: 0;
   padding: 0;
@@ -198,7 +145,7 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  margin-bottom: 7px;
+  margin-bottom: 9px;
   padding: 0;
   font: 600 10.5px/1 'Cinzel', Georgia, serif;
   letter-spacing: 2.4px;
@@ -212,95 +159,177 @@
   background: linear-gradient(90deg, rgba(232, 195, 74, 0.55), transparent);
 }
 
-/* Support-area tiles */
-.dm-areas {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-.dm-area {
-  position: relative;
+/* ---------- Cause dropdown ---------- */
+.dm-select { position: relative; }
+
+.dm-select-trigger {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 7px 10px;
-  border: 1px solid rgba(255, 231, 163, 0.2);
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
-  color: #F5EDFB;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.2;
+  gap: 12px;
+  width: 100%;
+  min-height: 58px;
+  padding: 8px 14px 8px 9px;
+  border: 1px solid rgba(255, 231, 163, 0.24);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(8, 3, 24, 0.22);
+  color: #fff;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
-  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.25s cubic-bezier(.16, 1, .3, 1);
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
 }
-.dm-area input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+.dm-select-trigger:hover { border-color: rgba(255, 231, 163, 0.45); }
+.dm-select-trigger:focus-visible,
+.dm-select.is-open .dm-select-trigger {
+  outline: none;
+  border-color: #FFCF5A;
+  box-shadow:
+    0 0 0 4px rgba(255, 207, 90, 0.16),
+    0 10px 26px rgba(255, 159, 28, 0.16);
 }
-.dm-area svg {
+.dm-select.is-invalid .dm-select-trigger {
+  border-color: rgba(248, 113, 113, 0.75);
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.14);
+  animation: dmShake 0.4s ease;
+}
+
+/* Gold tile holding each cause's line icon */
+.dm-select-icon {
   flex: none;
-  width: 28px;
-  height: 28px;
-  padding: 5px;
-  border-radius: 9px;
-  background: rgba(232, 195, 74, 0.14);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 207, 90, 0.22), rgba(255, 159, 28, 0.08));
+  box-shadow: inset 0 0 0 1px rgba(255, 231, 163, 0.25);
+  transition: background 0.25s;
+}
+.dm-select-icon svg {
+  width: 22px;
+  height: 22px;
   fill: none;
   stroke: #FFCF5A;
   stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: background 0.25s, stroke 0.25s;
+  transition: stroke 0.25s;
 }
-.dm-area:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 207, 90, 0.55);
-}
-.dm-area:focus-within {
-  border-color: #FFCF5A;
-  box-shadow: 0 0 0 3px rgba(255, 207, 90, 0.2);
-}
-.dm-area.is-selected {
-  border-color: #FFCF5A;
-  background: linear-gradient(135deg, rgba(255, 207, 90, 0.3), rgba(255, 159, 28, 0.12));
-  box-shadow: 0 10px 24px rgba(255, 159, 28, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  color: #fff;
-}
-.dm-area.is-selected svg {
+/* Solid gold tile once a cause is chosen, and on the chosen option */
+.dm-select-trigger:has(.dm-select-text strong) .dm-select-icon,
+.dm-option.is-selected .dm-select-icon {
   background: linear-gradient(135deg, #FFE7A3, #E8C34A);
-  stroke: #3A1046;
 }
-/* Gold check badge on the chosen tile */
-.dm-area.is-selected::after {
-  content: "✓";
-  position: absolute;
-  top: -7px;
-  right: -7px;
+.dm-select-trigger:has(.dm-select-text strong) .dm-select-icon svg,
+.dm-option.is-selected .dm-select-icon svg { stroke: #3A1046; }
+
+.dm-select-text {
+  flex: 1;
+  min-width: 0;
   display: grid;
-  place-items: center;
+  gap: 3px;
+}
+.dm-select-text strong {
+  font: 700 14.5px/1.2 'Manrope', system-ui, sans-serif;
+  color: #FFF6DE;
+}
+.dm-select-text small {
+  font: italic 13px/1.25 'Gentium Plus', Georgia, serif;
+  color: #CDBDE6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dm-select-placeholder {
+  font: 500 15px/1.3 'Manrope', system-ui, sans-serif;
+  color: #C2B2D8;
+}
+
+.dm-select-chevron {
+  flex: none;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #FFF3C9, #E8C34A);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-  color: #3A1046;
-  font-size: 11px;
-  font-weight: 900;
-  animation: dmPop 0.35s cubic-bezier(.16, 1, .3, 1);
+  fill: none;
+  stroke: #FFCF5A;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.3s cubic-bezier(.16, 1, .3, 1);
+}
+.dm-select.is-open .dm-select-chevron { transform: rotate(180deg); }
+
+/* The open list floats over the fields below */
+.dm-select-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 7px;
+  list-style: none;
+  border: 1px solid rgba(255, 207, 90, 0.45);
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255, 170, 40, 0.16), transparent),
+    linear-gradient(170deg, #3d1450 0%, #2a0d3e 100%);
+  box-shadow:
+    0 24px 60px rgba(6, 2, 20, 0.7),
+    0 0 40px rgba(255, 170, 40, 0.12);
+  outline: none;
+  transform-origin: top center;
+  animation: dmDrop 0.28s cubic-bezier(.16, 1, .3, 1);
+}
+.dm-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 8px 8px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.dm-option.is-active {
+  border-color: rgba(255, 231, 163, 0.25);
+  background: rgba(255, 255, 255, 0.07);
+}
+.dm-option.is-selected {
+  border-color: rgba(255, 207, 90, 0.6);
+  background: linear-gradient(135deg, rgba(255, 207, 90, 0.24), rgba(255, 159, 28, 0.08));
+}
+.dm-option-check {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #FFCF5A;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.2s, transform 0.25s cubic-bezier(.16, 1, .3, 1);
+}
+.dm-option.is-selected .dm-option-check {
+  opacity: 1;
+  transform: none;
 }
 
 /* Amount chips + custom amount */
 .dm-amounts {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
+  gap: 8px;
 }
 /* "Or enter an amount of your own" gets its own line under the chips */
 .dm-amount-field { grid-column: 1 / -1; }
 .dm-chip {
   padding: 0 2px;
-  min-height: 42px;
+  min-height: 44px;
   border: 1px solid rgba(255, 231, 163, 0.28);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.06);
@@ -398,16 +427,21 @@
 .dm-form input[type="text"],
 .dm-form input[type="email"] {
   width: 100%;
-  padding: 11px 14px;
+  padding: 13px 14px 13px 42px;
   border: 1px solid rgba(255, 231, 163, 0.22);
   border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  background:
+    var(--dm-icon, none) no-repeat 14px 50% / 18px 18px,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(8, 3, 24, 0.22);
   color: #fff;
   font: 500 15px/1.3 'Manrope', system-ui, sans-serif;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 .dm-form input::placeholder { color: #C2B2D8; font-weight: 400; }
+/* Gold line icons, matching the Login / Sign up popup */
+.dm-form input[type="text"] { --dm-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8C34A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4.5 20.5c1.2-3.8 4.2-5.5 7.5-5.5s6.3 1.7 7.5 5.5'/%3E%3C/svg%3E"); }
+.dm-form input[type="email"] { --dm-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8C34A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2.5'/%3E%3Cpath d='M3.5 7l8.5 6 8.5-6'/%3E%3C/svg%3E"); }
 .dm-form input:hover { border-color: rgba(255, 231, 163, 0.4); }
 .dm-form input:focus {
   outline: none;
@@ -425,7 +459,49 @@
 .dm-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
+}
+
+/* Write-in cause, shown under the dropdown when "Other" is picked */
+.dm-other {
+  position: relative;
+  margin-top: 10px;
+  animation: dmDrop 0.3s cubic-bezier(.16, 1, .3, 1);
+}
+.dm-other textarea {
+  display: block;
+  width: 100%;
+  min-height: 70px;
+  padding: 12px 14px 24px;
+  border: 1px solid rgba(255, 231, 163, 0.32);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(8, 3, 24, 0.22);
+  color: #fff;
+  font: 500 15px/1.45 'Manrope', system-ui, sans-serif;
+  resize: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.dm-other textarea::placeholder {
+  color: #C2B2D8;
+  font: italic 15px/1.45 'Gentium Plus', Georgia, serif;
+}
+.dm-other textarea:hover { border-color: rgba(255, 231, 163, 0.5); }
+.dm-other textarea:focus {
+  outline: none;
+  border-color: #FFCF5A;
+  box-shadow:
+    0 0 0 4px rgba(255, 207, 90, 0.16),
+    0 10px 26px rgba(255, 159, 28, 0.16);
+}
+.dm-other-count {
+  position: absolute;
+  right: 12px;
+  bottom: 7px;
+  font: 600 11px/1 'Manrope', system-ui, sans-serif;
+  color: #A99CC6;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
 }
 
 .dm-error {
@@ -437,7 +513,7 @@
   font-size: 13.5px;
 }
 
-/* ---------- Pledge button: the brightest thing on the card ---------- */
+/* ---------- Donate button: the brightest thing on the card ---------- */
 .dm-submit {
   position: relative;
   display: flex;
@@ -446,8 +522,8 @@
   gap: 10px;
   overflow: hidden;
   width: 100%;
-  margin-top: 2px;
-  padding: 14px 20px;
+  margin-top: 4px;
+  padding: 16px 20px;
   border: 0;
   border-radius: 15px;
   background: linear-gradient(135deg, #FFB627 0%, #FFE7A3 42%, #E8C34A 62%, #D48A1C 100%);
@@ -457,8 +533,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.65),
     inset 0 -3px 0 rgba(140, 80, 10, 0.3);
   color: #2A0D3E;
-  font: 800 16px/1 'Manrope', system-ui, sans-serif;
-  letter-spacing: 0.4px;
+  font: 800 17px/1 'Manrope', system-ui, sans-serif;
+  letter-spacing: 0.6px;
   cursor: pointer;
   animation: dmGlow 2.6s ease-in-out infinite;
   transition: transform 0.25s cubic-bezier(.16, 1, .3, 1), background-position 0.6s;
@@ -491,6 +567,28 @@
   opacity: 0.75;
   cursor: wait;
   animation: none;
+}
+
+/* Reassurance under the button */
+.dm-assure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: -6px 0 0;
+  font: italic 13.5px/1.35 'Gentium Plus', Georgia, serif;
+  color: #CDBDE6;
+  text-align: center;
+}
+.dm-assure svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #FFCF5A;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ---------- Thank-you state ---------- */
@@ -546,28 +644,33 @@
 }
 
 /* ---------- Small screens ---------- */
+@media (max-width: 700px) {
+  .dm-inner { padding-left: 30px; padding-right: 30px; }
+}
 @media (max-width: 480px) {
-  .dm-inner { padding: 22px 16px 18px; }
+  .dm-inner { padding: 28px 18px 20px; }
   .donate-modal .lp-title-main { font-size: 28px; }
-  .dm-area { padding: 7px 8px; font-size: 12px; gap: 7px; }
-  .dm-area svg { width: 24px; height: 24px; padding: 4px; }
+  .dm-amounts { grid-template-columns: repeat(2, 1fr); }
   .dm-row { grid-template-columns: 1fr; }
+  .dm-select-text small { white-space: normal; }
 }
 
-/* Short screens (most laptops at 125–150% scaling): drop the lede and shrink
-   the emblem so the whole card fits without scrolling */
-@media (max-height: 760px) {
+/* Shorter screens (most laptops, especially at 125-150% scaling): drop the
+   lede, then tighten the spacing and emblem, so the card fits unscrolled */
+@media (max-height: 860px) {
   .dm-lede { display: none; }
-  .donate-modal .lp-divider { margin-bottom: 12px; }
+  .donate-modal .lp-divider { margin-bottom: 18px; }
 }
-@media (max-height: 660px) {
-  .dm-inner { padding-top: 18px; padding-bottom: 16px; }
-  .dm-emblem { width: 80px; height: 60px; }
-  .dm-rays { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
-  .dm-glow { width: 50px; height: 50px; margin: -25px 0 0 -25px; }
+@media (max-height: 760px) {
+  .dm-inner { padding-top: 22px; padding-bottom: 18px; }
+  .donate-modal .dm-emblem { width: 100px; height: 100px; margin-bottom: 8px; }
+  .donate-modal .dm-emblem img { width: 78px; height: 78px; }
   .donate-modal .lp-title-pre { display: none; }
   .donate-modal .lp-title-main { font-size: 28px; }
-  .dm-form { gap: 10px; }
+  .donate-modal .lp-divider { margin: 8px auto 14px; }
+  .dm-form { gap: 13px; }
+  .dm-select-trigger { min-height: 52px; }
+  .dm-select-icon { width: 36px; height: 36px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -575,49 +678,21 @@
   .donate-modal,
   .donate-modal::before,
   .dm-content > *,
-  .dm-rays,
-  .dm-glow,
-  .dm-flame,
-  .dm-flame-core,
-  .dm-flame-halo,
-  .dm-oil-glint,
-  .dm-reflect,
   .dm-submit,
   .dm-submit::after,
   .dm-submit svg,
-  .dm-area.is-selected::after,
+  .dm-select-list,
+  .dm-select.is-invalid .dm-select-trigger,
   .dm-thanks-mark { animation: none; }
-  .dm-ember { display: none; }
 }
 
 @keyframes dmFade { from { opacity: 0; } }
 @keyframes dmRise { from { opacity: 0; transform: translateY(40px) scale(.95); } }
 @keyframes dmUp { from { opacity: 0; transform: translateY(14px); } }
 @keyframes dmSpin { to { transform: rotate(360deg); } }
-@keyframes dmBreathe { 50% { transform: scale(1.2); opacity: 0.75; } }
-@keyframes dmFlicker {
-  0%, 100% { transform: scale(1, 1) skewX(0deg); }
-  20% { transform: scale(0.95, 1.06) skewX(-3deg); }
-  40% { transform: scale(1.03, 0.96) skewX(2deg); }
-  60% { transform: scale(0.97, 1.04) skewX(-1.5deg); }
-  80% { transform: scale(1.02, 0.98) skewX(1deg); }
-}
-@keyframes dmCore {
-  0%, 100% { transform: scale(1, 1); opacity: 1; }
-  50% { transform: scale(0.9, 1.08); opacity: 0.88; }
-}
-@keyframes dmHalo {
-  0%, 100% { transform: scale(1); opacity: 0.55; }
-  40% { transform: scale(1.12, 1.06); opacity: 0.7; }
-  70% { transform: scale(0.94); opacity: 0.45; }
-}
-@keyframes dmShimmer { 50% { opacity: 0.4; } }
-@keyframes dmEmber {
-  0% { opacity: 0; transform: translate(0, 0); }
-  15% { opacity: 1; }
-  100% { opacity: 0; transform: translate(4px, -22px); }
-}
 @keyframes dmPop { from { transform: scale(0); } }
+@keyframes dmDrop { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+@keyframes dmShake { 25% { transform: translateX(-5px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
 @keyframes dmBeat { 0%, 60%, 100% { transform: scale(1); } 30% { transform: scale(1.18); } }
 @keyframes dmGlow {
   0%, 100% { box-shadow: 0 16px 38px rgba(255, 159, 28, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -3px 0 rgba(140, 80, 10, 0.3); }

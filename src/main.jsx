@@ -16,9 +16,14 @@ import './styles/new-design.css';
 import './styles/bubbles.css';
 import './styles/pages.css';
 import './styles/contact-page.css';
+import './styles/salesiq-theme.css'; // Zoho SalesIQ chat launcher, in the site's colours
 import App from './App.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import './styles/auth.css';
+import { themeSalesIQ } from './utils/salesiqTheme.js';
+
+// Zoho SalesIQ chat window (an iframe Zoho creates), in the site's colours
+themeSalesIQ();
 
 // Routing (including the auth pages and /oauth-test) is handled by
 // React Router in App.jsx.

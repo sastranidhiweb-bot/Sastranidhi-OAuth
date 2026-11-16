@@ -1,22 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useModal } from '../../context/ModalContext.jsx';
-import { PopupDecor, trackSpotlight } from '../LaunchPopup/PopupDecor.jsx';
+import { PopupDecor, PopupEmblem, trackSpotlight } from '../LaunchPopup/PopupDecor.jsx';
 import '../../styles/donate-modal.css';
 
 // "Support Sastra Nidhi" popup, opened from the header, footer and donate
 // band. Same family as the launch and Login / Sign up popups (PopupDecor),
-// but warmer and grander — saffron light, a lit diya, a thicker gold border —
-// so it stands apart. For now it sends the pledge to FormSubmit, with the
-// field names that inbox has always received; payment will move to Razorpay.
+// but warmer and grander — saffron light, falling flowers, a thicker gold
+// border — so it stands apart. Uses the same logo + lotus emblem as Login.
+// For now it sends the donation details to FormSubmit, with the field names
+// that inbox has always received; payment will move to Razorpay.
 // Rendered once, in App.jsx.
 
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/noreply@sastranidhi.org';
 
+// "Others" lets the donor write their own cause (sent as "Others: <their text>")
+const OTHER = 'Others';
+
 const AREAS = [
-  { value: 'Research and Digitisation', label: 'Research & Digitisation', icon: 'scroll' },
-  { value: 'Education and Courses', label: 'Education & Courses', icon: 'book' },
-  { value: 'Publications', label: 'Publications', icon: 'quill' },
-  { value: 'General Support', label: 'General Support', icon: 'lotus' },
+  { value: 'Research and Digitisation', label: 'Research & Digitisation', note: 'Preserve and digitise rare manuscripts', icon: 'scroll' },
+  { value: 'Education and Courses', label: 'Education & Courses', note: 'Bring śāstra learning to every student', icon: 'book' },
+  { value: 'Publications', label: 'Publications', note: 'Publish scholarly editions and studies', icon: 'quill' },
+  { value: 'General Support', label: 'General Support', note: 'Wherever the need is greatest', icon: 'lotus' },
+  { value: OTHER, label: 'Others', note: 'Tell us the cause in your own words', icon: 'pen' },
 ];
 
 const AMOUNTS = [1001, 5001, 11001, 25001];
@@ -51,131 +56,202 @@ const ICONS = {
       <path d="M4 20h16" />
     </>
   ),
+  pen: (
+    <>
+      <path d="M15.5 4.5l4 4L9 19l-5 1 1-5z" />
+      <path d="M13.5 6.5l4 4" />
+    </>
+  ),
 };
 
 const formatINR = (n) => `₹${n.toLocaleString('en-IN')}`;
 
-// A lit brass diya — the lamp of knowledge — seen from the front and a little
-// above, its spout pointing at the viewer and the flame rising from the wick
-// at the front of the rim. Layered flame (white-hot core, blue base, orange
-// edge, soft glow) flickers; embers drift up; rays turn behind the flame.
-// Stands in for the logo emblem of the other popups.
-function Diya() {
+// Where the support goes: a gold dropdown (listbox) with an icon and a short
+// note per cause. The parent posts the chosen cause as "purpose".
+function CauseSelect({ value, onChange, invalid }) {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const rootRef = useRef(null);
+  const triggerRef = useRef(null);
+  const listRef = useRef(null);
+  const selected = AREAS.find((a) => a.value === value);
+
+  // Close when clicking anywhere outside the dropdown
+  useEffect(() => {
+    if (!open) return undefined;
+    const onDown = (e) => {
+      if (!rootRef.current?.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, [open]);
+
+  useEffect(() => {
+    if (open) listRef.current?.focus();
+  }, [open]);
+
+  const openList = () => {
+    setActive(Math.max(AREAS.findIndex((a) => a.value === value), 0));
+    setOpen(true);
+  };
+
+  const closeList = () => {
+    setOpen(false);
+    triggerRef.current?.focus();
+  };
+
+  const choose = (i) => {
+    onChange(AREAS[i].value);
+    closeList();
+  };
+
+  const onTriggerKey = (e) => {
+    if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) {
+      e.preventDefault();
+      openList();
+    }
+  };
+
+  const onListKey = (e) => {
+    const last = AREAS.length - 1;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActive((i) => (i === last ? 0 : i + 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActive((i) => (i === 0 ? last : i - 1));
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      setActive(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      setActive(last);
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      choose(active);
+    } else if (e.key === 'Escape') {
+      // Close just the dropdown, not the whole popup
+      e.preventDefault();
+      e.stopPropagation();
+      closeList();
+    } else if (e.key === 'Tab') {
+      setOpen(false);
+    }
+  };
+
+  const classes = ['dm-select', open && 'is-open', invalid && 'is-invalid'].filter(Boolean).join(' ');
+
   return (
-    <div className="dm-emblem" aria-hidden="true">
-      <span className="dm-rays" />
-      <span className="dm-glow" />
-      <svg className="dm-diya" viewBox="0 0 120 90">
-        <defs>
-          <linearGradient id="dmBrass" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#FFF4C8" />
-            <stop offset="0.25" stopColor="#F2CF63" />
-            <stop offset="0.62" stopColor="#C9952B" />
-            <stop offset="1" stopColor="#6E4A10" />
-          </linearGradient>
-          <radialGradient id="dmSheen" cx="30%" cy="25%" r="55%">
-            <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.5" />
-            <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
-          </radialGradient>
-          <linearGradient id="dmShade" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#3A1C02" stopOpacity="0.15" />
-            <stop offset="0.4" stopColor="#3A1C02" stopOpacity="0" />
-            <stop offset="1" stopColor="#3A1C02" stopOpacity="0.4" />
-          </linearGradient>
-          <radialGradient id="dmOil" cx="50%" cy="85%" r="70%">
-            <stop offset="0" stopColor="#E09A2A" />
-            <stop offset="0.45" stopColor="#8C4A10" />
-            <stop offset="1" stopColor="#3E1A03" />
-          </radialGradient>
-          <linearGradient id="dmLip" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#FFF0BF" />
-            <stop offset="1" stopColor="#D9A93A" />
-          </linearGradient>
-          <radialGradient id="dmFlameOuter" cx="50%" cy="82%" r="75%">
-            <stop offset="0" stopColor="#FFFFFF" />
-            <stop offset="0.25" stopColor="#FFF1B0" />
-            <stop offset="0.55" stopColor="#FFC23D" />
-            <stop offset="0.82" stopColor="#FF7A12" />
-            <stop offset="1" stopColor="#E8450C" stopOpacity="0.85" />
-          </radialGradient>
-          <filter id="dmBlur" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3.2" />
-          </filter>
-          <filter id="dmSoft" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.3" />
-          </filter>
-        </defs>
+    <div ref={rootRef} className={classes}>
+      <button
+        ref={triggerRef}
+        type="button"
+        className="dm-select-trigger"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-labelledby="dm-cause-label dm-cause-value"
+        onClick={() => (open ? setOpen(false) : openList())}
+        onKeyDown={onTriggerKey}
+      >
+        <span className="dm-select-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">{ICONS[selected ? selected.icon : 'lotus']}</svg>
+        </span>
+        <span id="dm-cause-value" className="dm-select-text">
+          {selected ? (
+            <>
+              <strong>{selected.label}</strong>
+              <small>{selected.note}</small>
+            </>
+          ) : (
+            <span className="dm-select-placeholder">Choose a cause to support</span>
+          )}
+        </span>
+        <svg className="dm-select-chevron" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
 
-        {/* shadow on the ground */}
-        <ellipse cx="60" cy="85.5" rx="34" ry="2.8" fill="#000" opacity="0.4" filter="url(#dmSoft)" />
-
-        {/* foot */}
-        <path d="M47 72 Q 60 75.5 73 72 L 78 82 Q 60 87 42 82 Z" fill="url(#dmBrass)" />
-        <path d="M42 82 Q 60 87 78 82" fill="none" stroke="#5A3A0A" strokeWidth="1" />
-
-        {/* bowl */}
-        <path d="M20 46 Q 21 71 60 75 Q 99 71 100 46 Z" fill="url(#dmBrass)" />
-        <path d="M20 46 Q 21 71 60 75 Q 99 71 100 46 Z" fill="url(#dmShade)" />
-        <path d="M20 46 Q 21 71 60 75 Q 99 71 100 46 Z" fill="url(#dmSheen)" />
-
-        {/* engraved band of dots */}
-        <path d="M25 58 Q 60 72 95 58" fill="none" stroke="#7A5212" strokeWidth="0.9" opacity="0.65" />
-        <path
-          d="M27 63 Q 60 77 93 63"
-          fill="none"
-          stroke="#FFF0BF"
-          strokeWidth="1.7"
-          strokeDasharray="0 4.6"
-          strokeLinecap="round"
-          opacity="0.85"
-        />
-
-        {/* polished highlight on the left of the bowl */}
-        <path d="M25 51 Q 28 63 39 69" fill="none" stroke="#FFFFFF" strokeWidth="2.4" strokeLinecap="round" opacity="0.5" />
-
-        {/* warm light from the flame falling on the front of the bowl */}
-        <ellipse className="dm-reflect" cx="60" cy="69" rx="11" ry="3.4" fill="#FFE7A3" opacity="0.5" filter="url(#dmSoft)" />
-
-        {/* rim and the oil inside, lit by the flame */}
-        <ellipse cx="60" cy="46" rx="40" ry="10" fill="url(#dmLip)" />
-        <ellipse cx="60" cy="46.6" rx="36" ry="7.8" fill="url(#dmOil)" />
-        <ellipse className="dm-oil-glint" cx="60" cy="45" rx="12" ry="2" fill="#FFD66B" opacity="0.75" />
-
-        {/* spout pinched towards the viewer, with its oil channel */}
-        <path d="M46 53.5 Q 60 58.5 74 53.5 Q 67 60.5 60 67 Q 53 60.5 46 53.5 Z" fill="url(#dmLip)" />
-        <path d="M46 53.5 Q 53 60.5 60 67 Q 67 60.5 74 53.5" fill="none" stroke="#9C7A1E" strokeWidth="0.8" />
-        <path d="M52.5 54.3 Q 60 57.2 67.5 54.3 Q 63.5 58.6 60 62.5 Q 56.5 58.6 52.5 54.3 Z" fill="#5A2A06" />
-
-        {/* wick lying in the channel */}
-        <path d="M60 55.5 L 60 63" stroke="#2E1704" strokeWidth="2.4" strokeLinecap="round" />
-
-        {/* flame */}
-        <ellipse className="dm-flame-halo" cx="60" cy="43" rx="16" ry="23" fill="#FFB020" opacity="0.55" filter="url(#dmBlur)" />
-        <g className="dm-flame">
-          <path d="M60 22 C 69.5 35, 71.5 49, 60 63.5 C 48.5 49, 50.5 35, 60 22 Z" fill="url(#dmFlameOuter)" />
-          <path className="dm-flame-core" d="M60 37 C 65 45, 65 54.5, 60 61.5 C 55 54.5, 55 45, 60 37 Z" fill="#FFFBEA" />
-          <ellipse cx="60" cy="60.6" rx="3" ry="2.4" fill="#7DB8FF" opacity="0.7" />
-        </g>
-        <circle cx="60" cy="63.2" r="1.4" fill="#FF8A00" />
-
-        {/* embers drifting up */}
-        <circle className="dm-ember" cx="60" cy="25" r="0.9" fill="#FFE7A3" />
-        <circle className="dm-ember" cx="58" cy="27" r="0.7" fill="#FFC23D" style={{ animationDelay: '1.1s', animationDuration: '3.8s' }} />
-        <circle className="dm-ember" cx="62" cy="26" r="0.8" fill="#FFF3C9" style={{ animationDelay: '2.2s', animationDuration: '3.4s' }} />
-      </svg>
+      {open && (
+        <ul
+          ref={listRef}
+          className="dm-select-list"
+          role="listbox"
+          tabIndex={-1}
+          aria-labelledby="dm-cause-label"
+          aria-activedescendant={`dm-cause-${active}`}
+          onKeyDown={onListKey}
+        >
+          {AREAS.map((a, i) => {
+            const optionClasses = [
+              'dm-option',
+              i === active && 'is-active',
+              a.value === value && 'is-selected',
+            ].filter(Boolean).join(' ');
+            return (
+              <li
+                key={a.value}
+                id={`dm-cause-${i}`}
+                role="option"
+                aria-selected={a.value === value}
+                className={optionClasses}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => choose(i)}
+              >
+                <span className="dm-select-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">{ICONS[a.icon]}</svg>
+                </span>
+                <span className="dm-select-text">
+                  <strong>{a.label}</strong>
+                  <small>{a.note}</small>
+                </span>
+                <svg className="dm-option-check" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12.5l4.5 4.5L19 7.5" />
+                </svg>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }
 
 function DonateCard({ close }) {
   const [area, setArea] = useState('');
+  const [otherCause, setOtherCause] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
+  const [missingCause, setMissingCause] = useState(false);
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const otherRef = useRef(null);
+
+  const isOther = area === OTHER;
+  const purpose = isOther ? `${OTHER}: ${otherCause.trim()}` : area;
+
+  const chooseArea = (value) => {
+    setArea(value);
+    setMissingCause(false);
+    setError('');
+  };
+
+  // Put the cursor in the write-in field as soon as "Other" is picked
+  useEffect(() => {
+    if (isOther) otherRef.current?.focus();
+  }, [isOther]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!area) {
+      setMissingCause(true);
+      setError('Please choose a cause for your donation.');
+      return;
+    }
+    if (isOther && !otherCause.trim()) {
+      setError('Please tell us the cause you would like to support.');
+      otherRef.current?.focus();
+      return;
+    }
     setSubmitting(true);
     setError('');
 
@@ -197,7 +273,7 @@ function DonateCard({ close }) {
 
   return (
     <div className="dm-content">
-      <Diya />
+      <PopupEmblem className="dm-emblem" />
 
       <div className="lp-kicker">Vidyā-dānam · The gift of knowledge</div>
       <h2 id="donate-modal-title" className="dm-heading">
@@ -215,7 +291,8 @@ function DonateCard({ close }) {
           <div className="dm-thanks-mark" aria-hidden="true">✓</div>
           <h3>Dhanyavādaḥ — thank you</h3>
           <p>
-            Your pledge has reached us. Thank you for supporting Śāstra Nidhi.
+            Your donation details have reached us. Our team will write to you
+            shortly to complete your gift to Śāstra Nidhi.
           </p>
           <button type="button" className="dm-done" onClick={close}>
             Close
@@ -232,28 +309,31 @@ function DonateCard({ close }) {
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
 
-            <fieldset className="dm-fieldset">
-              <legend className="dm-label">Where should your support go?</legend>
-              <div className="dm-areas">
-                {AREAS.map(({ value, label, icon }) => (
-                  <label key={value} className={`dm-area${area === value ? ' is-selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="purpose"
-                      value={value}
-                      required
-                      checked={area === value}
-                      onChange={() => setArea(value)}
-                    />
-                    <svg viewBox="0 0 24 24" aria-hidden="true">{ICONS[icon]}</svg>
-                    <span>{label}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <div className="dm-section">
+              <div id="dm-cause-label" className="dm-label">Support a cause</div>
+              <CauseSelect value={area} onChange={chooseArea} invalid={missingCause} />
+              <input type="hidden" name="purpose" value={purpose} />
+              {isOther && (
+                <div className="dm-other">
+                  <textarea
+                    ref={otherRef}
+                    rows={2}
+                    maxLength={200}
+                    placeholder="Write the cause you would like to support…"
+                    aria-label="The cause you would like to support"
+                    value={otherCause}
+                    onChange={(e) => {
+                      setOtherCause(e.target.value);
+                      if (error) setError('');
+                    }}
+                  />
+                  <span className="dm-other-count" aria-hidden="true">{otherCause.length}/200</span>
+                </div>
+              )}
+            </div>
 
-            <fieldset className="dm-fieldset">
-              <legend className="dm-label">Amount you wish to offer</legend>
+            <fieldset className="dm-section dm-fieldset">
+              <legend className="dm-label">Choose an amount</legend>
               <div className="dm-amounts">
                 {AMOUNTS.map((value) => (
                   <button
@@ -273,7 +353,7 @@ function DonateCard({ close }) {
                     name="amount"
                     min="1"
                     inputMode="numeric"
-                    placeholder="Or enter an amount of your own"
+                    placeholder="Or enter your own amount"
                     aria-label="Donation amount in rupees"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
@@ -282,15 +362,18 @@ function DonateCard({ close }) {
               </div>
             </fieldset>
 
-            <div className="dm-row">
-              <input type="text" name="name" required placeholder="Full name" autoComplete="name" />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="Email address"
-                autoComplete="email"
-              />
+            <div className="dm-section">
+              <div className="dm-label">Your details</div>
+              <div className="dm-row">
+                <input type="text" name="name" required placeholder="Full name" autoComplete="name" />
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Email address"
+                  autoComplete="email"
+                />
+              </div>
             </div>
 
             {error && <div className="dm-error" role="alert">{error}</div>}
@@ -299,8 +382,18 @@ function DonateCard({ close }) {
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />
               </svg>
-              <span>{submitting ? 'Sending your pledge…' : amount ? `Pledge ${formatINR(Number(amount))}` : 'Pledge your support'}</span>
+              <span>
+                {submitting ? 'Sending…' : amount ? `Donate ${formatINR(Number(amount))}` : 'Donate'}
+              </span>
             </button>
+
+            <p className="dm-assure">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+              Our team will contact you by email after the donation is successful.
+            </p>
           </form>
         </>
       )}
