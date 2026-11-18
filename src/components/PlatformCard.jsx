@@ -11,7 +11,12 @@ export default function PlatformCard({
   description,
   href,
   moreTo,
+  tag,
+  accent,
+  inert,
 }) {
+  // site pages ("/…") open in place; external platforms open a new tab
+  const internal = href?.startsWith('/');
   // briefly shows "Opening…" on the name badge after it is clicked
   const [opening, setOpening] = useState(false);
 
@@ -22,19 +27,29 @@ export default function PlatformCard({
   }, [opening]);
 
   return (
-    <div className="tablet">
+    // `inert` (cards scrolled out of view in the carousel) keeps their links
+    // out of the Tab order
+    <div className="tablet" data-accent={accent} inert={inert ? '' : undefined}>
+      {tag && <span className="tablet-tag">{tag}</span>}
       <div className="tablet-main">
         <div className="tablet-head">
-          <a
-            className="icon icon-pill"
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpening(true)}
-          >
-            {opening ? 'Opening…' : shortLabel || icon}
-            <span className="pill-arrow" aria-hidden="true">↗</span>
-          </a>
+          {internal ? (
+            <Link className="icon icon-pill" to={href}>
+              {shortLabel || icon}
+              <span className="pill-arrow" aria-hidden="true">→</span>
+            </Link>
+          ) : (
+            <a
+              className="icon icon-pill"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpening(true)}
+            >
+              {opening ? 'Opening…' : shortLabel || icon}
+              <span className="pill-arrow" aria-hidden="true">↗</span>
+            </a>
+          )}
         </div>
         <h3>
           {title}

@@ -430,3 +430,261 @@ section#platforms {
    "More..." stay left-aligned. */
 #platforms .tablet h3{text-align:center;color:#45218B;}
 #platforms .tablet h3 .tablet-subtitle{color:#8A5A12;}
+
+/* ============================================================
+   PLATFORM CAROUSEL (Initiatives.jsx)
+   The cards sit in a horizontal scroll-snap track instead of the
+   4-column grid: 4 per view on desktop, 2 on tablets, 1 (with the
+   next card peeking) on phones. The arrows get their own gutters
+   on either side of the cards (below the cards on phones).
+   ============================================================ */
+#platforms .pc-carousel {
+  --pc-gap: 20px;
+  --pc-per-view: 4;
+  --pc-arrow: 48px;
+  --pc-gutter: 68px;
+  position: relative;
+  padding: 0 var(--pc-gutter);
+}
+/* wider than the default 1160px wrap so the gutters don't squeeze the cards */
+#platforms .wrap:has(.pc-carousel) { max-width: 1300px; }
+/* takes over the grid's pull-up into the hero arc */
+.homepage #platforms .pc-carousel { margin-top: -30px; }
+
+#platforms .pc-track {
+  display: flex;
+  gap: var(--pc-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* room for the cards' hover lift and shadow inside the scroller */
+  padding: 14px 2px 34px;
+  margin: -14px -2px -34px;
+  outline: none;
+}
+#platforms .pc-track::-webkit-scrollbar { display: none; }
+
+#platforms .pc-track > .tablet {
+  flex: 0 0 calc((100% - (var(--pc-per-view) - 1) * var(--pc-gap)) / var(--pc-per-view));
+  min-width: 0;
+  scroll-snap-align: start;
+  grid-row: auto;
+}
+
+/* corner ribbon (PlatformCard `tag`) */
+/* hangs from the top edge, clear of the centred name badge below it */
+#platforms .tablet .tablet-tag {
+  position: absolute;
+  top: 0;
+  right: 18px;
+  z-index: 2;
+  padding: 2px 9px 3px;
+  border-radius: 0 0 8px 8px;
+  line-height: 1.3;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #21114F;
+  background: linear-gradient(135deg, #F3DFA0, #E8C34A);
+  box-shadow: 0 2px 6px rgba(154, 116, 20, 0.3);
+  animation: pcTagPulse 2.4s ease-in-out infinite;
+}
+@keyframes pcTagPulse {
+  50% { box-shadow: 0 0 0 4px rgba(232, 195, 74, 0.25), 0 2px 6px rgba(154, 116, 20, 0.3); }
+}
+
+/* loading placeholders */
+#platforms .tablet.pc-skel {
+  min-height: 210px;
+  background: linear-gradient(90deg, #EFEAF8 25%, #F9F7FD 50%, #EFEAF8 75%);
+  background-size: 200% 100%;
+  animation: pcShimmer 1.2s linear infinite;
+}
+@keyframes pcShimmer { to { background-position: -200% 0; } }
+
+/* ---------- Side arrows ---------- */
+/* centred in the gutters left and right of the cards */
+#platforms .pc-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  width: var(--pc-arrow);
+  height: var(--pc-arrow);
+  margin-top: calc(var(--pc-arrow) / -2);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 195, 74, 0.85);
+  background: linear-gradient(135deg, #21114F, #45218B);
+  color: #F3DFA0;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(33, 17, 79, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+#platforms .pc-arrow svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#platforms .pc-arrow--prev { left: calc((var(--pc-gutter) - var(--pc-arrow)) / 2 - 4px); }
+#platforms .pc-arrow--next { right: calc((var(--pc-gutter) - var(--pc-arrow)) / 2 - 4px); }
+
+/* soft gold halo that breathes, so the arrows read as controls */
+#platforms .pc-arrow::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 195, 74, 0.55);
+  animation: pcHalo 2.6s ease-out infinite;
+  pointer-events: none;
+}
+#platforms .pc-arrow--next::before { animation-delay: 1.3s; }
+@keyframes pcHalo {
+  0%   { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+/* the next arrow nudges right now and then as a hint */
+#platforms .pc-arrow--next svg { animation: pcNudge 3.2s ease-in-out infinite; }
+@keyframes pcNudge {
+  0%, 70%, 100% { transform: none; }
+  80% { transform: translateX(3px); }
+  90% { transform: translateX(-1px); }
+}
+#platforms .pc-carousel.is-paused .pc-arrow::before,
+#platforms .pc-carousel.is-paused .pc-arrow--next svg { animation-play-state: paused; }
+
+#platforms .pc-arrow:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 3px rgba(232, 195, 74, 0.35), 0 10px 24px rgba(33, 17, 79, 0.32);
+}
+#platforms .pc-arrow:active:not(:disabled) { transform: scale(0.94); }
+#platforms .pc-arrow:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 3px; }
+#platforms .pc-arrow:disabled { opacity: 0; pointer-events: none; }
+
+/* ---------- Counter + dots ---------- */
+#platforms .pc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+#platforms .pc-count {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text-muted);
+  min-width: 64px;
+}
+#platforms .pc-dots { display: flex; align-items: center; gap: 7px; }
+#platforms .pc-dot {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(69, 33, 139, 0.22);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
+}
+#platforms .pc-dot:hover { background: rgba(69, 33, 139, 0.4); }
+#platforms .pc-dot.is-active { width: 34px; background: rgba(69, 33, 139, 0.28); }
+#platforms .pc-dot.is-active:not(:has(.pc-dot-fill)) { background: var(--brand-violet); }
+#platforms .pc-dot-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brand-violet), var(--brand-gold));
+  transform-origin: left center;
+  animation: pcFill linear forwards;
+}
+@keyframes pcFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ---------- Responsive ---------- */
+/* small laptops: 3 per view so the gutters don't make the cards too narrow */
+@media (max-width: 1180px) {
+  #platforms .pc-carousel { --pc-per-view: 3; }
+}
+@media (max-width: 980px) {
+  #platforms .pc-carousel { --pc-per-view: 2; --pc-gap: 16px; --pc-arrow: 42px; --pc-gutter: 56px; }
+}
+@media (max-width: 560px) {
+  /* one card with the next one peeking, so it reads as swipeable; the
+     arrows move below the cards, either side of the dots */
+  #platforms .pc-carousel { --pc-gap: 12px; --pc-arrow: 40px; padding: 0 0 62px; }
+  #platforms .pc-track > .tablet { flex-basis: 86%; }
+  #platforms .pc-track { scroll-padding-left: 2px; }
+  /* centre 31px above the bottom, level with the dots row below */
+  #platforms .pc-arrow { top: auto; bottom: 11px; margin-top: 0; }
+  #platforms .pc-arrow--prev { left: 6px; }
+  #platforms .pc-arrow--next { right: 6px; }
+  /* dots sit in the row between the arrows */
+  #platforms .pc-footer { margin-top: -44px; padding: 0 60px; min-height: 26px; position: relative; z-index: 4; pointer-events: none; }
+  #platforms .pc-dots { pointer-events: auto; }
+  #platforms .pc-count { display: none; }
+  /* the old stacked layout gave the cards display:block; keep them flex */
+  #platforms .pc-track > .tablet { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #platforms .pc-track { scroll-behavior: auto; }
+  #platforms .tablet .tablet-tag,
+  #platforms .tablet.pc-skel,
+  #platforms .pc-arrow::before,
+  #platforms .pc-arrow--next svg { animation: none; }
+}
+
+/* ============================================================
+   CARD ACCENTS — same card, a different theme colour per platform
+   (PlatformCard `accent`, set in data/platformsData.js). Each set:
+     --accent       main colour (title, link, badge)
+     --accent-deep  darker end of the badge gradient
+     --accent-soft  tint at the top of the card
+   The gold inner ring stays on every card so they read as one family.
+   ============================================================ */
+#platforms .tablet[data-accent="violet"]  { --accent: #45218B; --accent-deep: #21114F; --accent-soft: #EFE8FB; }
+#platforms .tablet[data-accent="teal"]    { --accent: #1F5E6E; --accent-deep: #0F2F3E; --accent-soft: #E3F1F2; }
+#platforms .tablet[data-accent="maroon"]  { --accent: #8A2846; --accent-deep: #4A0F24; --accent-soft: #F8E6EB; }
+#platforms .tablet[data-accent="saffron"] { --accent: #A8481A; --accent-deep: #5A1E0E; --accent-soft: #FCEBDD; }
+#platforms .tablet[data-accent="indigo"]  { --accent: #2B3A8C; --accent-deep: #141C4F; --accent-soft: #E6E9F8; }
+#platforms .tablet[data-accent="plum"]    { --accent: #6B2A7B; --accent-deep: #35103F; --accent-soft: #F3E6F6; }
+#platforms .tablet[data-accent="emerald"] { --accent: #2F684F; --accent-deep: #133826; --accent-soft: #E3F2EA; }
+#platforms .tablet[data-accent="gold"]    { --accent: #8A5A12; --accent-deep: #4A2F06; --accent-soft: #FBF1D6; }
+#platforms .tablet[data-accent="navy"]    { --accent: #173B56; --accent-deep: #0A1E2E; --accent-soft: #E3EDF4; }
+
+/* tinted top fading into white, accent-coloured outer border */
+#platforms .tablet[data-accent] {
+  background: linear-gradient(180deg, var(--accent-soft) 0%, #FFFFFF 58%) !important;
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent) !important;
+}
+#platforms .tablet[data-accent]:hover:not(:has(.tablet-head:hover)) {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent) !important;
+  box-shadow:
+    inset 0 0 0 5px rgba(255, 255, 255, 0.95),
+    inset 0 0 0 6.5px rgba(232, 195, 74, 0.9),
+    0 22px 44px color-mix(in srgb, var(--accent) 22%, transparent) !important;
+}
+#platforms .tablet[data-accent]::after {
+  background: linear-gradient(90deg, var(--accent), var(--brand-gold));
+}
+
+#platforms .tablet[data-accent] .icon-pill {
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+}
+#platforms .tablet[data-accent] a.icon-pill:hover {
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #FFFFFF));
+}
+#platforms .tablet[data-accent] h3 { color: var(--accent); }
+#platforms .tablet[data-accent] .tablet-more { color: var(--accent); }
+#platforms .tablet[data-accent] .tablet-more:hover { color: color-mix(in srgb, var(--accent) 70%, #FFFFFF); }
