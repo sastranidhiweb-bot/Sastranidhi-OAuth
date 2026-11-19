@@ -3,6 +3,7 @@ import Hero from '../components/Hero/Hero.jsx';
 import Initiatives from '../components/Initiatives/Initiatives.jsx';
 import Stats from '../components/Stats/Stats.jsx';
 import Discover from '../components/Discover/Discover.jsx';
+import KnowledgeHub from '../components/Content/KnowledgeHub.jsx';
 import LaunchPopup from '../components/LaunchPopup/LaunchPopup.jsx';
 import About from '../components/About/About.jsx';
 import Courses from '../components/Courses/Courses.jsx';
@@ -25,7 +26,8 @@ export default function HomePage() {
           <Hero />
           <Initiatives />
           <Stats />
-          <Discover />
+          {/* Live from the content service; the static Discover section if it can't be reached */}
+          <KnowledgeHub fallback={<Discover />} />
           <Courses />
           <Research />
           <About />
