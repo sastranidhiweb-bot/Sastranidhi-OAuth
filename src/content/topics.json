@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "bhagavad-gita",
+    "name": "Bhagavad-gītā",
+    "description": "The song of the Lord: Kṛṣṇa’s counsel to Arjuna on duty, devotion and the Self.",
+    "image": "/media/story/gita-krishna-arjuna-chariot.webp",
+    "popular": true
+  },
+  {
+    "slug": "upanisads",
+    "name": "Upaniṣads",
+    "description": "The philosophical heart of the Vedas, inquiring into Brahman and the Self.",
+    "image": "/media/story/upanishads-rishi-teaching.webp",
+    "popular": true
+  },
+  {
+    "slug": "puranas",
+    "name": "Purāṇas",
+    "description": "Ancient histories and narratives that carry dharma to every home.",
+    "image": "/media/story/story-07-peacocks.webp",
+    "popular": true
+  },
+  {
+    "slug": "ramayana",
+    "name": "Rāmāyaṇa",
+    "description": "Vālmīki’s epic of Śrī Rāma: the ideal of righteous living.",
+    "image": "/media/story/upanishads-rishi-teaching.webp",
+    "popular": true
+  },
+  {
+    "slug": "mahabharata",
+    "name": "Mahābhārata",
+    "description": "Vyāsa’s great epic of the Bhārata dynasty, and the setting of the Gītā.",
+    "image": "/media/story/gita-krishna-arjuna-chariot.webp",
+    "popular": true
+  },
+  {
+    "slug": "dharma",
+    "name": "Dharma",
+    "description": "Duty, righteousness and the order that sustains life.",
+    "image": "/media/story/brahmasutras-vyasadeva.webp",
+    "popular": true
+  },
+  {
+    "slug": "ayurveda",
+    "name": "Āyurveda",
+    "description": "The science of life: health, balance and well-being.",
+    "image": "/media/story/brahmasutras-vyasadeva.webp",
+    "popular": true
+  },
+  {
+    "slug": "yoga",
+    "name": "Yoga",
+    "description": "Disciplines of body, breath and mind towards inner freedom.",
+    "image": "/media/story/upanishads-rishi-teaching.webp",
+    "popular": true
+  },
+  {
+    "slug": "sanskrit",
+    "name": "Sanskrit",
+    "description": "The language of the śāstras: grammar, reading and recitation.",
+    "image": "/media/story/sandarbhas-jiva-gosvami.webp",
+    "popular": true
+  },
+  {
+    "slug": "indian-culture",
+    "name": "Indian Culture",
+    "description": "Temples, festivals, arts and the living heritage of Bhārata.",
+    "image": "/media/story/story-10-vrindavan.webp",
+    "popular": true
+  }
+]

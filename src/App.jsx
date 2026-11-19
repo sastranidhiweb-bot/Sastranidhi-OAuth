@@ -31,7 +31,6 @@ import OAuthTestPage from './pages/OAuthTestPage.jsx';
 import ArticlesPage from './pages/content/ArticlesPage.jsx';
 import ArticlePage from './pages/content/ArticlePage.jsx';
 import { TopicsPage, TopicPage, VideosPage } from './pages/content/TopicsPages.jsx';
-import AdminContentPage from './pages/admin/AdminContentPage.jsx';
 
 // Routes drawn without the site header/footer (AuthLayout pages and the dev
 // OAuth harness).
@@ -139,13 +138,12 @@ function AppRoutes() {
         <Route path="/collaborate" element={<CollaboratePage />} />
         <Route path="/collaborate/apply" element={<CollaborateApplyPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        {/* Dynamic content (from the content service) */}
+        {/* Articles, topics and videos (content in src/content/) */}
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/articles/:slug" element={<ArticlePage />} />
         <Route path="/topics" element={<TopicsPage />} />
         <Route path="/topics/:slug" element={<TopicPage />} />
         <Route path="/videos" element={<VideosPage />} />
-        <Route path="/admin/content" element={<AdminContentPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupWizard />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
